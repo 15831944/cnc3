@@ -1,0 +1,428 @@
+Power Analyzer report for cnc3_v1_5
+Thu Dec 16 17:30:58 2021
+Quartus Prime Version 19.1.0 Build 670 09/22/2019 SJ Standard Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Parallel Compilation
+  3. Power Analyzer Summary
+  4. Power Analyzer Settings
+  5. Indeterminate Toggle Rates
+  6. Operating Conditions Used
+  7. Thermal Power Dissipation by Block
+  8. Thermal Power Dissipation by Block Type
+  9. Thermal Power Dissipation by Hierarchy
+ 10. Core Dynamic Thermal Power Dissipation by Clock Domain
+ 11. Current Drawn from Voltage Supplies Summary
+ 12. VCCIO Supply Current Drawn by I/O Bank
+ 13. VCCIO Supply Current Drawn by Voltage
+ 14. Confidence Metric Details
+ 15. Signal Activities
+ 16. Power Analyzer Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2019  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 6           ;
+; Maximum allowed            ; 6           ;
+;                            ;             ;
+; Average used               ; 2.12        ;
+; Maximum used               ; 6           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processors 2-6         ;  22.5%      ;
++----------------------------+-------------+
+
+
++-------------------------------------------------------------------------------------------+
+; Power Analyzer Summary                                                                    ;
++----------------------------------------+--------------------------------------------------+
+; Power Analyzer Status                  ; Successful - Thu Dec 16 17:30:58 2021            ;
+; Quartus Prime Version                  ; 19.1.0 Build 670 09/22/2019 SJ Standard Edition  ;
+; Revision Name                          ; cnc3_v1_5                                        ;
+; Top-level Entity Name                  ; top                                              ;
+; Family                                 ; MAX 10                                           ;
+; Device                                 ; 10M16SCE144C8G                                   ;
+; Power Models                           ; Final                                            ;
+; Total Thermal Power Dissipation        ; 475.58 mW                                        ;
+; Core Dynamic Thermal Power Dissipation ; 170.22 mW                                        ;
+; Core Static Thermal Power Dissipation  ; 227.61 mW                                        ;
+; I/O Thermal Power Dissipation          ; 77.75 mW                                         ;
+; Power Estimation Confidence            ; Low: user provided insufficient toggle rate data ;
++----------------------------------------+--------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------+
+; Power Analyzer Settings                                                                                                  ;
++------------------------------------------------------------------+---------------------------------------+---------------+
+; Option                                                           ; Setting                               ; Default Value ;
++------------------------------------------------------------------+---------------------------------------+---------------+
+; Maximum processors allowed for parallel compilation              ; 6                                     ;               ;
+; Use smart compilation                                            ; Off                                   ; Off           ;
+; Enable parallel Assembler and Timing Analyzer during compilation ; On                                    ; On            ;
+; Enable compact report table                                      ; Off                                   ; Off           ;
+; Default Power Input I/O Toggle Rate                              ; 12.5%                                 ; 12.5%         ;
+; Preset Cooling Solution                                          ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW ;               ;
+; Board thermal model                                              ; None (CONSERVATIVE)                   ;               ;
+; Default Power Toggle Rate                                        ; 12.5%                                 ; 12.5%         ;
+; Use vectorless estimation                                        ; On                                    ; On            ;
+; Use Input Files                                                  ; Off                                   ; Off           ;
+; Filter Glitches in VCD File Reader                               ; On                                    ; On            ;
+; Power Analyzer Report Signal Activity                            ; Off                                   ; Off           ;
+; Power Analyzer Report Power Dissipation                          ; Off                                   ; Off           ;
+; Device Power Characteristics                                     ; TYPICAL                               ; TYPICAL       ;
+; Automatically Compute Junction Temperature                       ; On                                    ; On            ;
+; Specified Junction Temperature                                   ; 25                                    ; 25            ;
+; Ambient Temperature                                              ; 25                                    ; 25            ;
+; Use Custom Cooling Solution                                      ; Off                                   ; Off           ;
+; Board Temperature                                                ; 25                                    ; 25            ;
++------------------------------------------------------------------+---------------------------------------+---------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------+
+; Indeterminate Toggle Rates                                                                                            ;
++-----------------------------------------------------------------------------------------+-----------------------------+
+; Node                                                                                    ; Reason                      ;
++-----------------------------------------------------------------------------------------+-----------------------------+
+; enc_Z[0]                                                                                ; No valid clock domain found ;
+; enc_Z[1]                                                                                ; No valid clock domain found ;
+; enc_Z[2]                                                                                ; No valid clock domain found ;
+; main_pll:pll_inst|altpll:altpll_component|main_pll_altpll:auto_generated|locked~clkctrl ; No valid clock domain found ;
++-----------------------------------------------------------------------------------------+-----------------------------+
+
+
++-------------------------------------------------------------------------+
+; Operating Conditions Used                                               ;
++---------------------------------------------+---------------------------+
+; Setting                                     ; Value                     ;
++---------------------------------------------+---------------------------+
+; Device power characteristics                ; Typical                   ;
+;                                             ;                           ;
+; Voltages                                    ;                           ;
+;     VCCA                                    ; 3.00 V                    ;
+;     VCC_ONE                                 ; 3.00 V                    ;
+;     3.3-V LVTTL I/O Standard                ; 3.3 V                     ;
+;     3.3-V LVCMOS I/O Standard               ; 3.3 V                     ;
+;     3.3 V Schmitt Trigger I/O Standard      ; 3.3 V                     ;
+;                                             ;                           ;
+; Auto computed junction temperature          ; 32.5 degrees Celsius      ;
+;     Ambient temperature                     ; 25.0 degrees Celsius      ;
+;     Junction-to-Case thermal resistance     ; 8.40 degrees Celsius/Watt ;
+;     Case-to-Heat Sink thermal resistance    ; 0.10 degrees Celsius/Watt ;
+;     Heat Sink-to-Ambient thermal resistance ; 7.30 degrees Celsius/Watt ;
+;                                             ;                           ;
+; Board model used                            ; None                      ;
++---------------------------------------------+---------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------+
+; Thermal Power Dissipation by Block                                                                                                           ;
++------------+------------+---------------------+-----------------------------+--------------------------------+-------------------------------+
+; Block Name ; Block Type ; Total Thermal Power ; Block Thermal Dynamic Power ; Block Thermal Static Power (1) ; Routing Thermal Dynamic Power ;
++------------+------------+---------------------+-----------------------------+--------------------------------+-------------------------------+
+(1) The "Thermal Power Dissipation by Block" Table has been hidden. To show this table, please select the "Write power dissipation by block to report file" option under "PowerPlay Power Analyzer Settings".
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Thermal Power Dissipation by Block Type                                                                                                                                                                            ;
++---------------------+-----------------------------------+-----------------------------+--------------------------------+-------------------------------+-----------------------------------------------------------+
+; Block Type          ; Total Thermal Power by Block Type ; Block Thermal Dynamic Power ; Block Thermal Static Power (1) ; Routing Thermal Dynamic Power ; Block Average Toggle Rate (millions of transitions / sec) ;
++---------------------+-----------------------------------+-----------------------------+--------------------------------+-------------------------------+-----------------------------------------------------------+
+; PLL                 ; 13.60 mW                          ; 13.60 mW                    ; --                             ; 0.00 mW                       ;   48.000                                                  ;
+; M9K                 ; 1.99 mW                           ; 1.99 mW                     ; --                             ; 0.00 mW                       ;    3.824                                                  ;
+; Combinational cell  ; 11.37 mW                          ; 6.76 mW                     ; --                             ; 4.62 mW                       ;    6.893                                                  ;
+; Clock control block ; 10.58 mW                          ; 0.00 mW                     ; --                             ; 10.58 mW                      ;   63.999                                                  ;
+; Register cell       ; 32.73 mW                          ; 23.22 mW                    ; --                             ; 9.52 mW                       ;    7.751                                                  ;
+; I/O register        ; 3.26 mW                           ; 3.08 mW                     ; --                             ; 0.19 mW                       ;    9.000                                                  ;
+; I/O                 ; 22.50 mW                          ; 17.60 mW                    ; 4.75 mW                        ; 0.15 mW                       ;    7.960                                                  ;
+; Voltage Regulator   ; 100.56 mW                         ; 99.59 mW                    ; 0.97 mW                        ; --                            ; --                                                        ;
++---------------------+-----------------------------------+-----------------------------+--------------------------------+-------------------------------+-----------------------------------------------------------+
+(1) The "Block Thermal Static Power" for all block types except Pins and the Voltage Regulator, if one exists, is part of the "Core Static Thermal Power Dissipation" value found on the PowerPlay Power Analyzer-->Summary report panel. The "Core Static Thermal Power Dissipation" also contains the thermal static power dissipated by the routing.
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Thermal Power Dissipation by Hierarchy                                                                                                                                                                                                                                                                                                                                                                                 ;
++---------------------------------------------------------------------+--------------------------------------+---------------------------------+-----------------------------------+-----------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Compilation Hierarchy Node                                          ; Total Thermal Power by Hierarchy (1) ; Block Thermal Dynamic Power (1) ; Block Thermal Static Power (1)(2) ; Routing Thermal Dynamic Power (1) ; Full Hierarchy Name                                                                                                                                                                             ;
++---------------------------------------------------------------------+--------------------------------------+---------------------------------+-----------------------------------+-----------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; |top                                                                ; 196.61 mW (123.46 mW)                ; 165.83 mW (117.20 mW)           ; 5.72 mW (5.72 mW)                 ; 25.06 mW (0.55 mW)                ; |top                                                                                                                                                                                            ;
+;     |hard_block:auto_generated_inst                                 ; 0.00 mW (0.00 mW)                    ; 0.00 mW (0.00 mW)               ; --                                ; 0.00 mW (0.00 mW)                 ; |top|hard_block:auto_generated_inst                                                                                                                                                             ;
+;     |led_flash:led_inst                                             ; 0.21 mW (0.21 mW)                    ; 0.18 mW (0.18 mW)               ; --                                ; 0.03 mW (0.03 mW)                 ; |top|led_flash:led_inst                                                                                                                                                                         ;
+;     |mcu_main:mcu_inst                                              ; 49.14 mW (0.00 mW)                   ; 34.85 mW (0.00 mW)              ; --                                ; 14.29 mW (0.00 mW)                ; |top|mcu_main:mcu_inst                                                                                                                                                                          ;
+;         |main:main_inst                                             ; 47.41 mW (0.99 mW)                   ; 33.49 mW (0.97 mW)              ; --                                ; 13.92 mW (0.01 mW)                ; |top|mcu_main:mcu_inst|main:main_inst                                                                                                                                                           ;
+;             |adc_bus:adc_inst                                       ; 7.72 mW (1.26 mW)                    ; 6.13 mW (0.99 mW)               ; --                                ; 1.59 mW (0.26 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|adc_bus:adc_inst                                                                                                                                          ;
+;                 |adc_acc:adc_inst                                   ; 6.46 mW (0.00 mW)                    ; 5.14 mW (0.00 mW)               ; --                                ; 1.33 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|adc_bus:adc_inst|adc_acc:adc_inst                                                                                                                         ;
+;                     |adc_MCP3008:adc_inst                           ; 1.17 mW (1.17 mW)                    ; 0.84 mW (0.84 mW)               ; --                                ; 0.33 mW (0.33 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|adc_bus:adc_inst|adc_acc:adc_inst|adc_MCP3008:adc_inst                                                                                                    ;
+;                     |adc_permit:permit_inst                         ; 5.29 mW (0.33 mW)                    ; 4.29 mW (0.13 mW)               ; --                                ; 1.00 mW (0.20 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|adc_bus:adc_inst|adc_acc:adc_inst|adc_permit:permit_inst                                                                                                  ;
+;                         |cic_decim_osr:cic                          ; 1.94 mW (1.94 mW)                    ; 1.43 mW (1.43 mW)               ; --                                ; 0.51 mW (0.51 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|adc_bus:adc_inst|adc_acc:adc_inst|adc_permit:permit_inst|cic_decim_osr:cic                                                                                ;
+;                         |accum_var:shc_step                         ; 1.58 mW (0.09 mW)                    ; 1.44 mW (0.08 mW)               ; --                                ; 0.14 mW (0.01 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|adc_bus:adc_inst|adc_acc:adc_inst|adc_permit:permit_inst|accum_var:shc_step                                                                               ;
+;                             |delay_line_var:delay_inst              ; 1.49 mW (0.41 mW)                    ; 1.36 mW (0.28 mW)               ; --                                ; 0.13 mW (0.13 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|adc_bus:adc_inst|adc_acc:adc_inst|adc_permit:permit_inst|accum_var:shc_step|delay_line_var:delay_inst                                                     ;
+;                                 |altsyncram:ram_rtl_0               ; 1.08 mW (0.00 mW)                    ; 1.08 mW (0.00 mW)               ; --                                ; 0.00 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|adc_bus:adc_inst|adc_acc:adc_inst|adc_permit:permit_inst|accum_var:shc_step|delay_line_var:delay_inst|altsyncram:ram_rtl_0                                ;
+;                                     |altsyncram_i7g1:auto_generated ; 1.08 mW (1.08 mW)                    ; 1.08 mW (1.08 mW)               ; --                                ; 0.00 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|adc_bus:adc_inst|adc_acc:adc_inst|adc_permit:permit_inst|accum_var:shc_step|delay_line_var:delay_inst|altsyncram:ram_rtl_0|altsyncram_i7g1:auto_generated ;
+;                         |accum_var:shc_time                         ; 1.43 mW (0.12 mW)                    ; 1.29 mW (0.10 mW)               ; --                                ; 0.14 mW (0.02 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|adc_bus:adc_inst|adc_acc:adc_inst|adc_permit:permit_inst|accum_var:shc_time                                                                               ;
+;                             |delay_line_var:delay_inst              ; 1.31 mW (0.40 mW)                    ; 1.19 mW (0.28 mW)               ; --                                ; 0.12 mW (0.12 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|adc_bus:adc_inst|adc_acc:adc_inst|adc_permit:permit_inst|accum_var:shc_time|delay_line_var:delay_inst                                                     ;
+;                                 |altsyncram:ram_rtl_0               ; 0.91 mW (0.00 mW)                    ; 0.91 mW (0.00 mW)               ; --                                ; 0.00 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|adc_bus:adc_inst|adc_acc:adc_inst|adc_permit:permit_inst|accum_var:shc_time|delay_line_var:delay_inst|altsyncram:ram_rtl_0                                ;
+;                                     |altsyncram_ocg1:auto_generated ; 0.91 mW (0.91 mW)                    ; 0.91 mW (0.91 mW)               ; --                                ; 0.00 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|adc_bus:adc_inst|adc_acc:adc_inst|adc_permit:permit_inst|accum_var:shc_time|delay_line_var:delay_inst|altsyncram:ram_rtl_0|altsyncram_ocg1:auto_generated ;
+;             |ctrl_bus:ctrl_inst                                     ; 5.98 mW (2.41 mW)                    ; 4.45 mW (1.67 mW)               ; --                                ; 1.53 mW (0.75 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|ctrl_bus:ctrl_inst                                                                                                                                        ;
+;                 |input_filter:gen_limsw[0].flt_inst                 ; 0.30 mW (0.09 mW)                    ; 0.24 mW (0.08 mW)               ; --                                ; 0.06 mW (0.01 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|ctrl_bus:ctrl_inst|input_filter:gen_limsw[0].flt_inst                                                                                                     ;
+;                     |lpf_cap_full:lpf_inst                          ; 0.21 mW (0.21 mW)                    ; 0.16 mW (0.16 mW)               ; --                                ; 0.05 mW (0.05 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|ctrl_bus:ctrl_inst|input_filter:gen_limsw[0].flt_inst|lpf_cap_full:lpf_inst                                                                               ;
+;                 |input_filter:gen_limsw[1].flt_inst                 ; 0.23 mW (0.02 mW)                    ; 0.17 mW (0.02 mW)               ; --                                ; 0.05 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|ctrl_bus:ctrl_inst|input_filter:gen_limsw[1].flt_inst                                                                                                     ;
+;                     |lpf_cap_full:lpf_inst                          ; 0.21 mW (0.21 mW)                    ; 0.16 mW (0.16 mW)               ; --                                ; 0.05 mW (0.05 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|ctrl_bus:ctrl_inst|input_filter:gen_limsw[1].flt_inst|lpf_cap_full:lpf_inst                                                                               ;
+;                 |input_filter:gen_limsw[2].flt_inst                 ; 0.24 mW (0.02 mW)                    ; 0.19 mW (0.02 mW)               ; --                                ; 0.05 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|ctrl_bus:ctrl_inst|input_filter:gen_limsw[2].flt_inst                                                                                                     ;
+;                     |lpf_cap_full:lpf_inst                          ; 0.22 mW (0.22 mW)                    ; 0.18 mW (0.18 mW)               ; --                                ; 0.05 mW (0.05 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|ctrl_bus:ctrl_inst|input_filter:gen_limsw[2].flt_inst|lpf_cap_full:lpf_inst                                                                               ;
+;                 |input_filter:gen_limsw[3].flt_inst                 ; 0.23 mW (0.02 mW)                    ; 0.19 mW (0.02 mW)               ; --                                ; 0.05 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|ctrl_bus:ctrl_inst|input_filter:gen_limsw[3].flt_inst                                                                                                     ;
+;                     |lpf_cap_full:lpf_inst                          ; 0.21 mW (0.21 mW)                    ; 0.17 mW (0.17 mW)               ; --                                ; 0.05 mW (0.05 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|ctrl_bus:ctrl_inst|input_filter:gen_limsw[3].flt_inst|lpf_cap_full:lpf_inst                                                                               ;
+;                 |input_filter:gen_limsw[4].flt_inst                 ; 0.25 mW (0.02 mW)                    ; 0.19 mW (0.02 mW)               ; --                                ; 0.05 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|ctrl_bus:ctrl_inst|input_filter:gen_limsw[4].flt_inst                                                                                                     ;
+;                     |lpf_cap_full:lpf_inst                          ; 0.23 mW (0.23 mW)                    ; 0.17 mW (0.17 mW)               ; --                                ; 0.05 mW (0.05 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|ctrl_bus:ctrl_inst|input_filter:gen_limsw[4].flt_inst|lpf_cap_full:lpf_inst                                                                               ;
+;                 |input_filter:gen_limsw[5].flt_inst                 ; 0.24 mW (0.02 mW)                    ; 0.19 mW (0.02 mW)               ; --                                ; 0.05 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|ctrl_bus:ctrl_inst|input_filter:gen_limsw[5].flt_inst                                                                                                     ;
+;                     |lpf_cap_full:lpf_inst                          ; 0.22 mW (0.22 mW)                    ; 0.17 mW (0.17 mW)               ; --                                ; 0.05 mW (0.05 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|ctrl_bus:ctrl_inst|input_filter:gen_limsw[5].flt_inst|lpf_cap_full:lpf_inst                                                                               ;
+;                 |input_filter:gen_limsw[6].flt_inst                 ; 0.28 mW (0.02 mW)                    ; 0.20 mW (0.02 mW)               ; --                                ; 0.08 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|ctrl_bus:ctrl_inst|input_filter:gen_limsw[6].flt_inst                                                                                                     ;
+;                     |lpf_cap_full:lpf_inst                          ; 0.26 mW (0.26 mW)                    ; 0.18 mW (0.18 mW)               ; --                                ; 0.08 mW (0.08 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|ctrl_bus:ctrl_inst|input_filter:gen_limsw[6].flt_inst|lpf_cap_full:lpf_inst                                                                               ;
+;                 |input_filter:gen_limsw[7].flt_inst                 ; 0.24 mW (0.02 mW)                    ; 0.19 mW (0.02 mW)               ; --                                ; 0.05 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|ctrl_bus:ctrl_inst|input_filter:gen_limsw[7].flt_inst                                                                                                     ;
+;                     |lpf_cap_full:lpf_inst                          ; 0.22 mW (0.22 mW)                    ; 0.18 mW (0.18 mW)               ; --                                ; 0.05 mW (0.05 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|ctrl_bus:ctrl_inst|input_filter:gen_limsw[7].flt_inst|lpf_cap_full:lpf_inst                                                                               ;
+;                 |input_filter:gen_limsw[8].flt_inst                 ; 0.26 mW (0.02 mW)                    ; 0.20 mW (0.02 mW)               ; --                                ; 0.05 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|ctrl_bus:ctrl_inst|input_filter:gen_limsw[8].flt_inst                                                                                                     ;
+;                     |lpf_cap_full:lpf_inst                          ; 0.24 mW (0.24 mW)                    ; 0.19 mW (0.19 mW)               ; --                                ; 0.05 mW (0.05 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|ctrl_bus:ctrl_inst|input_filter:gen_limsw[8].flt_inst|lpf_cap_full:lpf_inst                                                                               ;
+;                 |input_filter:gen_limsw[9].flt_inst                 ; 0.24 mW (0.02 mW)                    ; 0.20 mW (0.02 mW)               ; --                                ; 0.05 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|ctrl_bus:ctrl_inst|input_filter:gen_limsw[9].flt_inst                                                                                                     ;
+;                     |lpf_cap_full:lpf_inst                          ; 0.22 mW (0.22 mW)                    ; 0.18 mW (0.18 mW)               ; --                                ; 0.05 mW (0.05 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|ctrl_bus:ctrl_inst|input_filter:gen_limsw[9].flt_inst|lpf_cap_full:lpf_inst                                                                               ;
+;                 |hv_enabled:hv_ena_inst                             ; 0.30 mW (0.30 mW)                    ; 0.20 mW (0.20 mW)               ; --                                ; 0.10 mW (0.10 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|ctrl_bus:ctrl_inst|hv_enabled:hv_ena_inst                                                                                                                 ;
+;                 |piso_always:piso_ctrl                              ; 0.42 mW (0.00 mW)                    ; 0.34 mW (0.00 mW)               ; --                                ; 0.08 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|ctrl_bus:ctrl_inst|piso_always:piso_ctrl                                                                                                                  ;
+;                     |piso:piso_inst                                 ; 0.42 mW (0.38 mW)                    ; 0.34 mW (0.31 mW)               ; --                                ; 0.08 mW (0.07 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|ctrl_bus:ctrl_inst|piso_always:piso_ctrl|piso:piso_inst                                                                                                   ;
+;                         |clk_div:clk_div_inst                       ; 0.04 mW (0.04 mW)                    ; 0.04 mW (0.04 mW)               ; --                                ; 0.01 mW (0.01 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|ctrl_bus:ctrl_inst|piso_always:piso_ctrl|piso:piso_inst|clk_div:clk_div_inst                                                                              ;
+;                 |piso_always:piso_ind                               ; 0.33 mW (0.00 mW)                    ; 0.26 mW (0.00 mW)               ; --                                ; 0.07 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|ctrl_bus:ctrl_inst|piso_always:piso_ind                                                                                                                   ;
+;                     |piso:piso_inst                                 ; 0.33 mW (0.29 mW)                    ; 0.26 mW (0.23 mW)               ; --                                ; 0.07 mW (0.07 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|ctrl_bus:ctrl_inst|piso_always:piso_ind|piso:piso_inst                                                                                                    ;
+;                         |clk_div:clk_div_inst                       ; 0.04 mW (0.04 mW)                    ; 0.03 mW (0.03 mW)               ; --                                ; 0.01 mW (0.01 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|ctrl_bus:ctrl_inst|piso_always:piso_ind|piso:piso_inst|clk_div:clk_div_inst                                                                               ;
+;             |enc_bus:enc_inst                                       ; 13.13 mW (5.21 mW)                   ; 9.27 mW (3.51 mW)               ; --                                ; 3.86 mW (1.71 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst                                                                                                                                          ;
+;                 |rot_enc_zero:encoders[0].encoder                   ; 1.19 mW (0.38 mW)                    ; 0.87 mW (0.33 mW)               ; --                                ; 0.31 mW (0.04 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[0].encoder                                                                                                         ;
+;                     |q_rotary_enc:enc_inst                          ; 0.48 mW (0.48 mW)                    ; 0.27 mW (0.27 mW)               ; --                                ; 0.20 mW (0.20 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[0].encoder|q_rotary_enc:enc_inst                                                                                   ;
+;                     |lpf_cap:f0                                     ; 0.11 mW (0.00 mW)                    ; 0.09 mW (0.00 mW)               ; --                                ; 0.02 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[0].encoder|lpf_cap:f0                                                                                              ;
+;                         |lpf_cap_full:lpf_inst                      ; 0.11 mW (0.11 mW)                    ; 0.09 mW (0.09 mW)               ; --                                ; 0.02 mW (0.02 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[0].encoder|lpf_cap:f0|lpf_cap_full:lpf_inst                                                                        ;
+;                     |lpf_cap:f1                                     ; 0.12 mW (0.00 mW)                    ; 0.09 mW (0.00 mW)               ; --                                ; 0.03 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[0].encoder|lpf_cap:f1                                                                                              ;
+;                         |lpf_cap_full:lpf_inst                      ; 0.12 mW (0.12 mW)                    ; 0.09 mW (0.09 mW)               ; --                                ; 0.03 mW (0.03 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[0].encoder|lpf_cap:f1|lpf_cap_full:lpf_inst                                                                        ;
+;                     |lpf_cap:f2                                     ; 0.11 mW (0.00 mW)                    ; 0.08 mW (0.00 mW)               ; --                                ; 0.02 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[0].encoder|lpf_cap:f2                                                                                              ;
+;                         |lpf_cap_full:lpf_inst                      ; 0.11 mW (0.11 mW)                    ; 0.08 mW (0.08 mW)               ; --                                ; 0.02 mW (0.02 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[0].encoder|lpf_cap:f2|lpf_cap_full:lpf_inst                                                                        ;
+;                 |rot_enc_zero:encoders[1].encoder                   ; 1.40 mW (0.43 mW)                    ; 1.02 mW (0.35 mW)               ; --                                ; 0.38 mW (0.08 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[1].encoder                                                                                                         ;
+;                     |q_rotary_enc:enc_inst                          ; 0.50 mW (0.50 mW)                    ; 0.27 mW (0.27 mW)               ; --                                ; 0.24 mW (0.24 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[1].encoder|q_rotary_enc:enc_inst                                                                                   ;
+;                     |lpf_cap:f0                                     ; 0.22 mW (0.00 mW)                    ; 0.19 mW (0.00 mW)               ; --                                ; 0.03 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[1].encoder|lpf_cap:f0                                                                                              ;
+;                         |lpf_cap_full:lpf_inst                      ; 0.22 mW (0.22 mW)                    ; 0.19 mW (0.19 mW)               ; --                                ; 0.03 mW (0.03 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[1].encoder|lpf_cap:f0|lpf_cap_full:lpf_inst                                                                        ;
+;                     |lpf_cap:f1                                     ; 0.15 mW (0.00 mW)                    ; 0.12 mW (0.00 mW)               ; --                                ; 0.02 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[1].encoder|lpf_cap:f1                                                                                              ;
+;                         |lpf_cap_full:lpf_inst                      ; 0.15 mW (0.15 mW)                    ; 0.12 mW (0.12 mW)               ; --                                ; 0.02 mW (0.02 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[1].encoder|lpf_cap:f1|lpf_cap_full:lpf_inst                                                                        ;
+;                     |lpf_cap:f2                                     ; 0.10 mW (0.00 mW)                    ; 0.08 mW (0.00 mW)               ; --                                ; 0.02 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[1].encoder|lpf_cap:f2                                                                                              ;
+;                         |lpf_cap_full:lpf_inst                      ; 0.10 mW (0.10 mW)                    ; 0.08 mW (0.08 mW)               ; --                                ; 0.02 mW (0.02 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[1].encoder|lpf_cap:f2|lpf_cap_full:lpf_inst                                                                        ;
+;                 |rot_enc_zero:encoders[2].encoder                   ; 1.37 mW (0.43 mW)                    ; 0.94 mW (0.34 mW)               ; --                                ; 0.43 mW (0.09 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[2].encoder                                                                                                         ;
+;                     |q_rotary_enc:enc_inst                          ; 0.51 mW (0.51 mW)                    ; 0.25 mW (0.25 mW)               ; --                                ; 0.26 mW (0.26 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[2].encoder|q_rotary_enc:enc_inst                                                                                   ;
+;                     |lpf_cap:f0                                     ; 0.13 mW (0.00 mW)                    ; 0.09 mW (0.00 mW)               ; --                                ; 0.03 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[2].encoder|lpf_cap:f0                                                                                              ;
+;                         |lpf_cap_full:lpf_inst                      ; 0.13 mW (0.13 mW)                    ; 0.09 mW (0.09 mW)               ; --                                ; 0.03 mW (0.03 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[2].encoder|lpf_cap:f0|lpf_cap_full:lpf_inst                                                                        ;
+;                     |lpf_cap:f1                                     ; 0.12 mW (0.00 mW)                    ; 0.09 mW (0.00 mW)               ; --                                ; 0.03 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[2].encoder|lpf_cap:f1                                                                                              ;
+;                         |lpf_cap_full:lpf_inst                      ; 0.12 mW (0.12 mW)                    ; 0.09 mW (0.09 mW)               ; --                                ; 0.03 mW (0.03 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[2].encoder|lpf_cap:f1|lpf_cap_full:lpf_inst                                                                        ;
+;                     |lpf_cap:f2                                     ; 0.18 mW (0.00 mW)                    ; 0.16 mW (0.00 mW)               ; --                                ; 0.02 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[2].encoder|lpf_cap:f2                                                                                              ;
+;                         |lpf_cap_full:lpf_inst                      ; 0.18 mW (0.18 mW)                    ; 0.16 mW (0.16 mW)               ; --                                ; 0.02 mW (0.02 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[2].encoder|lpf_cap:f2|lpf_cap_full:lpf_inst                                                                        ;
+;                 |rot_enc_zero:encoders[3].encoder                   ; 0.76 mW (0.24 mW)                    ; 0.63 mW (0.22 mW)               ; --                                ; 0.14 mW (0.03 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[3].encoder                                                                                                         ;
+;                     |q_rotary_enc:enc_inst                          ; 0.21 mW (0.21 mW)                    ; 0.14 mW (0.14 mW)               ; --                                ; 0.07 mW (0.07 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[3].encoder|q_rotary_enc:enc_inst                                                                                   ;
+;                     |lpf_cap:f0                                     ; 0.16 mW (0.00 mW)                    ; 0.14 mW (0.00 mW)               ; --                                ; 0.02 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[3].encoder|lpf_cap:f0                                                                                              ;
+;                         |lpf_cap_full:lpf_inst                      ; 0.16 mW (0.16 mW)                    ; 0.14 mW (0.14 mW)               ; --                                ; 0.02 mW (0.02 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[3].encoder|lpf_cap:f0|lpf_cap_full:lpf_inst                                                                        ;
+;                     |lpf_cap:f1                                     ; 0.00 mW (0.00 mW)                    ; 0.00 mW (0.00 mW)               ; --                                ; 0.00 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[3].encoder|lpf_cap:f1                                                                                              ;
+;                     |lpf_cap:f2                                     ; 0.15 mW (0.00 mW)                    ; 0.13 mW (0.00 mW)               ; --                                ; 0.03 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[3].encoder|lpf_cap:f2                                                                                              ;
+;                         |lpf_cap_full:lpf_inst                      ; 0.15 mW (0.15 mW)                    ; 0.13 mW (0.13 mW)               ; --                                ; 0.03 mW (0.03 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[3].encoder|lpf_cap:f2|lpf_cap_full:lpf_inst                                                                        ;
+;                 |rot_enc_zero:encoders[4].encoder                   ; 0.93 mW (0.33 mW)                    ; 0.67 mW (0.25 mW)               ; --                                ; 0.26 mW (0.08 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[4].encoder                                                                                                         ;
+;                     |q_rotary_enc:enc_inst                          ; 0.27 mW (0.27 mW)                    ; 0.13 mW (0.13 mW)               ; --                                ; 0.14 mW (0.14 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[4].encoder|q_rotary_enc:enc_inst                                                                                   ;
+;                     |lpf_cap:f0                                     ; 0.13 mW (0.00 mW)                    ; 0.11 mW (0.00 mW)               ; --                                ; 0.02 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[4].encoder|lpf_cap:f0                                                                                              ;
+;                         |lpf_cap_full:lpf_inst                      ; 0.13 mW (0.13 mW)                    ; 0.11 mW (0.11 mW)               ; --                                ; 0.02 mW (0.02 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[4].encoder|lpf_cap:f0|lpf_cap_full:lpf_inst                                                                        ;
+;                     |lpf_cap:f1                                     ; 0.00 mW (0.00 mW)                    ; 0.00 mW (0.00 mW)               ; --                                ; 0.00 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[4].encoder|lpf_cap:f1                                                                                              ;
+;                     |lpf_cap:f2                                     ; 0.21 mW (0.00 mW)                    ; 0.18 mW (0.00 mW)               ; --                                ; 0.03 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[4].encoder|lpf_cap:f2                                                                                              ;
+;                         |lpf_cap_full:lpf_inst                      ; 0.21 mW (0.21 mW)                    ; 0.18 mW (0.18 mW)               ; --                                ; 0.03 mW (0.03 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[4].encoder|lpf_cap:f2|lpf_cap_full:lpf_inst                                                                        ;
+;                 |rot_enc_zero:encoders[5].encoder                   ; 0.80 mW (0.25 mW)                    ; 0.58 mW (0.20 mW)               ; --                                ; 0.21 mW (0.05 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[5].encoder                                                                                                         ;
+;                     |q_rotary_enc:enc_inst                          ; 0.25 mW (0.25 mW)                    ; 0.14 mW (0.14 mW)               ; --                                ; 0.11 mW (0.11 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[5].encoder|q_rotary_enc:enc_inst                                                                                   ;
+;                     |lpf_cap:f0                                     ; 0.16 mW (0.00 mW)                    ; 0.14 mW (0.00 mW)               ; --                                ; 0.02 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[5].encoder|lpf_cap:f0                                                                                              ;
+;                         |lpf_cap_full:lpf_inst                      ; 0.16 mW (0.16 mW)                    ; 0.14 mW (0.14 mW)               ; --                                ; 0.02 mW (0.02 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[5].encoder|lpf_cap:f0|lpf_cap_full:lpf_inst                                                                        ;
+;                     |lpf_cap:f1                                     ; 0.00 mW (0.00 mW)                    ; 0.00 mW (0.00 mW)               ; --                                ; 0.00 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[5].encoder|lpf_cap:f1                                                                                              ;
+;                     |lpf_cap:f2                                     ; 0.13 mW (0.00 mW)                    ; 0.11 mW (0.00 mW)               ; --                                ; 0.02 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[5].encoder|lpf_cap:f2                                                                                              ;
+;                         |lpf_cap_full:lpf_inst                      ; 0.13 mW (0.13 mW)                    ; 0.11 mW (0.11 mW)               ; --                                ; 0.02 mW (0.02 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[5].encoder|lpf_cap:f2|lpf_cap_full:lpf_inst                                                                        ;
+;                 |rot_enc_zero:encoders[6].encoder                   ; 0.68 mW (0.23 mW)                    ; 0.47 mW (0.17 mW)               ; --                                ; 0.21 mW (0.06 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[6].encoder                                                                                                         ;
+;                     |q_rotary_enc:enc_inst                          ; 0.23 mW (0.23 mW)                    ; 0.13 mW (0.13 mW)               ; --                                ; 0.10 mW (0.10 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[6].encoder|q_rotary_enc:enc_inst                                                                                   ;
+;                     |lpf_cap:f0                                     ; 0.09 mW (0.00 mW)                    ; 0.07 mW (0.00 mW)               ; --                                ; 0.02 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[6].encoder|lpf_cap:f0                                                                                              ;
+;                         |lpf_cap_full:lpf_inst                      ; 0.09 mW (0.09 mW)                    ; 0.07 mW (0.07 mW)               ; --                                ; 0.02 mW (0.02 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[6].encoder|lpf_cap:f0|lpf_cap_full:lpf_inst                                                                        ;
+;                     |lpf_cap:f1                                     ; 0.00 mW (0.00 mW)                    ; 0.00 mW (0.00 mW)               ; --                                ; 0.00 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[6].encoder|lpf_cap:f1                                                                                              ;
+;                     |lpf_cap:f2                                     ; 0.13 mW (0.00 mW)                    ; 0.10 mW (0.00 mW)               ; --                                ; 0.03 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[6].encoder|lpf_cap:f2                                                                                              ;
+;                         |lpf_cap_full:lpf_inst                      ; 0.13 mW (0.13 mW)                    ; 0.10 mW (0.10 mW)               ; --                                ; 0.03 mW (0.03 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[6].encoder|lpf_cap:f2|lpf_cap_full:lpf_inst                                                                        ;
+;                 |rot_enc_zero:encoders[7].encoder                   ; 0.79 mW (0.25 mW)                    ; 0.59 mW (0.20 mW)               ; --                                ; 0.20 mW (0.04 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[7].encoder                                                                                                         ;
+;                     |q_rotary_enc:enc_inst                          ; 0.27 mW (0.27 mW)                    ; 0.15 mW (0.15 mW)               ; --                                ; 0.11 mW (0.11 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[7].encoder|q_rotary_enc:enc_inst                                                                                   ;
+;                     |lpf_cap:f0                                     ; 0.14 mW (0.00 mW)                    ; 0.11 mW (0.00 mW)               ; --                                ; 0.03 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[7].encoder|lpf_cap:f0                                                                                              ;
+;                         |lpf_cap_full:lpf_inst                      ; 0.14 mW (0.14 mW)                    ; 0.11 mW (0.11 mW)               ; --                                ; 0.03 mW (0.03 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[7].encoder|lpf_cap:f0|lpf_cap_full:lpf_inst                                                                        ;
+;                     |lpf_cap:f1                                     ; 0.00 mW (0.00 mW)                    ; 0.00 mW (0.00 mW)               ; --                                ; 0.00 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[7].encoder|lpf_cap:f1                                                                                              ;
+;                     |lpf_cap:f2                                     ; 0.14 mW (0.00 mW)                    ; 0.12 mW (0.00 mW)               ; --                                ; 0.02 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[7].encoder|lpf_cap:f2                                                                                              ;
+;                         |lpf_cap_full:lpf_inst                      ; 0.14 mW (0.14 mW)                    ; 0.12 mW (0.12 mW)               ; --                                ; 0.02 mW (0.02 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|enc_bus:enc_inst|rot_enc_zero:encoders[7].encoder|lpf_cap:f2|lpf_cap_full:lpf_inst                                                                        ;
+;             |motor_bus:mtr_inst                                     ; 19.60 mW (4.73 mW)                   ; 12.68 mW (3.51 mW)              ; --                                ; 6.92 mW (1.22 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|motor_bus:mtr_inst                                                                                                                                        ;
+;                 |step_dir:U_inst                                    ; 0.09 mW (0.09 mW)                    ; 0.08 mW (0.08 mW)               ; --                                ; 0.01 mW (0.01 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|motor_bus:mtr_inst|step_dir:U_inst                                                                                                                        ;
+;                 |step_dir:V_inst                                    ; 0.09 mW (0.09 mW)                    ; 0.08 mW (0.08 mW)               ; --                                ; 0.01 mW (0.01 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|motor_bus:mtr_inst|step_dir:V_inst                                                                                                                        ;
+;                 |step_dir:X_inst                                    ; 0.11 mW (0.11 mW)                    ; 0.10 mW (0.10 mW)               ; --                                ; 0.01 mW (0.01 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|motor_bus:mtr_inst|step_dir:X_inst                                                                                                                        ;
+;                 |step_dir:Y_inst                                    ; 0.12 mW (0.12 mW)                    ; 0.10 mW (0.10 mW)               ; --                                ; 0.02 mW (0.02 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|motor_bus:mtr_inst|step_dir:Y_inst                                                                                                                        ;
+;                 |step_cnts:cnt_inst                                 ; 4.03 mW (0.00 mW)                    ; 2.63 mW (0.00 mW)               ; --                                ; 1.40 mW (0.00 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|motor_bus:mtr_inst|step_cnts:cnt_inst                                                                                                                     ;
+;                     |step_dir_cnt:gen_cnt[0].coord_cnt              ; 1.23 mW (1.23 mW)                    ; 0.78 mW (0.78 mW)               ; --                                ; 0.46 mW (0.46 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|motor_bus:mtr_inst|step_cnts:cnt_inst|step_dir_cnt:gen_cnt[0].coord_cnt                                                                                   ;
+;                     |step_dir_cnt:gen_cnt[1].coord_cnt              ; 1.37 mW (1.37 mW)                    ; 0.85 mW (0.85 mW)               ; --                                ; 0.53 mW (0.53 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|motor_bus:mtr_inst|step_cnts:cnt_inst|step_dir_cnt:gen_cnt[1].coord_cnt                                                                                   ;
+;                     |step_dir_cnt:gen_cnt[2].coord_cnt              ; 0.72 mW (0.72 mW)                    ; 0.50 mW (0.50 mW)               ; --                                ; 0.22 mW (0.22 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|motor_bus:mtr_inst|step_cnts:cnt_inst|step_dir_cnt:gen_cnt[2].coord_cnt                                                                                   ;
+;                     |step_dir_cnt:gen_cnt[3].coord_cnt              ; 0.70 mW (0.70 mW)                    ; 0.50 mW (0.50 mW)               ; --                                ; 0.20 mW (0.20 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|motor_bus:mtr_inst|step_cnts:cnt_inst|step_dir_cnt:gen_cnt[3].coord_cnt                                                                                   ;
+;                 |motor_cont:cont_inst                               ; 10.32 mW (0.43 mW)                   ; 6.09 mW (0.27 mW)               ; --                                ; 4.23 mW (0.16 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|motor_bus:mtr_inst|motor_cont:cont_inst                                                                                                                   ;
+;                     |pls_cont:gen[0].step_inst                      ; 2.39 mW (1.00 mW)                    ; 1.40 mW (0.53 mW)               ; --                                ; 0.98 mW (0.47 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|motor_bus:mtr_inst|motor_cont:cont_inst|pls_cont:gen[0].step_inst                                                                                         ;
+;                         |pls_gen:pls_inst                           ; 1.39 mW (1.39 mW)                    ; 0.87 mW (0.87 mW)               ; --                                ; 0.52 mW (0.52 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|motor_bus:mtr_inst|motor_cont:cont_inst|pls_cont:gen[0].step_inst|pls_gen:pls_inst                                                                        ;
+;                     |pls_cont:gen[1].step_inst                      ; 2.34 mW (0.96 mW)                    ; 1.34 mW (0.52 mW)               ; --                                ; 1.00 mW (0.44 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|motor_bus:mtr_inst|motor_cont:cont_inst|pls_cont:gen[1].step_inst                                                                                         ;
+;                         |pls_gen:pls_inst                           ; 1.38 mW (1.38 mW)                    ; 0.82 mW (0.82 mW)               ; --                                ; 0.56 mW (0.56 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|motor_bus:mtr_inst|motor_cont:cont_inst|pls_cont:gen[1].step_inst|pls_gen:pls_inst                                                                        ;
+;                     |pls_cont:gen[2].step_inst                      ; 2.28 mW (0.93 mW)                    ; 1.31 mW (0.46 mW)               ; --                                ; 0.97 mW (0.47 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|motor_bus:mtr_inst|motor_cont:cont_inst|pls_cont:gen[2].step_inst                                                                                         ;
+;                         |pls_gen:pls_inst                           ; 1.35 mW (1.35 mW)                    ; 0.85 mW (0.85 mW)               ; --                                ; 0.50 mW (0.50 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|motor_bus:mtr_inst|motor_cont:cont_inst|pls_cont:gen[2].step_inst|pls_gen:pls_inst                                                                        ;
+;                     |pls_cont:gen[3].step_inst                      ; 2.43 mW (1.04 mW)                    ; 1.40 mW (0.57 mW)               ; --                                ; 1.03 mW (0.47 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|motor_bus:mtr_inst|motor_cont:cont_inst|pls_cont:gen[3].step_inst                                                                                         ;
+;                         |pls_gen:pls_inst                           ; 1.39 mW (1.39 mW)                    ; 0.84 mW (0.84 mW)               ; --                                ; 0.56 mW (0.56 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|motor_bus:mtr_inst|motor_cont:cont_inst|pls_cont:gen[3].step_inst|pls_gen:pls_inst                                                                        ;
+;                     |prescale_oi:prescale_inst                      ; 0.45 mW (0.45 mW)                    ; 0.37 mW (0.37 mW)               ; --                                ; 0.09 mW (0.09 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|motor_bus:mtr_inst|motor_cont:cont_inst|prescale_oi:prescale_inst                                                                                         ;
+;                 |prescale:to_prescale                               ; 0.12 mW (0.12 mW)                    ; 0.09 mW (0.09 mW)               ; --                                ; 0.03 mW (0.03 mW)                 ; |top|mcu_main:mcu_inst|main:main_inst|motor_bus:mtr_inst|prescale:to_prescale                                                                                                                   ;
+;         |mcu_amux_mem:mux_if                                        ; 1.73 mW (1.73 mW)                    ; 1.35 mW (1.35 mW)               ; --                                ; 0.38 mW (0.38 mW)                 ; |top|mcu_main:mcu_inst|mcu_amux_mem:mux_if                                                                                                                                                      ;
+;     |main_pll:pll_inst                                              ; 23.80 mW (0.00 mW)                   ; 13.61 mW (0.00 mW)              ; --                                ; 10.19 mW (0.00 mW)                ; |top|main_pll:pll_inst                                                                                                                                                                          ;
+;         |altpll:altpll_component                                    ; 23.80 mW (0.00 mW)                   ; 13.61 mW (0.00 mW)              ; --                                ; 10.19 mW (0.00 mW)                ; |top|main_pll:pll_inst|altpll:altpll_component                                                                                                                                                  ;
+;             |main_pll_altpll:auto_generated                         ; 23.80 mW (23.80 mW)                  ; 13.61 mW (13.61 mW)             ; --                                ; 10.19 mW (10.19 mW)               ; |top|main_pll:pll_inst|altpll:altpll_component|main_pll_altpll:auto_generated                                                                                                                   ;
++---------------------------------------------------------------------+--------------------------------------+---------------------------------+-----------------------------------+-----------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+(1) Value in parentheses is the power consumed at that level of hierarchy. Value not in parentheses is the power consumed at that level of hierarchy plus the power consumed by all levels of hierarchy below it.
+
+(2) The "Block Thermal Static Power" for all levels of hierarchy except the top-level hierarchy is part of the "Core Static Thermal Power Dissipation" value found on the PowerPlay Power Analyzer-->Summary report panel. The "Core Static Thermal Power Dissipation" also contains the thermal static power dissipated by the routing.
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------+
+; Core Dynamic Thermal Power Dissipation by Clock Domain                                                                                       ;
++-------------------------------------------------------------------------------------------+-----------------------+--------------------------+
+; Clock Domain                                                                              ; Clock Frequency (MHz) ; Total Core Dynamic Power ;
++-------------------------------------------------------------------------------------------+-----------------------+--------------------------+
+; gen24                                                                                     ; 24.00                 ; 0.41                     ;
+; main_pll:pll_inst|altpll:altpll_component|main_pll_altpll:auto_generated|wire_pll1_clk[0] ; 72.00                 ; 73.29                    ;
++-------------------------------------------------------------------------------------------+-----------------------+--------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------+
+; Current Drawn from Voltage Supplies Summary                                                                                        ;
++----------------+-------------------------+---------------------------+--------------------------+----------------------------------+
+; Voltage Supply ; Total Current Drawn (1) ; Dynamic Current Drawn (1) ; Static Current Drawn (1) ; Minimum Power Supply Current (2) ;
++----------------+-------------------------+---------------------------+--------------------------+----------------------------------+
+; VCCIO          ; 22.83 mA                ; 5.23 mA                   ; 17.60 mA                 ; 22.83 mA                         ;
+; VCCA           ; 5.57 mA                 ; 2.53 mA                   ; 3.04 mA                  ; 5.57 mA                          ;
+; VCC_ONE        ; 128.16 mA               ; 55.33 mA                  ; 72.83 mA                 ; 128.16 mA                        ;
++----------------+-------------------------+---------------------------+--------------------------+----------------------------------+
+(1) Currents reported in columns "Total Current Drawn", "Dynamic Current Drawn", and "Static Current Drawn" are sufficient for user operation of the device.  
+(2) Currents reported in column "Minimum Power Supply Current" are sufficient for power-up, configuration, and user operation of the device.
+
+
++-----------------------------------------------------------------------------------------------+
+; VCCIO Supply Current Drawn by I/O Bank                                                        ;
++----------+---------------+---------------------+-----------------------+----------------------+
+; I/O Bank ; VCCIO Voltage ; Total Current Drawn ; Dynamic Current Drawn ; Static Current Drawn ;
++----------+---------------+---------------------+-----------------------+----------------------+
+; 1A       ; 3.3V          ; 2.24 mA             ; 0.34 mA               ; 1.90 mA              ;
+; 1B       ; 3.3V          ; 2.08 mA             ; 0.16 mA               ; 1.93 mA              ;
+; 2        ; 3.3V          ; 2.02 mA             ; 0.14 mA               ; 1.88 mA              ;
+; 3        ; 3.3V          ; 3.95 mA             ; 1.88 mA               ; 2.07 mA              ;
+; 4        ; 3.3V          ; 2.51 mA             ; 0.63 mA               ; 1.88 mA              ;
+; 5        ; 3.3V          ; 2.21 mA             ; 0.22 mA               ; 1.99 mA              ;
+; 6        ; 3.3V          ; 2.58 mA             ; 0.53 mA               ; 2.05 mA              ;
+; 7        ; 3.3V          ; 2.61 mA             ; 0.73 mA               ; 1.88 mA              ;
+; 8        ; 3.3V          ; 2.63 mA             ; 0.59 mA               ; 2.04 mA              ;
++----------+---------------+---------------------+-----------------------+----------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------+
+; VCCIO Supply Current Drawn by Voltage                                                                                             ;
++---------------+-------------------------+---------------------------+--------------------------+----------------------------------+
+; VCCIO Voltage ; Total Current Drawn (1) ; Dynamic Current Drawn (1) ; Static Current Drawn (1) ; Minimum Power Supply Current (2) ;
++---------------+-------------------------+---------------------------+--------------------------+----------------------------------+
+; 3.3V          ; 22.83 mA                ; 5.23 mA                   ; 17.60 mA                 ; 22.83 mA                         ;
++---------------+-------------------------+---------------------------+--------------------------+----------------------------------+
+(1) Currents reported in columns "Total Current Drawn", "Dynamic Current Drawn", and "Static Current Drawn" are sufficient for user operation of the device.  
+(2) Currents reported in column "Minimum Power Supply Current" are sufficient for power-up, configuration, and user operation of the device.
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------+
+; Confidence Metric Details                                                                                                                           ;
++----------------------------------------------------------------------------------------+---------------+------------+---------------+---------------+
+; Data Source                                                                            ; Total         ; Pin        ; Registered    ; Combinational ;
++----------------------------------------------------------------------------------------+---------------+------------+---------------+---------------+
+; Simulation (from file)                                                                 ;               ;            ;               ;               ;
+;     -- Number of signals with Toggle Rate from Simulation                              ; 0 (0.0%)      ; 0 (0.0%)   ; 0 (0.0%)      ; 0 (0.0%)      ;
+;     -- Number of signals with Static Probability from Simulation                       ; 0 (0.0%)      ; 0 (0.0%)   ; 0 (0.0%)      ; 0 (0.0%)      ;
+;                                                                                        ;               ;            ;               ;               ;
+; Node, entity or clock assignment                                                       ;               ;            ;               ;               ;
+;     -- Number of signals with Toggle Rate from Node, entity or clock assignment        ; 4 (0.0%)      ; 1 (0.9%)   ; 0 (0.0%)      ; 3 (0.0%)      ;
+;     -- Number of signals with Static Probability from Node, entity or clock assignment ; 5 (0.0%)      ; 1 (0.9%)   ; 0 (0.0%)      ; 4 (0.0%)      ;
+;                                                                                        ;               ;            ;               ;               ;
+; Vectorless estimation                                                                  ;               ;            ;               ;               ;
+;     -- Number of signals with Toggle Rate from Vectorless estimation                   ; 13229 (99.6%) ; 68 (58.1%) ; 4296 (100.0%) ; 8865 (100.0%) ;
+;     -- Number of signals with Zero toggle rate, from Vectorless estimation             ; 50 (0.4%)     ; 7 (6.0%)   ; 6 (0.1%)      ; 37 (0.4%)     ;
+;     -- Number of signals with Static Probability from Vectorless estimation            ; 13228 (99.6%) ; 68 (58.1%) ; 4296 (100.0%) ; 8864 (100.0%) ;
+;                                                                                        ;               ;            ;               ;               ;
+; Default assignment                                                                     ;               ;            ;               ;               ;
+;     -- Number of signals with Toggle Rate from Default assignment                      ; 39 (0.3%)     ; 39 (33.3%) ; 0 (0.0%)      ; 0 (0.0%)      ;
+;     -- Number of signals with Static Probability from Default assignment               ; 48 (0.4%)     ; 48 (41.0%) ; 0 (0.0%)      ; 0 (0.0%)      ;
+;                                                                                        ;               ;            ;               ;               ;
+; Assumed 0                                                                              ;               ;            ;               ;               ;
+;     -- Number of signals with Toggle Rate assumed 0                                    ; 9 (0.1%)      ; 9 (7.7%)   ; 0 (0.0%)      ; 0 (0.0%)      ;
++----------------------------------------------------------------------------------------+---------------+------------+---------------+---------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------+
+; Signal Activities                                                                                                                           ;
++--------+------+---------------------------------------------+-------------------------+--------------------+--------------------------------+
+; Signal ; Type ; Toggle Rate (millions of transitions / sec) ; Toggle Rate Data Source ; Static Probability ; Static Probability Data Source ;
++--------+------+---------------------------------------------+-------------------------+--------------------+--------------------------------+
+(1) The "Signal Activity" Table has been hidden. To show this table, please select the "Write signal activities to report file" option under "PowerPlay Power Analyzer Settings".
+
+
++-------------------------+
+; Power Analyzer Messages ;
++-------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Power Analyzer
+    Info: Version 19.1.0 Build 670 09/22/2019 SJ Standard Edition
+    Info: Processing started: Thu Dec 16 17:30:51 2021
+Info: Command: quartus_pow --read_settings_files=off --write_settings_files=off cnc -c cnc3_v1_5
+Info (21077): Low junction temperature is 0 degrees C
+Info (21077): High junction temperature is 85 degrees C
+Info (332104): Reading SDC File: 'cnc.sdc'
+Info (332110): Deriving PLL clocks
+    Info (332110): create_generated_clock -source {pll_inst|altpll_component|auto_generated|pll1|inclk[0]} -multiply_by 3 -duty_cycle 50.00 -name {pll_inst|altpll_component|auto_generated|pll1|clk[0]} {pll_inst|altpll_component|auto_generated|pll1|clk[0]}
+Info (332151): Clock uncertainty is not calculated until you update the timing netlist.
+Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
+Info (223000): Starting Vectorless Power Activity Estimation
+Warning (222013): Relative toggle rates could not be calculated because no clock domain could be identified for some nodes
+Info (223001): Completed Vectorless Power Activity Estimation
+Info (218000): Using Advanced I/O Power to simulate I/O buffers with the specified board trace model
+Info (334003): Started post-fitting delay annotation
+Info (334004): Delay annotation completed successfully
+Info (215049): Average toggle rate for this design is 7.209 millions of transitions / sec
+Info (215031): Total thermal power estimate for the design is 475.58 mW
+Info: Quartus Prime Power Analyzer was successful. 0 errors, 1 warning
+    Info: Peak virtual memory: 4937 megabytes
+    Info: Processing ended: Thu Dec 16 17:30:58 2021
+    Info: Elapsed time: 00:00:07
+    Info: Total CPU time (on all processors): 00:00:15
+
+

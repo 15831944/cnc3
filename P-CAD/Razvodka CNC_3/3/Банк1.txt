@@ -1,0 +1,15 @@
+L_IND_SDO  = U3-6
+L_IND_SCLK = U3-7
+L_IND_LOAD = U3-8
+L_A2       = U3-10
+L_B2       = U3-11
+L_Z2       = U3-12
+L_STEP4    = U3-13
+L_DIR4     = U3-14
+
+L_SD_ENA   = U3-15
+ALT_TMS    = U3-16
+ALT_RES0   = U3-17
+ALT_TCK    = U3-18
+ALT_TDI    = U3-19
+ALT_TDO    = U3-20

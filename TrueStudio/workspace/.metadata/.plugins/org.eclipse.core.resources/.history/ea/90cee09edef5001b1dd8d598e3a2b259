@@ -1,0 +1,296 @@
+#include "touch.h"
+
+#include <math.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
+#include "fpga.h"
+#include "step_dir.h"
+#include "cnc_param.h"
+#include "feedback.h"
+#include "defines.h"
+#include "cnc_func.h"
+#include "fpga_gpo.h"
+
+typedef enum {ST_IDLE, ST_FWD, ST_FWD_FINE, ST_REV_FINE, ST_RB} touch_state_t;
+static touch_state_t state, state_old;
+
+struct {
+	BOOL valid;
+	point_t pt;
+} touch_res;
+
+point_t touch_result() { return touch_res.pt; }
+int32_t touch_res_x() { return touch_res.pt.x; }
+int32_t touch_res_y() { return touch_res.pt.y; }
+BOOL touch_valid() { return touch_res.valid; }
+
+typedef struct {
+	uint8_t touches;
+	double dx, dy, F, F_fine, fine_share;
+} touch_task_t;
+
+static touch_task_t task;
+static int touch_cnt;
+
+void touch_init(double x, double y, uint8_t touches, double F, double F_fine, double fine_share) {
+	task.dx = x;
+	task.dy = y;
+	task.touches = touches;
+	task.F = F;
+	task.F_fine = F_fine;
+	task.fine_share = fine_share;
+}
+
+void touch_reset() {
+	state = state_old = ST_IDLE;
+	task.touches = 0;
+}
+
+static int touch_error() {
+	touch_reset();
+	return -1;
+}
+
+// return: 0 - OK, 1 - finish, result < 0 - error
+int touch_next(float* const T) {
+	static int nx0, ny0, nx1, ny1, nx, ny;
+	static double ts = 0;
+
+	state_old = state;
+
+//#ifdef PRINT
+//	nx = fpga_getPos(0);
+//	ny = fpga_getPos(1);
+//	printf("(%d,%d)\n", nx, ny);
+//#endif
+
+	switch (state) {
+	default:
+		return touch_error();
+
+	case ST_IDLE:
+		if (task.touches) {
+			touch_res.valid = FALSE;
+			touch_res.pt.x = touch_res.pt.y = 0;
+
+			double k = 1.0 - task.fine_share;
+			double x = task.dx * k;
+			double y = task.dy * k;
+			nx = mm_to_steps(x, cnc_scale_x());
+			ny = mm_to_steps(y, cnc_scale_y());
+
+			if (nx || ny) {
+				touch_cnt = 1;
+
+				fpga_snapMotor();
+				nx0 = fpga_getPos(0);
+				ny0 = fpga_getPos(1);
+
+				double R = sqrt(x*x + y*y); // mm
+				*T = 1.0 / task.F; // clocks / mm
+				ts = (*T) * R; // clocks
+
+				fpga_setCenterMode(FPGA_CENTER_MODE_FORWARD);
+				step_writeXYUV(0, ts, nx, ny, 0, 0);
+
+#ifdef PRINT
+				uint16_t run = fpga_getRun();
+				uint8_t wrreq = run & 0xff;
+				run >>= 8;
+
+				printf("CNT:%d X:%d(%d) Y:%d(%d) fwd\n", (int)touch_cnt, (int)nx, (int)(nx ? round(ts/nx) : 0), (int)ny, (int)(ny ? round(ts/ny) : 0));
+				printf("RD wrreq:%x run:%x\n", (int)wrreq, (int)run);
+#endif
+
+				state = ST_FWD;
+			}
+		}
+		else
+			return touch_error();
+
+		break;
+
+	case ST_FWD: {
+			BOOL stopped = step_isStopped();
+			BOOL centered = fpga_getCentered();
+
+			if (step_isStopped()) {
+				if (fpga_getCentered()) {
+					fpga_snapMotor();
+					nx1 = fpga_getPos(0); // move back to (x0, y0) with slow speed
+					ny1 = fpga_getPos(1);
+
+					nx = nx0 - nx1;
+					ny = ny0 - ny1;
+
+					if (nx || ny) {
+						*T = 1.0 / task.F_fine; // clocks / mm
+						double R = steps_to_mm2(nx, ny, cnc_scale_xy()); // mm
+						ts = (*T) * R; // clocks
+
+						fpga_setCenterMode(FPGA_CENTER_MODE_REVERSE);
+						step_writeXYUV(0, ts, nx, ny, 0, 0);
+
+						printf("CNT:%d X:%d(%d) Y:%d(%d) rev\n", (int)touch_cnt, (int)nx, (int)(nx ? round(ts/nx) : 0), (int)ny, (int)(ny ? round(ts/ny) : 0));
+
+						state = ST_REV_FINE;
+					}
+					else
+						return touch_error();
+				}
+				else { // Fine speed
+					double x = task.dx * task.fine_share;
+					double y = task.dy * task.fine_share;
+					nx = mm_to_steps(x, cnc_scale_x());
+					ny = mm_to_steps(y, cnc_scale_y());
+
+					if (nx || ny) {
+						double R = sqrt(x*x + y*y); // mm
+						*T = 1.0 / task.F_fine; // clocks / mm
+						ts = (*T) * R; // clocks
+
+						fpga_setCenterMode(FPGA_CENTER_MODE_FORWARD);
+						step_writeXYUV(0, ts, nx, ny, 0, 0);
+
+						printf("CNT:%d X:%d(%d) Y:%d(%d) ffwd\n", (int)touch_cnt, (int)nx, (int)(nx ? round(ts/nx) : 0), (int)ny, (int)(ny ? round(ts/ny) : 0));
+
+						state = ST_FWD_FINE;
+					}
+					else
+						return touch_error();
+				}
+			}
+		}
+		break;
+
+	case ST_FWD_FINE:
+		if (step_isStopped()) {
+			if (fpga_getCentered()) {
+				fpga_snapMotor();
+				nx1 = fpga_getPos(0); // move in direction to (x0, y0) at slow speed
+				ny1 = fpga_getPos(1);
+
+				nx = nx0 - nx1;
+				ny = ny0 - ny1;
+
+				if (nx || ny) {
+					*T = 1.0 / task.F_fine; // clocks / mm
+					double R = steps_to_mm2(nx, ny, cnc_scale_xy());
+					ts = (*T) * R; // clocks
+
+					fpga_setCenterMode(FPGA_CENTER_MODE_REVERSE);
+					step_writeXYUV(0, ts, nx, ny, 0, 0);
+
+					printf("CNT:%d X:%d(%d) Y:%d(%d) rev\n", (int)touch_cnt, (int)nx, (int)(nx ? round(ts/nx) : 0), (int)ny, (int)(ny ? round(ts/ny) : 0));
+
+					state = ST_REV_FINE;
+					break;
+				}
+			}
+
+			return touch_error();
+		}
+		break;
+
+	case ST_REV_FINE:
+		if (step_isStopped()) {
+			if (fpga_getCentered()) {
+				if (touch_cnt < task.touches) {
+					touch_cnt++;
+
+					fpga_snapMotor();
+					int x1 = fpga_getPos(0);
+					int y1 = fpga_getPos(1);
+
+					touch_res.pt.x += x1;
+					touch_res.pt.y += y1;
+
+					double R = sqrt(task.dx*task.dx + task.dy*task.dy);
+					double k = TOUCH_RB / R;
+
+					double x = -task.dx * k;
+					double y = -task.dy * k;
+
+					nx = mm_to_steps(x, cnc_scale_x());
+					ny = mm_to_steps(y, cnc_scale_y());
+
+					if (nx || ny) {
+						*T = 1.0 / task.F_fine; // clocks / mm
+						ts = (*T) * TOUCH_RB; // clocks
+
+						fpga_setCenterMode(FPGA_CENTER_MODE_OFF);
+						step_writeXYUV(0, ts, nx, ny, 0, 0);
+
+						printf("CNT:%d X:%d(%d) Y:%d(%d) rev\n", (int)touch_cnt, (int)nx, (int)(nx ? round(ts/nx) : 0), (int)ny, (int)(ny ? round(ts/ny) : 0));
+
+						state = ST_RB;
+					}
+					else
+						return touch_error();
+				}
+				else {
+					fpga_snapMotor();
+					touch_res.pt.x += fpga_getPos(0);
+					touch_res.pt.y += fpga_getPos(1);
+
+					touch_res.pt.x /= task.touches;
+					touch_res.pt.y /= task.touches;
+					touch_res.valid = TRUE;
+
+					printf("Touch %d %d\n", (int)touch_res.pt.x, (int)touch_res.pt.y);
+
+					task.touches = 0;
+					state = ST_IDLE;
+					return 1;
+				}
+			}
+			else
+				return touch_error();
+		}
+		break;
+
+	case ST_RB:
+		if (step_isStopped()) {
+			double R = sqrt(task.dx * task.dx + task.dy * task.dy);
+			double k = 2.0 * TOUCH_RB / R;
+
+			double x = task.dx * k;
+			double y = task.dy * k;
+			nx = mm_to_steps(x, cnc_scale_x());
+			ny = mm_to_steps(y, cnc_scale_y());
+
+			if (nx || ny) {
+				double R = sqrt(x*x + y*y); // mm
+				*T = 1.0 / task.F_fine; // clocks / mm
+				ts = (*T) * R; // clocks
+
+				fpga_setCenterMode(FPGA_CENTER_MODE_FORWARD);
+				step_writeXYUV(0, ts, nx, ny, 0, 0);
+
+				printf("CNT:%d X:%d(%d) Y:%d(%d) ffwd\n", (int)touch_cnt, (int)nx, (int)(nx ? round(ts/nx) : 0), (int)ny, (int)(ny ? round(ts/ny) : 0));
+
+				state = ST_FWD_FINE;
+			}
+			else
+				return touch_error();
+		}
+		break;
+	}
+
+#ifdef PRINT
+	if (state != state_old) {
+		switch (state) {
+		case ST_IDLE:		printf("\tT_ST_IDLE\n"); break;
+		case ST_FWD:		printf("\tT_ST_FWD\n"); break;
+		case ST_FWD_FINE:	printf("\tT_ST_FWD_F\n"); break;
+		case ST_REV_FINE:	printf("\tT_ST_REV_F\n"); break;
+		case ST_RB:			printf("\tT_ST_RB\n"); break;
+		default:			printf("\ttstate: %d\n", (int)state); break;
+		}
+	}
+#endif
+
+	return 0;
+}

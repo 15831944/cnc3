@@ -1,0 +1,719 @@
+#include "center.h"
+
+#include <math.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
+#include "fpga.h"
+#include "step_dir.h"
+#include "cnc_param.h"
+#include "feedback.h"
+#include "defines.h"
+#include "cnc_func.h"
+#include "fpga_gpo.h"
+
+typedef enum {ST_TOUCH_IDLE, ST_TOUCH_FWD, ST_TOUCH_FWD_FINE, ST_TOUCH_REV_FINE, ST_TOUCH_RB} touch_state_t;
+typedef enum {ST_IDLE, ST_TOUCH, ST_CENTER, ST_BACK, ST_WAIT} center_state_t;
+
+static center_t center;
+static touch_state_t tstate, tstate_old;
+static center_state_t state, state_old;
+static fpoint_t D = {0,0};
+
+void center_default() {
+	center.mode			= CENTER_NO;
+	center.touches		= 1;
+	center.attempts		= 1;
+	center.drum_vel		= 0;
+	center.thld		= ADC_MAX;
+	center.R		= 100; // mm
+	center.rollback	= 0; // mm
+	center.F		= mmm_to_mmclock(18);
+	center.F_fine	= mmm_to_mmclock(1.8);
+	center.fine_share	= 0;
+}
+
+void center_reset() {
+	center_default();
+	tstate_old = tstate = ST_TOUCH_IDLE;
+	state_old = state = ST_IDLE;
+	D.x = D.y = 0;
+}
+
+static int center_error() {
+	center_reset();
+	center_default();
+	return -1;
+}
+
+int32_t center_D(AXIS_T axis) { return axis == AXIS_X ? D.x : (axis == AXIS_Y ? D.y : 0); }
+
+int center_getState() { return (int)state; }
+
+// return 0 - OK
+int center_init(const center_t* const p) {
+	center_reset();
+
+	memcpy(&center, p, sizeof(center_t));
+
+	center.rollback = fabs(center.rollback);
+
+	if (	(center.mode == CENTER_X || center.mode == CENTER_Y || center.mode == CENTER_CIRCLE) &&
+			center.touches && center.touches < CENTER_ATTEMPTS_MAX &&
+			center.attempts && center.attempts < CENTER_ATTEMPTS_MAX &&
+			center.drum_vel >= 0 && center.drum_vel <= DRUM_VEL_MAX &&
+			center.thld <= ADC_MAX &&
+			center.fine_share >= 0.0 && center.fine_share <= 1.0 &&
+			fabs(center.R) < CENTER_RADIUS_MAX && center.rollback < CENTER_RADIUS_MAX &&
+			center.F >= F_MIN && center.F <= F_MAX &&
+			center.F_fine >= F_MIN && center.F_fine <= F_MAX
+	){
+		if (center.R >= 0)
+			center.rollback = -center.rollback;
+
+		printf("CENTER Md=%d Tou=%d Att=%d Dr=%d THLD=%d Z=%d R=%d RB=%d V=%d VF=%d\n",
+				(int)center.mode, (int)center.touches, (int)center.attempts, (int)center.drum_vel,
+				(int)center.thld, (int)(center.fine_share * 100),
+				(int)(center.R * 1000), (int)(center.rollback * 1000),
+				(int)(mmclock_to_mmm(center.F) * (1000.0/60)), (int)(mmclock_to_mmm(center.F_fine) * (1000.0/60))
+			);
+
+		return 0;
+	}
+
+	center_default();
+	return -1;
+}
+
+void cnc_reqG92_xyuv_enc(int32_t x, int32_t y, int32_t u, int32_t v, int32_t enc_x, int32_t enc_y);
+
+struct {
+	BOOL valid;
+	point_t pt;
+} touch_res;
+
+point_t get_touch_result() { return touch_res.pt; }
+BOOL get_touch_valid() { return touch_res.valid; }
+
+typedef struct {
+	uint8_t touches;
+	double dx, dy, F, F_fine, fine_share;
+} touch_task_t;
+
+static touch_task_t ttask;
+static int touch_cnt;
+
+void touch_init(double x, double y, uint8_t touches, double F, double F_fine, double fine_share) {
+	ttask.dx = x;
+	ttask.dy = y;
+	ttask.touches = touches;
+	ttask.F = F;
+	ttask.F_fine = F_fine;
+	ttask.fine_share = fine_share;
+}
+
+// return: 0 - OK, 1 - finish, result < 0 - error
+int touch_next(float* const T) {
+	static int nx0, ny0, nx1, ny1, nx, ny;
+	static double ts = 0;
+
+	tstate_old = tstate;
+
+	switch (tstate) {
+	default:
+		ttask.touches = 0;
+		state = ST_TOUCH_IDLE;
+		return -1;
+	case ST_TOUCH_IDLE:
+		if (ttask.touches) {
+			touch_res.valid = FALSE;
+			touch_res.pt.x = touch_res.pt.y = 0;
+
+			double k = 1.0 - ttask.fine_share;
+			double x = ttask.dx * k;
+			double y = ttask.dy * k;
+			nx = mm_to_steps(x, cnc_scale_x());
+			ny = mm_to_steps(y, cnc_scale_y());
+
+			if (nx || ny) {
+				touch_cnt = 1;
+
+				nx0 = fpga_getPos(0);
+				ny0 = fpga_getPos(1);
+
+				double R = sqrt(x*x + y*y); // mm
+				*T = 1.0 / ttask.F; // clocks / mm
+				ts = (*T) * R; // clocks
+
+				fpga_setCenterMode(FPGA_CENTER_MODE_FORWARD);
+				step_writeXYUV(0, ts, nx, ny, 0, 0);
+
+#ifdef PRINT
+				uint16_t run = fpga_getRun();
+				uint8_t wrreq = run & 0xff;
+				run >>= 8;
+
+				printf("CNT:%d X:%d(%d) Y:%d(%d) fwd\n", (int)touch_cnt, (int)nx, (int)(nx ? round(ts/nx) : 0), (int)ny, (int)(ny ? round(ts/ny) : 0));
+				printf("RD wrreq:%x run:%x\n", (int)wrreq, (int)run);
+#endif
+
+				tstate = ST_TOUCH_FWD;
+			}
+		}
+		else
+			return -1;
+		break;
+
+	case ST_TOUCH_FWD:
+		if (step_isStopped()) {
+			if (fpga_getCentered()) {
+				nx1 = fpga_getPos(0); // move back to (x0, y0) with slow speed
+				ny1 = fpga_getPos(1);
+
+				nx = nx0 - nx1;
+				ny = ny0 - ny1;
+
+				if (nx || ny) {
+					*T = 1.0 / ttask.F_fine; // clocks / mm
+					double R = steps_to_mm2(nx, ny, cnc_scale_xy()); // mm
+					ts = (*T) * R; // clocks
+
+					fpga_setCenterMode(FPGA_CENTER_MODE_REVERSE);
+					step_writeXYUV(0, ts, nx, ny, 0, 0);
+
+					printf("CNT:%d X:%d(%d) Y:%d(%d) rev\n", (int)touch_cnt, (int)nx, (int)(nx ? round(ts/nx) : 0), (int)ny, (int)(ny ? round(ts/ny) : 0));
+
+					state = ST_TOUCH_REV_FINE;
+				}
+				else {
+					state = ST_TOUCH_IDLE;
+					return -1;
+				}
+			}
+			else { // Fine speed
+				double x = ttask.dx * ttask.fine_share;
+				double y = ttask.dy * ttask.fine_share;
+				nx = mm_to_steps(x, cnc_scale_x());
+				ny = mm_to_steps(y, cnc_scale_y());
+
+				if (nx || ny) {
+					double R = sqrt(x*x + y*y); // mm
+					*T = 1.0 / ttask.F_fine; // clocks / mm
+					ts = (*T) * R; // clocks
+
+					fpga_setCenterMode(FPGA_CENTER_MODE_FORWARD);
+					step_writeXYUV(0, ts, nx, ny, 0, 0);
+
+					printf("CNT:%d X:%d(%d) Y:%d(%d) ffwd\n", (int)touch_cnt, (int)nx, (int)(nx ? round(ts/nx) : 0), (int)ny, (int)(ny ? round(ts/ny) : 0));
+
+					state = ST_TOUCH_FWD_FINE;
+				}
+				else {
+					state = ST_TOUCH_IDLE;
+					return -1;
+				}
+			}
+		}
+		break;
+
+	case ST_TOUCH_FWD_FINE:
+		if (step_isStopped()) {
+			if (fpga_getCentered()) {
+				nx1 = fpga_getPos(0); // move in direction to (x0, y0) at slow speed
+				ny1 = fpga_getPos(1);
+
+				nx = nx0 - nx1;
+				ny = ny0 - ny1;
+
+				if (nx || ny) {
+					*T = 1.0 / ttask.F_fine; // clocks / mm
+					double R = steps_to_mm2(nx, ny, cnc_scale_xy());
+					ts = (*T) * R; // clocks
+
+					fpga_setCenterMode(FPGA_CENTER_MODE_REVERSE);
+					step_writeXYUV(0, ts, nx, ny, 0, 0);
+
+					printf("CNT:%d X:%d(%d) Y:%d(%d) rev\n", (int)touch_cnt, (int)nx, (int)(nx ? round(ts/nx) : 0), (int)ny, (int)(ny ? round(ts/ny) : 0));
+
+					state = ST_TOUCH_REV_FINE;
+				}
+			}
+			else {
+				state = ST_TOUCH_IDLE;
+				return -1;
+			}
+		}
+		break;
+
+	case ST_TOUCH_REV_FINE:
+		if (step_isStopped()) {
+			if (fpga_getCentered()) {
+				if (touch_cnt < ttask.touches) {
+					touch_cnt++;
+
+					int x1 = fpga_getPos(0);
+					int y1 = fpga_getPos(1);
+
+					touch_res.pt.x += x1;
+					touch_res.pt.y += y1;
+
+					double R = sqrt(ttask.dx*ttask.dx + ttask.dy*ttask.dy);
+					double k = TOUCH_RB / R;
+
+					double x = -ttask.dx * k;
+					double y = -ttask.dy * k;
+
+					nx = mm_to_steps(x, cnc_scale_x());
+					ny = mm_to_steps(y, cnc_scale_y());
+
+					if (nx || ny) {
+						*T = 1.0 / ttask.F_fine; // clocks / mm
+						ts = (*T) * TOUCH_RB; // clocks
+
+						fpga_setCenterMode(FPGA_CENTER_MODE_OFF);
+						step_writeXYUV(0, ts, nx, ny, 0, 0);
+
+						printf("CNT:%d X:%d(%d) Y:%d(%d) rev\n", (int)touch_cnt, (int)nx, (int)(nx ? round(ts/nx) : 0), (int)ny, (int)(ny ? round(ts/ny) : 0));
+
+						state = ST_TOUCH_RB;
+					}
+					else {
+						state = ST_TOUCH_IDLE;
+						return -1;
+					}
+				}
+				else {
+					touch_res.pt.x += fpga_getPos(0);
+					touch_res.pt.y += fpga_getPos(1);
+
+					touch_res.pt.x /= ttask.touches;
+					touch_res.pt.y /= ttask.touches;
+					touch_res.valid = TRUE;
+
+					printf("Touch %d %d\n", (int)touch_res.pt.x, (int)touch_res.pt.y);
+
+					ttask.touches = 0;
+					state = ST_TOUCH_IDLE;
+					return 1;
+				}
+			}
+			else
+				return -1;
+		}
+		break;
+
+	case ST_TOUCH_RB:
+		if (step_isStopped()) {
+			double R = sqrt(ttask.dx * ttask.dx + ttask.dy * ttask.dy);
+			double k = 2.0 * TOUCH_RB / R;
+
+			double x = ttask.dx * k;
+			double y = ttask.dy * k;
+			nx = mm_to_steps(x, cnc_scale_x());
+			ny = mm_to_steps(y, cnc_scale_y());
+
+			if (nx || ny) {
+				double R = sqrt(x*x + y*y); // mm
+				*T = 1.0 / ttask.F_fine; // clocks / mm
+				ts = (*T) * R; // clocks
+
+				fpga_setCenterMode(FPGA_CENTER_MODE_FORWARD);
+				step_writeXYUV(0, ts, nx, ny, 0, 0);
+
+				printf("CNT:%d X:%d(%d) Y:%d(%d) ffwd\n", (int)touch_cnt, (int)nx, (int)(nx ? round(ts/nx) : 0), (int)ny, (int)(ny ? round(ts/ny) : 0));
+
+				state = ST_TOUCH_FWD_FINE;
+			}
+			else {
+				state = ST_TOUCH_IDLE;
+				return -1;
+			}
+		}
+		break;
+	}
+
+#ifdef PRINT
+	if (tstate != tstate_old) {
+		switch (tstate) {
+		case ST_TOUCH_IDLE:		printf("\tSTT_IDLE\n"); break;
+		case ST_TOUCH_FWD:		printf("\tSTT_FWD\n"); break;
+		case ST_TOUCH_FWD_FINE:	printf("\tSTT_FWD_F\n"); break;
+		case ST_TOUCH_REV_FINE:	printf("\tSTT_REV_F\n"); break;
+		case ST_TOUCH_RB:		printf("\tSTT_RB\n"); break;
+		default:				printf("\ttstate: %d\n", (int)tstate); break;
+		}
+	}
+#endif
+
+	return 0;
+}
+
+// return: 0 - OK, 1 - finish, result < 0 - error
+int center_next(float* const T) {
+	static int nx, ny, res; // temporary variables
+	static int step, acc_cnt; // counters
+	static double ts = 0; // temporary variable
+	static fpoint_t N[4] = {{0,0}, {0,0}, {0,0}, {0,0}}, Cn_acc = {0,0}; // accumulated variables
+
+	state_old = state;
+
+	switch (state) {
+	default:
+		return center_error();
+
+	case ST_IDLE:
+		res = -1;
+
+		if (center.mode == CENTER_X || center.mode == CENTER_Y || center.mode == CENTER_CIRCLE) {
+			cnc_reqG92_xyuv_enc(0, 0, 0, 0, 0, 0);
+			fpga_setCenterMode(FPGA_CENTER_MODE_OFF);
+			gpo_setDrumVel(center.drum_vel);
+			gpo_setDrumEnable(center.drum_vel != 0);
+			fpga_setCenterThld(center.thld);
+
+#ifdef PRINT
+			fpga_adcSnapshop();
+			uint16_t adc = fpga_getADC(0);
+			uint16_t thld = fpga_getCenterThld();
+			printf("ADC:%x THLD:%x\n", adc, thld);
+
+			int fb_ena = fpga_getFeedbackEnable();
+			int soft_permit = fpga_getSoftPermit();
+			printf("FB:%x PERM:%x\n", fb_ena, soft_permit);
+
+			uint16_t mode = fpga_getCenterMode();
+			int center_ena = mode >> 8;
+			mode &= 0xff;
+			printf("C:%x MD:%x\n", center_ena, (int)mode);
+
+			uint16_t flags = fpga_getFlags();
+			printf("F:%x\n", (int)flags);
+#endif
+			if (center.mode == CENTER_X) {
+				touch_init(center.R, 0, center.touches, center.F, center.F_fine, center.fine_share);
+				res = touch_next(T);
+				state = ST_TOUCH;
+			}
+			else if (center.mode == CENTER_Y) {
+				touch_init(0, center.R, center.touches, center.F, center.F_fine, center.fine_share);
+				res = touch_next(T);
+				state = ST_TOUCH;
+			}
+			else {
+				for (int i = 0; i < 4; i++)
+					N[i].x = N[i].y = 0;
+
+				Cn_acc.x = Cn_acc.y = 0;
+				D.x = D.y = 0;
+
+				step = 0;
+				acc_cnt = 1;
+
+				touch_init(center.R, 0, center.touches, center.F, center.F_fine, center.fine_share);
+				res = touch_next(T);
+				state = ST_CENTER;
+			}
+		}
+
+		if (res != 0)
+			return center_error();
+
+		break;
+
+	case ST_TOUCH:
+		res = touch_next(T);
+
+		if (res == 0) // OK, working on
+			;
+		else if (res == 1) { // finish, rollback
+			nx = center.mode == CENTER_X ? mm_to_steps(center.rollback, cnc_scale_x()) : 0;
+			ny = center.mode == CENTER_Y ? mm_to_steps(center.rollback, cnc_scale_y()) : 0;
+
+			*T = 1.0f / center.F; // clocks / mm
+			ts = fabs(center.rollback) * (*T); // clocks
+
+			fpga_setCenterMode(FPGA_CENTER_MODE_OFF);
+			step_writeXYUV(0, ts, nx, ny, 0, 0);
+
+			printf("RB x:%d y:%d\n", (int)nx, (int)ny);
+
+			state = ST_WAIT;
+		}
+		else
+			return center_error();
+
+		break;
+
+	case ST_CENTER:
+		res = touch_next(T);
+
+		if (res == 0) // OK, working on
+			;
+		else if (res == 1) { // finish, goto start position
+			static fpoint_t Cn = {0,0};
+
+			switch (step) {
+			case 0:
+				nx = touch_res.pt.x;
+				ny = touch_res.pt.y;
+
+				N[0].x += nx;
+				N[0].y += ny;
+
+				nx = -nx;
+				ny = -ny;
+
+				if (nx || ny) {
+					*T = 1.0f / center.F; // clocks / mm
+					ts = steps_to_mm2(nx, ny, cnc_scale_xy()) * (*T); // clocks
+
+					fpga_setCenterMode(FPGA_CENTER_MODE_OFF);
+					step_writeXYUV(0, ts, nx, ny, 0, 0);
+
+					printf("Back %d %d\n", nx, ny);
+
+					state = ST_BACK;
+				}
+				else
+					return center_error();
+
+				step++;
+				break;
+
+			case 1: // goto center
+				N[1].x += touch_res.pt.x;
+				N[1].y += touch_res.pt.y;
+
+				Cn.x = round( ( N[0].x + N[1].x ) / (2.0 * (double)acc_cnt) );
+				Cn.y = round( ( N[0].y + N[1].y ) / (2.0 * (double)acc_cnt) );
+
+				nx = (int32_t)Cn.x - touch_res.pt.x;
+				ny = (int32_t)Cn.y - touch_res.pt.y;
+
+				if (nx || ny) {
+					*T = 1.0f / center.F; // clocks / mm
+					ts = steps_to_mm2(nx, ny, cnc_scale_xy()) * (*T); // clocks
+
+					fpga_setCenterMode(FPGA_CENTER_MODE_OFF);
+					step_writeXYUV(0, ts, nx, ny, 0, 0);
+
+					printf("Back %d %d\n", (int)nx, (int)ny);
+
+					state = ST_BACK;
+				}
+				else
+					return center_error();
+
+				step++;
+				break;
+
+			case 2:
+				nx = touch_res.pt.x;
+				ny = touch_res.pt.y;
+
+				N[2].x += nx;
+				N[2].y += ny;
+
+				nx = -nx; // to (0,0)
+				ny = -ny;
+
+				if (nx || ny) {
+					*T = 1.0f / center.F; // clocks / mm
+					ts = steps_to_mm2(nx, ny, cnc_scale_xy()) * (*T); // clocks
+
+					fpga_setCenterMode(FPGA_CENTER_MODE_OFF);
+					step_writeXYUV(0, ts, nx, ny, 0, 0);
+
+					printf("Back %d %d\n", nx, ny);
+
+					state = ST_BACK;
+				}
+				else
+					return center_error();
+
+				step++;
+				break;
+
+			case 3: {
+				static fpoint_t A1, A2, B1, B2, Cn;
+
+				N[3].x += touch_res.pt.x;
+				N[3].y += touch_res.pt.y;
+
+				A1.x = N[0].x / (double)acc_cnt;
+				A1.y = N[0].y / (double)acc_cnt;
+				A2.x = N[1].x / (double)acc_cnt;
+				A2.y = N[1].y / (double)acc_cnt;
+
+				B1.x = N[2].x / (double)acc_cnt;
+				B1.y = N[2].y / (double)acc_cnt;
+				B2.x = N[3].x / (double)acc_cnt;
+				B2.y = N[3].y / (double)acc_cnt;
+
+				D.x = fabs(A2.x - A1.x);
+				D.y = fabs(B2.y - B1.y);
+
+				// Calculate center
+//				static BOOL A_vert, B_vert;
+//				static double b1, c1, b2, c2;
+//
+//				A_vert = A1.x > (A2.x - 0.001) && A1.x < (A2.x + 0.001);
+//
+//				if (!A_vert) {
+//					b1 = (A2.y - A1.y) / (A2.x - A1.x);
+//					c1 = -b1 * A1.x + A1.y;
+//				}
+//				else
+//					b1 = c1 = 0;
+//
+//				B_vert = B1.x > (B2.x - 0.001) && B1.x < (B2.x + 0.001);
+//
+//				if (!B_vert) {
+//					b2 = (B2.y - B1.y) / (B2.x - B1.x);
+//					c2 = -b2 * B1.x + B1.y;
+//				}
+//				else
+//					b2 = c2 = 0;
+//
+//				if (A_vert && B_vert)
+//					return center_error();
+//				else if (A_vert) {
+//					Cn.x = (A1.x + A2.x) / 2.0;
+//					Cn.y = b2 * Cn.x + c2;
+//				}
+//				else if (B_vert) {
+//					Cn.x = (B1.x + B2.x) / 2.0;
+//					Cn.y = b1 * Cn.x + c1;
+//				}
+//				else {
+//					Cn.x = (c2 - c1) / (b1 - b2);
+//					Cn.y = b1 * Cn.x + c1;
+//				}
+
+				Cn.x = (A1.x + A2.x) / 2.0;
+				Cn.y = (B1.y + B2.y) / 2.0;
+
+				Cn.x = round(Cn.x);
+				Cn.y = round(Cn.y);
+
+				Cn_acc.x += Cn.x;
+				Cn_acc.y += Cn.y;
+
+				if (acc_cnt < center.attempts) {
+					nx = (int)Cn.x - touch_res.pt.x;
+					ny = (int)Cn.y - touch_res.pt.y;
+					state = ST_BACK;
+				}
+				else {
+					Cn.x = round(Cn_acc.x / (double)acc_cnt);
+					Cn.y = round(Cn_acc.y / (double)acc_cnt);
+					nx = (int)Cn.x - touch_res.pt.x;
+					ny = (int)Cn.y - touch_res.pt.y;
+					state = ST_WAIT;
+				}
+
+				if (nx || ny) {
+					*T = 1.0f / center.F; // clocks / mm
+					ts = steps_to_mm2(nx, ny, cnc_scale_xy()) * (*T); // clocks
+
+					fpga_setCenterMode(FPGA_CENTER_MODE_OFF);
+					step_writeXYUV(0, ts, nx, ny, 0, 0);
+
+					printf("Back %d %d\n", (int)nx, (int)ny);
+				}
+				else
+					return center_error();
+
+				step = 0;
+				acc_cnt++;
+			}
+				break;
+
+			default:
+				return center_error();
+			}
+		}
+		else
+			return center_error();
+
+	break;
+
+	case ST_BACK:
+		if (step_isStopped()) {
+			switch (step) {
+			case 1:
+				touch_init(-center.R, 0, center.touches, center.F, center.F_fine, center.fine_share);
+				break;
+			case 2:
+				touch_init(0, center.R, center.touches, center.F, center.F_fine, center.fine_share);
+				break;
+			case 3:
+				touch_init(0, -center.R, center.touches, center.F, center.F_fine, center.fine_share);
+				break;
+			default:
+				return center_error();
+			}
+
+			if (touch_next(T) == 0)
+				state = ST_CENTER;
+			else
+				return center_error();
+		}
+
+		break;
+
+	case ST_WAIT:
+		if (step_isStopped()) {
+			center_reset();
+			center_default();
+//			cnc_reqG92_xyuv_enc(0, 0, 0, 0, 0, 0);
+			return 1;
+		}
+		break;
+	}
+
+#ifdef PRINT
+	if (state != state_old) {
+		switch (state) {
+		case ST_IDLE: printf("\tST_IDLE\n"); break;
+		case ST_TOUCH: printf("\tST_TOUCH\n"); break;
+		case ST_CENTER: printf("\tST_CENTER\n"); break;
+		case ST_BACK: printf("\tST_BACK\n"); break;
+		case ST_WAIT: printf("\tST_WAIT\n"); break;
+		default: printf("\tstate: %d\n", (int)state); break;
+		}
+	}
+#endif
+
+	return 0;
+}
+
+extern uint8_t cnc_ena;
+BOOL cnc_isInit();
+BOOL key_isInit();
+void cnc_reqCenter(const center_t* const pcenter);
+
+void center_test() {
+	static int cnt = 0;
+	static center_t center;
+
+	if (!cnt && cnc_ena && cnc_isInit() && key_isInit()) {
+		cnt = 1;
+
+		gpo_setCenterEnable(TRUE);
+		gpo_apply();
+
+		center.mode		= CENTER_X;
+		center.touches	= 1;
+		center.attempts	= 1;
+		center.drum_vel	= 0;
+		center.thld		= 60; // ~10 V
+		center.fine_share	= 0.2;
+		center.R			= 100; // mm
+		center.rollback	= 0; // mm
+		center.F		= mmm_to_mmclock(18);
+		center.F_fine	= mmm_to_mmclock(1.8);
+		cnc_reqCenter(&center);
+	}
+}

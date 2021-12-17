@@ -1,0 +1,12 @@
+Power Analyzer Status : Successful - Thu Dec 16 17:30:58 2021
+Quartus Prime Version : 19.1.0 Build 670 09/22/2019 SJ Standard Edition
+Revision Name : cnc3_v1_5
+Top-level Entity Name : top
+Family : MAX 10
+Device : 10M16SCE144C8G
+Power Models : Final
+Total Thermal Power Dissipation : 475.58 mW
+Core Dynamic Thermal Power Dissipation : 170.22 mW
+Core Static Thermal Power Dissipation : 227.61 mW
+I/O Thermal Power Dissipation : 77.75 mW
+Power Estimation Confidence : Low: user provided insufficient toggle rate data

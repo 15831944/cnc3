@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;cnc3/Core/Inc/IS42S16320F-7TL.h&apos; to &apos;IS42S16320F.h&apos;" description="Rename resource &apos;IS42S16320F-7TL.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Core/Inc/IS42S16320F-7TL.h" name="IS42S16320F.h" stamp="1617628786184" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;cnc3/Core/Src/IS42S16320F-7TL.c&apos; to &apos;IS42S16320F.c&apos;" description="Rename resource &apos;IS42S16320F-7TL.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Core/Src/IS42S16320F-7TL.c" name="IS42S16320F.c" stamp="1617628799031" updateReferences="true"/>
+</session>

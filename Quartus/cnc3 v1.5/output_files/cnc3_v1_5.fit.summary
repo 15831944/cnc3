@@ -1,0 +1,18 @@
+Fitter Status : Successful - Thu Dec 16 17:30:45 2021
+Quartus Prime Version : 19.1.0 Build 670 09/22/2019 SJ Standard Edition
+Revision Name : cnc3_v1_5
+Top-level Entity Name : top
+Family : MAX 10
+Device : 10M16SCE144C8G
+Timing Models : Final
+Total logic elements : 7,483 / 15,840 ( 47 % )
+    Total combinational functions : 7,023 / 15,840 ( 44 % )
+    Dedicated logic registers : 4,234 / 15,840 ( 27 % )
+Total registers : 4296
+Total pins : 94 / 101 ( 93 % )
+Total virtual pins : 0
+Total memory bits : 1,280 / 562,176 ( < 1 % )
+Embedded Multiplier 9-bit elements : 0 / 90 ( 0 % )
+Total PLLs : 1 / 1 ( 100 % )
+UFM blocks : 0 / 1 ( 0 % )
+ADC blocks : 0

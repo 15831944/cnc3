@@ -1,0 +1,12 @@
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=win32
+configDescList=org.eclipse.launchbar.core.descriptorType.default\:cnc2 Debug,org.eclipse.launchbar.core.descriptorType.default\:cnc3_sdram8_1 Debug,org.eclipse.launchbar.core.descriptorType.default\:cnc3 Debug
+eclipse.preferences.version=1
+org.eclipse.launchbar.core.descriptorType.default\:cnc2\ Debug/activeLaunchMode=debug
+org.eclipse.launchbar.core.descriptorType.default\:cnc2\ Debug/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
+org.eclipse.launchbar.core.descriptorType.default\:cnc3.elf/activeLaunchMode=debug
+org.eclipse.launchbar.core.descriptorType.default\:cnc3.elf/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
+org.eclipse.launchbar.core.descriptorType.default\:cnc3_sdram.elf/activeLaunchMode=debug
+org.eclipse.launchbar.core.descriptorType.default\:cnc3_sdram.elf/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
+org.eclipse.launchbar.core.descriptorType.default\:cnc3_usb.elf/activeLaunchMode=debug
+org.eclipse.launchbar.core.descriptorType.default\:cnc3_usb.elf/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
