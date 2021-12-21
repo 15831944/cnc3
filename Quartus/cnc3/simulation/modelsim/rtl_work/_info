@@ -1,0 +1,66 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Work/Meatec/Main/cnc3/Quartus/cnc3 v1.5/simulation/modelsim
+T_opt
+!s110 1640073960
+Vf@IL1NmnA=KjHznkV[i;A1
+04 11 4 work imit_enc_tb fast 0
+=1-b88584a4e7ae-61c18ae7-304-1a74
+o-quiet -auto_acc_if_foreign -work work -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L fiftyfivenm_ver -L rtl_work -L work +acc
+n@_opt
+OL;O;10.4c;61
+vimit_enc
+Z1 DXx6 sv_std 3 std 0 22 WmjPaeP=7F5?QFXzJ>D[Q2
+!s110 1640073958
+!i10b 1
+!s100 z5QOG?l07ESnmAHjh0^MF2
+I9?hS6E38U4mC2Sg6bRUPI3
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+!s105 imit_enc_sv_unit
+S1
+R0
+w1640006796
+8C:/Work/Meatec/Main/cnc3/Quartus/cnc3 v1.5/imit_enc.sv
+FC:/Work/Meatec/Main/cnc3/Quartus/cnc3 v1.5/imit_enc.sv
+L0 6
+Z3 OL;L;10.4c;61
+r1
+!s85 0
+31
+Z4 !s108 1640073958.000000
+!s107 C:/Work/Meatec/Main/cnc3/Quartus/cnc3 v1.5/imit_enc.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Work/Meatec/Main/cnc3/Quartus/cnc3 v1.5|C:/Work/Meatec/Main/cnc3/Quartus/cnc3 v1.5/imit_enc.sv|
+!i113 0
+Z5 o-sv -work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+!s92 -sv -work work {+incdir+C:/Work/Meatec/Main/cnc3/Quartus/cnc3 v1.5} -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+vimit_enc_tb
+R1
+!s110 1640073959
+!i10b 1
+!s100 Anfh6kYQ`1PCi?Ec0VkJ<3
+I0KkFo[mkHj[^AUD]ia3@?1
+R2
+!s105 imit_enc_tb_sv_unit
+S1
+R0
+w1640073721
+8C:/Work/Meatec/Main/cnc3/Quartus/cnc3 v1.5/testbench/imit_enc_tb.sv
+FC:/Work/Meatec/Main/cnc3/Quartus/cnc3 v1.5/testbench/imit_enc_tb.sv
+L0 4
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Work/Meatec/Main/cnc3/Quartus/cnc3 v1.5/testbench/imit_enc_tb.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Work/Meatec/Main/cnc3/Quartus/cnc3 v1.5/testbench|C:/Work/Meatec/Main/cnc3/Quartus/cnc3 v1.5/testbench/imit_enc_tb.sv|
+!i113 0
+R5
+!s92 -sv -work work {+incdir+C:/Work/Meatec/Main/cnc3/Quartus/cnc3 v1.5/testbench} -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact

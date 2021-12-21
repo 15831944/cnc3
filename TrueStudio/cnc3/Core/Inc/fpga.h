@@ -232,6 +232,10 @@ void fpga_setEnc(uint8_t index, int32_t value);
 void fpga_setDist(uint8_t index, uint32_t value);
 
 int32_t fpga_getPos(uint8_t index);
+int32_t fpga_getPosX();
+int32_t fpga_getPosY();
+int32_t fpga_getPosU();
+int32_t fpga_getPosV();
 
 int32_t fpga_getDeltaX();
 int32_t fpga_getDeltaY();

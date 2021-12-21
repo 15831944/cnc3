@@ -35,13 +35,13 @@ cnc_context_t* cnc_ctx_getForce() {
 	cnc_ctx.field.rollback	= cnc_isRollback();
 	cnc_ctx.field.attempt	= cnc_getRollbackAttempt() & 7;
 
-	cnc_ctx.field.x = fpga_getPos(0);
-	cnc_ctx.field.y = fpga_getPos(1);
-	cnc_ctx.field.u = fpga_getPos(2);
-	cnc_ctx.field.v = fpga_getPos(3);
+	cnc_ctx.field.x = fpga_getPosX();
+	cnc_ctx.field.y = fpga_getPosY();
+	cnc_ctx.field.u = fpga_getPosU();
+	cnc_ctx.field.v = fpga_getPosV();
 
-	cnc_ctx.field.enc_x = enc_get(0);
-	cnc_ctx.field.enc_y = enc_get(1);
+	cnc_ctx.field.enc_x = enc_getX();
+	cnc_ctx.field.enc_y = enc_getY();
 
 	data32_reg.data = fpga_getControls();
 	limsw_mask_reg.data = fpga_getLimSwMask();

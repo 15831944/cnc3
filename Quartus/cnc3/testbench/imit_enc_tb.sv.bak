@@ -1,0 +1,12 @@
+module imit_enc_tb;
+	bit clk = 0, aclr = 0, sclr = 0;
+	bit step = 0, dir = 0;	
+	wire A, B.
+
+	initial begin
+
+	end
+	
+	imit_enc dut(.*);
+
+endmodule

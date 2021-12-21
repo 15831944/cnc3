@@ -1,0 +1,333 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "nirq",
+					"strict" : false
+				},
+				{
+					"name" : "X[0]",
+					"strict" : false
+				},
+				{
+					"name" : "X[1]",
+					"strict" : false
+				},
+				{
+					"name" : "X[2]",
+					"strict" : false
+				},
+				{
+					"name" : "X[3]",
+					"strict" : false
+				},
+				{
+					"name" : "X[4]",
+					"strict" : false
+				},
+				{
+					"name" : "Y[0]",
+					"strict" : false
+				},
+				{
+					"name" : "Y[1]",
+					"strict" : false
+				},
+				{
+					"name" : "Y[2]",
+					"strict" : false
+				},
+				{
+					"name" : "Y[3]",
+					"strict" : false
+				},
+				{
+					"name" : "Y[4]",
+					"strict" : false
+				},
+				{
+					"name" : "U[0]",
+					"strict" : false
+				},
+				{
+					"name" : "U[1]",
+					"strict" : false
+				},
+				{
+					"name" : "U[2]",
+					"strict" : false
+				},
+				{
+					"name" : "V[0]",
+					"strict" : false
+				},
+				{
+					"name" : "V[1]",
+					"strict" : false
+				},
+				{
+					"name" : "V[2]",
+					"strict" : false
+				},
+				{
+					"name" : "adc_sclk",
+					"strict" : false
+				},
+				{
+					"name" : "adc_csn",
+					"strict" : false
+				},
+				{
+					"name" : "adc_mosi",
+					"strict" : false
+				},
+				{
+					"name" : "ind_sclk",
+					"strict" : false
+				},
+				{
+					"name" : "ind_sdo",
+					"strict" : false
+				},
+				{
+					"name" : "ind_load",
+					"strict" : false
+				},
+				{
+					"name" : "hv_ena",
+					"strict" : false
+				},
+				{
+					"name" : "hv_lvl",
+					"strict" : false
+				},
+				{
+					"name" : "pump_ena",
+					"strict" : false
+				},
+				{
+					"name" : "drum_fwd",
+					"strict" : false
+				},
+				{
+					"name" : "drum_rev",
+					"strict" : false
+				},
+				{
+					"name" : "oe",
+					"strict" : false
+				},
+				{
+					"name" : "center_n",
+					"strict" : false
+				},
+				{
+					"name" : "drum_vel[0]",
+					"strict" : false
+				},
+				{
+					"name" : "drum_vel[1]",
+					"strict" : false
+				},
+				{
+					"name" : "drum_vel[2]",
+					"strict" : false
+				},
+				{
+					"name" : "sd_ena",
+					"strict" : false
+				},
+				{
+					"name" : "sd_oe_n",
+					"strict" : false
+				},
+				{
+					"name" : "current[0]",
+					"strict" : false
+				},
+				{
+					"name" : "current[1]",
+					"strict" : false
+				},
+				{
+					"name" : "current[2]",
+					"strict" : false
+				},
+				{
+					"name" : "current[3]",
+					"strict" : false
+				},
+				{
+					"name" : "current[4]",
+					"strict" : false
+				},
+				{
+					"name" : "current[5]",
+					"strict" : false
+				},
+				{
+					"name" : "gen_sclk",
+					"strict" : false
+				},
+				{
+					"name" : "gen_load",
+					"strict" : false
+				},
+				{
+					"name" : "gen_sdo",
+					"strict" : false
+				},
+				{
+					"name" : "led_n",
+					"strict" : false
+				},
+				{
+					"name" : "ad[0]",
+					"strict" : false
+				},
+				{
+					"name" : "ad[1]",
+					"strict" : false
+				},
+				{
+					"name" : "ad[2]",
+					"strict" : false
+				},
+				{
+					"name" : "ad[3]",
+					"strict" : false
+				},
+				{
+					"name" : "ad[4]",
+					"strict" : false
+				},
+				{
+					"name" : "ad[5]",
+					"strict" : false
+				},
+				{
+					"name" : "ad[6]",
+					"strict" : false
+				},
+				{
+					"name" : "ad[7]",
+					"strict" : false
+				},
+				{
+					"name" : "ad[8]",
+					"strict" : false
+				},
+				{
+					"name" : "ad[9]",
+					"strict" : false
+				},
+				{
+					"name" : "ad[10]",
+					"strict" : false
+				},
+				{
+					"name" : "ad[11]",
+					"strict" : false
+				},
+				{
+					"name" : "ad[12]",
+					"strict" : false
+				},
+				{
+					"name" : "ad[13]",
+					"strict" : false
+				},
+				{
+					"name" : "ad[14]",
+					"strict" : false
+				},
+				{
+					"name" : "ad[15]",
+					"strict" : false
+				},
+				{
+					"name" : "gen24",
+					"strict" : false
+				},
+				{
+					"name" : "ne",
+					"strict" : false
+				},
+				{
+					"name" : "noe",
+					"strict" : false
+				},
+				{
+					"name" : "adc_miso",
+					"strict" : false
+				},
+				{
+					"name" : "nwe",
+					"strict" : false
+				},
+				{
+					"name" : "nbl[0]",
+					"strict" : false
+				},
+				{
+					"name" : "nbl[1]",
+					"strict" : false
+				},
+				{
+					"name" : "nadv",
+					"strict" : false
+				},
+				{
+					"name" : "sig_in[5]",
+					"strict" : false
+				},
+				{
+					"name" : "sig_in[1]",
+					"strict" : false
+				},
+				{
+					"name" : "sig_in[4]",
+					"strict" : false
+				},
+				{
+					"name" : "sig_in[0]",
+					"strict" : false
+				},
+				{
+					"name" : "sig_in[2]",
+					"strict" : false
+				},
+				{
+					"name" : "sig_in[3]",
+					"strict" : false
+				},
+				{
+					"name" : "sig_in[6]",
+					"strict" : false
+				},
+				{
+					"name" : "sig_in[7]",
+					"strict" : false
+				},
+				{
+					"name" : "wire_break",
+					"strict" : false
+				},
+				{
+					"name" : "OK220",
+					"strict" : false
+				},
+				{
+					"name" : "enc_A[2]",
+					"strict" : false
+				},
+				{
+					"name" : "enc_B[2]",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

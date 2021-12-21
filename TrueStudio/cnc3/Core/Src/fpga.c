@@ -134,6 +134,10 @@ void fpga_setPos(uint8_t index, int32_t value) { fpga_write_s32((POS32>>2) + (in
 //void fpga_setDist(uint8_t index, uint32_t value) { fpga_write_u32((POS32>>2) + (index<<1) + 1, value); }
 
 int32_t fpga_getPos(uint8_t index) { return fpga_read_s32((POS32>>2) + (index<<1)); }
+int32_t fpga_getPosX() { return fpga_read_s32(POS32 >> 2); }
+int32_t fpga_getPosY() { return fpga_read_s32((POS32 + 8) >> 2); }
+int32_t fpga_getPosU() { return fpga_read_s32((POS32 + 0x10) >> 2); }
+int32_t fpga_getPosV() { return fpga_read_s32((POS32 + 0x18) >> 2); }
 
 // Encoder delta
 int32_t fpga_getDeltaX() { return fpga_read_s32( (POS32 + 4) >> 2 ); }
