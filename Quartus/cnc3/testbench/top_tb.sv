@@ -46,9 +46,9 @@ typedef struct packed {
 } lim_switch_t;
 
 module top_tb #(parameter
-	TEST = 12
+	TEST = 0
 );
-
+	// PINS
 	bit gen24 = 0;
 
 	bit ne = 1, noe = 1, nwe = 1, nadv = 1;
@@ -61,27 +61,28 @@ module top_tb #(parameter
 	bit [2:0] enc_A, enc_B, enc_Z;
 	
 	wire adc_sclk, adc_csn, adc_mosi;
-	bit [1:0] adc_miso = '0;
+	bit adc_miso = '0;
 	
-	wire pult_sclk, pult_sdo, pult_load;
-	bit pult_sdi = 1'b0;
+	wire ind_sclk, ind_sdo, ind_load;
 	
 	bit wire_break = 1'b0, OK220 = 1'b1;	
 	bit [7:0] sig_in = '0;
 	
-	wire hv_ena, hv_lvl, pump_ena, estop, drum_fwd, drum_rev, oe_n;	
+	wire hv_ena, hv_lvl, pump_ena, estop, drum_fwd, drum_rev, oe, center_n;
 	wire [2:0] drum_vel;
 	
 	bit pult_A = 1'b0, pult_B = 1'b0;
 	
-	wire step, dir, sd_ena;	
+	wire step, dir, sd_ena, sd_oe_n;	
 	wire [5:0] current;
 	
 	wire gen_sclk, gen_load, gen_sdo;	
 	bit gen_sdi = 1'b0;
 	
 	wire led_n;
-	
+	wire [2:0] res;
+
+	// VARIABLES	
 	bit [7:0][9:0] adc_data = {10'd8, 10'd7, 10'd6, 10'd5, 10'd4, 10'd3, 10'd2, 10'd1};
 
 	always #20.833ns gen24++;
@@ -109,20 +110,27 @@ module top_tb #(parameter
 		bus.printVersion();
 		bus.printAllRegs();
 		
+		bus.waitFilterReady();
+//		bus.setLimSwitchMask(16'h0020); // The soft alarm is always enabled
+		bus.clearLimSwitch();
+		
+//		repeat(100) @(posedge gen24);
+//		$display("Continue ...");
+//		$stop(2);
+		
 		case (TEST)
 			0: StepByStep();
 			1: FullTurn();
 			2: AsymSteps();
 			3: Timeout();
-			4: HVTest();
-			5: #50us bus.printAdc();
-			6: RW32(0, 15);
-			7: oneStep(0);
-			8: pauseScale(10);
-			9: DataOut();
-			10: DataIn();
-			11: ControlsTest();
-			12: FeedbackTest();
+			4: #50us bus.printAdc();
+			5: RW32(0, 15);
+			6: oneStep(0);
+			7: pauseScale(10);
+			8: DataOut();
+			9: DataIn();
+			10: ControlsTest();
+			11: FeedbackTest();
 		endcase
 		
 		repeat(100) @(posedge gen24);
@@ -134,29 +142,39 @@ module top_tb #(parameter
 	
 	top dut(.*);
 	
-	MCP3008 adc_inst(.data(adc_data), .sclk(adc_sclk), .csn(adc_csn), .mosi(adc_mosi), .miso(adc_miso[0]));	
+	MCP3008 adc_inst(.data(adc_data), .sclk(adc_sclk), .csn(adc_csn), .mosi(adc_mosi), .miso(adc_miso));	
 	
 	wire [15:0] gen_dato;
-	wire [15:0] pult_dato;
+	wire [15:0] ind_dato;
+	bit ind_sdi = 0;
 	
 	SN74HC595_N #(.N(2)) SN74HC595_6x_inst(.lock(gen_load), .sclk(gen_sclk), .sdo(gen_sdo), .sdi(gen_sdi), .q(gen_dato));
-	SN74HC595_2x SN74HC595_2x_inst(.lock(pult_load), .sclk(pult_sclk), .sdo(pult_sdo), .sdi(pult_sdi), .q(pult_dato));
+	SN74HC595_2x SN74HC595_2x_inst(.lock(ind_load), .sclk(ind_sclk), .sdo(ind_sdo), .sdi(ind_sdi), .q(ind_dato));
 	
 	bit [15:0] kb = 0;
 	
 	SN74HC165_2x kb_inst(.data(kb), .load_n(kb_load), .sclk(kb_sclk), .sdi(kb_sdi));
 	
 	task StepByStep();
+		automatic logic[31:0] enc_x, enc_y;
+	
 		bus.setThld(0, 1023);
 		bus.setOE(1);
 		
-		for (int k = 0; k < 25; k++)
+		for (int k = 0; k < 250; k++)
 			for (int i = 0; i < 4; i++) begin
 				bus.waitReady();
 				bus.step(i, 1, 100);
 			end
 				
 		bus.waitReady();
+		
+		repeat(100) @(posedge gen24);
+		bus.globalSnapshot();
+		bus.getEncoder(0, enc_x);
+		bus.getEncoder(1, enc_y);
+		
+		$display("Encoder X = %d, Y = %d]", enc_x, enc_y);
 	endtask
 	
 	task FullTurn();
@@ -220,16 +238,6 @@ module top_tb #(parameter
 		bus.setThld(~16'h0, ~16'h0);
 		
 		wait(!nirq);
-	endtask
-	
-	task HVTest();
-		bus.setHVEna(1);
-		repeat(100) @(posedge gen24);
-		bus.setHV(100, 0, 20, 'hF);
-		repeat(200) @(posedge gen24);
-		bus.setHV(200, 0, 40, 'h5);
-		repeat(400) @(posedge gen24);
-		bus.setHVEna(0);
 	endtask
 	
 	task RW32(int start, int stop);
@@ -317,11 +325,11 @@ module top_tb #(parameter
 		bus.setIndicator(16'hABCD);
 		bus.setControls(48'h1234_5678_9ABC);
 		
-		bus.waitSpiReady();
+		bus.waitFilterReady();
 		bus.setIndicator(16'h8001);
 		bus.setControls(48'h1111_2222_3333);
 		
-		bus.waitSpiReady();
+		bus.waitFilterReady();
 		bus.getIndicatorOld(data16);
 		bus.getControlsOld(data48);
 		$display("Read Ind: %04h Controls: %04h%08h", data16, data48[47:32], data48[31:0]);

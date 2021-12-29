@@ -7,6 +7,7 @@ debug/cnc_backup.o
 debug/cnc_com.o
 debug/cnc_com_thread.o
 debug/cnc_context.o
+debug/cnc_param.o
 debug/com_packet.o
 debug/comb_widget.o
 debug/contour_range.o

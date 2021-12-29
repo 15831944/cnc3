@@ -303,10 +303,10 @@ void RunWidget::setPositionLabels(size_t axis_num, int value) {
 
         double scale = 1;
         switch (axis_num) {
-            case 0: scale = X_SCALE; break;
-            case 1: scale = Y_SCALE; break;
-            case 2: scale = U_SCALE; break;
-            case 3: scale = V_SCALE; break;
+        case 0: scale = CncParam::scaleX; break;
+        case 1: scale = CncParam::scaleY; break;
+        case 2: scale = CncParam::scaleU; break;
+        case 3: scale = CncParam::scaleV; break;
         }
 
         uint32_t value_um = static_cast<uint32_t>( std::round(double(value) / scale * 1e3) );

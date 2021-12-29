@@ -22,12 +22,7 @@ namespace auxItems {
         a = b ^ a;
     }
 
-    // Print the vector to the debug console
-    void print_vector(const vector<uint8_t>& data) {
-        print_array(data.data(), data.size());
-    }
-
-    void print_array(const uint8_t * const bytes, size_t size) {
+    string toString(const uint8_t * const bytes, size_t size) {
         size_t i;
         QString s;
 
@@ -40,7 +35,16 @@ namespace auxItems {
                 s += " ";
         }
 
-        qDebug("%s", s.toStdString().c_str());
+        return s.toStdString();
+    }
+
+    void print_array(const uint8_t * const bytes, size_t size) {
+        qDebug("%s", toString(bytes, size).c_str());
+    }
+
+    // Print the vector to the debug console
+    void print_vector(const vector<uint8_t>& data) {
+        print_array(data.data(), data.size());
     }
 
     // Print list of std::strings to debug console

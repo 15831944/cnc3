@@ -59,8 +59,8 @@ typedef struct {
 	pulse_t pulse;
 } cnc_param_t;
 
-void cnc_useEncXY(BOOL ena);
-BOOL cnc_encXYUsed();
+void cnc_setEncModeXY(BOOL ena);
+BOOL cnc_isEncMode();
 
 void cnc_clearDirectParam(cnc_param_t* const par);
 
@@ -101,8 +101,6 @@ float cnc_getCurrentT();
 float cnc_speed();
 void cnc_setSpeed(float F);
 
-void cnc_task_tb();
-
 int cnc_setRollbackLength(float value);
 float cnc_getRollbackLength();
 
@@ -123,9 +121,6 @@ BOOL cnc_isReverse();
 void cnc_gotoPos(const cnc_context_t* const ctx);
 
 void cnc_printState();
-
-BOOL cnc_test_rev();
-void cnc_test_direct();
 
 BOOL cnc_fault();
 

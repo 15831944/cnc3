@@ -18,7 +18,7 @@
 using namespace std;
 using namespace auxItems;
 
-CncComThread::CncComThread(QObject *parent): QThread(parent) {}
+CncComThread::CncComThread(QObject *parent): QThread(parent), m_wrbytes(UINT8_MAX) {}
 
 CncComThread::~CncComThread() {
     close();
@@ -131,7 +131,6 @@ int CncComThread::readPort(ComPacket &rxd, int timeout_ms) {
                 while (m_port->waitForReadyRead(10))
                     responseData += m_port->readAll();
 
-
                 for (QByteArray::iterator it = responseData.begin(); it != responseData.end(); ++it) {
                     rxd.append(*it);
 
@@ -141,7 +140,7 @@ int CncComThread::readPort(ComPacket &rxd, int timeout_ms) {
             }
             else {
                 rxd.finalize();
-                return -2;
+                return -2; // timeout
             }
 
         } while (!rxd.complete());
@@ -176,6 +175,7 @@ int CncComThread::readPort(ComPacket &rxd, int timeout_ms) {
     }
 }
 
+// by 255 bytes
 void CncComThread::writeBytes(uint32_t addr, const std::vector<uint8_t> &bytes) {
     if (bytes.size()) {
         if ((addr & 0xF0000000) != 0)
@@ -190,15 +190,17 @@ void CncComThread::writeBytes(uint32_t addr, const std::vector<uint8_t> &bytes) 
         m_port->flush();
 
 #ifdef PRINT_CNC_COM_DEBUG
-        qDebug("Write to address 0x%08x:\n", addr);
-        auxItems::print_array(m_txpack.rawData(), m_txpack.rawSize());
+        qDebug("Write to address 0x%08x bytes %d:\n%s\n", (int)addr, (int)bytes.size(), m_txpack.toString().c_str());
 #endif
-
         while (true) {
             int res = readPort(m_rxpack, TIMEOUT);
 
             if (res <= 0)
                 throw runtime_error( string("Rx timeout. Received ") + to_string(m_rxpack.rawSize()) + " bytes" );
+
+#ifdef PRINT_CNC_COM_DEBUG
+            qDebug("Received %d bytes:\n%s\n", (int)m_rxpack.rawSize(), m_rxpack.toString().c_str());
+#endif
 
             if (m_rxpack.complete()) {
                 if (m_rxpack.command() == ComPacket::Command::CMD_ERROR)
@@ -228,6 +230,7 @@ void CncComThread::writeBytes(uint32_t addr, const std::vector<uint8_t> &bytes) 
     }
 }
 
+// by 255 bytes
 void CncComThread::writeBytes(uint32_t addr, const uint8_t* data, size_t size, size_t begin, size_t length) {
     if (begin < size) {
         data += begin;
@@ -236,18 +239,23 @@ void CncComThread::writeBytes(uint32_t addr, const uint8_t* data, size_t size, s
             length = static_cast<uint8_t>(size - begin);
 
         if (length != 0) {
-            vector<uint8_t> bytes(length);
-            memcpy(bytes.data(), data, bytes.size());
-            writeBytes(addr, bytes);
+            if (length > UINT8_MAX)
+                length = UINT8_MAX;
+
+            m_wrbytes.resize(length);
+            memcpy(m_wrbytes.data(), data, m_wrbytes.size());
+            writeBytes(addr, m_wrbytes);
         }
     }
 }
 
+// by 255 bytes
 std::vector<uint8_t> CncComThread::readBytes(uint32_t addr, size_t length, ComPacket::Command cmd) {
     const QMutexLocker portLocker(&m_mutexPort);
-    vector<uint8_t> rddata(length);
 
     if (length != 0 && (cmd == ComPacket::Command::CMD_READ || cmd == ComPacket::Command::CMD_READ_FIFO)) {
+        m_rdbytes.resize(length);
+
         if ((addr & 0xF0000000) != 0)
             throw runtime_error( string_format("Address error: 0x%08x", int(addr)) );
 
@@ -260,16 +268,17 @@ std::vector<uint8_t> CncComThread::readBytes(uint32_t addr, size_t length, ComPa
         m_port->flush();
 
 #ifdef PRINT_CNC_COM_DEBUG
-        qDebug("Write to address 0x%08x:\n", addr);
-        auxItems::print_array(m_txpack.rawData(), m_txpack.rawSize());
+        qDebug("Read address 0x%08x, %d bytes:\n%s\n", addr, (int)m_txpack.rawSize(), m_txpack.toString().c_str());
 #endif
-
         while (true) {
             int res = readPort(m_rxpack, TIMEOUT);
 
             if (res <= 0)
                 throw runtime_error( string("Rx timeout. Received ") + to_string(m_rxpack.rawSize()) + " bytes" );
 
+#ifdef PRINT_CNC_COM_DEBUG
+            qDebug("Received %d bytes:\n%s\n", (int)m_rxpack.rawSize(), m_rxpack.toString().c_str());
+#endif
             if (m_rxpack.complete()) {
                 if (m_rxpack.command() == ComPacket::Command::CMD_ERROR)
                     throw runtime_error("CNC sent an error code");
@@ -295,10 +304,13 @@ std::vector<uint8_t> CncComThread::readBytes(uint32_t addr, size_t length, ComPa
                 break;
             }
         }
+
+        memcpy(m_rdbytes.data(), m_rxpack.data(), m_rdbytes.size());
+    } else {
+        m_rdbytes.clear();
     }
 
-    memcpy(rddata.data(), m_rxpack.data(), rddata.size());
-    return rddata;
+    return m_rdbytes;
 }
 
 // Start or wake up a transducer thread
@@ -375,20 +387,21 @@ void CncComThread::run() {
     qDebug("CNC thread is quit");
 }
 
-void CncComThread::write(uint32_t addr, const void* const data, size_t size) {
-    const QMutexLocker portLocker(&m_mutexPort);
+void CncComThread::write(uint32_t addr, const void* const data, const size_t size) {
     const size_t max = ComPacket::MAX;
+    const QMutexLocker portLocker(&m_mutexPort);
+    size_t pos = 0, len = 0;
+    size_t rem = size;
 
-    size_t pos = 0;
+    while (rem > 0) {
+        len = rem > max ? max : rem;
 
-    while (size > 0) {
-        size_t len = size > max ? max : size;
-
+        // write by 255 bytes
         this->writeBytes(addr, reinterpret_cast<const uint8_t*>(data), size, pos, len);
 
         addr += len;
         pos += len;
-        size -= len;
+        rem -= len;
     }
 }
 

@@ -240,7 +240,7 @@ module ctrl_bus #(parameter
 				'h0: rddata <= 16'(flag);
 				'h2: rddata <= 16'(irq_mask);
 				
-				'h6: rddata <= {13'h0, mcu_flag, pll_reset_flag, power_on_flag}; // testing				
+				'h6: rddata <= {12'h0, !flt_allready, mcu_flag, pll_reset_flag, power_on_flag}; // testing				
 				'h8: rddata <= 16'({1'b1, limsw_mask});
 				
 				'hC: rddata <= 16'(limsw);

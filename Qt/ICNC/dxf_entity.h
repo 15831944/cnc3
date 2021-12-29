@@ -46,7 +46,7 @@ public:
 
 class DxfEntity : public IContourObject {
 protected:
-    constexpr static const double M_PRECISION = PRECISION; // mm
+    constexpr static const double M_PRECISION = CncParam::PRECISION; // mm
     ENTITY_TYPE m_type;
 
     struct {

@@ -5,7 +5,7 @@
 `define FAC_VER (6'h0)
 `define FAC_REV (8'h3) // CNC3
 `define VER (8'h3)
-`define REV (8'h4)
+`define REV (8'h5)
 
 // 3.2 - centering
 // 3.3 - correct abort at pulse generator

@@ -288,10 +288,6 @@
 					"strict" : false
 				},
 				{
-					"name" : "sig_in[4]",
-					"strict" : false
-				},
-				{
 					"name" : "sig_in[0]",
 					"strict" : false
 				},
@@ -301,6 +297,10 @@
 				},
 				{
 					"name" : "sig_in[3]",
+					"strict" : false
+				},
+				{
+					"name" : "sig_in[4]",
 					"strict" : false
 				},
 				{

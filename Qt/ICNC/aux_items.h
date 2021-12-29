@@ -27,8 +27,10 @@ namespace auxItems {
     void byte_reverse(uint32_t& data);
     void swap(uint8_t& a, uint8_t& b);
 
-    void print_vector(const std::vector<uint8_t>& bytes);
+    std::string toString(const uint8_t * const bytes, size_t size);
     void print_array(const uint8_t* const bytes, size_t size);
+    void print_vector(const std::vector<uint8_t>& bytes);
+
     void print_strings(const std::list<std::string>& ss);
 
     void push_back_range(std::vector<uint8_t>& v, const std::vector<uint8_t>& src, const size_t& src_begin, const size_t& src_length);

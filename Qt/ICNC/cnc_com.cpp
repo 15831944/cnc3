@@ -28,6 +28,7 @@ void CncCom::clear() {
     m_state = IDLE;
 }
 
+// by 255 bytes
 bool CncCom::writeReqAsync(uint32_t& addr, std::deque<uint8_t>& bytes, const size_t length) {
     if (!isOpen()) {
         errorResponse("COM port isn't opened");
@@ -36,7 +37,7 @@ bool CncCom::writeReqAsync(uint32_t& addr, std::deque<uint8_t>& bytes, const siz
     } else if (length == 0) {
         errorResponse( "Sending pack size is 0 bytes" );
     } else if (length > ComPacket::MAX) {
-        errorResponse("Packet size is bigger than 256 bytes");
+        errorResponse("Packet size is bigger than 255 bytes");
     } else if (length > bytes.size()) {
         errorResponse( string_format("Packet size bigger than available data. Data size: %d, Required packet size: %d", int(addr), int(length)) );
     } else {
@@ -51,7 +52,7 @@ bool CncCom::writeReqAsync(uint32_t& addr, std::deque<uint8_t>& bytes, const siz
         addr += v.size();
 
 #ifdef PRINT_CNC_COM_DEBUG
-        qDebug("Write to address 0x%08x:\n", m_reqPack.addr());
+        qDebug("Write to address 0x%08x (async):\n", m_reqPack.addr());
         auxItems::print_array(m_reqPack.rawData(), m_reqPack.rawSize());
 #endif
         return true;
@@ -126,6 +127,7 @@ void CncCom::write64Async(const uint32_t addr, const uint64_t data, bool block) 
     writeAsync(addr, v, block);
 }
 
+// by 255 bytes
 bool CncCom::readReqAsync(uint32_t& addr, const size_t length, const ComPacket::Command cmd) {
     if (!isOpen()) {
         errorResponse("COM port isn't opened");
@@ -134,7 +136,7 @@ bool CncCom::readReqAsync(uint32_t& addr, const size_t length, const ComPacket::
     } else if (length == 0) {
         errorResponse( "Sending pack size is 0 bytes" );
     } else if (length > ComPacket::MAX) {
-        errorResponse("Packet size is bigger than 256 bytes");
+        errorResponse("Packet size is bigger than 255 bytes");
     } else if (!(cmd == ComPacket::Command::CMD_READ || cmd == ComPacket::Command::CMD_READ_FIFO)) {
         errorResponse("Incorrect command");
     } else {

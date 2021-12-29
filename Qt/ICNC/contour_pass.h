@@ -28,7 +28,7 @@ class ContourPass {
     static void clear(std::deque<ContourPair>& contours);
 
 public:
-    constexpr static const double M_PRECISION = PRECISION; // mm
+    constexpr static const double M_PRECISION = CncParam::PRECISION; // mm
     constexpr static const double M_TAB_MIN = 1; // mm
     constexpr static const double M_OVERLAP_MIN = 1; // mm
 

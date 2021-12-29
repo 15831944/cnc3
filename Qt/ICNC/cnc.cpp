@@ -17,26 +17,6 @@
 using namespace std;
 using namespace auxItems;
 
-uint16_t CncParam::inputLevel = DEFAULT_INPUT_LEVEL;
-bool CncParam::sdEnable = DEFAULT_SD_ENA;
-bool CncParam::reverseX = false;
-bool CncParam::reverseY = false;
-bool CncParam::reverseU = false;
-bool CncParam::reverseV = false;
-bool CncParam::swapXY = false;
-bool CncParam::swapUV = false;
-bool CncParam::reverseEncX = false;
-bool CncParam::reverseEncY = false;
-double CncParam::step = DEFAULT_STEP; // mm
-double CncParam::scaleX = DEFAULT_SCALE_XY, CncParam::scaleY = DEFAULT_SCALE_XY, CncParam::scaleU = DEFAULT_SCALE_UV, CncParam::scaleV = DEFAULT_SCALE_UV;
-double CncParam::scaleEncX = DEFAULT_SCALE_ENC_XY, CncParam::scaleEncY = DEFAULT_SCALE_ENC_XY;
-bool CncParam::encXY = false;
-
-bool CncParam::fb_ena = false;
-unsigned CncParam::rb_attempts = DEFAULT_RB_ATTEMPTS;
-double CncParam::low_thld = 0, CncParam::high_thld = 200, CncParam::rb_to = DEFAULT_RB_TO, CncParam::rb_len = DEFAULT_RB_LEN, CncParam::rb_speed = DEFAULT_RB_SPEED;
-double CncParam::acc = DEFAULT_ACC, CncParam::dec = DEFAULT_DEC;
-
 CncCom Cnc::m_com;
 
 Cnc::Cnc(QObject* parent) : QObject(parent), m_msg(nullptr), m_fpga(m_com) {}
@@ -181,18 +161,19 @@ bool Cnc::writeFromFile(const string& fileName) {
 }
 
 bool Cnc::write(const std::list<std::string>& frames) {
-    vector<uint8_t> data;
+    m_wrbuf.clear();
+
     for (list<string>::const_iterator it = frames.begin(); it != frames.end(); ++it)
-        push_back_range(data, *it);
+        push_back_range(m_wrbuf, *it);
 
     uint32_t pa_size = isOpen() ? m_com.read32(ADDR::PA_SIZE) : 0;
 
-    if (data.size() > pa_size) {
-        m_msg->write( QString::asprintf("G-code size is too big %d bytes (available only %d bytes)", int(data.size()), int(pa_size)) );
+    if (m_wrbuf.size() > pa_size) {
+        m_msg->write( QString::asprintf("G-code size is too big %d bytes (available only %d bytes)", int(m_wrbuf.size()), int(pa_size)) );
         return false;
     }
 
-    return writeProgArray(data);
+    return writeProgArray(m_wrbuf);
 }
 
 void Cnc::printGCode() {

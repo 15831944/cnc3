@@ -7,14 +7,14 @@ z2
 !i10e 25
 !i10f 100
 cModel Technology
-Z0 dC:/Work/Meatec/Main/cnc3/Quartus/cnc3 v1.5/simulation/modelsim
+dC:/Work/Meatec/Main/cnc3/Quartus/cnc3 v1.5/simulation/modelsim
 vio_buf_opdrn
-Z1 !s110 1640073955
+Z0 !s110 1640161693
 !i10b 1
 !s100 VhizJG_UoJ<b<SS=?:bCT2
 IzXob=660GYfDK5_DWI`[X3
-Z2 VDg1SIo80bB@j0V0VzS_@n1
-R0
+Z1 VDg1SIo80bB@j0V0VzS_@n1
+Z2 dC:/Work/Meatec/Main/cnc3/Quartus/cnc3/simulation/modelsim
 Z3 w1569199346
 Z4 8c:/intelfpga/19.1/quartus/eda/sim_lib/sgate.v
 Z5 Fc:/intelfpga/19.1/quartus/eda/sim_lib/sgate.v
@@ -23,18 +23,18 @@ Z6 OL;L;10.4c;61
 r1
 !s85 0
 31
-Z7 !s108 1640073955.000000
+Z7 !s108 1640161693.000000
 Z8 !s107 c:/intelfpga/19.1/quartus/eda/sim_lib/sgate.v|
 Z9 !s90 -reportprogress|300|-vlog01compat|-work|sgate_ver|c:/intelfpga/19.1/quartus/eda/sim_lib/sgate.v|
 !i113 0
 Z10 o-vlog01compat -work sgate_ver -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
 vio_buf_tri
-R1
+R0
 !i10b 1
 !s100 ?YGOlajRX;CdIUX3@kX2J3
 I52]nmIEbH8=EZV5cFN=Ez0
+R1
 R2
-R0
 R3
 R4
 R5
@@ -49,12 +49,12 @@ R9
 !i113 0
 R10
 vmux21
-R1
+R0
 !i10b 1
 !s100 HcGg6i>]m`AMMH9aNn6Q=3
 IFa463<adN:RWlbkjJ2G5b1
+R1
 R2
-R0
 R3
 R4
 R5
@@ -69,12 +69,12 @@ R9
 !i113 0
 R10
 voper_add
-R1
+R0
 !i10b 1
 !s100 F]260k47e_6ji=Hl0aMn90
 IeGYAToWP91XnRmZjB_mGg2
+R1
 R2
-R0
 R3
 R4
 R5
@@ -89,12 +89,12 @@ R9
 !i113 0
 R10
 voper_addsub
-R1
+R0
 !i10b 1
 !s100 PzGM7DT:m1:V^R;Wk6A9U0
 IgbPDjcKOoNGz[>Ie?C]W62
+R1
 R2
-R0
 R3
 R4
 R5
@@ -109,12 +109,12 @@ R9
 !i113 0
 R10
 voper_bus_mux
-R1
+R0
 !i10b 1
 !s100 <QAOZae4<L6l]N?[hZ6cV0
 IZQOMG;O=b>4J@OUG9g5e`0
+R1
 R2
-R0
 R3
 R4
 R5
@@ -129,12 +129,12 @@ R9
 !i113 0
 R10
 voper_decoder
-R1
+R0
 !i10b 1
 !s100 WF@i7V0YS>liZCkHzI1]g2
 I0@UAj2UL1nA6O@cdmPPee2
+R1
 R2
-R0
 R3
 R4
 R5
@@ -149,12 +149,12 @@ R9
 !i113 0
 R10
 voper_div
-R1
+R0
 !i10b 1
 !s100 Y7z7:dEh:a5:jP:@Rkad_1
 ISCJn9H:7nL2TQ_lH<JbEd1
+R1
 R2
-R0
 R3
 R4
 R5
@@ -169,12 +169,12 @@ R9
 !i113 0
 R10
 voper_latch
-R1
+R0
 !i10b 1
 !s100 [26OEODU?jK0WVIPH6H@12
 IP=nm^G<d?Z:G<bHaHNbog0
+R1
 R2
-R0
 R3
 R4
 R5
@@ -189,12 +189,12 @@ R9
 !i113 0
 R10
 voper_left_shift
-R1
+R0
 !i10b 1
 !s100 oEX`oU<M]4;:hXO0T_J4Q0
 I9J<@oWkP>z^L=`5eh9cm12
+R1
 R2
-R0
 R3
 R4
 R5
@@ -209,12 +209,12 @@ R9
 !i113 0
 R10
 voper_less_than
-R1
+R0
 !i10b 1
 !s100 7]>dQPEcF[:0Yfl:?a`Sd0
 IXJ8=oJaZ`RKHX[0oWM?950
+R1
 R2
-R0
 R3
 R4
 R5
@@ -229,12 +229,12 @@ R9
 !i113 0
 R10
 voper_mod
-R1
+R0
 !i10b 1
 !s100 SHPDPUBZCW7f4Ao1FH>E@3
 In9ebSVY5a<Bnd7jC7[M<o2
+R1
 R2
-R0
 R3
 R4
 R5
@@ -249,12 +249,12 @@ R9
 !i113 0
 R10
 voper_mult
-R1
+R0
 !i10b 1
 !s100 HzzQ:IXC7^UI2?[e_9O>`3
 I;:T`o=ZFhf6aQ:NY5DEkg3
+R1
 R2
-R0
 R3
 R4
 R5
@@ -269,12 +269,12 @@ R9
 !i113 0
 R10
 voper_mux
-R1
+R0
 !i10b 1
 !s100 =OXiOUmAaVXl6FLDLY8Fg3
 I?ViQ0U6>_XEcnoIKWDK@^0
+R1
 R2
-R0
 R3
 R4
 R5
@@ -289,12 +289,12 @@ R9
 !i113 0
 R10
 voper_right_shift
-R1
+R0
 !i10b 1
 !s100 SJb]ZjP[^k;ijbIaz@C4X1
 I2@<;>HhlmiADe1@@;hHYE2
+R1
 R2
-R0
 R3
 R4
 R5
@@ -309,12 +309,12 @@ R9
 !i113 0
 R10
 voper_rotate_left
-R1
+R0
 !i10b 1
 !s100 ]^Q15_44QmmReONg[Ze@>1
 I67e4E78D8]N@jI;A[cz2c0
+R1
 R2
-R0
 R3
 R4
 R5
@@ -329,12 +329,12 @@ R9
 !i113 0
 R10
 voper_rotate_right
-R1
+R0
 !i10b 1
 !s100 OzOO95^?ClVNBgL0?:>MF2
 IUeK2:?oM1aPB1f@V8OUIo3
+R1
 R2
-R0
 R3
 R4
 R5
@@ -349,12 +349,12 @@ R9
 !i113 0
 R10
 voper_selector
-R1
+R0
 !i10b 1
 !s100 7T8d]AYhJ_?U?SDL236<k2
 IfEhUUlRZD:n>mTOO1F]SH0
+R1
 R2
-R0
 R3
 R4
 R5
@@ -369,12 +369,12 @@ R9
 !i113 0
 R10
 vtri_bus
-R1
+R0
 !i10b 1
 !s100 ?YZlazA67<O;:URU4><Mm2
 I]CnoBT;iFT;33j_k[m<203
+R1
 R2
-R0
 R3
 R4
 R5

@@ -41,20 +41,27 @@ const scale_t* cnc_scaleEnc();
 double cnc_scaleEncX();
 double cnc_scaleEncY();
 
-double cnc_coeEnc2StepsX();
-double cnc_coeEnc2StepsY();
-
-double cnc_enc2mmX(int32_t cnt);
-double cnc_enc2mmY(int32_t cnt);
-
-double cnc_steps2mmX(int32_t cnt);
-double cnc_steps2mmY(int32_t cnt);
-
 void cnc_setScaleX(double vlaue);
 void cnc_setScaleY(double vlaue);
 void cnc_setScaleU(double vlaue);
 void cnc_setScaleV(double vlaue);
 void cnc_setScaleEncX(double vlaue);
 void cnc_setScaleEncY(double vlaue);
+
+//
+double cnc_ratioStepsEncX();
+double cnc_ratioStepsEncY();
+
+double cnc_steps2mmX(int32_t cnt);
+double cnc_steps2mmY(int32_t cnt);
+double cnc_steps2mmU(int32_t cnt);
+double cnc_steps2mmV(int32_t cnt);
+double cnc_enc2mmX(int32_t cnt);
+double cnc_enc2mmY(int32_t cnt);
+
+int32_t cnc_mm2StepsX(double value);
+int32_t cnc_mm2StepsY(double value);
+int32_t cnc_mm2StepsU(double value);
+int32_t cnc_mm2StepsV(double value);
 
 #endif /* INC_CNC_PARAM_H_ */

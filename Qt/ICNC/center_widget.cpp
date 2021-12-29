@@ -457,11 +457,11 @@ void CenterWidget::setLimitSwitches(bool fwd, bool rev, bool alarm, bool wire_br
 }
 
 void CenterWidget::setX(int32_t value) {
-    fnumX->setValue(value * (1.0 / X_SCALE));
+    fnumX->setValue(value * (1.0 / CncParam::scaleX));
 }
 
 void CenterWidget::setY(int32_t value) {
-    fnumY->setValue(value * (1.0 / Y_SCALE));
+    fnumY->setValue(value * (1.0 / CncParam::scaleY));
 }
 
 // ADC
@@ -498,14 +498,14 @@ void CenterWidget::emptyPlot() {
 
 void CenterWidget::addToPlot(int x, int y, ContourRange& range, const QColor& color, const QColor& tipColor, int width, Qt::PenStyle style) {
     if (!m_pts.empty()) {
-        int x_last = round(m_pts.back().x() * X_SCALE);
-        int y_last = round(m_pts.back().y() * Y_SCALE);
+        int x_last = round(m_pts.back().x() * CncParam::scaleX);
+        int y_last = round(m_pts.back().y() * CncParam::scaleY);
 
         if (x == x_last && y == y_last)
             return;
     }
 
-    QPointF pt = {x * (1.0 / X_SCALE), y * (1.0 / Y_SCALE)};
+    QPointF pt = {x / CncParam::scaleX, y / CncParam::scaleY};
 
     m_pts.push_back(pt);
 

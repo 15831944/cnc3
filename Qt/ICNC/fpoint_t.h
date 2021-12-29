@@ -1,8 +1,8 @@
 #ifndef FPOINT_T_H
 #define FPOINT_T_H
 
+#include "cnc_param.h"
 #include <string>
-#include "main.h"
 #include <QPointF>
 
 struct RotateMatrix {
@@ -13,7 +13,7 @@ struct RotateMatrix {
 };
 
 struct fpoint_t {
-    constexpr static const double CMP_PRECISION = PRECISION / 2.0; // 0.5 um
+    constexpr static const double CMP_PRECISION = CncParam::PRECISION; // 0.5 um
     double x{0}, y{0};
 
     explicit fpoint_t(double x = 0, double y = 0);

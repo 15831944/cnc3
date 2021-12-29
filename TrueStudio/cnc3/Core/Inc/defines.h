@@ -1,7 +1,7 @@
 #ifndef INC_DEFINES_H_
 #define INC_DEFINES_H_
 
-#define RESEASE
+//#define RESEASE
 //#define STONE
 
 #define NAME ("CNC")
@@ -9,11 +9,11 @@
 
 #if defined(RESEASE)
 	#define VER_TYPE (1) // 0 - stable, 1 - alpha, 2 - beta
-//	#define WDT_ENA // a watch dog timer for MCU program error
-//	#define SOFT_WDT // for lose USB connection
+	#define WDT_ENA // a watch dog timer for MCU program error
+	#define SOFT_WDT // for lose USB connection
 #else
 	#define VER_TYPE (2)
-	#define PRINT
+//	#define PRINT
 //	#define SOFT_WDT
 #endif
 

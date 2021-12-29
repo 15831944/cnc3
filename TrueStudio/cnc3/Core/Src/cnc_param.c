@@ -6,7 +6,9 @@
 #include "fpga.h"
 
 static double step = STEP; // motor step, mm
-static scale_t scale_xy = {SCALE, SCALE}, scale_uv = {SCALE_UV, SCALE_UV}, scale_enc = {SCALE_ENC, SCALE_ENC}; // steps / mm
+static scale_t scale_xy = {SCALE,		SCALE,		1.0 / SCALE,		1.0 / SCALE}; // steps / mm
+static scale_t scale_uv = {SCALE_UV,	SCALE_UV,	1.0 / SCALE_UV,		1.0 / SCALE_UV}; // steps / mm
+static scale_t scale_enc = {SCALE_ENC,	SCALE_ENC,	1.0 / SCALE_ENC,	1.0 / SCALE_ENC}; // steps / mm
 
 static float acc = ACC, dec = DEC; // mm/tick^2/V
 
@@ -25,12 +27,16 @@ float velocity(float v0, float acc, float d) {
 
 void cnc_resetParam() {
 	step = STEP;
-	scale_xy.x = SCALE;
-	scale_xy.y = SCALE;
-	scale_uv.x = SCALE_UV;
-	scale_uv.y = SCALE_UV;
-	scale_enc.x = SCALE_ENC;
-	scale_enc.y = SCALE_ENC;
+
+	scale_xy.x = scale_xy.y = SCALE;
+	scale_xy.x_inv = scale_xy.y_inv = 1.0 / SCALE;
+
+	scale_uv.x = scale_uv.y = SCALE_UV;
+	scale_uv.x_inv = scale_uv.y_inv = 1.0 / SCALE_UV;
+
+	scale_enc.x = scale_enc.y = SCALE_ENC;
+	scale_enc.x_inv = scale_enc.y_inv = 1.0 / SCALE_ENC;
+
 	acc = ACC;
 	dec = DEC;
 }
@@ -69,28 +75,40 @@ float cnc_pidDec() { return dec * COE_DCODE_TO_VOLT; }
 static double limitScale(double value) { return value < SCALE_MIN ? SCALE_MIN : value > SCALE_MAX ? SCALE_MAX : value; }
 
 void cnc_setScaleX(double value) {
-	if (cnc_isIdle())
+	if (cnc_isIdle()) {
 		scale_xy.x = limitScale(value);
+		scale_xy.x_inv  = 1 / scale_xy.x;
+	}
 }
 void cnc_setScaleY(double value) {
-	if (cnc_isIdle())
+	if (cnc_isIdle()) {
 		scale_xy.y = limitScale(value);
+		scale_xy.y_inv  = 1 / scale_xy.y;
+	}
 }
 void cnc_setScaleU(double value) {
-	if (cnc_isIdle())
+	if (cnc_isIdle()) {
 		scale_uv.x = limitScale(value);
+		scale_uv.x_inv = 1 / scale_uv.x;
+	}
 }
 void cnc_setScaleV(double value) {
-	if (cnc_isIdle())
+	if (cnc_isIdle()) {
 		scale_uv.y = limitScale(value);
+		scale_uv.y_inv = 1 / scale_uv.y;
+	}
 }
 void cnc_setScaleEncX(double value) {
-	if (cnc_isIdle())
+	if (cnc_isIdle()) {
 		scale_enc.x = limitScale(value);
+		scale_enc.x_inv = 1 / scale_enc.x;
+	}
 }
 void cnc_setScaleEncY(double value) {
-	if (cnc_isIdle())
+	if (cnc_isIdle()) {
 		scale_enc.y = limitScale(value);
+		scale_enc.y_inv = 1 / scale_enc.y;
+	}
 }
 
 // steps / mm
@@ -110,12 +128,21 @@ double cnc_scaleEncX() { return scale_enc.x; }
 double cnc_scaleEncY() { return scale_enc.y; }
 
 // should be > 1
-double cnc_coeEnc2StepsX() { return scale_xy.x / scale_enc.x; }
-double cnc_coeEnc2StepsY() { return scale_xy.y / scale_enc.y; }
+double cnc_ratioStepsEncX() { return scale_xy.x / scale_enc.x; }
+double cnc_ratioStepsEncY() { return scale_xy.y / scale_enc.y; }
 
-double cnc_enc2mmX(int32_t cnt) { return (double)cnt / scale_enc.x; }
-double cnc_enc2mmY(int32_t cnt) { return (double)cnt / scale_enc.y; }
+//
+double cnc_steps2mmX(int32_t cnt) { return (double)cnt * scale_xy.x_inv; }
+double cnc_steps2mmY(int32_t cnt) { return (double)cnt * scale_xy.y_inv; }
 
-double cnc_steps2mmX(int32_t cnt) { return (double)cnt / scale_xy.x; }
-double cnc_steps2mmY(int32_t cnt) { return (double)cnt / scale_xy.y; }
+double cnc_steps2mmU(int32_t cnt) { return (double)cnt * scale_uv.x_inv; }
+double cnc_steps2mmV(int32_t cnt) { return (double)cnt * scale_uv.y_inv; }
 
+double cnc_enc2mmX(int32_t cnt) { return (double)cnt * scale_enc.x_inv; }
+double cnc_enc2mmY(int32_t cnt) { return (double)cnt * scale_enc.y_inv; }
+
+int32_t cnc_mm2StepsX(double value) { return (int32_t)round(value * scale_xy.x); }
+int32_t cnc_mm2StepsY(double value) { return (int32_t)round(value * scale_xy.y); }
+
+int32_t cnc_mm2StepsU(double value) { return (int32_t)round(value * scale_uv.x); }
+int32_t cnc_mm2StepsV(double value) { return (int32_t)round(value * scale_uv.y); }

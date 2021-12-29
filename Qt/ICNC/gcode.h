@@ -34,7 +34,7 @@ struct GCodeSettings {
 };
 
 class GCode {
-    constexpr static const double M_PRECISION = PRECISION; // mm
+    constexpr static const double M_PRECISION = CncParam::PRECISION; // mm
 
     const QColor XY_INCUT_COLOR = Qt::GlobalColor::blue;
     const QColor XY_COLOR = Qt::GlobalColor::darkBlue;

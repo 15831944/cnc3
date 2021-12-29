@@ -16,7 +16,7 @@ typedef enum {AXIS_X, AXIS_Y, AXIS_U, AXIS_V, MOTORS} AXIS_T;
 typedef struct { int32_t x, y; } point_t;
 
 typedef struct { double x, y; } fpoint_t;
-typedef struct { double x, y; } scale_t;
+typedef struct { double x, y, x_inv, y_inv; } scale_t;
 
 typedef struct { uint32_t x, y; } path_t;
 
@@ -81,7 +81,7 @@ typedef union {
         uint32_t drum_vel:8;
 
         uint32_t uv_ena:1;
-        uint32_t enc_ena:1;
+        uint32_t enc_mode:1;
         uint32_t rev:1;
         uint32_t rollback:1;
         uint32_t attempt:3;

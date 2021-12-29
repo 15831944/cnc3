@@ -85,7 +85,7 @@ BOOL gpo_cncEnabled() {
 #endif
 }
 
-void cnc_useEncXY(BOOL ena);
+void cnc_setEncModeXY(BOOL ena);
 void cnc_enableUV(BOOL ena);
 
 void gpo_setControlsEnable(uint16_t ena, uint16_t mask) {

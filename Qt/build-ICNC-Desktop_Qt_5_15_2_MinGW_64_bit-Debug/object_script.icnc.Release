@@ -7,6 +7,7 @@ release/cnc_backup.o
 release/cnc_com.o
 release/cnc_com_thread.o
 release/cnc_context.o
+release/cnc_param.o
 release/com_packet.o
 release/comb_widget.o
 release/contour_range.o

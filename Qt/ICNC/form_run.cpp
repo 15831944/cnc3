@@ -853,10 +853,20 @@ void FormRun::readCncContext() {
 
             if (par.appState.isWork() && ctx.isWork()) {
                 setCursor(ctx.frameNum());
-                onFrameChanged(ctx.frameNum(),
-                               fpoint_t(ctx.x() / X_SCALE, ctx.y() / Y_SCALE),
-                               fpoint_t(ctx.u() / U_SCALE, ctx.v() /  V_SCALE)
-                               );
+
+                if (ctx.isEncoderMode()) {
+                    onFrameChanged(
+                        ctx.frameNum(),
+                        fpoint_t(ctx.encoderX() / CncParam::scaleEncX, ctx.encoderY() / CncParam::scaleEncY),
+                        fpoint_t(ctx.u() / CncParam::scaleU, ctx.v() / CncParam::scaleV)
+                    );
+                } else {
+                    onFrameChanged(
+                        ctx.frameNum(),
+                        fpoint_t(ctx.x() / CncParam::scaleX, ctx.y() / CncParam::scaleY),
+                        fpoint_t(ctx.u() / CncParam::scaleU, ctx.v() / CncParam::scaleV)
+                    );
+                }
 
                 if (remain_tmr >= REMAIN_TIMER_MAX) {
                     remain_tmr = 0;

@@ -7,7 +7,7 @@ void toDebug(const cnc_context_t * const ctx) {
     qDebug("drumVel:%x\n",
            ctx->field.drum_vel);
     qDebug("uv:%x rev:%x enc:%x\n",
-           ctx->field.uv_ena, ctx->field.rev, ctx->field.enc_ena);
+           ctx->field.uv_ena, ctx->field.rev, ctx->field.enc_mode);
     qDebug("St:%x\n",
            ctx->field.state);
     qDebug("pW:%d pR:%d hvLvl:%x I:%x\n",

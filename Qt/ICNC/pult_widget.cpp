@@ -9,12 +9,12 @@ using namespace std;
 PultWidget::PultWidget(QWidget *parent) :
     QWidget(parent)
 {
-    scale[0] = X_SCALE;
-    scale[1] = Y_SCALE;
-    scale[2] = U_SCALE;
-    scale[3] = V_SCALE;
-    scale_enc[0] = X_ENC_SCALE;
-    scale_enc[1] = Y_ENC_SCALE;
+    scale[0] = CncParam::scaleX;
+    scale[1] = CncParam::scaleY;
+    scale[2] = CncParam::scaleU;
+    scale[3] = CncParam::scaleV;
+    scale_enc[0] = CncParam::scaleEncX;
+    scale_enc[1] = CncParam::scaleEncY;
 
     createView();    
     createControl();

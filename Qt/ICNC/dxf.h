@@ -21,7 +21,7 @@ struct DxfCodeValue {
 };
 
 class Dxf {
-    constexpr static const double M_PRECISION = PRECISION; // mm
+    constexpr static const double M_PRECISION = CncParam::PRECISION; // mm
 
     enum class STATES {SKIP, SECTION, BLOCKS, BLOCK, BLOCK_LINE, BLOCK_ARC, BLOCK_CIRCLE, BLOCK_POINT, BLOCK_ENTITY, ENTITIES, LINE, ARC, CIRCLE, POINT, INSERT, ENTITY};
     static STATES next_entity(Dxf::STATES state, const DxfCodeValue& pair);

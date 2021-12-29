@@ -3,11 +3,12 @@
 
 #include <cstdint>
 #include <vector>
+#include <string>
 
 class ComPacket {
 public:
     enum Command: int {CMD_IDLE, CMD_READ, CMD_WRITE, CMD_READ_FIFO, CMD_ERROR = 0xF};
-    static constexpr unsigned MAX = 256;
+    static constexpr unsigned MAX = 255;
     static constexpr unsigned SIZE = MAX + 4 + 1 + 4;    
 private:
     std::vector<uint8_t> m_data = std::vector<uint8_t>(SIZE);
@@ -45,6 +46,8 @@ public:
 
     void createWritePacket(uint32_t addr, const std::vector<uint8_t>& bytes, size_t begin, size_t length);
     void createReadPacket(Command cmd, uint32_t addr, size_t length);
+
+    std::string toString() const;
 };
 
 #endif // COMPACKET_H

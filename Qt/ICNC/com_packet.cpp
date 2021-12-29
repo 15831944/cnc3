@@ -1,4 +1,5 @@
 #include "com_packet.h"
+#include "aux_items.h"
 #include  <cstring>
 
 using namespace std;
@@ -171,4 +172,8 @@ void ComPacket::createReadPacket(Command cmd, uint32_t addr, size_t length) {
 
         m_i = 9;
     }
+}
+
+string ComPacket::toString() const {
+    return auxItems::toString(m_data.data(), m_i);
 }

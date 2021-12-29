@@ -10,8 +10,11 @@
 
 #include "aux_items.h"
 #include "com_packet.h"
+#include "main.h"
 
-#define PRINT_CNC_COM_DEBUG
+#ifdef DEV
+    #define PRINT_CNC_COM_DEBUG
+#endif
 
 // Class provides communication with CNC
 class CncComThread : public QThread {
@@ -21,6 +24,7 @@ class CncComThread : public QThread {
 
     QSerialPort* m_port = nullptr;
     ComPacket m_txpack, m_rxpack;
+    std::vector<uint8_t> m_wrbytes, m_rdbytes;
 
     std::string m_message;
     ComPacket m_request;

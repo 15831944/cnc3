@@ -169,7 +169,6 @@ module motor_bus #(parameter
 					'h5A: rddata <= {15'h0, sd_ena};
 					default: rddata <= '0;
 				endcase
-//			else if (l_rdaddr < 'hC0)
 			else if (l_rdaddr < 'hA0) // 4 motors
 				case (l_rdaddr[2:1])
 					'h0: rddata <= coord[l_rdaddr[4:3]][15:0];

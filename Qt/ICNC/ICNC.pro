@@ -56,6 +56,7 @@ SOURCES += \
     cnc_com.cpp \
     cnc_com_thread.cpp \
     cnc_context.cpp \
+    cnc_param.cpp \
     com_packet.cpp \
     comb_widget.cpp \
     contour_range.cpp \
@@ -123,6 +124,7 @@ HEADERS += \
     cnc_com.h \
     cnc_com_thread.h \
     cnc_context.h \
+    cnc_param.h \
     com_packet.h \
     comb_widget.h \
     contour_range.h \

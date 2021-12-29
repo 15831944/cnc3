@@ -6,7 +6,7 @@
 #include "fpoint_t.h"
 
 struct ContourRange {
-    constexpr static const double CMP_PRECISION = PRECISION / 2.0;
+    constexpr static const double CMP_PRECISION = CncParam::PRECISION;
     bool valid;
     double x_min, x_max, y_min, y_max;
 

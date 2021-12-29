@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(10M16SCE144) Path("C:/Work/Meatec/Main/cnc3/Quartus/cnc3 v1.5/output_files/") File("cnc3_v1_5.pof") MfrSpec(OpMask(3) Child_OpMask(2 3 3));
+		Device PartName(10M16SCE144) Path("C:/Work/Meatec/Main/cnc3/Quartus/cnc3/output_files/") File("cnc3_v1_5.pof") MfrSpec(OpMask(3) Child_OpMask(2 3 3));
 
 ChainEnd;
 

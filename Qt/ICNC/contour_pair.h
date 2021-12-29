@@ -6,7 +6,7 @@
 enum class CONTOUR_TYPE : uint8_t { CONTOUR_MAIN, CONTOUR_CUTLINE, CONTOUR_PASS, CONTOUR_TAB, CONTOUR_OVERLAP, CONTOUR_OUT };
 
 class ContourPair {
-    constexpr static const double M_PRECISION = PRECISION; // mm
+    constexpr static const double M_PRECISION = CncParam::PRECISION; // mm
 
     static GeneratorMode m_genModeDefault;
     static cut_t m_cutDefault;

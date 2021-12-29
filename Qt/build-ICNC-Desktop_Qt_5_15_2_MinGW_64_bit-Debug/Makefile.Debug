@@ -59,6 +59,7 @@ SOURCES       = ..\ICNC\amp.cpp \
 		..\ICNC\cnc_com.cpp \
 		..\ICNC\cnc_com_thread.cpp \
 		..\ICNC\cnc_context.cpp \
+		..\ICNC\cnc_param.cpp \
 		..\ICNC\com_packet.cpp \
 		..\ICNC\comb_widget.cpp \
 		..\ICNC\contour_range.cpp \
@@ -152,6 +153,7 @@ OBJECTS       = debug/amp.o \
 		debug/cnc_com.o \
 		debug/cnc_com_thread.o \
 		debug/cnc_context.o \
+		debug/cnc_param.o \
 		debug/com_packet.o \
 		debug/comb_widget.o \
 		debug/contour_range.o \
@@ -246,6 +248,7 @@ DIST          = icnc_ru.qm ..\ICNC\amp.h \
 		..\ICNC\cnc_com.h \
 		..\ICNC\cnc_com_thread.h \
 		..\ICNC\cnc_context.h \
+		..\ICNC\cnc_param.h \
 		..\ICNC\com_packet.h \
 		..\ICNC\comb_widget.h \
 		..\ICNC\contour_range.h \
@@ -314,6 +317,7 @@ DIST          = icnc_ru.qm ..\ICNC\amp.h \
 		..\ICNC\cnc_com.cpp \
 		..\ICNC\cnc_com_thread.cpp \
 		..\ICNC\cnc_context.cpp \
+		..\ICNC\cnc_param.cpp \
 		..\ICNC\com_packet.cpp \
 		..\ICNC\comb_widget.cpp \
 		..\ICNC\contour_range.cpp \
@@ -393,10 +397,10 @@ qmake: FORCE
 qmake_all: FORCE
 
 dist:
-	$(ZIP) icnc.zip $(SOURCES) $(DIST) ..\ICNC\ICNC.pro C:\Qt\5.15.2\mingw81_64\mkspecs\features\spec_pre.prf C:\Qt\5.15.2\mingw81_64\mkspecs\qdevice.pri C:\Qt\5.15.2\mingw81_64\mkspecs\features\device_config.prf C:\Qt\5.15.2\mingw81_64\mkspecs\common\sanitize.conf C:\Qt\5.15.2\mingw81_64\mkspecs\common\gcc-base.conf C:\Qt\5.15.2\mingw81_64\mkspecs\common\g++-base.conf C:\Qt\5.15.2\mingw81_64\mkspecs\common\angle.conf C:\Qt\5.15.2\mingw81_64\mkspecs\features\win32\windows_vulkan_sdk.prf C:\Qt\5.15.2\mingw81_64\mkspecs\common\windows-vulkan.conf C:\Qt\5.15.2\mingw81_64\mkspecs\common\g++-win32.conf C:\Qt\5.15.2\mingw81_64\mkspecs\common\windows-desktop.conf C:\Qt\5.15.2\mingw81_64\mkspecs\qconfig.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3danimation.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3danimation_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dcore.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dcore_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dextras.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dextras_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dinput.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dinput_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dlogic.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dlogic_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquick.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquick_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickanimation.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickanimation_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickextras.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickextras_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickinput.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickinput_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickrender.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickrender_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickscene2d.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickscene2d_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3drender.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3drender_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_accessibility_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axbase.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axbase_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axcontainer.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axcontainer_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axserver.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axserver_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_bluetooth.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_bluetooth_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_bootstrap_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_concurrent.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_concurrent_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_core.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_core_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_dbus.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_dbus_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_designer.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_designer_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_designercomponents_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_devicediscovery_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_edid_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_egl_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_fb_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_fontdatabase_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_gamepad.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_gamepad_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_gui.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_gui_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_help.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_help_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_location.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_location_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_multimedia.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_multimedia_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_multimediawidgets.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_multimediawidgets_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_network.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_network_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_nfc.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_nfc_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_opengl.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_opengl_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_openglextensions.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_openglextensions_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_packetprotocol_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_platformcompositor_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_positioning.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_positioning_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_positioningquick.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_positioningquick_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_printsupport.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_printsupport_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qml.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qml_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmldebug_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmldevtools_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmlmodels.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmlmodels_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmltest.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmltest_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmlworkerscript.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmlworkerscript_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickcontrols2.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickparticles_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickshapes_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quicktemplates2.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quicktemplates2_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickwidgets.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickwidgets_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_remoteobjects.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_remoteobjects_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_repparser.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_repparser_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_scxml.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_scxml_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_sensors.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_sensors_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_serialbus.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_serialbus_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_serialport.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_serialport_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_sql.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_sql_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_svg.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_svg_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_testlib.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_testlib_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_texttospeech.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_texttospeech_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_theme_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_uiplugin.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_uitools.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_uitools_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_vulkan_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_webchannel.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_webchannel_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_websockets.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_websockets_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_widgets.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_widgets_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_windowsuiautomation_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_winextras.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_winextras_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_xml.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_xml_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_xmlpatterns.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_xmlpatterns_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_zlib_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\features\qt_functions.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\qt_config.prf C:\Qt\5.15.2\mingw81_64\mkspecs\win32-g++\qmake.conf C:\Qt\5.15.2\mingw81_64\mkspecs\features\spec_post.prf .qmake.stash C:\Qt\5.15.2\mingw81_64\mkspecs\features\exclusive_builds.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\toolchain.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\default_pre.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\win32\default_pre.prf C:\Qwt-6.2.0\features\qwtconfig.pri C:\Qwt-6.2.0\features\qwtfunctions.pri C:\Qwt-6.2.0\features\qwt.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\resolve_config.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\exclusive_builds_post.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\default_post.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\build_pass.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\qml_debug.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\precompile_header.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\warn_on.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\qt.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\resources_functions.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\resources.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\moc.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\win32\opengl.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\uic.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\qmake_use.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\file_copies.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\win32\windows.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\testcase_targets.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\exceptions.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\yacc.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\lex.prf ..\ICNC\ICNC.pro C:\Qt\5.15.2\mingw81_64\lib\Qt5Svg.prl C:\Qt\5.15.2\mingw81_64\lib\Qt5OpenGL.prl C:\Qt\5.15.2\mingw81_64\lib\Qt5Widgets.prl C:\Qt\5.15.2\mingw81_64\lib\Qt5Gui.prl C:\Qt\5.15.2\mingw81_64\lib\Qt5SerialPort.prl C:\Qt\5.15.2\mingw81_64\lib\Qt5Xml.prl C:\Qt\5.15.2\mingw81_64\lib\Qt5Core.prl C:\Qt\5.15.2\mingw81_64\lib\qtmain.prl icnc_ru.ts icnc_ru.ts   C:\Qt\5.15.2\mingw81_64\mkspecs\features\data\dummy.cpp ..\ICNC\amp.h ..\ICNC\aux_items.h ..\ICNC\center_widget.h ..\ICNC\cnc.h ..\ICNC\cnc_backup.h ..\ICNC\cnc_com.h ..\ICNC\cnc_com_thread.h ..\ICNC\cnc_context.h ..\ICNC\com_packet.h ..\ICNC\comb_widget.h ..\ICNC\contour_range.h ..\ICNC\contour_range.h ..\ICNC\form_center.h ..\ICNC\form_help.h ..\ICNC\form_passes_stone.h ..\ICNC\form_pult.h ..\ICNC\form_settings.h ..\ICNC\fpga.h ..\ICNC\frect_t.h ..\ICNC\generator_mode_list.h ..\ICNC\gframe.h ..\ICNC\gcode.h ..\ICNC\main.h ..\ICNC\mainwindow.h ..\ICNC\motor_record.h ..\ICNC\form_test.h ..\ICNC\form_run.h ..\ICNC\form_edit.h ..\ICNC\cnc_program.h ..\ICNC\code_editor.h ..\ICNC\form_home.h ..\ICNC\my_lib.h ..\ICNC\program_param.h ..\ICNC\pult_widget.h ..\ICNC\resize_dialog.h ..\ICNC\rotate_dialog.h ..\ICNC\slicing_widget.h ..\ICNC\start_stop_elapsed_timer.h ..\ICNC\run_widget.h ..\ICNC\dxf.h ..\ICNC\form_contour.h ..\ICNC\debug.h ..\ICNC\new_cutline_dialog.h ..\ICNC\form_passes.h ..\ICNC\spinbox_delegate.h ..\ICNC\contour_table_model.h ..\ICNC\mode_table_model.h ..\ICNC\my_types.h ..\ICNC\gpoint.h ..\ICNC\string_parser.h ..\ICNC\contour_pair.h ..\ICNC\contour_list.h ..\ICNC\contour_pass.h ..\ICNC\fpoint_t.h ..\ICNC\cnc_types.h ..\ICNC\double_ext.h ..\ICNC\dxf_entity.h ..\ICNC\dxf_arc.h ..\ICNC\dxf_entities.h ..\ICNC\dxf_line.h ..\ICNC\dxf_circle.h ..\ICNC\dxf_intersect.h ..\ICNC\dxf_point.h ..\ICNC\plot_view.h ..\ICNC\qwt_plot_view.h ..\ICNC\uv_sizing_widget.h ..\ICNC\uv_sizing_widget.h ..\ICNC\wire_cut.h  ..\ICNC\amp.cpp ..\ICNC\aux_items.cpp ..\ICNC\center_widget.cpp ..\ICNC\cnc.cpp ..\ICNC\cnc_backup.cpp ..\ICNC\cnc_backup.cpp ..\ICNC\cnc_com.cpp ..\ICNC\cnc_com_thread.cpp ..\ICNC\cnc_context.cpp ..\ICNC\com_packet.cpp ..\ICNC\comb_widget.cpp ..\ICNC\contour_range.cpp ..\ICNC\form_center.cpp ..\ICNC\form_help.cpp ..\ICNC\form_passes_stone.cpp ..\ICNC\form_pult.cpp ..\ICNC\form_settings.cpp ..\ICNC\fpga.cpp ..\ICNC\frect_t.cpp ..\ICNC\generator_mode_list.cpp ..\ICNC\gframe.cpp ..\ICNC\gcode.cpp ..\ICNC\main.cpp ..\ICNC\mainwindow.cpp ..\ICNC\cnc_test.cpp ..\ICNC\motor_record.cpp ..\ICNC\form_edit.cpp ..\ICNC\form_run.cpp ..\ICNC\form_test.cpp ..\ICNC\code_editor.cpp ..\ICNC\cnc_program.cpp ..\ICNC\form_home.cpp ..\ICNC\my_lib.cpp ..\ICNC\program_param.cpp ..\ICNC\pult_widget.cpp ..\ICNC\resize_dialog.cpp ..\ICNC\rotate_dialog.cpp ..\ICNC\slicing_widget.cpp ..\ICNC\start_stop_elapsed_timer.cpp ..\ICNC\run_widget.cpp ..\ICNC\dxf.cpp ..\ICNC\form_contour.cpp ..\ICNC\new_cutline_dialog.cpp ..\ICNC\form_passes.cpp ..\ICNC\spinbox_delegate.cpp ..\ICNC\contour_table_model.cpp ..\ICNC\mode_table_model.cpp ..\ICNC\gpoint.cpp ..\ICNC\string_parser.cpp ..\ICNC\contour_pair.cpp ..\ICNC\contour_list.cpp ..\ICNC\contour_pass.cpp ..\ICNC\fpoint_t.cpp ..\ICNC\cnc_types.cpp ..\ICNC\double_ext.cpp ..\ICNC\dxf_arc.cpp ..\ICNC\dxf_line.cpp ..\ICNC\dxf_entities.cpp ..\ICNC\dxf_entity.cpp ..\ICNC\dxf_circle.cpp ..\ICNC\dxf_intersect.cpp ..\ICNC\dxf_point.cpp ..\ICNC\plot_view.cpp ..\ICNC\qwt_plot_view.cpp ..\ICNC\uv_sizing_widget.cpp ..\ICNC\wire_cut.cpp ..\ICNC\mainwindow.ui ..\ICNC\formtest.ui    
+	$(ZIP) icnc.zip $(SOURCES) $(DIST) ..\ICNC\ICNC.pro C:\Qt\5.15.2\mingw81_64\mkspecs\features\spec_pre.prf C:\Qt\5.15.2\mingw81_64\mkspecs\qdevice.pri C:\Qt\5.15.2\mingw81_64\mkspecs\features\device_config.prf C:\Qt\5.15.2\mingw81_64\mkspecs\common\sanitize.conf C:\Qt\5.15.2\mingw81_64\mkspecs\common\gcc-base.conf C:\Qt\5.15.2\mingw81_64\mkspecs\common\g++-base.conf C:\Qt\5.15.2\mingw81_64\mkspecs\common\angle.conf C:\Qt\5.15.2\mingw81_64\mkspecs\features\win32\windows_vulkan_sdk.prf C:\Qt\5.15.2\mingw81_64\mkspecs\common\windows-vulkan.conf C:\Qt\5.15.2\mingw81_64\mkspecs\common\g++-win32.conf C:\Qt\5.15.2\mingw81_64\mkspecs\common\windows-desktop.conf C:\Qt\5.15.2\mingw81_64\mkspecs\qconfig.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3danimation.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3danimation_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dcore.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dcore_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dextras.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dextras_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dinput.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dinput_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dlogic.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dlogic_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquick.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquick_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickanimation.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickanimation_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickextras.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickextras_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickinput.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickinput_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickrender.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickrender_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickscene2d.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickscene2d_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3drender.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3drender_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_accessibility_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axbase.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axbase_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axcontainer.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axcontainer_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axserver.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axserver_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_bluetooth.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_bluetooth_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_bootstrap_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_concurrent.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_concurrent_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_core.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_core_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_dbus.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_dbus_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_designer.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_designer_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_designercomponents_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_devicediscovery_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_edid_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_egl_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_fb_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_fontdatabase_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_gamepad.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_gamepad_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_gui.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_gui_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_help.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_help_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_location.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_location_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_multimedia.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_multimedia_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_multimediawidgets.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_multimediawidgets_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_network.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_network_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_nfc.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_nfc_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_opengl.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_opengl_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_openglextensions.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_openglextensions_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_packetprotocol_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_platformcompositor_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_positioning.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_positioning_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_positioningquick.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_positioningquick_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_printsupport.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_printsupport_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qml.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qml_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmldebug_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmldevtools_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmlmodels.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmlmodels_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmltest.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmltest_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmlworkerscript.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmlworkerscript_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickcontrols2.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickparticles_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickshapes_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quicktemplates2.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quicktemplates2_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickwidgets.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickwidgets_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_remoteobjects.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_remoteobjects_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_repparser.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_repparser_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_scxml.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_scxml_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_sensors.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_sensors_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_serialbus.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_serialbus_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_serialport.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_serialport_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_sql.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_sql_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_svg.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_svg_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_testlib.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_testlib_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_texttospeech.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_texttospeech_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_theme_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_uiplugin.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_uitools.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_uitools_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_vulkan_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_webchannel.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_webchannel_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_websockets.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_websockets_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_widgets.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_widgets_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_windowsuiautomation_support_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_winextras.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_winextras_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_xml.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_xml_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_xmlpatterns.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_xmlpatterns_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\modules\qt_lib_zlib_private.pri C:\Qt\5.15.2\mingw81_64\mkspecs\features\qt_functions.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\qt_config.prf C:\Qt\5.15.2\mingw81_64\mkspecs\win32-g++\qmake.conf C:\Qt\5.15.2\mingw81_64\mkspecs\features\spec_post.prf .qmake.stash C:\Qt\5.15.2\mingw81_64\mkspecs\features\exclusive_builds.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\toolchain.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\default_pre.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\win32\default_pre.prf C:\Qwt-6.2.0\features\qwtconfig.pri C:\Qwt-6.2.0\features\qwtfunctions.pri C:\Qwt-6.2.0\features\qwt.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\resolve_config.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\exclusive_builds_post.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\default_post.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\build_pass.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\qml_debug.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\precompile_header.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\warn_on.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\qt.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\resources_functions.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\resources.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\moc.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\win32\opengl.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\uic.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\qmake_use.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\file_copies.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\win32\windows.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\testcase_targets.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\exceptions.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\yacc.prf C:\Qt\5.15.2\mingw81_64\mkspecs\features\lex.prf ..\ICNC\ICNC.pro C:\Qt\5.15.2\mingw81_64\lib\Qt5Svg.prl C:\Qt\5.15.2\mingw81_64\lib\Qt5OpenGL.prl C:\Qt\5.15.2\mingw81_64\lib\Qt5Widgets.prl C:\Qt\5.15.2\mingw81_64\lib\Qt5Gui.prl C:\Qt\5.15.2\mingw81_64\lib\Qt5SerialPort.prl C:\Qt\5.15.2\mingw81_64\lib\Qt5Xml.prl C:\Qt\5.15.2\mingw81_64\lib\Qt5Core.prl C:\Qt\5.15.2\mingw81_64\lib\qtmain.prl icnc_ru.ts icnc_ru.ts   C:\Qt\5.15.2\mingw81_64\mkspecs\features\data\dummy.cpp ..\ICNC\amp.h ..\ICNC\aux_items.h ..\ICNC\center_widget.h ..\ICNC\cnc.h ..\ICNC\cnc_backup.h ..\ICNC\cnc_com.h ..\ICNC\cnc_com_thread.h ..\ICNC\cnc_context.h ..\ICNC\cnc_param.h ..\ICNC\com_packet.h ..\ICNC\comb_widget.h ..\ICNC\contour_range.h ..\ICNC\contour_range.h ..\ICNC\form_center.h ..\ICNC\form_help.h ..\ICNC\form_passes_stone.h ..\ICNC\form_pult.h ..\ICNC\form_settings.h ..\ICNC\fpga.h ..\ICNC\frect_t.h ..\ICNC\generator_mode_list.h ..\ICNC\gframe.h ..\ICNC\gcode.h ..\ICNC\main.h ..\ICNC\mainwindow.h ..\ICNC\motor_record.h ..\ICNC\form_test.h ..\ICNC\form_run.h ..\ICNC\form_edit.h ..\ICNC\cnc_program.h ..\ICNC\code_editor.h ..\ICNC\form_home.h ..\ICNC\my_lib.h ..\ICNC\program_param.h ..\ICNC\pult_widget.h ..\ICNC\resize_dialog.h ..\ICNC\rotate_dialog.h ..\ICNC\slicing_widget.h ..\ICNC\start_stop_elapsed_timer.h ..\ICNC\run_widget.h ..\ICNC\dxf.h ..\ICNC\form_contour.h ..\ICNC\debug.h ..\ICNC\new_cutline_dialog.h ..\ICNC\form_passes.h ..\ICNC\spinbox_delegate.h ..\ICNC\contour_table_model.h ..\ICNC\mode_table_model.h ..\ICNC\my_types.h ..\ICNC\gpoint.h ..\ICNC\string_parser.h ..\ICNC\contour_pair.h ..\ICNC\contour_list.h ..\ICNC\contour_pass.h ..\ICNC\fpoint_t.h ..\ICNC\cnc_types.h ..\ICNC\double_ext.h ..\ICNC\dxf_entity.h ..\ICNC\dxf_arc.h ..\ICNC\dxf_entities.h ..\ICNC\dxf_line.h ..\ICNC\dxf_circle.h ..\ICNC\dxf_intersect.h ..\ICNC\dxf_point.h ..\ICNC\plot_view.h ..\ICNC\qwt_plot_view.h ..\ICNC\uv_sizing_widget.h ..\ICNC\uv_sizing_widget.h ..\ICNC\wire_cut.h  ..\ICNC\amp.cpp ..\ICNC\aux_items.cpp ..\ICNC\center_widget.cpp ..\ICNC\cnc.cpp ..\ICNC\cnc_backup.cpp ..\ICNC\cnc_backup.cpp ..\ICNC\cnc_com.cpp ..\ICNC\cnc_com_thread.cpp ..\ICNC\cnc_context.cpp ..\ICNC\cnc_param.cpp ..\ICNC\com_packet.cpp ..\ICNC\comb_widget.cpp ..\ICNC\contour_range.cpp ..\ICNC\form_center.cpp ..\ICNC\form_help.cpp ..\ICNC\form_passes_stone.cpp ..\ICNC\form_pult.cpp ..\ICNC\form_settings.cpp ..\ICNC\fpga.cpp ..\ICNC\frect_t.cpp ..\ICNC\generator_mode_list.cpp ..\ICNC\gframe.cpp ..\ICNC\gcode.cpp ..\ICNC\main.cpp ..\ICNC\mainwindow.cpp ..\ICNC\cnc_test.cpp ..\ICNC\motor_record.cpp ..\ICNC\form_edit.cpp ..\ICNC\form_run.cpp ..\ICNC\form_test.cpp ..\ICNC\code_editor.cpp ..\ICNC\cnc_program.cpp ..\ICNC\form_home.cpp ..\ICNC\my_lib.cpp ..\ICNC\program_param.cpp ..\ICNC\pult_widget.cpp ..\ICNC\resize_dialog.cpp ..\ICNC\rotate_dialog.cpp ..\ICNC\slicing_widget.cpp ..\ICNC\start_stop_elapsed_timer.cpp ..\ICNC\run_widget.cpp ..\ICNC\dxf.cpp ..\ICNC\form_contour.cpp ..\ICNC\new_cutline_dialog.cpp ..\ICNC\form_passes.cpp ..\ICNC\spinbox_delegate.cpp ..\ICNC\contour_table_model.cpp ..\ICNC\mode_table_model.cpp ..\ICNC\gpoint.cpp ..\ICNC\string_parser.cpp ..\ICNC\contour_pair.cpp ..\ICNC\contour_list.cpp ..\ICNC\contour_pass.cpp ..\ICNC\fpoint_t.cpp ..\ICNC\cnc_types.cpp ..\ICNC\double_ext.cpp ..\ICNC\dxf_arc.cpp ..\ICNC\dxf_line.cpp ..\ICNC\dxf_entities.cpp ..\ICNC\dxf_entity.cpp ..\ICNC\dxf_circle.cpp ..\ICNC\dxf_intersect.cpp ..\ICNC\dxf_point.cpp ..\ICNC\plot_view.cpp ..\ICNC\qwt_plot_view.cpp ..\ICNC\uv_sizing_widget.cpp ..\ICNC\wire_cut.cpp ..\ICNC\mainwindow.ui ..\ICNC\formtest.ui    
 
 clean: compiler_clean 
-	-$(DEL_FILE) debug\amp.o debug\aux_items.o debug\center_widget.o debug\cnc.o debug\cnc_backup.o debug\cnc_backup.o debug\cnc_com.o debug\cnc_com_thread.o debug\cnc_context.o debug\com_packet.o debug\comb_widget.o debug\contour_range.o debug\form_center.o debug\form_help.o debug\form_passes_stone.o debug\form_pult.o debug\form_settings.o debug\fpga.o debug\frect_t.o debug\generator_mode_list.o debug\gframe.o debug\gcode.o debug\main.o debug\mainwindow.o debug\cnc_test.o debug\motor_record.o debug\form_edit.o debug\form_run.o debug\form_test.o debug\code_editor.o debug\cnc_program.o debug\form_home.o debug\my_lib.o debug\program_param.o debug\pult_widget.o debug\resize_dialog.o debug\rotate_dialog.o debug\slicing_widget.o debug\start_stop_elapsed_timer.o debug\run_widget.o debug\dxf.o debug\form_contour.o debug\new_cutline_dialog.o debug\form_passes.o debug\spinbox_delegate.o debug\contour_table_model.o debug\mode_table_model.o debug\gpoint.o debug\string_parser.o debug\contour_pair.o debug\contour_list.o debug\contour_pass.o debug\fpoint_t.o debug\cnc_types.o debug\double_ext.o debug\dxf_arc.o debug\dxf_line.o debug\dxf_entities.o debug\dxf_entity.o debug\dxf_circle.o debug\dxf_intersect.o debug\dxf_point.o debug\plot_view.o debug\qwt_plot_view.o debug\uv_sizing_widget.o debug\wire_cut.o debug\moc_center_widget.o debug\moc_cnc.o debug\moc_cnc_com.o debug\moc_cnc_com_thread.o debug\moc_comb_widget.o debug\moc_form_center.o debug\moc_form_help.o debug\moc_form_passes_stone.o debug\moc_form_pult.o debug\moc_form_settings.o debug\moc_mainwindow.o debug\moc_form_test.o debug\moc_form_run.o debug\moc_form_edit.o debug\moc_code_editor.o debug\moc_form_home.o debug\moc_pult_widget.o debug\moc_resize_dialog.o debug\moc_rotate_dialog.o debug\moc_slicing_widget.o debug\moc_run_widget.o debug\moc_form_contour.o debug\moc_new_cutline_dialog.o debug\moc_form_passes.o debug\moc_spinbox_delegate.o debug\moc_contour_table_model.o debug\moc_mode_table_model.o debug\moc_uv_sizing_widget.o
+	-$(DEL_FILE) debug\amp.o debug\aux_items.o debug\center_widget.o debug\cnc.o debug\cnc_backup.o debug\cnc_backup.o debug\cnc_com.o debug\cnc_com_thread.o debug\cnc_context.o debug\cnc_param.o debug\com_packet.o debug\comb_widget.o debug\contour_range.o debug\form_center.o debug\form_help.o debug\form_passes_stone.o debug\form_pult.o debug\form_settings.o debug\fpga.o debug\frect_t.o debug\generator_mode_list.o debug\gframe.o debug\gcode.o debug\main.o debug\mainwindow.o debug\cnc_test.o debug\motor_record.o debug\form_edit.o debug\form_run.o debug\form_test.o debug\code_editor.o debug\cnc_program.o debug\form_home.o debug\my_lib.o debug\program_param.o debug\pult_widget.o debug\resize_dialog.o debug\rotate_dialog.o debug\slicing_widget.o debug\start_stop_elapsed_timer.o debug\run_widget.o debug\dxf.o debug\form_contour.o debug\new_cutline_dialog.o debug\form_passes.o debug\spinbox_delegate.o debug\contour_table_model.o debug\mode_table_model.o debug\gpoint.o debug\string_parser.o debug\contour_pair.o debug\contour_list.o debug\contour_pass.o debug\fpoint_t.o debug\cnc_types.o debug\double_ext.o debug\dxf_arc.o debug\dxf_line.o debug\dxf_entities.o debug\dxf_entity.o debug\dxf_circle.o debug\dxf_intersect.o debug\dxf_point.o debug\plot_view.o debug\qwt_plot_view.o debug\uv_sizing_widget.o debug\wire_cut.o debug\moc_center_widget.o debug\moc_cnc.o debug\moc_cnc_com.o debug\moc_cnc_com_thread.o debug\moc_comb_widget.o debug\moc_form_center.o debug\moc_form_help.o debug\moc_form_passes_stone.o debug\moc_form_pult.o debug\moc_form_settings.o debug\moc_mainwindow.o debug\moc_form_test.o debug\moc_form_run.o debug\moc_form_edit.o debug\moc_code_editor.o debug\moc_form_home.o debug\moc_pult_widget.o debug\moc_resize_dialog.o debug\moc_rotate_dialog.o debug\moc_slicing_widget.o debug\moc_run_widget.o debug\moc_form_contour.o debug\moc_new_cutline_dialog.o debug\moc_form_passes.o debug\moc_spinbox_delegate.o debug\moc_contour_table_model.o debug\moc_mode_table_model.o debug\moc_uv_sizing_widget.o
 	-$(DEL_FILE) debug\icnc_resource_res.o
 
 distclean: clean 
@@ -704,7 +708,8 @@ debug/moc_center_widget.cpp: ../ICNC/center_widget.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qpen.h \
 		../ICNC/amp.h \
 		../ICNC/fpoint_t.h \
-		../ICNC/main.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QPointF \
 		../ICNC/qwt_plot_view.h \
 		C:/Qwt-6.2.0/include/qwt_plot.h \
@@ -725,13 +730,13 @@ debug/moc_center_widget.cpp: ../ICNC/center_widget.h \
 		../ICNC/dxf_line.h \
 		../ICNC/dxf_entity.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/QColor \
+		../ICNC/main.h \
 		../ICNC/contour_range.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QVector \
 		../ICNC/dxf_arc.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		debug/moc_predefs.h \
@@ -999,14 +1004,15 @@ debug/moc_cnc.cpp: ../ICNC/cnc.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qtextformat.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qpen.h \
 		../ICNC/com_packet.h \
+		../ICNC/main.h \
 		../ICNC/fpga.h \
 		../ICNC/motor_record.h \
 		../ICNC/my_types.h \
-		../ICNC/main.h \
 		../ICNC/cnc_context.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QVariant \
 		../ICNC/amp.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QPointF \
 		debug/moc_predefs.h \
 		C:/Qt/5.15.2/mingw81_64/bin/moc.exe
@@ -1138,6 +1144,7 @@ debug/moc_cnc_com.cpp: ../ICNC/cnc_com.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qtextformat.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qpen.h \
 		../ICNC/com_packet.h \
+		../ICNC/main.h \
 		debug/moc_predefs.h \
 		C:/Qt/5.15.2/mingw81_64/bin/moc.exe
 	C:\Qt\5.15.2\mingw81_64\bin\moc.exe $(DEFINES) --include C:/Work/Meatec/Main/cnc3/Qt/build-ICNC-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/debug/moc_predefs.h -IC:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++ -IC:/Work/Meatec/Main/cnc3/Qt/ICNC -IC:/Qwt-6.2.0/include -IC:/Qt/5.15.2/mingw81_64/include -IC:/Qt/5.15.2/mingw81_64/include/QtSvg -IC:/Qt/5.15.2/mingw81_64/include/QtOpenGL -IC:/Qt/5.15.2/mingw81_64/include/QtWidgets -IC:/Qt/5.15.2/mingw81_64/include/QtGui -IC:/Qt/5.15.2/mingw81_64/include/QtANGLE -IC:/Qt/5.15.2/mingw81_64/include/QtSerialPort -IC:/Qt/5.15.2/mingw81_64/include/QtXml -IC:/Qt/5.15.2/mingw81_64/include/QtCore -I. -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -IC:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include ..\ICNC\cnc_com.h -o debug\moc_cnc_com.cpp
@@ -1267,6 +1274,7 @@ debug/moc_cnc_com_thread.cpp: ../ICNC/cnc_com_thread.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qtextformat.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qpen.h \
 		../ICNC/com_packet.h \
+		../ICNC/main.h \
 		debug/moc_predefs.h \
 		C:/Qt/5.15.2/mingw81_64/bin/moc.exe
 	C:\Qt\5.15.2\mingw81_64\bin\moc.exe $(DEFINES) --include C:/Work/Meatec/Main/cnc3/Qt/build-ICNC-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/debug/moc_predefs.h -IC:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++ -IC:/Work/Meatec/Main/cnc3/Qt/ICNC -IC:/Qwt-6.2.0/include -IC:/Qt/5.15.2/mingw81_64/include -IC:/Qt/5.15.2/mingw81_64/include/QtSvg -IC:/Qt/5.15.2/mingw81_64/include/QtOpenGL -IC:/Qt/5.15.2/mingw81_64/include/QtWidgets -IC:/Qt/5.15.2/mingw81_64/include/QtGui -IC:/Qt/5.15.2/mingw81_64/include/QtANGLE -IC:/Qt/5.15.2/mingw81_64/include/QtSerialPort -IC:/Qt/5.15.2/mingw81_64/include/QtXml -IC:/Qt/5.15.2/mingw81_64/include/QtCore -I. -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -IC:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include ..\ICNC\cnc_com_thread.h -o debug\moc_cnc_com_thread.cpp
@@ -1411,6 +1419,7 @@ debug/moc_comb_widget.cpp: ../ICNC/comb_widget.h \
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -1715,6 +1724,8 @@ debug/moc_form_center.cpp: ../ICNC/form_center.h \
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -1866,7 +1877,6 @@ debug/moc_form_center.cpp: ../ICNC/form_center.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		../ICNC/cnc.h \
@@ -2048,6 +2058,8 @@ debug/moc_form_help.cpp: ../ICNC/form_help.h \
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -2199,7 +2211,6 @@ debug/moc_form_help.cpp: ../ICNC/form_help.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		../ICNC/cnc.h \
@@ -2383,6 +2394,8 @@ debug/moc_form_passes_stone.cpp: ../ICNC/form_passes_stone.h \
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -2531,7 +2544,6 @@ debug/moc_form_passes_stone.cpp: ../ICNC/form_passes_stone.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		../ICNC/cnc.h \
@@ -2688,6 +2700,8 @@ debug/moc_form_pult.cpp: ../ICNC/form_pult.h \
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -2838,7 +2852,6 @@ debug/moc_form_pult.cpp: ../ICNC/form_pult.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		../ICNC/cnc.h \
@@ -3030,6 +3043,8 @@ debug/moc_form_settings.cpp: ../ICNC/form_settings.h \
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -3179,7 +3194,6 @@ debug/moc_form_settings.cpp: ../ICNC/form_settings.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		../ICNC/cnc.h \
@@ -3358,6 +3372,8 @@ debug/moc_mainwindow.cpp: ../ICNC/mainwindow.h \
 		../ICNC/gframe.h \
 		../ICNC/double_ext.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -3506,7 +3522,6 @@ debug/moc_mainwindow.cpp: ../ICNC/mainwindow.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		../ICNC/cnc.h \
@@ -3720,6 +3735,8 @@ debug/moc_form_test.cpp: ../ICNC/form_test.h \
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -3871,7 +3888,6 @@ debug/moc_form_test.cpp: ../ICNC/form_test.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		../ICNC/cnc.h \
@@ -4028,6 +4044,8 @@ debug/moc_form_run.cpp: ../ICNC/form_run.h \
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -4178,7 +4196,6 @@ debug/moc_form_run.cpp: ../ICNC/form_run.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		../ICNC/cnc.h \
@@ -4384,6 +4401,8 @@ debug/moc_form_edit.cpp: ../ICNC/form_edit.h \
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -4534,7 +4553,6 @@ debug/moc_form_edit.cpp: ../ICNC/form_edit.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		../ICNC/cnc.h \
@@ -4844,6 +4862,8 @@ debug/moc_form_home.cpp: ../ICNC/form_home.h \
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -4992,7 +5012,6 @@ debug/moc_form_home.cpp: ../ICNC/form_home.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		../ICNC/cnc.h \
@@ -5305,7 +5324,8 @@ debug/moc_pult_widget.cpp: ../ICNC/pult_widget.h \
 		../ICNC/aux_items.h \
 		../ICNC/amp.h \
 		../ICNC/fpoint_t.h \
-		../ICNC/main.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QPointF \
 		debug/moc_predefs.h \
 		C:/Qt/5.15.2/mingw81_64/bin/moc.exe
@@ -5438,7 +5458,8 @@ debug/moc_resize_dialog.cpp: ../ICNC/resize_dialog.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QDialogButtonBox \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qdialogbuttonbox.h \
 		../ICNC/fpoint_t.h \
-		../ICNC/main.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QPointF \
 		debug/moc_predefs.h \
 		C:/Qt/5.15.2/mingw81_64/bin/moc.exe
@@ -5714,6 +5735,7 @@ debug/moc_slicing_widget.cpp: ../ICNC/slicing_widget.h \
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -6029,6 +6051,8 @@ debug/moc_run_widget.cpp: ../ICNC/run_widget.h \
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -6180,7 +6204,6 @@ debug/moc_run_widget.cpp: ../ICNC/run_widget.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		../ICNC/plot_view.h \
@@ -6369,6 +6392,8 @@ debug/moc_form_contour.cpp: ../ICNC/form_contour.h \
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -6517,7 +6542,6 @@ debug/moc_form_contour.cpp: ../ICNC/form_contour.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		../ICNC/cnc.h \
@@ -6845,6 +6869,8 @@ debug/moc_form_passes.cpp: ../ICNC/form_passes.h \
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -6993,7 +7019,6 @@ debug/moc_form_passes.cpp: ../ICNC/form_passes.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		../ICNC/cnc.h \
@@ -7220,8 +7245,10 @@ debug/moc_contour_table_model.cpp: ../ICNC/contour_table_model.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qrgb.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qrgba64.h \
 		../ICNC/fpoint_t.h \
-		../ICNC/main.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QPointF \
+		../ICNC/main.h \
 		../ICNC/cnc_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QObject \
 		../ICNC/wire_cut.h \
@@ -7375,7 +7402,6 @@ debug/moc_contour_table_model.cpp: ../ICNC/contour_table_model.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		debug/moc_predefs.h \
@@ -7506,6 +7532,8 @@ debug/moc_mode_table_model.cpp: ../ICNC/mode_table_model.h \
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -7656,7 +7684,6 @@ debug/moc_mode_table_model.cpp: ../ICNC/mode_table_model.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		../ICNC/cnc.h \
@@ -7818,6 +7845,7 @@ debug/moc_uv_sizing_widget.cpp: ../ICNC/uv_sizing_widget.h \
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -8129,6 +8157,7 @@ debug/moc_uv_sizing_widget.cpp: ../ICNC/uv_sizing_widget.h \
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -8725,7 +8754,8 @@ debug/center_widget.o: ../ICNC/center_widget.cpp ../ICNC/center_widget.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qpen.h \
 		../ICNC/amp.h \
 		../ICNC/fpoint_t.h \
-		../ICNC/main.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QPointF \
 		../ICNC/qwt_plot_view.h \
 		C:/Qwt-6.2.0/include/qwt_plot.h \
@@ -8746,13 +8776,13 @@ debug/center_widget.o: ../ICNC/center_widget.cpp ../ICNC/center_widget.h \
 		../ICNC/dxf_line.h \
 		../ICNC/dxf_entity.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/QColor \
+		../ICNC/main.h \
 		../ICNC/contour_range.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QVector \
 		../ICNC/dxf_arc.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		C:/Qwt-6.2.0/include/qwt_legend.h \
@@ -9051,14 +9081,15 @@ debug/cnc.o: ../ICNC/cnc.cpp ../ICNC/cnc.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qtextformat.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qpen.h \
 		../ICNC/com_packet.h \
+		../ICNC/main.h \
 		../ICNC/fpga.h \
 		../ICNC/motor_record.h \
 		../ICNC/my_types.h \
-		../ICNC/main.h \
 		../ICNC/cnc_context.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QVariant \
 		../ICNC/amp.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QPointF \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\cnc.o ..\ICNC\cnc.cpp
@@ -9690,7 +9721,8 @@ debug/cnc_com.o: ../ICNC/cnc_com.cpp ../ICNC/cnc_com.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qtextcursor.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qtextformat.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qpen.h \
-		../ICNC/com_packet.h
+		../ICNC/com_packet.h \
+		../ICNC/main.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\cnc_com.o ..\ICNC\cnc_com.cpp
 
 debug/cnc_com_thread.o: ../ICNC/cnc_com_thread.cpp ../ICNC/cnc_com_thread.h \
@@ -9818,13 +9850,13 @@ debug/cnc_com_thread.o: ../ICNC/cnc_com_thread.cpp ../ICNC/cnc_com_thread.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qtextformat.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qpen.h \
 		../ICNC/com_packet.h \
+		../ICNC/main.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtSerialPort/QSerialPortInfo \
 		C:/Qt/5.15.2/mingw81_64/include/QtSerialPort/qserialportinfo.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QDebug \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QCoreApplication \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcoreapplication.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtCore/qeventloop.h \
-		../ICNC/main.h
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qeventloop.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\cnc_com_thread.o ..\ICNC\cnc_com_thread.cpp
 
 debug/cnc_context.o: ../ICNC/cnc_context.cpp ../ICNC/cnc_context.h \
@@ -10082,11 +10114,128 @@ debug/cnc_context.o: ../ICNC/cnc_context.cpp ../ICNC/cnc_context.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qpen.h \
 		../ICNC/amp.h \
 		../ICNC/fpoint_t.h \
-		../ICNC/main.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QPointF
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\cnc_context.o ..\ICNC\cnc_context.cpp
 
-debug/com_packet.o: ../ICNC/com_packet.cpp ../ICNC/com_packet.h
+debug/cnc_param.o: ../ICNC/cnc_param.cpp ../ICNC/cnc_param.h \
+		../ICNC/my_types.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\cnc_param.o ..\ICNC\cnc_param.cpp
+
+debug/com_packet.o: ../ICNC/com_packet.cpp ../ICNC/com_packet.h \
+		../ICNC/aux_items.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QTextEdit \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qtextedit.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qtwidgetsglobal.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/qtguiglobal.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qglobal.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qconfig-bootstrapped.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qconfig.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtcore-config.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qsystemdetection.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qprocessordetection.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcompilerdetection.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtypeinfo.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qsysinfo.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qlogging.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qflags.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qatomic.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qbasicatomic.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qatomic_bootstrap.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qgenericatomic.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qatomic_cxx11.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qatomic_msvc.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qglobalstatic.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qmutex.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qnumeric.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qversiontagging.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/qtgui-config.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qtwidgets-config.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qabstractscrollarea.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qframe.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qwidget.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/qwindowdefs.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qobjectdefs.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qnamespace.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qobjectdefs_impl.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/qwindowdefs_win.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qobject.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qstring.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qchar.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qbytearray.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qrefcount.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qarraydata.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qstringliteral.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qstringalgorithms.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qstringview.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qstringbuilder.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qlist.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qalgorithms.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qiterator.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qhashfunctions.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qpair.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qvector.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcontainertools_impl.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qpoint.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qbytearraylist.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qstringlist.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qregexp.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qstringmatcher.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcoreevent.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qscopedpointer.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qmetatype.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qvarlengtharray.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcontainerfwd.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qobject_impl.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qmargins.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/qpaintdevice.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qrect.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qsize.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/qpalette.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/qcolor.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/qrgb.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/qrgba64.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/qbrush.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/qmatrix.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/qpolygon.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/qregion.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdatastream.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qiodevice.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qline.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/qtransform.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/qimage.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/qpixelformat.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/qpixmap.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qsharedpointer.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qshareddata.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qhash.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qsharedpointer_impl.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/qfont.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/qfontmetrics.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/qfontinfo.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qsizepolicy.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/qcursor.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/qkeysequence.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/qevent.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qvariant.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qmap.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qdebug.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qtextstream.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qlocale.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qset.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcontiguouscache.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qurl.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qurlquery.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfile.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtCore/qfiledevice.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/qvector2d.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/qtouchdevice.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/qtextdocument.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/qtextoption.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/qtextcursor.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/qtextformat.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtGui/qpen.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\com_packet.o ..\ICNC\com_packet.cpp
 
 debug/comb_widget.o: ../ICNC/comb_widget.cpp ../ICNC/comb_widget.h \
@@ -10229,6 +10378,7 @@ debug/comb_widget.o: ../ICNC/comb_widget.cpp ../ICNC/comb_widget.h \
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -10448,7 +10598,8 @@ debug/contour_range.o: ../ICNC/contour_range.cpp ../ICNC/contour_range.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qpoint.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QPointF \
 		../ICNC/fpoint_t.h \
-		../ICNC/main.h
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\contour_range.o ..\ICNC\contour_range.cpp
 
 debug/form_center.o: ../ICNC/form_center.cpp ../ICNC/form_center.h \
@@ -10583,6 +10734,8 @@ debug/form_center.o: ../ICNC/form_center.cpp ../ICNC/form_center.h \
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -10734,7 +10887,6 @@ debug/form_center.o: ../ICNC/form_center.cpp ../ICNC/form_center.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		../ICNC/cnc.h \
@@ -10916,6 +11068,8 @@ debug/form_help.o: ../ICNC/form_help.cpp ../ICNC/form_help.h \
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -11067,7 +11221,6 @@ debug/form_help.o: ../ICNC/form_help.cpp ../ICNC/form_help.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		../ICNC/cnc.h \
@@ -11250,6 +11403,8 @@ debug/form_passes_stone.o: ../ICNC/form_passes_stone.cpp ../ICNC/form_passes_sto
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -11398,7 +11553,6 @@ debug/form_passes_stone.o: ../ICNC/form_passes_stone.cpp ../ICNC/form_passes_sto
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		../ICNC/cnc.h \
@@ -11570,6 +11724,8 @@ debug/form_pult.o: ../ICNC/form_pult.cpp ../ICNC/form_pult.h \
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -11720,7 +11876,6 @@ debug/form_pult.o: ../ICNC/form_pult.cpp ../ICNC/form_pult.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		../ICNC/cnc.h \
@@ -11912,6 +12067,8 @@ debug/form_settings.o: ../ICNC/form_settings.cpp ../ICNC/form_settings.h \
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -12061,7 +12218,6 @@ debug/form_settings.o: ../ICNC/form_settings.cpp ../ICNC/form_settings.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		../ICNC/cnc.h \
@@ -12212,12 +12368,14 @@ debug/fpga.o: ../ICNC/fpga.cpp ../ICNC/fpga.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtSerialPort/QSerialPort \
 		C:/Qt/5.15.2/mingw81_64/include/QtSerialPort/qserialport.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtSerialPort/qserialportglobal.h \
-		../ICNC/com_packet.h
+		../ICNC/com_packet.h \
+		../ICNC/main.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\fpga.o ..\ICNC\fpga.cpp
 
 debug/frect_t.o: ../ICNC/frect_t.cpp ../ICNC/frect_t.h \
 		../ICNC/fpoint_t.h \
-		../ICNC/main.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QPointF \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qpoint.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qnamespace.h \
@@ -12459,6 +12617,8 @@ debug/gframe.o: ../ICNC/gframe.cpp ../ICNC/gframe.h \
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QPointF \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qpoint.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qnamespace.h \
@@ -12615,6 +12775,8 @@ debug/gcode.o: ../ICNC/gcode.cpp ../ICNC/gcode.h \
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -12767,7 +12929,6 @@ debug/gcode.o: ../ICNC/gcode.cpp ../ICNC/gcode.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QDebug
@@ -12929,6 +13090,8 @@ debug/main.o: ../ICNC/main.cpp ../ICNC/mainwindow.h \
 		../ICNC/gframe.h \
 		../ICNC/double_ext.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -13077,7 +13240,6 @@ debug/main.o: ../ICNC/main.cpp ../ICNC/mainwindow.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		../ICNC/cnc.h \
@@ -13330,6 +13492,8 @@ debug/mainwindow.o: ../ICNC/mainwindow.cpp ../ICNC/mainwindow.h \
 		../ICNC/gframe.h \
 		../ICNC/double_ext.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -13478,7 +13642,6 @@ debug/mainwindow.o: ../ICNC/mainwindow.cpp ../ICNC/mainwindow.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		../ICNC/cnc.h \
@@ -13841,14 +14004,15 @@ debug/cnc_test.o: ../ICNC/cnc_test.cpp ../ICNC/cnc.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qtextformat.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qpen.h \
 		../ICNC/com_packet.h \
+		../ICNC/main.h \
 		../ICNC/fpga.h \
 		../ICNC/motor_record.h \
 		../ICNC/my_types.h \
-		../ICNC/main.h \
 		../ICNC/cnc_context.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QVariant \
 		../ICNC/amp.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QPointF
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\cnc_test.o ..\ICNC\cnc_test.cpp
 
@@ -14116,6 +14280,8 @@ debug/form_edit.o: ../ICNC/form_edit.cpp ../ICNC/form_edit.h \
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -14266,7 +14432,6 @@ debug/form_edit.o: ../ICNC/form_edit.cpp ../ICNC/form_edit.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		../ICNC/cnc.h \
@@ -14439,6 +14604,8 @@ debug/form_run.o: ../ICNC/form_run.cpp ../ICNC/form_run.h \
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -14589,7 +14756,6 @@ debug/form_run.o: ../ICNC/form_run.cpp ../ICNC/form_run.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		../ICNC/cnc.h \
@@ -14770,6 +14936,8 @@ debug/form_test.o: ../ICNC/form_test.cpp ../ICNC/form_test.h \
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -14921,7 +15089,6 @@ debug/form_test.o: ../ICNC/form_test.cpp ../ICNC/form_test.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		../ICNC/cnc.h \
@@ -15628,6 +15795,8 @@ debug/form_home.o: ../ICNC/form_home.cpp C:/Qt/5.15.2/mingw81_64/include/QtCore/
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -15773,7 +15942,6 @@ debug/form_home.o: ../ICNC/form_home.cpp C:/Qt/5.15.2/mingw81_64/include/QtCore/
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		../ICNC/cnc.h \
@@ -15931,6 +16099,8 @@ debug/program_param.o: ../ICNC/program_param.cpp ../ICNC/program_param.h \
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -16082,7 +16252,6 @@ debug/program_param.o: ../ICNC/program_param.cpp ../ICNC/program_param.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		../ICNC/cnc.h \
@@ -16388,7 +16557,8 @@ debug/pult_widget.o: ../ICNC/pult_widget.cpp ../ICNC/pult_widget.h \
 		../ICNC/aux_items.h \
 		../ICNC/amp.h \
 		../ICNC/fpoint_t.h \
-		../ICNC/main.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QPointF \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QDebug \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
@@ -16398,6 +16568,7 @@ debug/pult_widget.o: ../ICNC/pult_widget.cpp ../ICNC/pult_widget.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/QColor \
 		../ICNC/gframe.h \
 		../ICNC/double_ext.h \
+		../ICNC/main.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -16411,7 +16582,6 @@ debug/pult_widget.o: ../ICNC/pult_widget.cpp ../ICNC/pult_widget.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		../ICNC/cnc.h \
 		../ICNC/cnc_com.h \
@@ -16554,7 +16724,8 @@ debug/resize_dialog.o: ../ICNC/resize_dialog.cpp ../ICNC/resize_dialog.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QDialogButtonBox \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qdialogbuttonbox.h \
 		../ICNC/fpoint_t.h \
-		../ICNC/main.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QPointF
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\resize_dialog.o ..\ICNC\resize_dialog.cpp
 
@@ -16826,6 +16997,7 @@ debug/slicing_widget.o: ../ICNC/slicing_widget.cpp ../ICNC/slicing_widget.h \
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -17171,6 +17343,8 @@ debug/run_widget.o: ../ICNC/run_widget.cpp ../ICNC/run_widget.h \
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -17322,7 +17496,6 @@ debug/run_widget.o: ../ICNC/run_widget.cpp ../ICNC/run_widget.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		../ICNC/plot_view.h \
@@ -17420,8 +17593,10 @@ debug/dxf.o: ../ICNC/dxf.cpp ../ICNC/dxf.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qstringmatcher.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qrgba64.h \
 		../ICNC/fpoint_t.h \
-		../ICNC/main.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QPointF \
+		../ICNC/main.h \
 		../ICNC/cnc_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QObject \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qobject.h \
@@ -17597,7 +17772,6 @@ debug/dxf.o: ../ICNC/dxf.cpp ../ICNC/dxf.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QDebug \
@@ -17762,6 +17936,8 @@ debug/form_contour.o: ../ICNC/form_contour.cpp ../ICNC/form_contour.h \
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -17910,7 +18086,6 @@ debug/form_contour.o: ../ICNC/form_contour.cpp ../ICNC/form_contour.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		../ICNC/cnc.h \
@@ -18252,6 +18427,8 @@ debug/form_passes.o: ../ICNC/form_passes.cpp ../ICNC/form_passes.h \
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -18400,7 +18577,6 @@ debug/form_passes.o: ../ICNC/form_passes.cpp ../ICNC/form_passes.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		../ICNC/cnc.h \
@@ -18642,8 +18818,10 @@ debug/contour_table_model.o: ../ICNC/contour_table_model.cpp ../ICNC/contour_tab
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qrgb.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qrgba64.h \
 		../ICNC/fpoint_t.h \
-		../ICNC/main.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QPointF \
+		../ICNC/main.h \
 		../ICNC/cnc_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QObject \
 		../ICNC/wire_cut.h \
@@ -18797,7 +18975,6 @@ debug/contour_table_model.o: ../ICNC/contour_table_model.cpp ../ICNC/contour_tab
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QDebug
@@ -18927,6 +19104,8 @@ debug/mode_table_model.o: ../ICNC/mode_table_model.cpp ../ICNC/mode_table_model.
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \
@@ -19077,7 +19256,6 @@ debug/mode_table_model.o: ../ICNC/mode_table_model.cpp ../ICNC/mode_table_model.
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		../ICNC/cnc.h \
@@ -19211,8 +19389,10 @@ debug/contour_pair.o: ../ICNC/contour_pair.cpp ../ICNC/contour_pair.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qstringmatcher.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qrgba64.h \
 		../ICNC/fpoint_t.h \
-		../ICNC/main.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QPointF \
+		../ICNC/main.h \
 		../ICNC/cnc_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QObject \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qobject.h \
@@ -19388,7 +19568,6 @@ debug/contour_pair.o: ../ICNC/contour_pair.cpp ../ICNC/contour_pair.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\contour_pair.o ..\ICNC\contour_pair.cpp
@@ -19450,8 +19629,10 @@ debug/contour_list.o: ../ICNC/contour_list.cpp ../ICNC/contour_list.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qstringmatcher.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qrgba64.h \
 		../ICNC/fpoint_t.h \
-		../ICNC/main.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QPointF \
+		../ICNC/main.h \
 		../ICNC/cnc_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QObject \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qobject.h \
@@ -19627,7 +19808,6 @@ debug/contour_list.o: ../ICNC/contour_list.cpp ../ICNC/contour_list.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\contour_list.o ..\ICNC\contour_list.cpp
@@ -19690,8 +19870,10 @@ debug/contour_pass.o: ../ICNC/contour_pass.cpp ../ICNC/contour_pass.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qstringmatcher.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qrgba64.h \
 		../ICNC/fpoint_t.h \
-		../ICNC/main.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QPointF \
+		../ICNC/main.h \
 		../ICNC/cnc_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QObject \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qobject.h \
@@ -19867,14 +20049,14 @@ debug/contour_pass.o: ../ICNC/contour_pass.cpp ../ICNC/contour_pass.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\contour_pass.o ..\ICNC\contour_pass.cpp
 
 debug/fpoint_t.o: ../ICNC/fpoint_t.cpp ../ICNC/fpoint_t.h \
-		../ICNC/main.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QPointF \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qpoint.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qnamespace.h \
@@ -20171,8 +20353,10 @@ debug/dxf_arc.o: ../ICNC/dxf_arc.cpp ../ICNC/dxf_arc.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qstringmatcher.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qrgba64.h \
 		../ICNC/fpoint_t.h \
-		../ICNC/main.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QPointF \
+		../ICNC/main.h \
 		../ICNC/cnc_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QObject \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qobject.h \
@@ -20398,8 +20582,10 @@ debug/dxf_line.o: ../ICNC/dxf_line.cpp ../ICNC/dxf_line.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qstringmatcher.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qrgba64.h \
 		../ICNC/fpoint_t.h \
-		../ICNC/main.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QPointF \
+		../ICNC/main.h \
 		../ICNC/cnc_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QObject \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qobject.h \
@@ -20627,8 +20813,10 @@ debug/dxf_entities.o: ../ICNC/dxf_entities.cpp ../ICNC/dxf_entities.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qstringmatcher.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qrgba64.h \
 		../ICNC/fpoint_t.h \
-		../ICNC/main.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QPointF \
+		../ICNC/main.h \
 		../ICNC/cnc_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QObject \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qobject.h \
@@ -20856,8 +21044,10 @@ debug/dxf_entity.o: ../ICNC/dxf_entity.cpp ../ICNC/dxf_entity.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qstringmatcher.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qrgba64.h \
 		../ICNC/fpoint_t.h \
-		../ICNC/main.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QPointF \
+		../ICNC/main.h \
 		../ICNC/cnc_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QObject \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qobject.h \
@@ -21084,8 +21274,10 @@ debug/dxf_circle.o: ../ICNC/dxf_circle.cpp ../ICNC/dxf_circle.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qstringmatcher.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qrgba64.h \
 		../ICNC/fpoint_t.h \
-		../ICNC/main.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QPointF \
+		../ICNC/main.h \
 		../ICNC/cnc_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QObject \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qobject.h \
@@ -21312,8 +21504,10 @@ debug/dxf_intersect.o: ../ICNC/dxf_intersect.cpp ../ICNC/dxf_intersect.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qstringmatcher.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qrgba64.h \
 		../ICNC/fpoint_t.h \
-		../ICNC/main.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QPointF \
+		../ICNC/main.h \
 		../ICNC/cnc_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QObject \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qobject.h \
@@ -21542,8 +21736,10 @@ debug/dxf_point.o: ../ICNC/dxf_point.cpp ../ICNC/dxf_point.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qstringmatcher.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qrgba64.h \
 		../ICNC/fpoint_t.h \
-		../ICNC/main.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QPointF \
+		../ICNC/main.h \
 		../ICNC/cnc_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QObject \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qobject.h \
@@ -21843,8 +22039,10 @@ debug/qwt_plot_view.o: ../ICNC/qwt_plot_view.cpp ../ICNC/qwt_plot_view.h \
 		../ICNC/dxf_entity.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/QColor \
 		../ICNC/fpoint_t.h \
-		../ICNC/main.h \
+		../ICNC/cnc_param.h \
+		../ICNC/my_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QPointF \
+		../ICNC/main.h \
 		../ICNC/cnc_types.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QObject \
 		../ICNC/wire_cut.h \
@@ -21990,7 +22188,6 @@ debug/qwt_plot_view.o: ../ICNC/qwt_plot_view.cpp ../ICNC/qwt_plot_view.h \
 		../ICNC/dxf_circle.h \
 		../ICNC/dxf_point.h \
 		../ICNC/frect_t.h \
-		../ICNC/my_types.h \
 		../ICNC/my_lib.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QList \
 		C:/Qwt-6.2.0/include/qwt_legend.h \
@@ -22155,6 +22352,7 @@ debug/uv_sizing_widget.o: ../ICNC/uv_sizing_widget.cpp ../ICNC/uv_sizing_widget.
 		../ICNC/double_ext.h \
 		../ICNC/main.h \
 		../ICNC/fpoint_t.h \
+		../ICNC/cnc_param.h \
 		../ICNC/contour_list.h \
 		../ICNC/contour_pair.h \
 		../ICNC/dxf.h \

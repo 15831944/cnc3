@@ -7,60 +7,1449 @@ z2
 !i10e 25
 !i10f 100
 cModel Technology
-Z0 dC:/Work/Meatec/Main/cnc3/Quartus/cnc3 v1.5/simulation/modelsim
+Z0 dC:/Work/Meatec/Main/cnc3/Quartus/cnc3/simulation/modelsim
 T_opt
-!s110 1640073960
-Vf@IL1NmnA=KjHznkV[i;A1
-04 11 4 work imit_enc_tb fast 0
-=1-b88584a4e7ae-61c18ae7-304-1a74
+!s110 1640161699
+Vz8]iHDa?>ZU6;dR7gQc543
+04 6 4 work top_tb fast 0
+=1-b88584a4e7ae-61c2e1a3-db-1c10
 o-quiet -auto_acc_if_foreign -work work -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L fiftyfivenm_ver -L rtl_work -L work +acc
 n@_opt
 OL;O;10.4c;61
-vimit_enc
+vaccum
 Z1 DXx6 sv_std 3 std 0 22 WmjPaeP=7F5?QFXzJ>D[Q2
-!s110 1640073958
-!i10b 1
-!s100 z5QOG?l07ESnmAHjh0^MF2
-I9?hS6E38U4mC2Sg6bRUPI3
-Z2 VDg1SIo80bB@j0V0VzS_@n1
-!s105 imit_enc_sv_unit
-S1
-R0
-w1640006796
-8C:/Work/Meatec/Main/cnc3/Quartus/cnc3 v1.5/imit_enc.sv
-FC:/Work/Meatec/Main/cnc3/Quartus/cnc3 v1.5/imit_enc.sv
-L0 6
-Z3 OL;L;10.4c;61
+Z2 DXx4 work 11 top_sv_unit 0 22 N;`d>`_<5YYGg36g>QcFG3
+Z3 VDg1SIo80bB@j0V0VzS_@n1
 r1
 !s85 0
 31
-Z4 !s108 1640073958.000000
-!s107 C:/Work/Meatec/Main/cnc3/Quartus/cnc3 v1.5/imit_enc.sv|
-!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Work/Meatec/Main/cnc3/Quartus/cnc3 v1.5|C:/Work/Meatec/Main/cnc3/Quartus/cnc3 v1.5/imit_enc.sv|
-!i113 0
-Z5 o-sv -work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
-!s92 -sv -work work {+incdir+C:/Work/Meatec/Main/cnc3/Quartus/cnc3 v1.5} -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
-vimit_enc_tb
-R1
-!s110 1640073959
 !i10b 1
-!s100 Anfh6kYQ`1PCi?Ec0VkJ<3
-I0KkFo[mkHj[^AUD]ia3@?1
-R2
-!s105 imit_enc_tb_sv_unit
+!s100 FV:FoF_NDAlC=l6<l7_AM0
+Io@=Bac]4ld]<LaUTdhOTU1
+Z4 !s105 top_sv_unit
 S1
 R0
-w1640073721
-8C:/Work/Meatec/Main/cnc3/Quartus/cnc3 v1.5/testbench/imit_enc_tb.sv
-FC:/Work/Meatec/Main/cnc3/Quartus/cnc3 v1.5/testbench/imit_enc_tb.sv
-L0 4
+Z5 w1603332174
+Z6 8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/accum.sv
+Z7 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/accum.sv
+L0 6
+Z8 OL;L;10.4c;61
+Z9 !s108 1640161697.000000
+Z10 !s107 C:/Work/Meatec/Main/cnc3/Quartus/cnc3/imit_enc.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/adc_permit.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/delay_line.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/accum.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/cic_decim_osr.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/adc_MCP3008.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/adc_acc.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/adc_bus.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/q_rotary_enc.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/rot_enc_zero.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/enc_bus.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/step_dir_cnt.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/step_dir.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/prescale.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/pause_gen.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/pls_gen.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/pls_cont.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/motor_cont.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/motor_bus.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/hv_enabled.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/my_types.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/lpf_cap.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/sipo.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/keyboard.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/clk_div.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/piso.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/ctrl_bus.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/header.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/main.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/mcu_amux_mem.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/mcu_main.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/top.sv|
+Z11 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Work/Meatec/Main/cnc3/Quartus/cnc3|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/top.sv|
+!i113 0
+Z12 o-sv -work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z13 !s92 -sv -work work +incdir+C:/Work/Meatec/Main/cnc3/Quartus/cnc3 -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+vaccum_var
+R1
+R2
 R3
 r1
 !s85 0
 31
+!i10b 1
+!s100 Z5=oVN=cKPl@U;iQ37RL;1
+IPH<n]UoSPe<PeLIaQ4n3j2
 R4
-!s107 C:/Work/Meatec/Main/cnc3/Quartus/cnc3 v1.5/testbench/imit_enc_tb.sv|
-!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Work/Meatec/Main/cnc3/Quartus/cnc3 v1.5/testbench|C:/Work/Meatec/Main/cnc3/Quartus/cnc3 v1.5/testbench/imit_enc_tb.sv|
-!i113 0
+S1
+R0
 R5
-!s92 -sv -work work {+incdir+C:/Work/Meatec/Main/cnc3/Quartus/cnc3 v1.5/testbench} -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R6
+R7
+L0 47
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+vadc_acc
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 ElD>WK6U:7il14I`j5>Nl3
+IGaH=mPS6]ZLSjB@CizA;n1
+R4
+S1
+R0
+w1628688060
+8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/adc_acc.sv
+Z14 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/adc_acc.sv
+Z15 L0 10
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+vadc_bus
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 i1RoQO@ZH];_k8_MdJfXl2
+I[j[]@gobV2OgF7^`:D:Vh2
+R4
+S1
+R0
+w1629465432
+8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/adc_bus.sv
+Z16 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/adc_bus.sv
+L0 6
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+vadc_MCP3008
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 <QameIT_Uh2WE0]PHmlo22
+I8CJZIbig7VDWEg2?Vcfik2
+R4
+S1
+R0
+w1603317992
+8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/adc_MCP3008.sv
+Z17 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/adc_MCP3008.sv
+L0 7
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+nadc_@m@c@p3008
+vadc_permit
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 KRUQf?joEImo<0O=XnH0D1
+IidMdRf@He9G3EiHEi<ha:2
+R4
+S1
+R0
+w1625127760
+8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/adc_permit.sv
+Z18 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/adc_permit.sv
+L0 8
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+XADDR
+R1
+V@O`[ScDIa42i9kdK5_MlP3
+r1
+!s85 0
+31
+!i10b 1
+!s100 0dldhZSCdf:jYf9Ic_1=[0
+I@O`[ScDIa42i9kdK5_MlP3
+S1
+R0
+Z19 w1640161683
+Z20 8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/testbench/FmcBus.sv
+Z21 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/testbench/FmcBus.sv
+L0 7
+R8
+Z22 !s108 1640161698.000000
+Z23 !s107 C:/Work/Meatec/Main/cnc3/Quartus/cnc3/testbench/MyTypesPkg.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/testbench/FmcBus.sv|
+Z24 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Work/Meatec/Main/cnc3/Quartus/cnc3/testbench|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/testbench/FmcBus.sv|
+!i113 0
+R12
+Z25 !s92 -sv -work work +incdir+C:/Work/Meatec/Main/cnc3/Quartus/cnc3/testbench -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+n@a@d@d@r
+vcic_decim_osr
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 :c@5k[;l=L7VR5akSch>81
+I=;Fz_gA>k^R7JZn=kIPi92
+R4
+S1
+R0
+w1603755534
+8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/cic_decim_osr.sv
+Z26 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/cic_decim_osr.sv
+L0 4
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+vclk_div
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 [hDBn08f=U16e3P5K`Fzb0
+IKM;WH^7LIgBK0CFZ9:iGY0
+R4
+S1
+R0
+Z27 w1585612080
+8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/clk_div.sv
+Z28 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/clk_div.sv
+L0 6
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+vctrl_bus
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 gGaYT@d@hOS@7Vc2R1[[E0
+IZ4E37@Mbg@X8;`jF8_mQ;1
+R4
+S1
+R0
+w1640095606
+8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/ctrl_bus.sv
+Z29 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/ctrl_bus.sv
+Z30 L0 13
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+vdelay_line
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 WbhX_H?UG0K@LnDF>AVIG3
+I0loI<6^_`lb[XLZg78O]C3
+R4
+S1
+R0
+Z31 w1603330870
+Z32 8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/delay_line.sv
+Z33 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/delay_line.sv
+L0 4
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+vdelay_line_var
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 goJzMYEMLN;_;P]X6>fKM2
+I82OeegYF>?2B;VK[e<:cL2
+R4
+S1
+R0
+R31
+R32
+R33
+L0 59
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+venc_bus
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 E]2zBF6_e>HHC7MiV5aD`1
+ISo<gCfWoV?K17o>K^DP623
+R4
+S1
+R0
+w1640004610
+8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/enc_bus.sv
+Z34 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/enc_bus.sv
+L0 5
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+XFmcBus_sv_unit
+R1
+Z35 DXx4 work 10 MyTypesPkg 0 22 ejZl3[InUhkE]L_^]g?Jh1
+Z36 DXx4 work 4 ADDR 0 22 @O`[ScDIa42i9kdK5_MlP3
+VoGH4OKJ@PczQ?]__NBz@H3
+r1
+!s85 0
+31
+!i10b 1
+!s100 YmklRi`AC2ENA5?S0FjEo3
+IoGH4OKJ@PczQ?]__NBz@H3
+!i103 1
+S1
+R0
+R19
+R20
+R21
+Z37 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/testbench/MyTypesPkg.sv
+L0 4
+R8
+R22
+R23
+R24
+!i113 0
+R12
+R25
+n@fmc@bus_sv_unit
+Xheader_sv_unit
+R1
+Z38 !s110 1640161697
+!i10b 1
+!s100 ZK=;CJE4X]jYePcnGolT]2
+IKG0S[:iRO?jgJ`d8cS_cZ3
+VKG0S[:iRO?jgJ`d8cS_cZ3
+!i103 1
+S1
+R0
+Z39 w1640091212
+8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/header.sv
+Z40 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/header.sv
+Z41 L0 25
+R8
+r1
+!s85 0
+31
+R9
+!s107 C:/Work/Meatec/Main/cnc3/Quartus/cnc3/header.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Work/Meatec/Main/cnc3/Quartus/cnc3|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/header.sv|
+!i113 0
+R12
+R13
+vhv_enabled
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 [R83TVJPz;XnkfVW;G@l@2
+I2a<<g`fCD7GI`f9[i]lM>1
+R4
+S1
+R0
+w1602109654
+8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/hv_enabled.sv
+Z42 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/hv_enabled.sv
+L0 4
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+YIFmcBus
+R1
+R35
+R36
+DXx4 work 14 FmcBus_sv_unit 0 22 oGH4OKJ@PczQ?]__NBz@H3
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 N_OhNll7Q<mEY4K9bPigG1
+Ii2a`K`ik@YV4kz3V=08<90
+!s105 FmcBus_sv_unit
+S1
+R0
+R19
+R20
+R21
+L0 64
+R8
+R22
+R23
+R24
+!i113 0
+R12
+R25
+n@i@fmc@bus
+vimit_enc
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 5=^mzmBXbGocPmEH`CH5_1
+Id:P4h^1V<T=E;G>[[;i0a1
+R4
+S1
+R0
+w1640006796
+8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/imit_enc.sv
+Z43 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/imit_enc.sv
+L0 6
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+vinput_filter
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 Y<NGoEWEm4jSLLbU@oGT62
+IPHf`f979SR<9;Y@cOd9g52
+R4
+S1
+R0
+R27
+Z44 8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/lpf_cap.sv
+Z45 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/lpf_cap.sv
+L0 114
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+vkeyboard
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 Z@[]4ahl:D9V2GbJ>L[:m1
+IKV3gM?AogG@DA73ib:WA40
+R4
+S1
+R0
+R27
+8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/keyboard.sv
+Z46 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/keyboard.sv
+L0 7
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+vled_flash
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 DfMEGK`b5ChCeNV;>`iE72
+I>52@8G0kFEXh<fmUl=GVi1
+R4
+S1
+R0
+Z47 w1637314748
+Z48 8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/top.sv
+Z49 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/top.sv
+L0 136
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+vlpf_cap
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 _4:GOMPD`:DJ:?TF3QCZ@3
+I1UGRg9U9MP4WJ=Cbag>:G1
+R4
+S1
+R0
+R27
+R44
+R45
+L0 9
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+vlpf_cap_full
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 mW7Zo[=gn7?<RW?;RB1L92
+IXQjdLMFKiTeAW59G5<8l70
+R4
+S1
+R0
+R27
+R44
+R45
+L0 23
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+vmain
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 8HSz4jWJz;_ih3M2B8IhV2
+IMTfA8I=JOn0=1Hhk@kKJc1
+R4
+S1
+R0
+w1640084037
+8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/main.sv
+Z50 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/main.sv
+R30
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+vmain_pll
+R38
+!i10b 1
+!s100 jGUK:EG_FOPegVhcdkjN[1
+Igd9?JK<0QU8_ozN^0BkQh0
+R3
+R0
+w1607389202
+8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/main_pll.v
+FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/main_pll.v
+Z51 L0 40
+R8
+r1
+!s85 0
+31
+R9
+!s107 C:/Work/Meatec/Main/cnc3/Quartus/cnc3/main_pll.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Work/Meatec/Main/cnc3/Quartus/cnc3|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/main_pll.v|
+!i113 0
+Z52 o-vlog01compat -work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+!s92 -vlog01compat -work work +incdir+C:/Work/Meatec/Main/cnc3/Quartus/cnc3 -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+vmain_pll_altpll
+R38
+!i10b 1
+!s100 VEc>N[W^=0FDfk]HfQ>AQ2
+I]odS814`]aa=dZdLED:<M1
+R3
+R0
+w1639485304
+8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/db/main_pll_altpll.v
+FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/db/main_pll_altpll.v
+L0 31
+R8
+r1
+!s85 0
+31
+R9
+!s107 C:/Work/Meatec/Main/cnc3/Quartus/cnc3/db/main_pll_altpll.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Work/Meatec/Main/cnc3/Quartus/cnc3/db|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/db/main_pll_altpll.v|
+!i113 0
+R52
+!s92 -vlog01compat -work work +incdir+C:/Work/Meatec/Main/cnc3/Quartus/cnc3/db -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+vMCP3008
+R1
+Z53 !s110 1640161698
+!i10b 1
+!s100 WcJhPj1GG=Z[GbkYDTV2E2
+IjE:@A4d<f2B3W[O^d=5Sk1
+R3
+!s105 MCP3008_sv_unit
+S1
+R0
+w1593038116
+8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/testbench/MCP3008.sv
+Z54 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/testbench/MCP3008.sv
+L0 1
+R8
+r1
+!s85 0
+31
+R22
+!s107 C:/Work/Meatec/Main/cnc3/Quartus/cnc3/testbench/MCP3008.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Work/Meatec/Main/cnc3/Quartus/cnc3/testbench|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/testbench/MCP3008.sv|
+!i113 0
+R12
+R25
+n@m@c@p3008
+vmcu_amux_mem
+R1
+R38
+!i10b 1
+!s100 ;jjkjhbgO8z=eGIKoboie0
+ICAJX;>C5TP]Ajc2R^EGC50
+R3
+R4
+S1
+R0
+R27
+8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/mcu_amux_mem.sv
+Z55 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/mcu_amux_mem.sv
+L0 4
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!i113 0
+R12
+R13
+vmcu_main
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 ]1cZWlh]zF=JJ>X>Ha6C]2
+Ij4Zc1hk;=2MlOEac_3oQV2
+R4
+S1
+R0
+w1623404456
+8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/mcu_main.sv
+Z56 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/mcu_main.sv
+L0 8
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+vmotor_bus
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 2SP`AdZ692JYSzeFS8fYo2
+IORYP`zQQ]T>Q3[J]Ii:Si0
+R4
+S1
+R0
+Z57 w1640091597
+Z58 8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/motor_bus.sv
+Z59 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/motor_bus.sv
+L0 7
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+vmotor_cont
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 ]GzIEN_bZzIiZbh0B<zF42
+I;FM[aNJZUlfcYOb6ECPcl1
+R4
+S1
+R0
+w1607461756
+8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/motor_cont.sv
+Z60 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/motor_cont.sv
+L0 7
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+Xmy_types_sv_unit
+R1
+R38
+!i10b 1
+!s100 XL8H=;=mBcM37fKzQjc[73
+IS2PD@Q[n_^GSGeWUZ5TYH2
+VS2PD@Q[n_^GSGeWUZ5TYH2
+!i103 1
+S1
+R0
+w1623313074
+8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/my_types.sv
+Z61 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/my_types.sv
+L0 4
+R8
+r1
+!s85 0
+31
+R9
+!s107 C:/Work/Meatec/Main/cnc3/Quartus/cnc3/my_types.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Work/Meatec/Main/cnc3/Quartus/cnc3|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/my_types.sv|
+!i113 0
+R12
+R13
+XMyTypesPkg
+R1
+VejZl3[InUhkE]L_^]g?Jh1
+r1
+!s85 0
+31
+!i10b 1
+!s100 Z]M:fMB[0HZPOjE>7GID>0
+IejZl3[InUhkE]L_^]g?Jh1
+S1
+R0
+R27
+8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/testbench/MyTypesPkg.sv
+R37
+L0 7
+R8
+R22
+R23
+R24
+!i113 0
+R12
+R25
+n@my@types@pkg
+Xpause_gen_sv_unit
+R1
+R38
+!i10b 1
+!s100 Gk4j;V?9z8FMKcQ]maV7_2
+I^3@CnzBUV_0>bi;BII5aK3
+V^3@CnzBUV_0>bi;BII5aK3
+!i103 1
+S1
+R0
+R39
+8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/pause_gen.sv
+Z62 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/pause_gen.sv
+R40
+R41
+R8
+r1
+!s85 0
+31
+R9
+!s107 C:/Work/Meatec/Main/cnc3/Quartus/cnc3/header.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/pause_gen.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Work/Meatec/Main/cnc3/Quartus/cnc3|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/pause_gen.sv|
+!i113 0
+R12
+R13
+vpiso
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 F5P_jk<NYBN@k3kFB;<HR2
+I;=MY2D;OB=bIT^@FfZg?G2
+R4
+S1
+R0
+R27
+Z63 8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/piso.sv
+Z64 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/piso.sv
+L0 69
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+vpiso_always
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 1[cJ1bUU_kD4en6Te0JS80
+INTO`M=L9k?mYT0eB@WR522
+R4
+S1
+R0
+R27
+R63
+R64
+L0 44
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+vpiso_reg
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 0K>jz0@=Le;Pgo9[DG?973
+IMMVBicCeE`H6TCzEbezhc1
+R4
+S1
+R0
+R27
+R63
+R64
+L0 7
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+vpls_cont
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 bozmiMLe;Ze7Nc?P>JS8=2
+IEM?UO0HL_RT=z;2@RfO:_0
+R4
+S1
+R0
+R27
+8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/pls_cont.sv
+Z65 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/pls_cont.sv
+L0 6
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+vpls_gen
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 o`^gBX2b@_69JJY;3jO>F1
+IEzFEPa9]fg0>Uo9gQD2N72
+R4
+S1
+R0
+w1628499484
+8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/pls_gen.sv
+Z66 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/pls_gen.sv
+L0 6
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+vprescale
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 PR5><HCD_A0lN2ZNmRa4G3
+I?^k>TX_:To5@E<R4e^Rm?3
+R4
+S1
+R0
+Z67 w1594352072
+Z68 8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/prescale.sv
+Z69 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/prescale.sv
+L0 42
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+vprescale_oi
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 ^bEL<K3Y5]iem5Tdl24]B0
+IdMJb?`>MW0NC@A6b66cRf0
+R4
+S1
+R0
+R67
+R68
+R69
+L0 4
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+vq_rotary_enc
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 b;8HhKg@z;757Y:V64Y5V2
+IP66PKEH5ic8Ee56hOR=HT1
+R4
+S1
+R0
+w1639567693
+8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/q_rotary_enc.sv
+Z70 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/q_rotary_enc.sv
+L0 9
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+vrot_enc_zero
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 LczYUT_7gcagPk[o?D`Q22
+I@8dTUBg<FW]R^:1ER2d5a3
+R4
+S1
+R0
+Z71 w1640158447
+8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/rot_enc_zero.sv
+Z72 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/rot_enc_zero.sv
+R15
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+vsipo
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 7IOEGXKC>AeQb?Hg4=K]M2
+I_XAU9h@`mDSz[3hDoKVgK0
+R4
+S1
+R0
+R27
+Z73 8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/sipo.sv
+Z74 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/sipo.sv
+R51
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+vsipo_reg
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 zXa7WN[dOYKR?TfiGNmnF0
+INE]7Jk]bT]SFGKGj[ha@H3
+R4
+S1
+R0
+R27
+R73
+R74
+L0 7
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+vSN74HC165
+R1
+R53
+!i10b 1
+!s100 OTaicMZ=Ao=2K^F@Uk24g2
+In<NlN8FCDlYbEgiM[H94N1
+R3
+Z75 !s105 SN74HC165_sv_unit
+S1
+R0
+R27
+Z76 8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/testbench/SN74HC165.sv
+Z77 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/testbench/SN74HC165.sv
+L0 4
+R8
+r1
+!s85 0
+31
+R22
+Z78 !s107 C:/Work/Meatec/Main/cnc3/Quartus/cnc3/testbench/SN74HC165.sv|
+Z79 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Work/Meatec/Main/cnc3/Quartus/cnc3/testbench|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/testbench/SN74HC165.sv|
+!i113 0
+R12
+R25
+n@s@n74@h@c165
+vSN74HC165_2x
+R1
+R53
+!i10b 1
+!s100 2``XHTb4H_<]jcZOKn;TT2
+I:>mgT2^E=PSfRV[h`mUR31
+R3
+R75
+S1
+R0
+R27
+R76
+R77
+L0 24
+R8
+r1
+!s85 0
+31
+R22
+R78
+R79
+!i113 0
+R12
+R25
+n@s@n74@h@c165_2x
+vSN74HC165_4x
+R1
+R53
+!i10b 1
+!s100 KD^gD1IDoJ@6[:N_3O4Vh3
+I?Am]eE@:L>R:GG@gIR0VH3
+R3
+R75
+S1
+R0
+R27
+R76
+R77
+L0 52
+R8
+r1
+!s85 0
+31
+R22
+R78
+R79
+!i113 0
+R12
+R25
+n@s@n74@h@c165_4x
+vSN74HC595
+R1
+R53
+!i10b 1
+!s100 D^NYILn8=IHQLck5odONJ3
+IJLhW3^>l@Wn@YLYT?>izR2
+R3
+Z80 !s105 SN74HC595_sv_unit
+S1
+R0
+R27
+Z81 8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/testbench/SN74HC595.sv
+Z82 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/testbench/SN74HC595.sv
+L0 4
+R8
+r1
+!s85 0
+31
+R22
+Z83 !s107 C:/Work/Meatec/Main/cnc3/Quartus/cnc3/testbench/SN74HC595.sv|
+Z84 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Work/Meatec/Main/cnc3/Quartus/cnc3/testbench|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/testbench/SN74HC595.sv|
+!i113 0
+R12
+R25
+n@s@n74@h@c595
+vSN74HC595_2x
+R1
+R53
+!i10b 1
+!s100 zJCPBK]KHfPSEQJR20LTo1
+IYTh8]Ik^b60<[kc6Y5z?U0
+R3
+R80
+S1
+R0
+R27
+R81
+R82
+L0 28
+R8
+r1
+!s85 0
+31
+R22
+R83
+R84
+!i113 0
+R12
+R25
+n@s@n74@h@c595_2x
+vSN74HC595_N
+R1
+R53
+!i10b 1
+!s100 Sl]Wmzm9JJ`WN503e^3=B1
+IEmldSgHd0[;ORUVXR7j3T0
+R3
+R80
+S1
+R0
+R27
+R81
+R82
+Z85 L0 48
+R8
+r1
+!s85 0
+31
+R22
+R83
+R84
+!i113 0
+R12
+R25
+n@s@n74@h@c595_@n
+vstep_cnts
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 o><cb7EbOg48X:72H4UIX3
+IbEcaPPkVZ<^D7MaNci]^c2
+R4
+S1
+R0
+R57
+R58
+R59
+L0 290
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+vstep_dir
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 cBGfOU1Ll4UPkkz<@`Jeg1
+I3>9`dV`i63Iz6CG>664@P0
+R4
+S1
+R0
+R27
+8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/step_dir.sv
+Z86 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/step_dir.sv
+L0 6
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+vstep_dir_cnt
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 E5B[3HK>4oz8;=G6Kc7Z32
+I2icZ7M=URn^mmoe_5]H^<1
+R4
+S1
+R0
+w1639664980
+8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/step_dir_cnt.sv
+Z87 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/step_dir_cnt.sv
+L0 6
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+vtop
+R1
+R2
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 KnN8bMz9<F8f9Vl^WdU8S3
+I<2LJomVDf]C?AinlMDZlV3
+R4
+S1
+R0
+R47
+R48
+R49
+L0 8
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+Xtop_sv_unit
+R1
+VN;`d>`_<5YYGg36g>QcFG3
+r1
+!s85 0
+31
+!i10b 1
+!s100 U94DNAY44G<]m0ldMahXj0
+IN;`d>`_<5YYGg36g>QcFG3
+!i103 1
+S1
+R0
+R71
+R48
+R49
+R56
+R55
+R50
+R40
+R29
+R64
+R28
+R46
+R74
+R45
+R61
+R42
+R59
+R60
+R65
+R66
+R62
+R69
+R86
+R87
+R34
+R72
+R70
+R16
+R14
+R17
+R26
+R7
+R33
+R18
+R43
+R41
+R8
+R9
+R10
+R11
+!i113 0
+R12
+R13
+vtop_tb
+R1
+Z88 DXx4 work 10 MyTypesPkg 0 22 U84fkV9SCdZ:I9T9=mahU2
+Z89 DXx4 work 4 ADDR 0 22 LUZ8ajdMVfUFQ:2Ldk>j:1
+DXx4 work 14 top_tb_sv_unit 0 22 FhY```okizQBQ^dTDX@Xg3
+R3
+r1
+!s85 0
+31
+!i10b 1
+!s100 h2OVeE>;N?lZA`:ez8>7U2
+IRea`@[JZX^01^72KdddRE3
+!s105 top_tb_sv_unit
+S1
+R0
+w1640160347
+Z90 8C:/Work/Meatec/Main/cnc3/Quartus/cnc3/testbench/top_tb.sv
+Z91 FC:/Work/Meatec/Main/cnc3/Quartus/cnc3/testbench/top_tb.sv
+R85
+R8
+R9
+Z92 !s107 C:/Work/Meatec/Main/cnc3/Quartus/cnc3/testbench/SN74HC165.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/testbench/SN74HC595.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/testbench/MyTypesPkg.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/testbench/FmcBus.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/testbench/MCP3008.sv|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/testbench/top_tb.sv|
+Z93 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Work/Meatec/Main/cnc3/Quartus/cnc3/testbench|C:/Work/Meatec/Main/cnc3/Quartus/cnc3/testbench/top_tb.sv|
+!i113 0
+R12
+R25
+Xtop_tb_sv_unit
+R1
+R88
+R89
+VFhY```okizQBQ^dTDX@Xg3
+r1
+!s85 0
+31
+!i10b 1
+!s100 bN7A^B53MmODl[RfzR8?13
+IFhY```okizQBQ^dTDX@Xg3
+!i103 1
+S1
+R0
+R19
+R90
+R91
+R54
+R21
+R37
+R82
+R77
+L0 4
+R8
+R9
+R92
+R93
+!i113 0
+R12
+R25

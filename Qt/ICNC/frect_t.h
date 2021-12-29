@@ -4,7 +4,7 @@
 #include "fpoint_t.h"
 
 class frect_t {
-    constexpr static const double CMP_PRECISION = PRECISION / 2.0;
+    constexpr static const double CMP_PRECISION = CncParam::PRECISION;
 
     fpoint_t m_min{0,0}, m_max{0,0};
 

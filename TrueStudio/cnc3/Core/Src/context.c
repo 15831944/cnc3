@@ -29,6 +29,7 @@ cnc_context_t* cnc_ctx_getForce() {
 	cnc_ctx.field.touches = touches();
 
 	cnc_ctx.field.uv_ena = cnc_uvEnabled();
+	cnc_ctx.field.enc_mode = cnc_isEncMode();
 	cnc_ctx.field.id = fpga_getTaskID();
 
 	cnc_ctx.field.rev		= cnc_isReverse();

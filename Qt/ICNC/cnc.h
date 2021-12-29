@@ -13,6 +13,7 @@
 #include "main.h"
 #include "cnc_context.h"
 #include "fpoint_t.h"
+#include "cnc_param.h"
 
 namespace ADDR {
     const uint32_t STATUS       = 0;
@@ -127,73 +128,6 @@ struct path_t {
     inline std::string toString() const { return "(" + std::to_string(x) + "," + std::to_string(y) + "," + std::to_string(u) + "," + std::to_string(v) + ")"; }
 };
 
-//////////////////////////////
-struct CncParam {
-    static constexpr size_t AXES_NUM = 4;
-
-    static constexpr uint16_t INPUT_LEVEL_METAL = 0x001;
-    static constexpr uint16_t INPUT_LEVEL_STONE = 0x010;
-    static constexpr uint16_t INPUT_LEVEL_DEBUG = 0x300;
-
-#ifdef STONE
-    static constexpr uint16_t INPUT_LEVEL_DEFAULT = INPUT_LEVEL_STONE;
-#else
-    static constexpr uint16_t DEFAULT_INPUT_LEVEL = INPUT_LEVEL_METAL;
-#endif
-
-    static constexpr bool DEFAULT_SD_ENA = false;
-
-    static constexpr double DEFAULT_STEP = 0.001; // mm
-    static constexpr double DEFAULT_SCALE_XY = 1000; // steps/mm
-    static constexpr double DEFAULT_SCALE_UV = 1000; // steps/mm
-
-    static constexpr double ENCODERS_NUM = 2;
-    static constexpr double DEFAULT_SCALE_ENC_XY = 200; // steps/mm
-    static constexpr bool DEFAULT_ENC_XY = false; // encoder enable
-
-    static constexpr double DEFAULT_RB_TO = 30; // sec
-    static constexpr unsigned DEFAULT_RB_ATTEMPTS = 3; // times
-    static constexpr double DEFAULT_RB_LEN = 0.3; // mm
-    static constexpr double DEFAULT_RB_SPEED = 1; // mm/min
-
-    static constexpr double DEFAULT_ACC = 100;
-    static constexpr double DEFAULT_DEC = 100;
-
-    static uint16_t inputLevel;
-    static bool sdEnable;
-    static bool reverseX, reverseY, reverseU, reverseV, swapXY, swapUV, reverseEncX, reverseEncY;
-    static double step; // mm
-    static double scaleX, scaleY, scaleU, scaleV;
-    static double scaleEncX, scaleEncY;
-    static bool encXY;
-
-    static bool fb_ena;
-    static unsigned rb_attempts;
-    static double low_thld, high_thld, rb_to, rb_len, rb_speed;
-
-    static double acc, dec;
-
-    // scale - steps/mm
-    static int32_t mm_to_steps(double mm, double scale) {
-        double res = mm * scale;
-
-        if (res > INT32_MAX)
-            res = INT32_MAX;
-        else if (res < INT32_MIN)
-            res = INT32_MIN;
-
-        return static_cast<int32_t>(round(res));
-    }
-
-    // scale - steps/mm
-    static double steps_to_mm(int32_t steps, double scale) { return steps / scale; }
-
-    static double ums_to_mmm(double value) {
-        return value * (60.0 / 1000.0);
-    }
-};
-
-//
 enum class CENTER_MODE_T {CENTER_NO, CENTER_X, CENTER_Y, CENTER_CIRCLE_4R, CENTER_CIRCLE_3ADJ};
 
 class Cnc : public QObject {
@@ -208,6 +142,8 @@ private:
     static CncCom m_com;
     std::deque<MotorRecord> m_imit_list;
     auxItems::Reporter* m_msg;
+
+    std::vector<uint8_t> m_wrbuf;
 
 public:
     Fpga::FpgaBus m_fpga;

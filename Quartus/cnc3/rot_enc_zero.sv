@@ -71,7 +71,7 @@ module rot_enc_zero(
 		Z_flt_reg <= (sclr || dir_changed) ? 1'b0 : Z_flt;
 		
 		if (sclr || dir_changed)
-			Z_pos <= '1;
+			Z_pos <= '0;
 		else if (Z_clk)
 			Z_pos <= bidir_counter;
 		

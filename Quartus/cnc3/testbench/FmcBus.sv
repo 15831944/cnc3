@@ -9,7 +9,6 @@ package ADDR;
 	const int ENC_BAR		= 'h100;
 	const int CTRL_BAR	= 'h180;
 	const int ADC_BAR		= 'h1C0;
-	const int HV_BAR		= 'h200;
 	
 	const int MTR_NUM		= 8;
 	
@@ -18,25 +17,26 @@ package ADDR;
 	const int MTR_OE		= MTR_BAR + 'h42;
 	const int TASK_ID		= MTR_BAR + 'h44;
 	const int MTR_WRREQ	= MTR_BAR + 'h48;
+	const int MTR_CONTROL = MTR_BAR + 'h4A;
 	const int TIMEOUT32	= MTR_BAR + 'h4C;
-	const int TIMEOUT_ENA	= MTR_BAR + 'h50;	
+	const int TIMEOUT_ENA = MTR_BAR + 'h50;	
 	const int T_SCALE		= MTR_BAR + 'h54;
 	
-	const int COORD32_DIST32	= MTR_BAR + 'h80;
+	const int POS32		= MTR_BAR + 'h80;
 	
 	const int ENC_NUM		= 8;
 	const int ENC8_CLR	= ENC_BAR;
-	const int POS32_Z32	= ENC_BAR;
+	const int ENC32		= ENC_BAR + 'h40;
 	
 	const int IRQ_FLAG		= CTRL_BAR;
 	const int IRQ_FLAG_CLR	= CTRL_BAR;
 	const int IRQ_MASK		= CTRL_BAR + 'h2;
 	const int RESET			= CTRL_BAR + 'h4;
-	const int SIG_STATUS		= CTRL_BAR + 'h6;
+	const int STATUS			= CTRL_BAR + 'h6;
 	const int LIM_SWITCH_MASK	= CTRL_BAR + 'h8;
 	
 	const int LIM_SWITCH			= CTRL_BAR + 'hC;
-	const int LIM_SWITCH_REG	= CTRL_BAR + 'hE;
+	const int LIM_SWITCH_FLAG	= CTRL_BAR + 'hE;
 	
 	const int KEY32_LEVEL		= CTRL_BAR + 'h10;
 	const int KEY32				= CTRL_BAR + 'h14;
@@ -59,15 +59,6 @@ package ADDR;
 	const int FB_ENA			= ADC_BAR + 'h14;
 	const int SOFT_PERMIT	= ADC_BAR + 'h16;
 	const int PERMIT			= ADC_BAR + 'h18;
-	
-	const int HV_PER32	= HV_BAR;
-	const int HV_T32_0	= HV_BAR + 'h4;
-	const int HV_T32_1	= HV_BAR + 'h8;
-	const int HV_CODE		= HV_BAR + 'hC;
-	const int HV_UPDATE	= HV_BAR + 'hE;
-	
-	const int HV_ENA		= HV_BAR + 'h10;
-	const int HV_INV		= HV_BAR + 'h12;
 endpackage :ADDR
 
 interface IFmcBus();
@@ -121,6 +112,7 @@ class FmcBus;
 	extern task getTimeout(output logic [31:0] T);
 	extern task setTScale(int unsigned T);
 	extern task getTScale(output logic [15:0] T);
+	extern task globalSnapshot();
 
 	extern task setThld(bit [15:0] low, bit [15:0] high);
 	extern task enableFeedback(bit ena);
@@ -128,11 +120,7 @@ class FmcBus;
 	
 	extern task irqEna(bit enable);
 	
-	extern task setHV(int per, int unsigned t0, int unsigned t1, byte code);
-	extern task setHVEna(bit enable);
-	extern task setHVInv(bit enable);
-	
-	extern task waitSpiReady();
+	extern task waitFilterReady();
 	
 	extern task setIndicator(input bit [15:0] value);
 	extern task getIndicator(output logic [15:0] value);
@@ -149,6 +137,10 @@ class FmcBus;
 	
 	extern task setLimSwitchMask(input bit [15:0] value);
 	extern task getLimSwitchMask(output logic [15:0] value);
+	
+	extern task clearLimSwitch();
+	
+	extern task getEncoder(unsigned i, output logic [31:0] value);
 	
 endclass
 
@@ -420,6 +412,10 @@ task FmcBus::getTScale(output logic [15:0] T);
 	read(ADDR::T_SCALE, T);
 endtask
 
+task FmcBus::globalSnapshot();
+	write(ADDR::MTR_CONTROL, 4);
+endtask
+
 // ADC
 task FmcBus::setThld(bit [15:0] low, bit [15:0] high);
 	write(ADDR::LOW_THLD, low);
@@ -438,29 +434,12 @@ task FmcBus::irqEna(bit enable);
 	write(ADDR::IRQ_MASK, {16{enable}});
 endtask
 
-//
-task FmcBus::setHV(int per, int unsigned t0, int unsigned t1, byte code);
-	write32(ADDR::HV_PER32, per);
-	write32(ADDR::HV_T32_0, t0);
-	write32(ADDR::HV_T32_1, t1);
-	write(ADDR::HV_CODE, code);
-	write(ADDR::HV_UPDATE, 1);
-endtask
-
-task FmcBus::setHVEna(bit enable);
-	write(ADDR::HV_ENA, enable);
-endtask
-
-task FmcBus::setHVInv(bit enable);
-	write(ADDR::HV_INV, enable);
-endtask
-
-task FmcBus::waitSpiReady();
+task FmcBus::waitFilterReady();
 	automatic logic [15:0] data;
 	data = '1;
 	
-	while ((data & 'hF) != 0)
-		read(ADDR::SIG_STATUS, data);
+	while (data[3]) // Filters are not ready
+		read(ADDR::STATUS, data);
 endtask
 
 task FmcBus::setIndicator(input bit [15:0] value);
@@ -515,6 +494,15 @@ endtask
 
 task FmcBus::getLimSwitchMask(output logic [15:0] value);
 	read(ADDR::LIM_SWITCH_MASK, value);
+endtask
+
+task FmcBus::clearLimSwitch();
+	write(ADDR::LIM_SWITCH_FLAG, 16'h003F);
+endtask
+
+// i = 0, 1, 2
+task FmcBus::getEncoder(unsigned i, output logic [31:0] value);
+	read32(ADDR::ENC32 + (i << 3), value);
 endtask
 
 `endif

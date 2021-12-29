@@ -30,7 +30,7 @@ typedef union {
         uint32_t drum_vel:8;
 
         uint32_t uv_ena:1;
-        uint32_t enc_ena:1;
+        uint32_t enc_mode:1;
         uint32_t rev:1;
         uint32_t rollback:1;
         uint32_t attempt:3;
@@ -123,7 +123,7 @@ public:
         ctx.field.drum_vel = 0;
 
         ctx.field.uv_ena = false;
-        ctx.field.enc_ena = false;
+        ctx.field.enc_mode = false;
         ctx.field.rev = false;
         ctx.field.rollback = false;
         ctx.field.attempt = 0;
@@ -197,7 +197,7 @@ public:
             ctx.field.drum_vel = v[1];
 
             ctx.field.uv_ena    = (v[2] & 1) != 0;
-            ctx.field.enc_ena   = (v[2] & 2) != 0;
+            ctx.field.enc_mode   = (v[2] & 2) != 0;
             ctx.field.rev       = (v[2] & 4) != 0;
             ctx.field.rollback  = (v[2] & 8) != 0;
             ctx.field.attempt   = v[2]>>4 & 7;
@@ -311,6 +311,8 @@ public:
     int32_t encoderX() const { return m_context.field.enc_x; }
     int32_t encoderY() const { return m_context.field.enc_y; }
 
+    bool isEncoderMode() const { return m_context.field.enc_mode; }
+
     CncLimitSwitches limitSwitches() const {
         CncLimitSwitches ls;
         ls.res = 0;
@@ -382,7 +384,7 @@ public:
         cnc_state_t state = static_cast<cnc_state_t>(m_context.field.state);
 
         return  "State: "      + stateToString(state) + "\n" +
-                "Encoder "    + (m_context.field.enc_ena ? "(Yes)" : "(no)") + "\t" +
+                "Encoder "    + (m_context.field.enc_mode ? "(Yes)" : "(no)") + "\t" +
                 "UV "         + (m_context.field.uv_ena ? "(Yes)" : "(no)") + "\n" +
                 "Feedback "   + (m_context.field.fb_ena ? "(Yes)" : "(no)") + "\t" +
                 "Reverse "    + (m_context.field.rev ? "(Yes)" : "(no)") + "\t" +
