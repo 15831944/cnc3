@@ -11,10 +11,6 @@
 #include <QGroupBox>
 #include <QCheckBox>
 
-//#include "gcode.h"
-//#include "plot_view.h"
-//#include "code_editor.h"
-//#include "qwt_plot_view.h"
 #include "cnc_context.h"
 
 class PultWidget : public QWidget {
@@ -24,29 +20,29 @@ public:
     enum class MoveMode { MM, STEPS };
     MoveMode moveMode = MoveMode::MM;
 
-    QPushButton *btnGo, *btnSet, *btnApply;
+    QPushButton *btnGo = nullptr, *btnSet = nullptr;
 
-    QDoubleSpinBox *numMoveX, *numMoveY, *numMoveU, *numMoveV;
-    QDoubleSpinBox *numSetX, *numSetY, *numSetU, *numSetV;
+    QDoubleSpinBox *numMoveX = nullptr, *numMoveY = nullptr, *numMoveU = nullptr, *numMoveV = nullptr;
+    QDoubleSpinBox *numSetX = nullptr, *numSetY = nullptr, *numSetU = nullptr, *numSetV = nullptr;
     std::vector<QDoubleSpinBox*> moveNum, setNum, controlNum;
 
-    QRadioButton *moveMM, *moveSteps;
-    QGroupBox *groupMove;
+    QRadioButton *moveMM = nullptr, *moveSteps = nullptr;
+    QGroupBox *groupMove = nullptr;
 
-    QLabel *labelSpeed;
-    QDoubleSpinBox *numSpeed;
-    QRadioButton *speedMMM, *speedUMS;
-    QGroupBox *groupSpeed;
-    QGridLayout *gridSpeed;
+    QLabel *labelSpeed = nullptr;
+    QDoubleSpinBox *numSpeed = nullptr;
+    QRadioButton *speedMMM = nullptr, *speedUMS = nullptr;
+    QGroupBox *groupSpeed = nullptr;
+    QGridLayout *gridSpeed = nullptr;
 
-    QPushButton *btnCancel, *btnHold;
-    QGridLayout *gridButton;
+    QPushButton *btnCancel = nullptr, *btnHold = nullptr;
+    QGridLayout *gridButton = nullptr;
 
-    QDoubleSpinBox *numScaleX, *numScaleY, *numScaleU, *numScaleV;
-    QDoubleSpinBox *numScaleEncX, *numScaleEncY;
+    QDoubleSpinBox *numScaleX = nullptr, *numScaleY = nullptr, *numScaleU = nullptr, *numScaleV = nullptr;
+    QDoubleSpinBox *numScaleEncX = nullptr, *numScaleEncY = nullptr;
     std::vector<QDoubleSpinBox*> scaleNum;
     std::vector<QDoubleSpinBox*> encoderScaleNum;
-    QGridLayout *gridScale;
+    QGridLayout *gridScale = nullptr;
 
     std::vector<QLabel*> controlLabels;
 
@@ -55,21 +51,17 @@ public:
     std::vector<QDoubleSpinBox*> nums;
     std::vector<QRadioButton*> radio;
 
-    QLabel *labelTO, *labelFB, *labelPWR, *labelALM, *labelWB, *labelREV, *labelFWD;
+    QLabel *labelTO = nullptr, *labelFB = nullptr, *labelPWR = nullptr, *labelALM = nullptr, *labelWB = nullptr, *labelREV = nullptr, *labelFWD = nullptr;
     std::vector<QLabel*> checkLabels;
-    QCheckBox *checkTO, *checkFB, *checkPWR, *checkALM, *checkWB, *checkREV, *checkFWD;
+    QCheckBox *checkTO = nullptr, *checkFB = nullptr, *checkPWR = nullptr, *checkALM = nullptr, *checkWB = nullptr, *checkREV = nullptr, *checkFWD = nullptr;
 
-    QLabel *labelGap, *labelRev, *labelWorkpiece, *labelWire, *labelHV, *labelShunt;
+    QLabel *labelGap = nullptr, *labelRev = nullptr, *labelWorkpiece = nullptr, *labelWire = nullptr, *labelHV = nullptr, *labelShunt = nullptr;
     std::vector<QLabel*> adcLabels;
     std::vector<QLabel*> adcValueLabels;
 
-    double scale[4];
-
 private:
     std::vector<QLabel*> posLabels, posLabelsSmall, ctrlLabels;
-    QGridLayout *gridView, *gridMain, *gridControl, *gridControl2;
-
-    double scale_enc[2];
+    QGridLayout *gridView = nullptr, *gridMain = nullptr, *gridControl = nullptr, *gridControl2 = nullptr;
 
     void createView();
     void createControl();
@@ -100,6 +92,9 @@ public:
     int32_t getSetEncN(size_t i) const;
 
     double speed() const;
+
+    double scale(size_t i) const;
+    double scaleEncoder(size_t i) const;
 
     void setFontPointSize(QWidget* w, int pointSize);
     void setFontPointSize(int pointSize);

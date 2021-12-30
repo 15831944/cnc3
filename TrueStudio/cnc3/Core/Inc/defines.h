@@ -46,15 +46,15 @@
 #define ROLLBACK_DEFAULT	(0.3) // mm. This is the rollback distance after a short circuit
 #define ROLLBACK_ATTEMPTS	(3) // After each rollback, the rollback is repeated again if the short circuit continues
 
-#define F_DEFAULT_UMS				(300.0) // um/s. Default cutting speed
-#define F_ROLLBACK_DEFAULT_UMS		(30.0) // um/s. Default rollback speed
-#define T_DEFAULT_TICKS				( FPGA_CLOCK / (F_DEFAULT_UMS * 1e-3) ) // 240,000,000 clocks/mm
-#define T_ROLLBACK_DEFAULT_TICKS	( FPGA_CLOCK / (F_ROLLBACK_DEFAULT_UMS * 1e-3) ) // 2,400,000,000 clocks/mm
-
-#define F_MIN_UMS (1) // um/sec. Minimum speed
-#define F_MAX_UMS (F_DEFAULT_UMS) // um/sec. Maximum speed
+#define F_MIN_UMS (0.1) // um/sec. Minimum speed
+#define F_MAX_UMS (300.0) // um/sec. Maximum speed
 #define F_MIN_MMM ( F_MIN_UMS * 60.0 * 1e-3 ) // mm/min. Minimum speed
 #define F_MAX_MMM ( F_MAX_UMS * 60.0 * 1e-3 ) // mm/min. Maximum speed
+
+#define F_DEFAULT_UMS				(F_MAX_UMS) // um/s. Default cutting speed
+#define F_ROLLBACK_DEFAULT_UMS		(F_MAX_UMS / 10) // um/s. Default rollback speed
+#define T_DEFAULT_TICKS				( FPGA_CLOCK / (F_DEFAULT_UMS * 1e-3) ) // 240,000,000 clocks/mm
+#define T_ROLLBACK_DEFAULT_TICKS	( FPGA_CLOCK / (F_ROLLBACK_DEFAULT_UMS * 1e-3) ) // 2,400,000,000 clocks/mm
 
 #define COE_UMSEC2_TO_MMTICK2 ( 1e-3 / (FPGA_CLOCK * FPGA_CLOCK) ) // coefficient for convert from um/sec^2 to mm/clock^2
 #define COE_UMS_TO_MMTICK ( 1e-3 / FPGA_CLOCK ) // coefficient for convert from um/sec to mm/tick
@@ -75,9 +75,9 @@
 #define SCALE_UV		(1000.0) // steps/mm
 #define SCALE_ENC		(1000.0 / 5) // steps/mm
 
-#define STEP_MIN	(1.0 / SCALE_MAX) // mm
-#define STEP_MAX	(1.0 / SCALE_MIN) // mm
 #define STEP		(0.001) // mm
+#define STEP_MIN	(0.1 / SCALE_MAX) // mm
+#define STEP_MAX	(10.0 / SCALE_MIN) // mm
 
 #define DRUM_VEL_MAX (7)
 

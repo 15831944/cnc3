@@ -1,9 +1,0 @@
-#ifndef INC_CNC_TASK_TB_H_
-#define INC_CNC_TASK_TB_H_
-
-void cnc_task_tb();
-BOOL cnc_test_rev();
-void cnc_test_direct();
-void cnc_direct_test_task();
-
-#endif /* INC_CNC_TASK_TB_H_ */

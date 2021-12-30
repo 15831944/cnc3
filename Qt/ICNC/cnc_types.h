@@ -26,7 +26,7 @@ public:
     enum class Mode: bool {UMS, MMM}; // mm/min, um/sec
 
     static constexpr double FPGA_FREQ = 72e6; // Hz
-    static constexpr double MIN = 1 * 60 / 1000; // mm/min
+    static constexpr double MIN = 0.1 * 60 / 1000; // mm/min
     static constexpr double MAX = 300 * 60 / 1000; // mm/min
 
 private:
@@ -35,7 +35,7 @@ private:
 
 public:
     WireSpeed(double value = MAX, WireSpeed::Mode mode = WireSpeed::Mode::MMM) {
-        changeMode(mode);
+        m_mode = mode;
         set(value);
     }
 
@@ -51,13 +51,11 @@ public:
     void changeMode(WireSpeed::Mode value) { m_mode = value; }
     WireSpeed::Mode mode() { return m_mode; }
 
-    void set(double value) { this->m_value = (m_mode == Mode::MMM) ? value : toMMM(value); }
+    void set(double value) { m_value = (m_mode == Mode::MMM) ? value : toMMM(value); }
     void set(double value, WireSpeed::Mode mode) {
-        changeMode(mode);
+        m_mode = mode;
         set(value);
     }
-    void setMMM(double value) { this->m_value = value; }
-
     double get() const {
         double res = (m_mode == Mode::MMM) ? m_value : toUMS(m_value);
 
@@ -69,6 +67,7 @@ public:
         return res;
     }
 
+    void setMMM(double value) { m_value = value; }
     double getMMM() const {
         if (m_value < MIN)
             return MIN;

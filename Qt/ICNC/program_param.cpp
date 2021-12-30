@@ -346,16 +346,47 @@ void ProgramParam::loadAcceleration(double &acc, double &dec) {
     dec = CncParam::dec = settings.value("deceleration", CncParam::DEFAULT_DEC).toDouble();
 }
 
+double ProgramParam::loadValue(QSettings& settings, const QString& key, const double minValue, const double maxValue, const double defaultValue) {
+    double res;
+    bool OK = settings.contains(key);
+
+    if (OK)
+        res = settings.value(key, defaultValue).toDouble();
+
+    if (!OK || res > maxValue || res < minValue) {
+        res = defaultValue;
+        settings.setValue(key, defaultValue);
+    }
+
+    return res;
+}
+
+bool ProgramParam::loadValue(QSettings& settings, const QString& key, const bool defaultValue) {
+    bool res;
+
+    if (settings.contains(key))
+        res = settings.value(key, defaultValue).toBool();
+    else {
+        res = defaultValue;
+        settings.setValue(key, defaultValue);
+    }
+
+    return res;
+}
+
 void ProgramParam::loadStep(double &step, double &scaleX, double &scaleY, double &scaleU, double &scaleV, double &scaleEncX, double &scaleEncY, bool &encXY) {
     QSettings settings(org, app);
-    step        = CncParam::step        = settings.value("step",        CncParam::DEFAULT_STEP).toDouble();
-    scaleX      = CncParam::scaleX      = settings.value("scaleX",      CncParam::DEFAULT_SCALE_XY).toDouble();
-    scaleY      = CncParam::scaleY      = settings.value("scaleY",      CncParam::DEFAULT_SCALE_XY).toDouble();
-    scaleU      = CncParam::scaleU      = settings.value("scaleU",      CncParam::DEFAULT_SCALE_UV).toDouble();
-    scaleV      = CncParam::scaleV      = settings.value("scaleV",      CncParam::DEFAULT_SCALE_UV).toDouble();
-    scaleEncX   = CncParam::scaleEncX   = settings.value("scaleEncX",   CncParam::DEFAULT_SCALE_ENC_XY).toDouble();
-    scaleEncY   = CncParam::scaleEncY   = settings.value("scaleEncY",   CncParam::DEFAULT_SCALE_ENC_XY).toDouble();
-    encXY       = CncParam::encXY       = settings.value("encXY",       CncParam::DEFAULT_ENC_XY).toBool();
+
+    step = CncParam::step = loadValue(settings, "step", CncParam::STEP_MIN, CncParam::STEP_MAX, CncParam::DEFAULT_STEP);
+    scaleX = CncParam::scaleX = loadValue(settings, "scaleX", CncParam::SCALE_MIN, CncParam::SCALE_MAX, CncParam::DEFAULT_SCALE_XY);
+    scaleY = CncParam::scaleY = loadValue(settings, "scaleY", CncParam::SCALE_MIN, CncParam::SCALE_MAX, CncParam::DEFAULT_SCALE_XY);
+    scaleU = CncParam::scaleU = loadValue(settings, "scaleU", CncParam::SCALE_MIN, CncParam::SCALE_MAX, CncParam::DEFAULT_SCALE_UV);
+    scaleV = CncParam::scaleV = loadValue(settings, "scaleV", CncParam::SCALE_MIN, CncParam::SCALE_MAX, CncParam::DEFAULT_SCALE_UV);
+    scaleEncX = CncParam::scaleEncX = loadValue(settings, "scaleEncX", CncParam::SCALE_ENC_MIN, CncParam::SCALE_ENC_MAX, CncParam::DEFAULT_SCALE_ENC_XY);
+    scaleEncY = CncParam::scaleEncY = loadValue(settings, "scaleEncY", CncParam::SCALE_ENC_MIN, CncParam::SCALE_ENC_MAX, CncParam::DEFAULT_SCALE_ENC_XY);
+    encXY = CncParam::encXY = loadValue(settings, "encXY", CncParam::DEFAULT_ENC_XY);
+
+    settings.sync();
 }
 
 void ProgramParam::loadParam() {

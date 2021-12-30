@@ -69,10 +69,11 @@ CenterWidget::CenterWidget(QWidget *parent): QWidget(parent), plotView(QwtPlotVi
     labelCoarseSpeed = new QLabel(tr("Coarse speed") + ": ");
     fnumCoarseSpeed = new QDoubleSpinBox;
     fnumCoarseSpeed->setAccelerated(true);
+    fnumCoarseSpeed->setStepType(QAbstractSpinBox::AdaptiveDecimalStepType);
+    fnumCoarseSpeed->setDecimals(1);
+    fnumCoarseSpeed->setSingleStep(0.1);
     fnumCoarseSpeed->setRange(speed.min(), speed.max());
     fnumCoarseSpeed->setValue(speed.max());
-    fnumCoarseSpeed->setSingleStep(1);
-    fnumCoarseSpeed->setDecimals(1);
     fnumCoarseSpeed->setSuffix(" " + tr("um/sec"));
     labelCoarseSpeed->setBuddy(fnumCoarseSpeed);
 
@@ -80,10 +81,11 @@ CenterWidget::CenterWidget(QWidget *parent): QWidget(parent), plotView(QwtPlotVi
     labelFineSpeed = new QLabel(tr("Fine speed") + ": ");
     fnumFineSpeed = new QDoubleSpinBox;
     fnumFineSpeed->setAccelerated(true);
+    fnumFineSpeed->setStepType(QAbstractSpinBox::AdaptiveDecimalStepType);
+    fnumFineSpeed->setDecimals(1);
+    fnumFineSpeed->setSingleStep(0.1);
     fnumFineSpeed->setRange(speed.min(), speed.max());
     fnumFineSpeed->setValue(speed.max() / 10);
-    fnumFineSpeed->setSingleStep(1);
-    fnumFineSpeed->setDecimals(1);
     fnumFineSpeed->setSuffix(" " + tr("um/sec"));
     labelFineSpeed->setBuddy(fnumFineSpeed);
 
@@ -364,10 +366,10 @@ void CenterWidget::changeSpinBoxSpeed(QDoubleSpinBox*& fnumSpeed, WireSpeed::Mod
     case WireSpeed::Mode::MMM: {
         WireSpeed speed(fnumSpeed->value(), WireSpeed::Mode::UMS);
         speed.changeMode(WireSpeed::Mode::MMM);
-        fnumSpeed->setRange(speed.min(), speed.max());
-        fnumSpeed->setValue(speed.get());
-        fnumSpeed->setSingleStep(0.1);
         fnumSpeed->setDecimals(2);
+        fnumSpeed->setSingleStep(0.01);
+        fnumSpeed->setRange(speed.min(), speed.max());
+        fnumSpeed->setValue(speed.get());        
         fnumSpeed->setSuffix(" " + tr("mm/min"));
     }
         break;
@@ -375,10 +377,10 @@ void CenterWidget::changeSpinBoxSpeed(QDoubleSpinBox*& fnumSpeed, WireSpeed::Mod
     case WireSpeed::Mode::UMS: {
         WireSpeed speed(fnumSpeed->value(), WireSpeed::Mode::MMM);
         speed.changeMode(WireSpeed::Mode::UMS);
-        fnumSpeed->setRange(speed.min(), speed.max());
-        fnumSpeed->setValue(speed.get());
-        fnumSpeed->setSingleStep(1);
         fnumSpeed->setDecimals(1);
+        fnumSpeed->setSingleStep(0.1);
+        fnumSpeed->setRange(speed.min(), speed.max());
+        fnumSpeed->setValue(speed.get());        
         fnumSpeed->setSuffix(" " + tr("um/sec"));
     }
         break;

@@ -317,6 +317,8 @@ void FormPult::createButtonLayout() {
 
     //
     WireSpeed speed;
+    pultWidget->numSpeed->setDecimals(2);
+    pultWidget->numSpeed->setSingleStep(0.01);
     pultWidget->numSpeed->setRange(speed.min(), speed.max());
     pultWidget->numSpeed->setValue(speed.get());
 
@@ -330,10 +332,10 @@ void FormPult::createButtonLayout() {
             WireSpeed speed(pultWidget->numSpeed->value(), wireSpeedMode);
             wireSpeedMode = WireSpeed::Mode::MMM;
             speed.changeMode(wireSpeedMode);
+            pultWidget->numSpeed->setDecimals(2);
+            pultWidget->numSpeed->setSingleStep(0.01);
             pultWidget->numSpeed->setRange(speed.min(), speed.max());
             pultWidget->numSpeed->setValue(speed.get());
-            pultWidget->numSpeed->setSingleStep(0.1);
-            pultWidget->numSpeed->setDecimals(2);
         }
     });
     connect(pultWidget->speedUMS, &QRadioButton::clicked, this, [&]() {
@@ -341,10 +343,10 @@ void FormPult::createButtonLayout() {
             WireSpeed speed(pultWidget->numSpeed->value(), wireSpeedMode);
             wireSpeedMode = WireSpeed::Mode::UMS;
             speed.changeMode(wireSpeedMode);
-            pultWidget->numSpeed->setRange(speed.min(), speed.max());
-            pultWidget->numSpeed->setValue(speed.get());
-            pultWidget->numSpeed->setSingleStep(1);
             pultWidget->numSpeed->setDecimals(1);
+            pultWidget->numSpeed->setSingleStep(0.1);
+            pultWidget->numSpeed->setRange(speed.min(), speed.max());
+            pultWidget->numSpeed->setValue(speed.get());            
         }
     });
 
@@ -380,7 +382,7 @@ void FormPult::on_btnMove_clicked() {
     int32_t ny = pultWidget->getMoveN(1);
     int32_t nu = pultWidget->getMoveN(2);
     int32_t nv = pultWidget->getMoveN(3);
-    par.cnc.directMoveOn(nx, pultWidget->scale[0], ny, pultWidget->scale[1], nu, pultWidget->scale[2], nv, pultWidget->scale[3], pultWidget->speed());
+    par.cnc.directMoveOn(nx, pultWidget->scale(0), ny, pultWidget->scale(1), nu, pultWidget->scale(2), nv, pultWidget->scale(3), pultWidget->speed());
 }
 
 void FormPult::on_btnSet_clicked() {
@@ -539,7 +541,6 @@ void FormPult::readCutState() {
             if (ctx.isWork()) {
                 pultWidget->btnGo->setEnabled(false);
                 pultWidget->btnSet->setEnabled(false);
-                pultWidget->btnApply->setEnabled(false);
                 pultWidget->btnCancel->setEnabled(true);
                 btnHome->setEnabled(false);
             }
@@ -561,7 +562,6 @@ void FormPult::readCutState() {
 void FormPult::initButtons() {
     pultWidget->btnGo->setEnabled(true);
     pultWidget->btnSet->setEnabled(true);
-    pultWidget->btnApply->setEnabled(true);
     pultWidget->btnCancel->setEnabled(false);
     btnHome->setEnabled(true);
 }

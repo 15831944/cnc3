@@ -9,17 +9,10 @@ using namespace std;
 PultWidget::PultWidget(QWidget *parent) :
     QWidget(parent)
 {
-    scale[0] = CncParam::scaleX;
-    scale[1] = CncParam::scaleY;
-    scale[2] = CncParam::scaleU;
-    scale[3] = CncParam::scaleV;
-    scale_enc[0] = CncParam::scaleEncX;
-    scale_enc[1] = CncParam::scaleEncY;
-
-    createView();    
     createControl();
+    createView();
 
-    buttons = {btnGo, btnSet, btnApply, btnCancel, btnHold};
+    buttons = {btnGo, btnSet, btnCancel, btnHold};
 //    setFontPointSize(14);
 
     gridMain = new QGridLayout;
@@ -32,82 +25,186 @@ PultWidget::PultWidget(QWidget *parent) :
     for (size_t i = 0; i < CncParam::AXES_NUM; i++)
         setMotorView(i, 0);
 
-    for (size_t i = 0; i < 2; i++)
+    for (size_t i = 0; i < CncParam::ENC_NUM; i++)
         setEncoderView(i, 0);
 }
 
-int32_t PultWidget::getMoveN(size_t i) const {
-    if (i < CncParam::AXES_NUM && i < sizeof(scale)/sizeof(scale[0])) {
-        double res = 0;
+PultWidget::~PultWidget() {}
 
-        switch (moveMode) {
-        case MoveMode::MM:
-            res = moveNum[i]->value() * scale[i];
-            break;
-        case MoveMode::STEPS:
-            res = moveNum[i]->value();
-            break;
-        }
+void PultWidget::createControl() {
+    QLabel* labeldX = new QLabel("dX:");
+    QLabel* labeldY = new QLabel("dY:");
+    QLabel* labeldU = new QLabel("dU:");
+    QLabel* labeldV = new QLabel("dV:");
 
-        if (res > INT32_MAX)
-            res = INT32_MAX;
-        else if (res < INT32_MIN)
-            res = INT32_MIN;
+    QLabel* labelX = new QLabel("X:");
+    QLabel* labelY = new QLabel("Y:");
+    QLabel* labelU = new QLabel("U:");
+    QLabel* labelV = new QLabel("V:");
+    QLabel* labelX2 = new QLabel("X:");
+    QLabel* labelY2 = new QLabel("Y:");
+    QLabel* labelU2 = new QLabel("U:");
+    QLabel* labelV2 = new QLabel("V:");
+    QLabel* labelX3 = new QLabel("X:");
+    QLabel* labelY3 = new QLabel("Y:");
 
-        return static_cast<int32_t>(round(res));
+    QLabel* labelScale = new QLabel(tr("Scale (steps/mm)"));
+    QLabel* labelMotor = new QLabel(tr("Motor"));
+    QLabel* labelEncoder = new QLabel(tr("Encoder"));
+
+    ctrlLabels = {
+        labeldX, labeldY, labeldU, labeldV,
+        labelX, labelY, labelU, labelV,
+        labelX2, labelY2, labelU2, labelV2,
+        labelX3, labelY3,
+        labelScale, labelMotor, labelEncoder
+    };
+
+    /////////////////////////////////
+    btnGo = new QPushButton(tr("Move"));
+    btnGo->setStatusTip(tr("Relative movement on dX, dY with given speed"));
+
+    btnSet = new QPushButton(tr("Set"));
+    btnSet->setStatusTip(tr("Set position X, Y"));
+
+    createMmSteps();
+
+    numMoveX = new QDoubleSpinBox;
+    numMoveY = new QDoubleSpinBox;
+    numMoveU = new QDoubleSpinBox;
+    numMoveV = new QDoubleSpinBox;
+
+    numSetX = new QDoubleSpinBox;
+    numSetY = new QDoubleSpinBox;
+    numSetU = new QDoubleSpinBox;
+    numSetV = new QDoubleSpinBox;
+
+    moveNum = {numMoveX, numMoveY, numMoveU, numMoveV};
+    setNum = {numSetX, numSetY, numSetU, numSetV};
+    controlNum = {
+        numMoveX, numMoveY, numMoveU, numMoveV,
+        numSetX, numSetY, numSetU, numSetV
+    };
+
+    numMoveX->setRange(-1000, 1000);
+    numMoveX->setSingleStep(0.001);
+
+    //
+    numScaleX = new QDoubleSpinBox;
+    numScaleY = new QDoubleSpinBox;
+    numScaleU = new QDoubleSpinBox;
+    numScaleV = new QDoubleSpinBox;
+    numScaleEncX = new QDoubleSpinBox;
+    numScaleEncY = new QDoubleSpinBox;
+
+    scaleNum = {numScaleX, numScaleY, numScaleU, numScaleV};
+    encoderScaleNum = {numScaleEncX, numScaleEncY};
+
+    createSpeed();
+
+    gridControl = new QGridLayout;
+
+    gridControl->addWidget(btnGo, 0, 0, Qt::AlignLeft | Qt::AlignVCenter);
+    gridControl->addWidget(groupLabelNum(labeldX, numMoveX), 0, 1);
+    gridControl->addWidget(groupLabelNum(labeldY, numMoveY), 0, 2);
+
+#ifndef STONE
+    gridControl->addWidget(groupLabelNum(labeldU, numMoveU), 1, 1);
+    gridControl->addWidget(groupLabelNum(labeldV, numMoveV), 1, 2);
+#endif
+
+    gridControl->addLayout(gridSpeed, 0, 3, 2, 1);
+
+    gridControl->addWidget(btnSet, 2, 0, Qt::AlignLeft | Qt::AlignVCenter);
+    gridControl->addWidget(groupLabelNum(labelX, numSetX), 2, 1);
+    gridControl->addWidget(groupLabelNum(labelY, numSetY), 2, 2);
+
+#ifndef STONE
+    gridControl->addWidget(groupLabelNum(labelU, numSetU), 3, 1);
+    gridControl->addWidget(groupLabelNum(labelV, numSetV), 3, 2);
+#endif
+
+    gridControl->addWidget(groupMove, 4, 2, 1, 1, Qt::AlignHCenter);
+
+    gridControl->addWidget(labelScale, 5, 1, 1, 2, Qt::AlignLeft | Qt::AlignVCenter);
+
+    gridControl->addWidget(labelMotor, 6, 0);
+    gridControl->addWidget(groupLabelNum(labelX2, numScaleX), 6, 1);
+    gridControl->addWidget(groupLabelNum(labelY2, numScaleY), 6, 2);
+
+#ifndef STONE
+    gridControl->addWidget(groupLabelNum(labelU2, numScaleU), 7, 1);
+    gridControl->addWidget(groupLabelNum(labelV2, numScaleV), 7, 2);
+
+    gridControl->addWidget(labelEncoder, 8, 0);
+    gridControl->addWidget(groupLabelNum(labelX3, numScaleEncX), 8, 1);
+    gridControl->addWidget(groupLabelNum(labelY3, numScaleEncY), 8, 2);
+#endif
+
+    gridControl->addWidget(new QFrame, 0, 4, 9, 1);
+    gridControl->addWidget(new QFrame, 9, 0, 1, 4);
+
+    // Move set
+    moveMode = MoveMode::MM;
+
+    for (size_t i = 0; i < controlNum.size(); i++) {
+        controlNum[i]->setRange(-999.999, 999.999);
+        controlNum[i]->setSingleStep(0.001);
+        controlNum[i]->setDecimals(3);
+        controlNum[i]->setValue(0);
     }
 
-    return 0;
-}
+    connect(moveMM, &QRadioButton::clicked, this, [&]() {
+        if (moveMode != MoveMode::MM) {
+            moveMode = MoveMode::MM;
 
-int32_t PultWidget::getSetN(size_t i) const {
-    if (i < CncParam::AXES_NUM && i < sizeof(scale)/sizeof(scale[0])) {
-        double res = 0;
+            for (size_t i = 0; i < controlNum.size(); i++) {
+                controlNum[i]->blockSignals(true);
 
-        switch (moveMode) {
-        case MoveMode::MM:
-            res = setNum[i]->value() * scale[i];
-            break;
-        case MoveMode::STEPS:
-            res = setNum[i]->value();
-            break;
+                double value = controlNum[i]->value();
+                controlNum[i]->setValue(0);
+                controlNum[i]->setRange(-999.999, 999.999);
+                controlNum[i]->setSingleStep(0.001);
+                controlNum[i]->setDecimals(3);
+                controlNum[i]->setValue(value / scale(i));
+
+                controlNum[i]->blockSignals(false);
+            }
         }
+    });
+    connect(moveSteps, &QRadioButton::clicked, this, [&]() {
+        if (moveMode != MoveMode::STEPS) {
+            moveMode = MoveMode::STEPS;
 
-        if (res > INT32_MAX)
-            res = INT32_MAX;
-        else if (res < INT32_MIN)
-            res = INT32_MIN;
+            for (size_t i = 0; i < controlNum.size(); i++) {
+                controlNum[i]->blockSignals(true);
 
-        return static_cast<int32_t>(round(res));
+                double value = controlNum[i]->value();
+                controlNum[i]->setValue(0);
+                controlNum[i]->setRange(-999999, 999999);
+                controlNum[i]->setSingleStep(1);
+                controlNum[i]->setDecimals(0);
+                controlNum[i]->setValue(value * scale(i));
+
+                controlNum[i]->blockSignals(false);
+            }
+        }
+    });
+
+    // Scale
+    for (size_t i = 0; i < scaleNum.size(); i++) {
+        scaleNum[i]->setRange(CncParam::SCALE_MIN, CncParam::SCALE_MAX);
+        scaleNum[i]->setSingleStep(1);
+        scaleNum[i]->setDecimals(0);
+        scaleNum[i]->setValue(CncParam::scale(i));
     }
 
-    return 0;
-}
-
-int32_t PultWidget::getSetEncN(size_t i) const {
-    if (i < CncParam::AXES_NUM && i < sizeof(scale)/sizeof(scale[0]) && i < sizeof(scale_enc)/sizeof(scale_enc[0])) {
-        double res = 0;
-
-        switch (moveMode) {
-        case MoveMode::MM:
-            if (scale_enc[i] > 1)
-                res = setNum[i]->value() * scale_enc[i];
-            break;
-        case MoveMode::STEPS:
-            if (scale[i] > 1)
-                res = setNum[i]->value() * scale_enc[i] / scale[i];
-            break;
-        }
-
-        if (res > INT32_MAX)
-            res = INT32_MAX;
-        else if (res < INT32_MIN)
-            res = INT32_MIN;
-
-        return static_cast<int32_t>(round(res));
+    for (size_t i = 0; i < encoderScaleNum.size(); i++) {
+        encoderScaleNum[i]->setRange(CncParam::SCALE_ENC_MIN, CncParam::SCALE_ENC_MAX);
+        encoderScaleNum[i]->setSingleStep(1);
+        encoderScaleNum[i]->setDecimals(0);
+        encoderScaleNum[i]->setValue(CncParam::scaleEncoder(i));
     }
-
-    return 0;
 }
 
 void PultWidget::createView() {
@@ -310,216 +407,7 @@ void PultWidget::createView() {
     gridView->setSizeConstraint(QLayout::SetFixedSize);
 }
 
-QGroupBox* PultWidget::groupLabelNum(QLabel* label, QDoubleSpinBox* num) {
-    QGroupBox* group = new QGroupBox;
-    label->setBuddy(num);
-    group->setLayout(new QHBoxLayout);
-    group->layout()->addWidget(label);
-    group->layout()->addWidget(num);
-    return group;
-}
 
-void PultWidget::createControl() {
-    QLabel* labeldX = new QLabel("dX:");
-    QLabel* labeldY = new QLabel("dY:");
-    QLabel* labeldU = new QLabel("dU:");
-    QLabel* labeldV = new QLabel("dV:");
-
-    QLabel* labelX = new QLabel("X:");
-    QLabel* labelY = new QLabel("Y:");
-    QLabel* labelU = new QLabel("U:");
-    QLabel* labelV = new QLabel("V:");
-    QLabel* labelX2 = new QLabel("X:");
-    QLabel* labelY2 = new QLabel("Y:");
-    QLabel* labelU2 = new QLabel("U:");
-    QLabel* labelV2 = new QLabel("V:");
-    QLabel* labelX3 = new QLabel("X:");
-    QLabel* labelY3 = new QLabel("Y:");
-
-    QLabel* labelScale = new QLabel(tr("Scale (steps/mm)"));
-    QLabel* labelMotor = new QLabel(tr("Motor"));
-    QLabel* labelEncoder = new QLabel(tr("Encoder"));
-
-    ctrlLabels = {
-        labeldX, labeldY, labeldU, labeldV,
-        labelX, labelY, labelU, labelV,
-        labelX2, labelY2, labelU2, labelV2,
-        labelX3, labelY3,
-        labelScale, labelMotor, labelEncoder
-    };
-
-    /////////////////////////////////
-    btnGo = new QPushButton(tr("Move"));
-    btnGo->setStatusTip(tr("Relative movement on dX, dY with given speed"));
-
-    btnSet = new QPushButton(tr("Set"));
-    btnSet->setStatusTip(tr("Set position X, Y"));
-
-    btnApply = new QPushButton(tr("Apply"));
-    btnApply->setStatusTip(tr("Apply scale"));
-
-    createMmSteps();
-
-    numMoveX = new QDoubleSpinBox;
-    numMoveY = new QDoubleSpinBox;
-    numMoveU = new QDoubleSpinBox;
-    numMoveV = new QDoubleSpinBox;
-
-    numSetX = new QDoubleSpinBox;
-    numSetY = new QDoubleSpinBox;
-    numSetU = new QDoubleSpinBox;
-    numSetV = new QDoubleSpinBox;
-
-    moveNum = {numMoveX, numMoveY, numMoveU, numMoveV};
-    setNum = {numSetX, numSetY, numSetU, numSetV};
-    controlNum = {
-        numMoveX, numMoveY, numMoveU, numMoveV,
-        numSetX, numSetY, numSetU, numSetV
-    };
-
-    numMoveX->setRange(-1000, 1000);
-    numMoveX->setSingleStep(0.001);
-
-    //
-    numScaleX = new QDoubleSpinBox;
-    numScaleY = new QDoubleSpinBox;
-    numScaleU = new QDoubleSpinBox;
-    numScaleV = new QDoubleSpinBox;
-    numScaleEncX = new QDoubleSpinBox;
-    numScaleEncY = new QDoubleSpinBox;
-
-    scaleNum = {numScaleX, numScaleY, numScaleU, numScaleV};
-    encoderScaleNum = {numScaleEncX, numScaleEncY};
-
-    createSpeed();
-
-    gridControl = new QGridLayout;
-
-    gridControl->addWidget(btnGo, 0, 0, Qt::AlignLeft | Qt::AlignVCenter);
-    gridControl->addWidget(groupLabelNum(labeldX, numMoveX), 0, 1);
-    gridControl->addWidget(groupLabelNum(labeldY, numMoveY), 0, 2);
-
-#ifndef STONE
-    gridControl->addWidget(groupLabelNum(labeldU, numMoveU), 1, 1);
-    gridControl->addWidget(groupLabelNum(labeldV, numMoveV), 1, 2);
-#endif
-
-    gridControl->addLayout(gridSpeed, 0, 3, 2, 1);
-
-    gridControl->addWidget(btnSet, 2, 0, Qt::AlignLeft | Qt::AlignVCenter);
-    gridControl->addWidget(groupLabelNum(labelX, numSetX), 2, 1);
-    gridControl->addWidget(groupLabelNum(labelY, numSetY), 2, 2);
-
-#ifndef STONE
-    gridControl->addWidget(groupLabelNum(labelU, numSetU), 3, 1);
-    gridControl->addWidget(groupLabelNum(labelV, numSetV), 3, 2);
-#endif
-
-    gridControl->addWidget(groupMove, 4, 2, 1, 1, Qt::AlignHCenter);
-
-    gridControl->addWidget(labelScale, 5, 1, 1, 2, Qt::AlignLeft | Qt::AlignVCenter);
-
-    gridControl->addWidget(labelMotor, 6, 0);
-    gridControl->addWidget(groupLabelNum(labelX2, numScaleX), 6, 1);
-    gridControl->addWidget(groupLabelNum(labelY2, numScaleY), 6, 2);
-
-#ifndef STONE
-    gridControl->addWidget(groupLabelNum(labelU2, numScaleU), 7, 1);
-    gridControl->addWidget(groupLabelNum(labelV2, numScaleV), 7, 2);
-
-    gridControl->addWidget(labelEncoder, 8, 0);
-    gridControl->addWidget(groupLabelNum(labelX3, numScaleEncX), 8, 1);
-    gridControl->addWidget(groupLabelNum(labelY3, numScaleEncY), 8, 2);
-#endif
-
-    gridControl->addWidget(btnApply, 9, 2);
-
-    gridControl->addWidget(new QFrame, 0, 4, 9, 1);
-    gridControl->addWidget(new QFrame, 10, 0, 1, 4);
-
-    // Move set
-    moveMode = MoveMode::MM;
-
-    for (size_t i = 0; i < controlNum.size(); i++) {
-        controlNum[i]->setRange(-999.999, 999.999);
-        controlNum[i]->setSingleStep(0.001);
-        controlNum[i]->setDecimals(3);
-        controlNum[i]->setValue(0);
-    }
-
-    connect(moveMM, &QRadioButton::clicked, this, [&]() {
-        if (moveMode != MoveMode::MM) {
-            moveMode = MoveMode::MM;
-
-            for (size_t i = 0; i < controlNum.size(); i++) {
-                controlNum[i]->blockSignals(true);
-
-                double value = controlNum[i]->value();
-                controlNum[i]->setValue(0);
-
-                controlNum[i]->setRange(-999.999, 999.999);
-                controlNum[i]->setSingleStep(0.001);
-                controlNum[i]->setDecimals(3);
-
-                size_t ii = i % (sizeof(scale)/sizeof(scale[0]));
-                double k = scale[ii];
-
-                if (k > 1)
-                    controlNum[i]->setValue(value / k);
-
-                controlNum[i]->blockSignals(false);
-            }
-        }
-    });
-    connect(moveSteps, &QRadioButton::clicked, this, [&]() {
-        if (moveMode != MoveMode::STEPS) {
-            moveMode = MoveMode::STEPS;
-
-            for (size_t i = 0; i < controlNum.size(); i++) {
-                controlNum[i]->blockSignals(true);
-
-                double value = controlNum[i]->value();
-                controlNum[i]->setValue(0);
-
-                controlNum[i]->setRange(-999999, 999999);
-                controlNum[i]->setSingleStep(1);
-                controlNum[i]->setDecimals(0);
-
-                size_t ii = i % (sizeof(scale)/sizeof(scale[0]));
-                double k = scale[ii];
-
-                if (k > 1)
-                    controlNum[i]->setValue(value * k);
-
-                controlNum[i]->blockSignals(false);
-            }
-        }
-    });
-
-    // Scale
-    for (size_t i = 0; i < scaleNum.size() && i < sizeof(scale) / sizeof(scale[0]); i++) {
-        scaleNum[i]->setRange(1, 10000);
-        scaleNum[i]->setSingleStep(1);
-        scaleNum[i]->setDecimals(0);
-        scaleNum[i]->setValue(scale[i]);
-    }
-
-    for (size_t i = 0; i < encoderScaleNum.size() && i < sizeof(scale_enc) / sizeof(scale_enc[0]); i++) {
-        encoderScaleNum[i]->setRange(1, 10000);
-        encoderScaleNum[i]->setSingleStep(1);
-        encoderScaleNum[i]->setDecimals(0);
-        encoderScaleNum[i]->setValue(scale_enc[i]);
-    }
-
-    connect(btnApply, &QPushButton::clicked, this, [&]() {
-        scale[0] = scaleNum[0]->value();
-        scale[1] = scaleNum[1]->value();
-        scale[2] = scaleNum[2]->value();
-        scale[3] = scaleNum[3]->value();
-        scale_enc[0] = encoderScaleNum[0]->value();
-        scale_enc[1] = encoderScaleNum[1]->value();
-    });
-}
 
 void PultWidget::createMmSteps() {
     moveMM = new QRadioButton(tr("mm"));
@@ -539,7 +427,8 @@ void PultWidget::createSpeed() {
 
     numSpeed = new QDoubleSpinBox;
     numSpeed->setRange(0, 100);
-    numSpeed->setSingleStep(0.1);
+    numSpeed->setAccelerated(true);
+    numSpeed->setStepType(QAbstractSpinBox::AdaptiveDecimalStepType);
 
     speedMMM = new QRadioButton(tr("mm/min"));
     speedUMS = new QRadioButton(tr("um/sec"));
@@ -566,6 +455,94 @@ double PultWidget::speed() const {
 
     return value;
 }
+
+int32_t PultWidget::getMoveN(size_t i) const {
+    if (i < CncParam::AXES_NUM) {
+        double res = 0;
+
+        switch (moveMode) {
+        case MoveMode::MM:
+            res = moveNum[i]->value() * scale(i);
+            break;
+        case MoveMode::STEPS:
+            res = moveNum[i]->value();
+            break;
+        }
+
+        if (res > INT32_MAX)
+            res = INT32_MAX;
+        else if (res < INT32_MIN)
+            res = INT32_MIN;
+
+        return static_cast<int32_t>(round(res));
+    }
+
+    return 0;
+}
+
+// return number of steps
+int32_t PultWidget::getSetN(size_t i) const {
+    if (i < CncParam::AXES_NUM) {
+        double res = 0;
+
+        switch (moveMode) {
+        case MoveMode::MM:
+            res = setNum[i]->value() * scale(i);
+            break;
+        case MoveMode::STEPS:
+            res = setNum[i]->value();
+            break;
+        }
+
+        if (res > INT32_MAX)
+            res = INT32_MAX;
+        else if (res < INT32_MIN)
+            res = INT32_MIN;
+
+        return static_cast<int32_t>(round(res));
+    }
+
+    return 0;
+}
+
+int32_t PultWidget::getSetEncN(size_t i) const {
+    if (i < CncParam::ENC_NUM) {
+        double res = 0;
+
+        switch (moveMode) {
+        case MoveMode::MM:
+            if (scaleEncoder(i) > 1)
+                res = setNum[i]->value() * scaleEncoder(i);
+            break;
+        case MoveMode::STEPS:
+            if (scale(i) > 1)
+                res = setNum[i]->value() * scaleEncoder(i) / scale(i);
+            break;
+        }
+
+        if (res > INT32_MAX)
+            res = INT32_MAX;
+        else if (res < INT32_MIN)
+            res = INT32_MIN;
+
+        return static_cast<int32_t>(round(res));
+    }
+
+    return 0;
+}
+
+
+
+QGroupBox* PultWidget::groupLabelNum(QLabel* label, QDoubleSpinBox* num) {
+    QGroupBox* group = new QGroupBox;
+    label->setBuddy(num);
+    group->setLayout(new QHBoxLayout);
+    group->layout()->addWidget(label);
+    group->layout()->addWidget(num);
+    return group;
+}
+
+
 
 // Limit switches
 void PultWidget::setLimitSwitches(CncLimitSwitches ls) {
@@ -630,6 +607,57 @@ void PultWidget::setAdc(const cnc_adc_volt_t &adc) {
     setAdc(5, adc.shunt, true);
 }
 
+void PultWidget::setMotorView(size_t axis_num, int value) {
+    if (axis_num < CncParam::AXES_NUM) {
+        bool sign = value < 0;
+        unsigned abs_value = std::abs(value);
+
+        double k = scale(axis_num);
+
+        uint32_t value_um = static_cast<uint32_t>( std::round(double(abs_value) / k * 1e3) );
+
+        QString s = QString::asprintf("%c%04d.%03d", sign ? '-' : ' ', value_um / 1000, value_um % 1000);
+        QString s2 = QString::asprintf("%c%07d", sign ? '-' : ' ', abs_value);
+
+        posLabels[axis_num]->setText(R"(<font color=red>)" + s + R"(</font>)");
+        posLabels[axis_num + CncParam::AXES_NUM]->setText(R"(<font color=red>)" + s2 + R"(</font>)");
+    }
+}
+
+void PultWidget::setEncoderView(size_t axis_num, int value) {
+    if (axis_num < CncParam::ENCODERS_NUM) {
+        bool sign = value < 0;
+        unsigned abs_value = std::abs(value);
+
+        double k = scaleEncoder(axis_num);
+
+        uint32_t value_um = static_cast<uint32_t>( std::round(double(abs_value) / k * 1e3) );
+
+        QString s = QString::asprintf("%c%04d.%03d", sign ? '-' : ' ', value_um / 1000, value_um % 1000);
+        QString s2 = QString::asprintf("%c%07d", sign ? '-' : ' ', abs_value);
+
+        posLabels[axis_num + 8]->setText(R"(<font color=red>)" + s + R"(</font>)");
+        posLabels[axis_num + 8 + 2]->setText(R"(<font color=red>)" + s2 + R"(</font>)");
+    }
+}
+//
+double PultWidget::scale(size_t i) const {
+    switch (i) {
+    case 0: return numScaleX ? numScaleX->value() : 1.0;
+    case 1: return numScaleY ? numScaleY->value() : 1.0;
+    case 2: return numScaleU ? numScaleU->value() : 1.0;
+    case 3: return numScaleV ? numScaleV->value() : 1.0;
+    default: return 1.0;
+    }
+}
+
+double PultWidget::scaleEncoder(size_t i) const {
+    switch (i) {
+    case 0: return numScaleEncX ? numScaleEncX->value() : 1.0;
+    case 1: return numScaleEncY ? numScaleEncY->value() : 1.0;
+    default: return 1.0;
+    }
+}
 //
 void PultWidget::setFontPointSize(QWidget* w, int pointSize) {
     QFont font = w->font();
@@ -681,7 +709,6 @@ void PultWidget::setFontPointSize(int pointSize) {
 
     btnGo->setFont(font);
     btnSet->setFont(font);
-    btnApply->setFont(font);
 
     font = numMoveX->font();
     font.setPointSize(pointSize);
@@ -719,40 +746,4 @@ void PultWidget::setFontPointSize(int pointSize) {
     font.setPointSize(static_cast<int>(round(pointSize * 0.8)));
     speedMMM->setFont(font);
     speedUMS->setFont(font);
-}
-
-PultWidget::~PultWidget() {}
-
-void PultWidget::setMotorView(size_t axis_num, int value) {
-    if (axis_num < CncParam::AXES_NUM) {
-        bool sign = value < 0;
-        unsigned abs_value = std::abs(value);
-
-        double k = axis_num < sizeof(scale)/sizeof(scale[0]) ? scale[axis_num] : 1.0;
-
-        uint32_t value_um = static_cast<uint32_t>( std::round(double(abs_value) / k * 1e3) );
-
-        QString s = QString::asprintf("%c%04d.%03d", sign ? '-' : ' ', value_um / 1000, value_um % 1000);
-        QString s2 = QString::asprintf("%c%07d", sign ? '-' : ' ', abs_value);
-
-        posLabels[axis_num]->setText(R"(<font color=red>)" + s + R"(</font>)");
-        posLabels[axis_num + CncParam::AXES_NUM]->setText(R"(<font color=red>)" + s2 + R"(</font>)");
-    }
-}
-
-void PultWidget::setEncoderView(size_t axis_num, int value) {
-    if (axis_num < CncParam::ENCODERS_NUM) {
-        bool sign = value < 0;
-        unsigned abs_value = std::abs(value);
-
-        double k = axis_num < sizeof(scale_enc)/sizeof(scale_enc[0]) ? scale_enc[axis_num] : 1.0;
-
-        uint32_t value_um = static_cast<uint32_t>( std::round(double(abs_value) / k * 1e3) );
-
-        QString s = QString::asprintf("%c%04d.%03d", sign ? '-' : ' ', value_um / 1000, value_um % 1000);
-        QString s2 = QString::asprintf("%c%07d", sign ? '-' : ' ', abs_value);
-
-        posLabels[axis_num + 8]->setText(R"(<font color=red>)" + s + R"(</font>)");
-        posLabels[axis_num + 8 + 2]->setText(R"(<font color=red>)" + s2 + R"(</font>)");
-    }
 }

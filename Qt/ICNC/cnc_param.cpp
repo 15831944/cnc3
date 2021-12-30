@@ -43,3 +43,21 @@ double CncParam::steps_to_mm(int32_t steps, double scale) {
 double CncParam::ums_to_mmm(double value) {
     return value * (60.0 / 1000.0);
 }
+
+double CncParam::scale(size_t i) {
+    switch (i) {
+    case 0: return scaleX;
+    case 1: return scaleY;
+    case 2: return scaleU;
+    case 3: return scaleV;
+    default: return CncParam::DEFAULT_SCALE_XY;
+    }
+}
+
+double CncParam::scaleEncoder(size_t i) {
+    switch (i) {
+    case 0: return scaleEncX;
+    case 1: return scaleEncY;
+    default: return CncParam::DEFAULT_SCALE_ENC_XY;
+    }
+}

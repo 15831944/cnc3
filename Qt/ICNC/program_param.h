@@ -181,6 +181,10 @@ public:
     static void saveAcceleration(double acc, double dec);
     static void saveStep(double step, double scaleX, double scaleY, double scaleU, double scaleV, double scaleEncX, double scaleEncY, bool encXY);
 
+private:
+    static double loadValue(QSettings& settings, const QString& key, const double minValue, const double maxValue, const double defaultValue);
+    static bool loadValue(QSettings& settings, const QString& key, const bool defaultValue);
+public:
     static bool loadMotorReverseX();
     static bool loadMotorReverseY();
     static bool loadMotorReverseU();

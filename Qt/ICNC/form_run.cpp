@@ -335,7 +335,10 @@ void FormRun::createSpinBoxes() {
     //
     runWidget->numSpeed->setRange(m_speed.min(), m_speed.max());
     runWidget->numSpeed->setValue(m_speed.get());
-    runWidget->numSpeed->setDecimals(1);
+    runWidget->numSpeed->setDecimals(2);
+    runWidget->numSpeed->setSingleStep(0.01);
+    runWidget->numSpeed->setAccelerated(true);
+    runWidget->numSpeed->setStepType(QAbstractSpinBox::AdaptiveDecimalStepType);
 
     connect(runWidget->numSpeed, QOverload<double>::of(&QDoubleSpinBox::valueChanged), [=](double x) {
         m_speed.set(x);
@@ -352,11 +355,11 @@ void FormRun::createSpinBoxes() {
             m_speed.changeMode(WireSpeed::Mode::MMM);
             runWidget->numSpeed->blockSignals(true);
 
-            runWidget->numSpeed->setRange(DBL_MIN, DBL_MAX);
-            runWidget->numSpeed->setSingleStep(0.1);
-            runWidget->numSpeed->setDecimals(1);
-            runWidget->numSpeed->setValue(m_speed.get());
+//            runWidget->numSpeed->setRange(DBL_MIN, DBL_MAX);
+            runWidget->numSpeed->setDecimals(2);
+            runWidget->numSpeed->setSingleStep(0.01);
             runWidget->numSpeed->setRange(m_speed.min(), m_speed.max());
+            runWidget->numSpeed->setValue(m_speed.get());
 
             runWidget->numSpeed->blockSignals(false);
         }
@@ -366,11 +369,11 @@ void FormRun::createSpinBoxes() {
             m_speed.changeMode(WireSpeed::Mode::UMS);
             runWidget->numSpeed->blockSignals(true);
 
-            runWidget->numSpeed->setRange(DBL_MIN, DBL_MAX);
-            runWidget->numSpeed->setSingleStep(1);
-            runWidget->numSpeed->setDecimals(0);
-            runWidget->numSpeed->setValue(m_speed.get());
+//            runWidget->numSpeed->setRange(DBL_MIN, DBL_MAX);
+            runWidget->numSpeed->setDecimals(1);
+            runWidget->numSpeed->setSingleStep(0.1);
             runWidget->numSpeed->setRange(m_speed.min(), m_speed.max());
+            runWidget->numSpeed->setValue(m_speed.get());
 
             runWidget->numSpeed->blockSignals(false);
         }
