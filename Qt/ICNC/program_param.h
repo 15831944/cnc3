@@ -118,6 +118,13 @@ public:
     ProgramParam();
     ~ProgramParam();
 
+private:
+    static QString loadString(QSettings& settings, const QString& key, const QString& defaultValue, bool& OK);
+    static bool loadBool(QSettings& settings, const QString& key, const bool defaultValue, bool& OK);
+    static unsigned loadUInt(QSettings& settings, const QString& key, const unsigned minValue, const unsigned maxValue, const unsigned defaultValue, bool& OK);
+    static double loadDouble(QSettings& settings, const QString& key, const double minValue, const double maxValue, const double defaultValue, bool& OK);
+
+public:
     void loadSettings();
     void saveSettings();
 
@@ -181,10 +188,6 @@ public:
     static void saveAcceleration(double acc, double dec);
     static void saveStep(double step, double scaleX, double scaleY, double scaleU, double scaleV, double scaleEncX, double scaleEncY, bool encXY);
 
-private:
-    static double loadValue(QSettings& settings, const QString& key, const double minValue, const double maxValue, const double defaultValue);
-    static bool loadValue(QSettings& settings, const QString& key, const bool defaultValue);
-public:
     static bool loadMotorReverseX();
     static bool loadMotorReverseY();
     static bool loadMotorReverseU();
@@ -193,9 +196,9 @@ public:
     static bool loadMotorSwapUV();
     static bool loadEncReverseX();
     static bool loadEncReverseY();
-    static void loadFeedbackParam(bool& fb_ena, double& low_thld, double& high_thld, double& rb_to, unsigned& rb_attempts, double& rb_len, double& rb_speed);
-    static void loadAcceleration(double& acc, double& dec);
-    static void loadStep(double& step, double& scaleX, double& scaleY, double& scaleU, double& scaleV, double& scaleEncX, double& scaleEncY, bool& encXY);
+    static bool loadFeedbackParam(bool& fb_ena, double& low_thld, double& high_thld, double& rb_to, unsigned& rb_attempts, double& rb_len, double& rb_speed);
+    static bool loadAcceleration(double& acc, double& dec);
+    static bool loadStep(double& step, double& scaleX, double& scaleY, double& scaleU, double& scaleV, double& scaleEncX, double& scaleEncY, bool& encXY);
     static void loadParam();
 };
 

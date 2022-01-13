@@ -26,8 +26,8 @@ public:
     enum class Mode: bool {UMS, MMM}; // mm/min, um/sec
 
     static constexpr double FPGA_FREQ = 72e6; // Hz
-    static constexpr double MIN = 0.1 * 60 / 1000; // mm/min
-    static constexpr double MAX = 300 * 60 / 1000; // mm/min
+    static constexpr double MIN = 0.01; // mm/min
+    static constexpr double MAX = 18; // mm/min
 
 private:
     double m_value; // mm/min

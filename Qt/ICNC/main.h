@@ -8,16 +8,16 @@
 // 0.2.2.4 debug feedback
 // 0.2.2.8 Command keys in Code Editor, clear Run panel
 // 0.2.2.0 Time AM PM for non-russian languages
+// 0.3.0.0 Slow speed, write default settings on the disk if settings are empty
 
-//#define LINUX // - defined in pro file
-//#define STONE
-#define DEV
+#define STONE
+//#define DEV
 #ifndef STONE
     #define SHOW_ENCODERS
 #endif
 //#define TEST_ADC
 
-#ifdef LINUX
+#ifdef LINUX // - defined in pro file
 #define DEFAULT_COM ("/dev/ttyACM0")
 #else
 #define DEFAULT_COM ("COM6")

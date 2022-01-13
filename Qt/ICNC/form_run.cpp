@@ -337,8 +337,6 @@ void FormRun::createSpinBoxes() {
     runWidget->numSpeed->setValue(m_speed.get());
     runWidget->numSpeed->setDecimals(2);
     runWidget->numSpeed->setSingleStep(0.01);
-    runWidget->numSpeed->setAccelerated(true);
-    runWidget->numSpeed->setStepType(QAbstractSpinBox::AdaptiveDecimalStepType);
 
     connect(runWidget->numSpeed, QOverload<double>::of(&QDoubleSpinBox::valueChanged), [=](double x) {
         m_speed.set(x);
@@ -355,11 +353,14 @@ void FormRun::createSpinBoxes() {
             m_speed.changeMode(WireSpeed::Mode::MMM);
             runWidget->numSpeed->blockSignals(true);
 
+            unsigned dec = 2;
 //            runWidget->numSpeed->setRange(DBL_MIN, DBL_MAX);
-            runWidget->numSpeed->setDecimals(2);
-            runWidget->numSpeed->setSingleStep(0.01);
+            runWidget->numSpeed->setDecimals(dec);
+            runWidget->numSpeed->setSingleStep( pow(10, -dec) );
             runWidget->numSpeed->setRange(m_speed.min(), m_speed.max());
-            runWidget->numSpeed->setValue(m_speed.get());
+
+            double p = pow(10, dec);
+            runWidget->numSpeed->setValue( round(m_speed.get() * p) / p );
 
             runWidget->numSpeed->blockSignals(false);
         }
@@ -369,11 +370,14 @@ void FormRun::createSpinBoxes() {
             m_speed.changeMode(WireSpeed::Mode::UMS);
             runWidget->numSpeed->blockSignals(true);
 
+            unsigned dec = 1;
 //            runWidget->numSpeed->setRange(DBL_MIN, DBL_MAX);
-            runWidget->numSpeed->setDecimals(1);
-            runWidget->numSpeed->setSingleStep(0.1);
+            runWidget->numSpeed->setDecimals(dec);
+            runWidget->numSpeed->setSingleStep( pow(10, -dec) );
             runWidget->numSpeed->setRange(m_speed.min(), m_speed.max());
-            runWidget->numSpeed->setValue(m_speed.get());
+
+            double p = pow(10, dec);
+            runWidget->numSpeed->setValue( round(m_speed.get() * p) / p );
 
             runWidget->numSpeed->blockSignals(false);
         }
@@ -753,17 +757,11 @@ void FormRun::readCncContext() {
 
             runWidget->setLimitSwitches(ctx.limitSwitches());
 
-            btnDrum->blockSignals(true);
-            btnPump->blockSignals(true);
-            btnBreak->blockSignals(true);
-            btnVoltage->blockSignals(true);
             numDrumVel->blockSignals(true);
             numWidth->blockSignals(true);
             numRatio->blockSignals(true);
             numVoltage->blockSignals(true);
             numCurrent->blockSignals(true);
-
-            runWidget->btnHold->blockSignals(true);
             runWidget->numSpeed->blockSignals(true);
 
             btnDrum->setChecked(ctx.isDrumEnable());
@@ -841,17 +839,11 @@ void FormRun::readCncContext() {
             else
                 runWidget->numSpeed->setValue(m_speed.get());
 
-            btnDrum->blockSignals(false);
-            btnPump->blockSignals(false);
-            btnBreak->blockSignals(false);
-            btnVoltage->blockSignals(false);
             numDrumVel->blockSignals(false);
             numWidth->blockSignals(false);
             numRatio->blockSignals(false);
             numVoltage->blockSignals(false);
             numCurrent->blockSignals(false);
-
-            runWidget->btnHold->blockSignals(false);
             runWidget->numSpeed->blockSignals(false);
 
             if (par.appState.isWork() && ctx.isWork()) {

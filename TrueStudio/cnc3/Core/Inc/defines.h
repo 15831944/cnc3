@@ -2,7 +2,7 @@
 #define INC_DEFINES_H_
 
 //#define RESEASE
-//#define STONE
+#define STONE
 
 #define NAME ("CNC")
 #define MODEL ("0.3")
@@ -46,10 +46,12 @@
 #define ROLLBACK_DEFAULT	(0.3) // mm. This is the rollback distance after a short circuit
 #define ROLLBACK_ATTEMPTS	(3) // After each rollback, the rollback is repeated again if the short circuit continues
 
-#define F_MIN_UMS (0.1) // um/sec. Minimum speed
-#define F_MAX_UMS (300.0) // um/sec. Maximum speed
-#define F_MIN_MMM ( F_MIN_UMS * 60.0 * 1e-3 ) // mm/min. Minimum speed
-#define F_MAX_MMM ( F_MAX_UMS * 60.0 * 1e-3 ) // mm/min. Maximum speed
+#define F_MIN_MMM ( 0.01 ) // mm/min. Minimum speed
+#define F_MAX_MMM ( 18 ) // mm/min. Maximum speed
+
+#define MMM_TO_UMS(_MMM) ((_MMM) * (1000.0 / 60.0))
+#define F_MIN_UMS ( MMM_TO_UMS(F_MIN_MMM) ) // um/sec. Minimum speed
+#define F_MAX_UMS ( MMM_TO_UMS(F_MAX_MMM) ) // um/sec. Maximum speed
 
 #define F_DEFAULT_UMS				(F_MAX_UMS) // um/s. Default cutting speed
 #define F_ROLLBACK_DEFAULT_UMS		(F_MAX_UMS / 10) // um/s. Default rollback speed

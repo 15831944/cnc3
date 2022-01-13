@@ -306,6 +306,16 @@ void FormEdit::on_btnSave_clicked() {
         on_btnSaveAs_clicked();
     else {
         QFile file(par.fileDir + "/" + par.gcodeFileName);
+
+//        // create new file
+//        if (!file.exists()) {
+//            if (!file.open(QIODevice::NewOnly)) {
+//                QMessageBox::information(nullptr, "Error", file.errorString());
+//            } else {
+//                file.close();
+//            }
+//        }
+
         if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
             QMessageBox::information(nullptr, "Error", file.errorString());
         }
@@ -330,10 +340,10 @@ void FormEdit::on_btnSaveAs_clicked() {
         QFileInfo fInfo(new_filePath);
         par.fileDir = fInfo.dir().path();
         par.gcodeFileName = fInfo.fileName();
+        file_open = true;
         on_btnSave_clicked();
         par.saveSettings();
-        btnSave->setEnabled(true);
-        file_open = true;
+        btnSave->setEnabled(true);        
         emit fileNameChanged(par.gcodeFileName);
     }
 }

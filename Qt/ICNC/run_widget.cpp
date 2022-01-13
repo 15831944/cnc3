@@ -51,8 +51,8 @@ void RunWidget::createButtons() {
     labelSpeed = new QLabel(tr("Speed") + ": ");
 
     numSpeed = new QDoubleSpinBox;
-    numSpeed->setRange(0, 100);
-    numSpeed->setSingleStep(0.1);
+    numSpeed->setAccelerated(true);
+    numSpeed->setStepType(QAbstractSpinBox::AdaptiveDecimalStepType);
 
     btnSpeed = new QPushButton(tr("Enter"));
     btnSpeed->setStatusTip(tr("Enter speed"));

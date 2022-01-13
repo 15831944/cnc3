@@ -23,12 +23,72 @@ ProgramParam::~ProgramParam() {
     saveSettings();
 }
 
+QString ProgramParam::loadString(QSettings& settings, const QString& key, const QString& defaultValue, bool& OK) {
+    QString res;
+
+    if (settings.contains(key))
+        res = settings.value(key, defaultValue).toString();
+    else {
+        res = defaultValue;
+        settings.setValue(key, defaultValue);
+        OK = false;
+    }
+
+    return res;
+}
+
+bool ProgramParam::loadBool(QSettings& settings, const QString& key, const bool defaultValue, bool& OK) {
+    bool res;
+
+    if (settings.contains(key))
+        res = settings.value(key, defaultValue).toBool();
+    else {
+        res = defaultValue;
+        settings.setValue(key, defaultValue);
+        OK = false;
+    }
+
+    return res;
+}
+
+unsigned ProgramParam::loadUInt(QSettings& settings, const QString& key, const unsigned minValue, const unsigned maxValue, const unsigned defaultValue, bool& OK) {
+    unsigned res;
+    bool l_OK = settings.contains(key);
+
+    if (l_OK)
+        res = settings.value(key, defaultValue).toUInt();
+
+    if (!l_OK || res < minValue || res > maxValue) {
+        res = defaultValue;
+        settings.setValue(key, defaultValue);
+        OK = false;
+    }
+
+    return res;
+}
+
+double ProgramParam::loadDouble(QSettings& settings, const QString& key, const double minValue, const double maxValue, const double defaultValue, bool& OK) {
+    double res;
+    bool l_OK = settings.contains(key);
+
+    if (l_OK)
+        res = settings.value(key, defaultValue).toDouble();
+
+    if (!l_OK || res < minValue || res > maxValue) {
+        res = defaultValue;
+        settings.setValue(key, defaultValue);
+        OK = false;
+    }
+
+    return res;
+}
+
 void ProgramParam::loadSettings() {
-//    QSettings settings(m_SettingsFile, QSettings::NativeFormat);
+    bool OK = true;
     QSettings settings(org, app);
-    fileDir = settings.value("fileDir", "").toString();
-    gcodeFileName = settings.value("cncFileName", "").toString();
-    contourFileName = settings.value("contourFileName", "").toString();
+    fileDir = loadString(settings, "fileDir", "", OK);
+    gcodeFileName = loadString(settings, "cncFileName", "", OK);
+    contourFileName = loadString(settings, "contourFileName", "", OK);
 }
 
 void ProgramParam::saveSettings() {
@@ -72,7 +132,7 @@ void ProgramParam::saveGcode() {
 
 QString ProgramParam::loadGcode() {
     QSettings settings(org, app);
-    bool OK;
+    bool OK = true;
 
     loadInputLevel(OK);
 
@@ -135,16 +195,11 @@ void ProgramParam::saveInterfaceLanguage(InterfaceLanguage lang) {
 }
 
 InterfaceLanguage ProgramParam::loadInterfaceLanguage() {
+    bool OK = true;
     QSettings settings(org, app);
-
-    unsigned res = settings.value("language", static_cast<unsigned>(InterfaceLanguage::ENGLISH)).toUInt();
-
-    if (res < static_cast<unsigned>(InterfaceLanguage::END))
-        lang = static_cast<InterfaceLanguage>(res);
-    else
-        lang = InterfaceLanguage::ENGLISH;
-
-    return lang;
+    return lang = static_cast<InterfaceLanguage>(
+                loadUInt(settings, "language", 0, static_cast<unsigned>(InterfaceLanguage::END) - 1, static_cast<unsigned>(InterfaceLanguage::ENGLISH), OK)
+                );
 }
 
 QString ProgramParam::helpSubDir() {
@@ -171,16 +226,9 @@ void ProgramParam::saveFontSize(int fontSize) {
 }
 
 int ProgramParam::loadFontSize() {
+    bool OK = true;
     QSettings settings(org, app);
-
-    int res = settings.value("fontSize", 10).toInt();
-
-    if (res >= 8 && res <= 32)
-        fontSize = res;
-    else
-        fontSize = 10;
-
-    return fontSize;
+    return fontSize = loadUInt(settings, "fontSize", 8, 32, 10, OK);
 }
 
 void ProgramParam::saveInputLevel(uint16_t value) {
@@ -191,9 +239,8 @@ void ProgramParam::saveInputLevel(uint16_t value) {
 }
 
 uint16_t ProgramParam::loadInputLevel(bool& OK) {
-    QSettings settings(org, app);
-    OK = settings.contains("inputLevel");
-    CncParam::inputLevel = static_cast<uint16_t>(settings.value("inputLevel", CncParam::DEFAULT_INPUT_LEVEL).toUInt() & 0xFFFF);
+    QSettings settings(org, app);    
+    CncParam::inputLevel = static_cast<uint16_t>( loadUInt(settings, "inputLevel", 0, UINT16_MAX, CncParam::DEFAULT_INPUT_LEVEL, OK) );
     return CncParam::inputLevel;
 }
 
@@ -206,9 +253,7 @@ void ProgramParam::saveStepDir(bool sdEna) {
 
 bool ProgramParam::loadStepDir(bool &OK) {
     QSettings settings(org, app);
-    OK = settings.contains("sdEnable");
-    CncParam::sdEnable = settings.value("sdEnable", CncParam::DEFAULT_SD_ENA).toBool();
-    return CncParam::sdEnable;
+    return CncParam::sdEnable = loadBool(settings, "sdEnable", CncParam::DEFAULT_SD_ENA, OK);
 }
 
 void ProgramParam::saveMotorDir(bool revX, bool revY, bool revU, bool revV, bool swapXY, bool swapUV, bool reverseEncX, bool reverseEncY) {
@@ -287,110 +332,103 @@ void ProgramParam::saveStep(double step, double scaleX, double scaleY, double sc
 }
 
 bool ProgramParam::loadMotorReverseX() {
+    bool OK = true;
     QSettings settings(org, app);
-    return CncParam::reverseX = settings.value("motorReverseX", false).toBool();
+    return CncParam::reverseX = loadBool(settings, "motorReverseX", false, OK);
 }
 
 bool ProgramParam::loadMotorReverseY() {
+    bool OK = true;
     QSettings settings(org, app);
-    return CncParam::reverseY = settings.value("motorReverseY", false).toBool();
+    return CncParam::reverseY = loadBool(settings, "motorReverseY", false, OK);
 }
 
 bool ProgramParam::loadMotorReverseU() {
+    bool OK = true;
     QSettings settings(org, app);
-    return CncParam::reverseU = settings.value("motorReverseU", false).toBool();
+    return CncParam::reverseU = loadBool(settings, "motorReverseU", false, OK);
 }
 
 bool ProgramParam::loadMotorReverseV() {
+    bool OK = true;
     QSettings settings(org, app);
-    return CncParam::reverseV = settings.value("motorReverseV", false).toBool();
+    return CncParam::reverseV = loadBool(settings, "motorReverseV", false, OK);
 }
 
 bool ProgramParam::loadMotorSwapXY() {
+    bool OK = true;
     QSettings settings(org, app);
-    return CncParam::swapXY = settings.value("motorSwapXY", false).toBool();
+    return CncParam::swapXY = loadBool(settings, "motorSwapXY", false, OK);
 }
 
 bool ProgramParam::loadMotorSwapUV() {
+    bool OK = true;
     QSettings settings(org, app);
-    return CncParam::swapUV = settings.value("motorSwapUV", false).toBool();
+    return CncParam::swapUV = loadBool(settings, "motorSwapUV", false, OK);
 }
 
 bool ProgramParam::loadEncReverseX() {
+    bool OK = true;
     QSettings settings(org, app);
-    return CncParam::reverseEncX = settings.value("encReverseX", false).toBool();
+    return CncParam::reverseEncX = loadBool(settings, "encReverseX", false, OK);
 }
 
 bool ProgramParam::loadEncReverseY() {
+    bool OK = true;
     QSettings settings(org, app);
-    return CncParam::reverseEncY = settings.value("encReverseY", false).toBool();
+    return CncParam::reverseEncY = loadBool(settings, "encReverseY", false, OK);
 }
 
-void ProgramParam::loadFeedbackParam(bool& fb_ena, double& low_thld, double& high_thld, double& rb_to, unsigned& rb_attempts, double& rb_len, double& rb_speed) {
+bool ProgramParam::loadFeedbackParam(bool& fb_ena, double& low_thld, double& high_thld, double& rb_to, unsigned& rb_attempts, double& rb_len, double& rb_speed) {
+    bool OK = true;
     QSettings settings(org, app);
-    fb_ena = CncParam::fb_ena = settings.value("feedbackEnable", false).toBool();
-    low_thld = CncParam::low_thld = settings.value("lowThreshold", 0).toDouble();
+    fb_ena = CncParam::fb_ena = loadBool(settings, "feedbackEnable", false, OK);
 
     int thld_max = static_cast<int>( round(cnc_adc_volt_t::maxVolt(0)) );
-    high_thld = CncParam::high_thld = settings.value("highThreshold", thld_max).toDouble();
+    low_thld = CncParam::low_thld = loadDouble(settings, "lowThreshold", 0, thld_max, 0, OK);
+    high_thld = CncParam::high_thld = loadDouble(settings, "highThreshold", 0, thld_max, thld_max, OK);
 
-    rb_to = CncParam::rb_to = settings.value("rollbackTimeout", CncParam::DEFAULT_RB_TO).toDouble();
-    rb_attempts = CncParam::rb_attempts = settings.value("rollbackAttempts", CncParam::DEFAULT_RB_ATTEMPTS).toDouble();
-    rb_len = CncParam::rb_len = settings.value("rollbackLength", CncParam::DEFAULT_RB_LEN).toDouble();
-    rb_speed = CncParam::rb_speed = settings.value("rollbackSpeed", CncParam::DEFAULT_RB_SPEED).toDouble();
-}
-
-void ProgramParam::loadAcceleration(double &acc, double &dec) {
-    QSettings settings(org, app);
-    acc = CncParam::acc = settings.value("acceleration", CncParam::DEFAULT_ACC).toDouble();
-    dec = CncParam::dec = settings.value("deceleration", CncParam::DEFAULT_DEC).toDouble();
-}
-
-double ProgramParam::loadValue(QSettings& settings, const QString& key, const double minValue, const double maxValue, const double defaultValue) {
-    double res;
-    bool OK = settings.contains(key);
-
-    if (OK)
-        res = settings.value(key, defaultValue).toDouble();
-
-    if (!OK || res > maxValue || res < minValue) {
-        res = defaultValue;
-        settings.setValue(key, defaultValue);
+    if (low_thld > high_thld) {
+        low_thld = CncParam::low_thld = 0;
+        high_thld = CncParam::high_thld = thld_max;
+        settings.setValue("lowThreshold", CncParam::low_thld);
+        settings.setValue("highThreshold", CncParam::high_thld);
     }
 
-    return res;
+    rb_to = CncParam::rb_to = loadDouble(settings, "rollbackTimeout", 0, CncParam::DEFAULT_RB_TO * 10, CncParam::DEFAULT_RB_TO, OK);
+    rb_attempts = CncParam::rb_attempts = loadUInt(settings, "rollbackAttempts", 1, CncParam::DEFAULT_RB_ATTEMPTS * 10, CncParam::DEFAULT_RB_ATTEMPTS, OK);
+    rb_len = CncParam::rb_len = loadDouble(settings, "rollbackLength", 0, CncParam::DEFAULT_RB_LEN * 10, CncParam::DEFAULT_RB_LEN, OK);
+    rb_speed = CncParam::rb_speed = loadDouble(settings, "rollbackSpeed", 0, CncParam::DEFAULT_RB_SPEED * 10, CncParam::DEFAULT_RB_SPEED, OK);
+
+    return OK;
 }
 
-bool ProgramParam::loadValue(QSettings& settings, const QString& key, const bool defaultValue) {
-    bool res;
-
-    if (settings.contains(key))
-        res = settings.value(key, defaultValue).toBool();
-    else {
-        res = defaultValue;
-        settings.setValue(key, defaultValue);
-    }
-
-    return res;
+bool ProgramParam::loadAcceleration(double &acc, double &dec) {
+    bool OK = true;
+    QSettings settings(org, app);
+    acc = CncParam::acc = loadDouble(settings, "acceleration", CncParam::DEFAULT_ACC * 0.1, CncParam::DEFAULT_ACC * 10, CncParam::DEFAULT_ACC, OK);
+    dec = CncParam::dec = loadDouble(settings, "deceleration", CncParam::DEFAULT_DEC * 0.1, CncParam::DEFAULT_DEC * 10, CncParam::DEFAULT_DEC, OK);
+    return OK;
 }
 
-void ProgramParam::loadStep(double &step, double &scaleX, double &scaleY, double &scaleU, double &scaleV, double &scaleEncX, double &scaleEncY, bool &encXY) {
+bool ProgramParam::loadStep(double &step, double &scaleX, double &scaleY, double &scaleU, double &scaleV, double &scaleEncX, double &scaleEncY, bool &encXY) {
+    bool OK = true;
     QSettings settings(org, app);
 
-    step = CncParam::step = loadValue(settings, "step", CncParam::STEP_MIN, CncParam::STEP_MAX, CncParam::DEFAULT_STEP);
-    scaleX = CncParam::scaleX = loadValue(settings, "scaleX", CncParam::SCALE_MIN, CncParam::SCALE_MAX, CncParam::DEFAULT_SCALE_XY);
-    scaleY = CncParam::scaleY = loadValue(settings, "scaleY", CncParam::SCALE_MIN, CncParam::SCALE_MAX, CncParam::DEFAULT_SCALE_XY);
-    scaleU = CncParam::scaleU = loadValue(settings, "scaleU", CncParam::SCALE_MIN, CncParam::SCALE_MAX, CncParam::DEFAULT_SCALE_UV);
-    scaleV = CncParam::scaleV = loadValue(settings, "scaleV", CncParam::SCALE_MIN, CncParam::SCALE_MAX, CncParam::DEFAULT_SCALE_UV);
-    scaleEncX = CncParam::scaleEncX = loadValue(settings, "scaleEncX", CncParam::SCALE_ENC_MIN, CncParam::SCALE_ENC_MAX, CncParam::DEFAULT_SCALE_ENC_XY);
-    scaleEncY = CncParam::scaleEncY = loadValue(settings, "scaleEncY", CncParam::SCALE_ENC_MIN, CncParam::SCALE_ENC_MAX, CncParam::DEFAULT_SCALE_ENC_XY);
-    encXY = CncParam::encXY = loadValue(settings, "encXY", CncParam::DEFAULT_ENC_XY);
+    step = CncParam::step = loadDouble(settings, "step", CncParam::STEP_MIN, CncParam::STEP_MAX, CncParam::DEFAULT_STEP, OK);
+    scaleX = CncParam::scaleX = loadDouble(settings, "scaleX", CncParam::SCALE_MIN, CncParam::SCALE_MAX, CncParam::DEFAULT_SCALE_XY, OK);
+    scaleY = CncParam::scaleY = loadDouble(settings, "scaleY", CncParam::SCALE_MIN, CncParam::SCALE_MAX, CncParam::DEFAULT_SCALE_XY, OK);
+    scaleU = CncParam::scaleU = loadDouble(settings, "scaleU", CncParam::SCALE_MIN, CncParam::SCALE_MAX, CncParam::DEFAULT_SCALE_UV, OK);
+    scaleV = CncParam::scaleV = loadDouble(settings, "scaleV", CncParam::SCALE_MIN, CncParam::SCALE_MAX, CncParam::DEFAULT_SCALE_UV, OK);
+    scaleEncX = CncParam::scaleEncX = loadDouble(settings, "scaleEncX", CncParam::SCALE_ENC_MIN, CncParam::SCALE_ENC_MAX, CncParam::DEFAULT_SCALE_ENC_XY, OK);
+    scaleEncY = CncParam::scaleEncY = loadDouble(settings, "scaleEncY", CncParam::SCALE_ENC_MIN, CncParam::SCALE_ENC_MAX, CncParam::DEFAULT_SCALE_ENC_XY, OK);
+    encXY = CncParam::encXY = loadBool(settings, "encXY", CncParam::DEFAULT_ENC_XY, OK);
 
-    settings.sync();
+    return OK;
 }
 
 void ProgramParam::loadParam() {
-    bool OK, fb_ena;
+    bool OK = true, fb_ena;
     unsigned rb_attempts;
     double low_thld, high_thld, rb_to, rb_len, rb_speed, acc, dec;
     double step, scaleX, scaleY, scaleU, scaleV, scaleEncX, scaleEncY;
@@ -416,9 +454,11 @@ void ProgramParam::loadParam() {
     loadEncReverseX();
     loadEncReverseY();
 
-    loadFeedbackParam(fb_ena, low_thld, high_thld, rb_to, rb_attempts, rb_len, rb_speed);
-    loadAcceleration(acc, dec);
-    loadStep(step, scaleX, scaleY, scaleU, scaleV, scaleEncX, scaleEncY, encXY);
+    OK &= loadFeedbackParam(fb_ena, low_thld, high_thld, rb_to, rb_attempts, rb_len, rb_speed);
+    OK &= loadAcceleration(acc, dec);
+    OK &= loadStep(step, scaleX, scaleY, scaleU, scaleV, scaleEncX, scaleEncY, encXY);
+
+    loadStepDir(OK);
 }
 
 //
@@ -430,8 +470,9 @@ void ProgramParam::saveSwapXY(bool value) {
 }
 
 bool ProgramParam::loadSwapXY() {
+    bool OK = true;
     QSettings settings(org, app);
-    return swapXY = settings.value("swapXY", false).toBool();
+    return swapXY = loadBool(settings, "swapXY", false, OK);
 }
 
 void ProgramParam::saveReverseX(bool value) {
@@ -442,8 +483,9 @@ void ProgramParam::saveReverseX(bool value) {
 }
 
 bool ProgramParam::loadReverseX() {
+    bool OK = true;
     QSettings settings(org, app);
-    return reverseX = settings.value("reverseX", false).toBool();
+    return reverseX = loadBool(settings, "reverseX", false, OK);
 }
 
 void ProgramParam::saveReverseY(bool value) {
@@ -454,8 +496,9 @@ void ProgramParam::saveReverseY(bool value) {
 }
 
 bool ProgramParam::loadReverseY() {
+    bool OK = true;
     QSettings settings(org, app);
-    return reverseY = settings.value("reverseY", false).toBool();
+    return reverseY = loadBool(settings, "reverseY", false, OK);
 }
 
 void ProgramParam::saveShowXY(bool value) {
@@ -466,8 +509,9 @@ void ProgramParam::saveShowXY(bool value) {
 }
 
 bool ProgramParam::loadShowXY() {
+    bool OK = true;
     QSettings settings(org, app);
-    return showXY = settings.value("showXY", false).toBool();
+    return showXY = loadBool(settings, "showXY", false, OK);
 }
 
 //enum BUTTON_T {START, REVERSE, CANCEL};

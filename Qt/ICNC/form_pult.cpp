@@ -322,10 +322,11 @@ void FormPult::createButtonLayout() {
     pultWidget->numSpeed->setRange(speed.min(), speed.max());
     pultWidget->numSpeed->setValue(speed.get());
 
-    connect(pultWidget->numSpeed, QOverload<double>::of(&QDoubleSpinBox::valueChanged), [=](double x) {
-        WireSpeed speed(x, wireSpeedMode);
-        par.cnc.writeSpeed(speed);
-    });
+    // don't work, because speed was written into FPGA
+//    connect(pultWidget->numSpeed, QOverload<double>::of(&QDoubleSpinBox::valueChanged), [=](double x) {
+//        WireSpeed speed(x, wireSpeedMode);
+//        par.cnc.writeSpeed(speed);
+//    });
 
     connect(pultWidget->speedMMM, &QRadioButton::clicked, this, [&]() {
         if (wireSpeedMode != WireSpeed::Mode::MMM) {
@@ -429,10 +430,6 @@ void FormPult::readCutState() {
 
             pultWidget->setLimitSwitches(ctx.limitSwitches());
 
-            btnDrum->blockSignals(true);
-            btnPump->blockSignals(true);
-            btnBreak->blockSignals(true);
-            btnVoltage->blockSignals(true);
             numDrumVel->blockSignals(true);
             numWidth->blockSignals(true);
             numRatio->blockSignals(true);
@@ -440,7 +437,7 @@ void FormPult::readCutState() {
             numCurrent->blockSignals(true);
 
             pultWidget->btnHold->blockSignals(true);
-            pultWidget->numSpeed->blockSignals(true);
+//            pultWidget->numSpeed->blockSignals(true);
 
             btnDrum->setChecked(ctx.isDrumEnable());
             btnPump->setChecked(ctx.pumpEnabled());
@@ -507,21 +504,17 @@ void FormPult::readCutState() {
             WireSpeed speed( ctx.speed() );
             speed.changeMode(wireSpeedMode);
 
-            if (speed.get() < speed.min()) {
-                pultWidget->numSpeed->setValue(speed.min());
-                qDebug("Error: MIN CNC Speed: %f", static_cast<double>(ctx.speed()));
-            }
-            else if (speed.get() > speed.max()) {
-                pultWidget->numSpeed->setValue(speed.max());
-                qDebug("Error: MAX CNC Speed: %f", static_cast<double>(ctx.speed()));
-            }
-            else
-                pultWidget->numSpeed->setValue(speed.get());
+//            if (speed.get() < speed.min()) {
+//                pultWidget->numSpeed->setValue(speed.min());
+//                qDebug("Error: MIN CNC Speed: %f", static_cast<double>(ctx.speed()));
+//            }
+//            else if (speed.get() > speed.max()) {
+//                pultWidget->numSpeed->setValue(speed.max());
+//                qDebug("Error: MAX CNC Speed: %f", static_cast<double>(ctx.speed()));
+//            }
+//            else
+//                pultWidget->numSpeed->setValue(speed.get());
 
-            btnDrum->blockSignals(false);
-            btnPump->blockSignals(false);
-            btnBreak->blockSignals(false);
-            btnVoltage->blockSignals(false);
             numDrumVel->blockSignals(false);
             numWidth->blockSignals(false);
             numRatio->blockSignals(false);
@@ -529,7 +522,7 @@ void FormPult::readCutState() {
             numCurrent->blockSignals(false);
 
             pultWidget->btnHold->blockSignals(false);
-            pultWidget->numSpeed->blockSignals(false);
+//            pultWidget->numSpeed->blockSignals(false);
 
 //            if (par.appState.isWork() && cut_state.isWork()) {
 //                onFrameChanged(cut_state.frame_num,
