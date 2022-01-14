@@ -114,6 +114,7 @@ void cnc_turnOff();
 void cnc_turnOn();
 
 void cnc_reset();
+BOOL cnc_isInit();
 
 BOOL cnc_isRollback();
 BOOL cnc_isReverse();

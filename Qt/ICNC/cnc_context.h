@@ -25,7 +25,7 @@ typedef union {
         uint32_t voltage_ena:1;
         uint32_t hold_ena:1;
         uint32_t center_ena:1;
-        uint32_t :1;
+        uint32_t is_init:1;
 
         uint32_t drum_vel:8;
 
@@ -193,6 +193,7 @@ public:
             ctx.field.voltage_ena = (v[0] & 0x10) != 0;
             ctx.field.hold_ena = (v[0] & 0x20) != 0;
             ctx.field.center_ena = (v[0] & 0x40) != 0;
+            ctx.field.is_init = (v[0] & 0x80) != 0;
 
             ctx.field.drum_vel = v[1];
 
@@ -287,6 +288,7 @@ public:
     bool wireControlEnabled() const { return m_context.field.wire_ena; }
     bool voltageEnabled() const { return m_context.field.voltage_ena; }
     bool hold() const { return m_context.field.hold_ena; }
+    bool isInit() const { return m_context.field.is_init; }
     bool weakHV() const { return m_context.field.center_ena; }
 
     uint8_t drumVelocity() const { return m_context.field.drum_vel; }

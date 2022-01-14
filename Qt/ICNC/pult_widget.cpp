@@ -12,7 +12,7 @@ PultWidget::PultWidget(QWidget *parent) :
     createControl();
     createView();
 
-    buttons = {btnGo, btnSet, btnCancel, btnHold};
+    buttons = {btnMove, btnSet, btnCancel, btnHold};
 //    setFontPointSize(14);
 
     gridMain = new QGridLayout;
@@ -61,8 +61,8 @@ void PultWidget::createControl() {
     };
 
     /////////////////////////////////
-    btnGo = new QPushButton(tr("Move"));
-    btnGo->setStatusTip(tr("Relative movement on dX, dY with given speed"));
+    btnMove = new QPushButton(tr("Move"));
+    btnMove->setStatusTip(tr("Relative movement on dX, dY with given speed"));
 
     btnSet = new QPushButton(tr("Set"));
     btnSet->setStatusTip(tr("Set position X, Y"));
@@ -102,9 +102,17 @@ void PultWidget::createControl() {
 
     createSpeed();
 
+    numAll = {numMoveX, numMoveY, numMoveU, numMoveV, numSetX, numSetY, numSetU, numSetV, numScaleX, numScaleY, numScaleU, numScaleV, numScaleEncX, numScaleEncY, numSpeed};
+    radioAll = {moveMM, moveSteps, speedMMM, speedUMS};
+
+    for (QDoubleSpinBox* num: numAll) {
+        num->setAccelerated(true);
+        num->setStepType(QAbstractSpinBox::AdaptiveDecimalStepType);
+    }
+
     gridControl = new QGridLayout;
 
-    gridControl->addWidget(btnGo, 0, 0, Qt::AlignLeft | Qt::AlignVCenter);
+    gridControl->addWidget(btnMove, 0, 0, Qt::AlignLeft | Qt::AlignVCenter);
     gridControl->addWidget(groupLabelNum(labeldX, numMoveX), 0, 1);
     gridControl->addWidget(groupLabelNum(labeldY, numMoveY), 0, 2);
 
@@ -704,46 +712,37 @@ void PultWidget::setFontPointSize(int pointSize) {
     for (QLabel* label: ctrlLabels)
         label->setFont(font);
 
-    font = btnGo->font();
+    font = btnMove->font();
     font.setPointSize(pointSize);
 
-    btnGo->setFont(font);
+    btnMove->setFont(font);
     btnSet->setFont(font);
 
     font = numMoveX->font();
     font.setPointSize(pointSize);
-
-    numMoveX->setFont(font);
-    numMoveY->setFont(font);
-    numMoveU->setFont(font);
-    numMoveV->setFont(font);
-    numSetX->setFont(font);
-    numSetY->setFont(font);
-    numSetU->setFont(font);
-    numSetV->setFont(font);
-
-    numScaleX->setFont(font);
-    numScaleY->setFont(font);
-    numScaleU->setFont(font);
-    numScaleV->setFont(font);
-    numScaleEncX->setFont(font);
-    numScaleEncY->setFont(font);
-
-    font = moveMM->font();
-    font.setPointSize(static_cast<int>(round(pointSize * 0.8)));
-    moveMM->setFont(font);
-    moveSteps->setFont(font);
+    for (QDoubleSpinBox* num: numAll) {
+        num->setFont(font);
+    }
 
     font = labelSpeed->font();
     font.setPointSize(pointSize);
     labelSpeed->setFont(font);
 
-    font = numSpeed->font();
-    font.setPointSize(pointSize);
-    numSpeed->setFont(font);
+    font = moveMM->font();
+    font.setPointSize(static_cast<int>(round(pointSize * 0.8)));    
+    for (QRadioButton* radio: radioAll) {
+        radio->setFont(font);
+    }
+}
 
-    font = speedMMM->font();
-    font.setPointSize(static_cast<int>(round(pointSize * 0.8)));
-    speedMMM->setFont(font);
-    speedUMS->setFont(font);
+void PultWidget::controlsEnable(bool ena) {
+    btnMove->setEnabled(ena);
+    btnSet->setEnabled(ena);
+    btnCancel->setEnabled(!ena);
+
+    for (QDoubleSpinBox* num: numAll)
+        num->setEnabled(ena);
+
+    for (QRadioButton* radio: radioAll)
+        radio->setEnabled(ena);
 }

@@ -158,7 +158,10 @@ void ad_writeRegs(size_t addr, size_t len, const uint8_t buf[], size_t N) {
 					case 0x44: cnc_setParam(4, *p32); break;
 					case 0x45:
 						cnc_setParam(5, *p32);
-						cnc_reqG92();
+
+						if (cnc_isInit()) {
+							cnc_reqG92();
+						}
 						break;
 
 					case 0x50: cnc_setParam(0, *p32); break;
@@ -170,7 +173,10 @@ void ad_writeRegs(size_t addr, size_t len, const uint8_t buf[], size_t N) {
 					case 0x56: cnc_setParam(6, *p32); break;
 					case 0x57:
 						cnc_setParam(7, *p32);
-						cnc_reqG1();
+
+						if (cnc_isInit()) {
+							cnc_reqG1();
+						}
 						break;
 
 					// center function

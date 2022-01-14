@@ -20,7 +20,7 @@ public:
     enum class MoveMode { MM, STEPS };
     MoveMode moveMode = MoveMode::MM;
 
-    QPushButton *btnGo = nullptr, *btnSet = nullptr;
+    QPushButton *btnMove = nullptr, *btnSet = nullptr;
 
     QDoubleSpinBox *numMoveX = nullptr, *numMoveY = nullptr, *numMoveU = nullptr, *numMoveV = nullptr;
     QDoubleSpinBox *numSetX = nullptr, *numSetY = nullptr, *numSetU = nullptr, *numSetV = nullptr;
@@ -48,8 +48,9 @@ public:
 
     std::vector<QPushButton*> buttons;
     std::vector<QLabel*> labels;
-    std::vector<QDoubleSpinBox*> nums;
-    std::vector<QRadioButton*> radio;
+
+    std::vector<QDoubleSpinBox*> numAll;
+    std::vector<QRadioButton*> radioAll;
 
     QLabel *labelTO = nullptr, *labelFB = nullptr, *labelPWR = nullptr, *labelALM = nullptr, *labelWB = nullptr, *labelREV = nullptr, *labelFWD = nullptr;
     std::vector<QLabel*> checkLabels;
@@ -98,6 +99,8 @@ public:
 
     void setFontPointSize(QWidget* w, int pointSize);
     void setFontPointSize(int pointSize);
+
+    void controlsEnable(bool ena);
 };
 
 #endif // PULT_PLOT_WIDGET_H

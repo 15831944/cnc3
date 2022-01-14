@@ -51,6 +51,7 @@ class FormPult : public QWidget {
     void startAdc();
     void stopAdc();
 
+    void controlsEnable(bool ena, bool force = false);
     void initButtons();
 
 private slots:
@@ -70,7 +71,6 @@ public:
     ~FormPult();
 
     void setFontPointSize(int pointSize);
-
     void init();
 
 signals:

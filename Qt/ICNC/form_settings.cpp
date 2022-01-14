@@ -228,6 +228,9 @@ void FormSettings::createSettingsWidget() {
     numStep->setSingleStep(0.001);
     numStep->setDecimals(3);
     numStep->setSuffix(" " + tr("mm"));
+#ifdef STONE
+    numStep->setEnabled(false);
+#endif
 
     labelX = new QLabel("X: ");
     labelY = new QLabel("Y: ");
@@ -246,36 +249,54 @@ void FormSettings::createSettingsWidget() {
     numScaleX->setRange(1, 1000000);
     numScaleX->setValue(CncParam::scaleX);
     numScaleX->setDecimals(0);
+#ifdef STONE
+    numScaleX->setEnabled(false);
+#endif
 
     numScaleY = new QDoubleSpinBox;
     labelY->setBuddy(numScaleY);
     numScaleY->setRange(1, 1000000);
     numScaleY->setValue(CncParam::scaleY);
     numScaleY->setDecimals(0);
+#ifdef STONE
+    numScaleY->setEnabled(false);
+#endif
 
     numScaleU = new QDoubleSpinBox;
     labelU->setBuddy(numScaleU);
     numScaleU->setRange(1, 1000000);
     numScaleU->setValue(CncParam::scaleU);
     numScaleU->setDecimals(0);
+#ifdef STONE
+    numScaleU->setEnabled(false);
+#endif
 
     numScaleV = new QDoubleSpinBox;
     labelV->setBuddy(numScaleV);
     numScaleV->setRange(1, 1000000);
     numScaleV->setValue(CncParam::scaleV);
     numScaleV->setDecimals(0);
+#ifdef STONE
+    numScaleV->setEnabled(false);
+#endif
 
     numScaleEncX = new QDoubleSpinBox;
     labelEncX->setBuddy(numScaleEncX);
     numScaleEncX->setRange(1, 1000);
     numScaleEncX->setValue(CncParam::scaleEncX);
     numScaleEncX->setDecimals(0);
+#ifdef STONE
+    numScaleEncX->setEnabled(false);
+#endif
 
     numScaleEncY = new QDoubleSpinBox;
     labelEncY->setBuddy(numScaleEncY);
     numScaleEncY->setRange(1, 1000);
     numScaleEncY->setValue(CncParam::scaleEncY);
     numScaleEncY->setDecimals(0);
+#ifdef STONE
+    numScaleEncY->setEnabled(false);
+#endif
 
     scaleNum = {numScaleX, numScaleY, numScaleU, numScaleV};
     encScaleNum = {numScaleEncX, numScaleEncY};
@@ -606,10 +627,6 @@ void FormSettings::createButtons() {
         uint32_t rbAttempts;
         double low_thld, high_thld, rbTimeout, rbLength, rbSpeed, acc, dec;
 
-        float step;
-        bool encXY;
-        float scaleX, scaleY, scaleU, scaleV, scaleEncX, scaleEncY;
-
         bool OK = par.cnc.readSettings(
                     input_lvl, sdEna, sdEna, revX, revY, revU, revV,
                     swapXY, swapUV,
@@ -669,6 +686,11 @@ void FormSettings::createButtons() {
             emit showError("Read ERROR!");
         }
 
+#ifndef STONE
+        float step;
+        bool encXY;
+        float scaleX, scaleY, scaleU, scaleV, scaleEncX, scaleEncY;
+
         if (OK)
             OK = par.cnc.readStep(step, scaleX, scaleY, scaleU, scaleV, scaleEncX, scaleEncY, encXY);
 
@@ -683,6 +705,7 @@ void FormSettings::createButtons() {
             numScaleEncY->setValue(scaleEncY);
             checkEncXY->setCheckState(encXY ? Qt::Checked : Qt::Unchecked);
         }
+#endif
     });
 
     connect(btnWrite, &QPushButton::clicked, this, [&]() {

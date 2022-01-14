@@ -1,7 +1,8 @@
 #ifndef MY_TYPES_H
 #define MY_TYPES_H
 
-#include <cstdint>
+#include <stdint.h>
+#include <stddef.h>
 
 enum AXIS {AXIS_X, AXIS_Y, AXIS_NUM};
 enum DIR {PLUS, MINUS};

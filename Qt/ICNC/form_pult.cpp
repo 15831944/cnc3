@@ -24,7 +24,7 @@ FormPult::FormPult(ProgramParam& par, QWidget *parent) :
 
     this->setLayout(mainLayout);
 
-    connect(pultWidget->btnGo, &QPushButton::clicked, this, &FormPult::on_btnMove_clicked);
+    connect(pultWidget->btnMove, &QPushButton::clicked, this, &FormPult::on_btnMove_clicked);
     connect(pultWidget->btnSet, &QPushButton::clicked, this, &FormPult::on_btnSet_clicked);
 
     connect(pultWidget->btnCancel, &QPushButton::clicked, this, &FormPult::on_btnCancel_clicked);
@@ -366,7 +366,7 @@ void FormPult::init() {
 }
 
 void FormPult::_init() {
-    initButtons();
+    controlsEnable(true, true);
 
 //    if (!par.cnc.isOpen())
 //        pultWidget->txtMsg->insertPlainText("Error: No CNC connection\n");
@@ -532,31 +532,26 @@ void FormPult::readCutState() {
 //            }
 
             if (ctx.isWork()) {
-                pultWidget->btnGo->setEnabled(false);
-                pultWidget->btnSet->setEnabled(false);
-                pultWidget->btnCancel->setEnabled(true);
-                btnHome->setEnabled(false);
-            }
-            else if (ctx.isError()) {
+                controlsEnable(false);
+            } else if (ctx.isError()) {
                 par.cnc.cancelReq();
-                initButtons();
+                controlsEnable(true);
+            } else {
+                controlsEnable(true);
             }
-            else
-                initButtons();
-        }
-        catch (...) {
-            initButtons();
+        } catch (...) {
+            controlsEnable(true, true);
         }
 
         QTimer::singleShot(POLLING_TIME, this, &FormPult::readCutState);
     }
 }
 
-void FormPult::initButtons() {
-    pultWidget->btnGo->setEnabled(true);
-    pultWidget->btnSet->setEnabled(true);
-    pultWidget->btnCancel->setEnabled(false);
-    btnHome->setEnabled(true);
+void FormPult::controlsEnable(bool ena, bool force) {
+    if (force || btnHome->isEnabled() != ena) {
+        pultWidget->controlsEnable(ena);
+        btnHome->setEnabled(ena);
+    }
 }
 
 void FormPult::startAdc() { // on init

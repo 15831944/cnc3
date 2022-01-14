@@ -16,8 +16,8 @@
 #include "cnc_param.h"
 
 namespace ADDR {
-    const uint32_t STATUS       = 0;
-    const uint32_t CLEAR        = 1 << 2;
+    const uint32_t STATUS       = 0x00;
+    const uint32_t CLEAR        = 0x01 << 2;
 
     const uint32_t CONTEXT      = 0x10 << 2;
     const uint32_t UV_ENABLE    = 0x10 << 2;
