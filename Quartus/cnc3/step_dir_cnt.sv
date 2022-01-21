@@ -11,7 +11,7 @@ module step_dir_cnt(
 	input write, snapshot, enc_changed,
 	
 	input step, dir,
-	output reg signed [31:0] cnt, delta_enc
+	output reg signed [31:0] cnt, cnt_enc
 );
 
 	reg [1:0] step_reg = '0;
@@ -24,7 +24,7 @@ module step_dir_cnt(
 		dir_reg	<= aclr ? 3'h0 : (sclr ? 3'h0 : {dir_reg[1:0], dir});
 	end
 
-	reg signed [31:0] step_cnt = '0, cnt_enc = '0;
+	reg signed [31:0] step_cnt = '0, step_cnt_enc = '0;
 	
 	always_ff @(posedge clk, posedge aclr)
 		if (aclr)
@@ -41,14 +41,6 @@ module step_dir_cnt(
 		else if (step_clk)
 			step_cnt <= (dir_reg[2]) ? step_cnt - 1'b1 : step_cnt + 1'b1;
 			
-	always_ff @(posedge clk, posedge aclr)
-		if (aclr)
-			cnt <= '0;
-		else if (sclr)
-			cnt <= '0;
-		else if (snapshot)
-			cnt <= step_cnt;
-	
 	// Lock by encoder
 	reg enc_changed_reg = 1'b0;
 	always_ff @(posedge clk, posedge aclr)
@@ -58,19 +50,23 @@ module step_dir_cnt(
 	
 	always_ff @(posedge clk, posedge aclr)
 		if (aclr)
-			cnt_enc <= '0;
+			step_cnt_enc <= '0;
 		else if (sclr || (write && be != '0))
-			cnt_enc <= '0;
+			step_cnt_enc <= '0;
 		else if (enc_clk)
-			cnt_enc <= step_cnt;
-			
+			step_cnt_enc <= step_cnt;
+	
+	// Snapshot
 	always_ff @(posedge clk, posedge aclr)
 		if (aclr)
-			delta_enc <= '0;
+			{cnt, cnt_enc} <= '0;
 		else if (sclr)
-			delta_enc <= '0;
+			{cnt, cnt_enc} <= '0;
 		else if (snapshot)
-			delta_enc <= (enc_clk) ? 32'h0 : step_cnt - cnt_enc;
+			begin
+				cnt <= step_cnt;
+				cnt_enc <= step_cnt_enc;
+			end
 
 endmodule: step_dir_cnt
 

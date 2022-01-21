@@ -2,7 +2,7 @@
 #define INC_DEFINES_H_
 
 //#define RESEASE
-#define STONE
+//#define STONE
 
 #define NAME ("CNC")
 #define MODEL ("0.3")
@@ -13,7 +13,7 @@
 	#define SOFT_WDT // for lose USB connection
 #else
 	#define VER_TYPE (2)
-//	#define PRINT
+	#define PRINT
 //	#define SOFT_WDT
 #endif
 

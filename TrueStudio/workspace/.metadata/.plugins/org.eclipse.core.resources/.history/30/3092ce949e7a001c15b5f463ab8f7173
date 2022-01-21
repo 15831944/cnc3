@@ -1,0 +1,112 @@
+#include "enc_recalc_pos.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <float.h>
+#include <ctype.h>
+#include <fpga_gpo.h>
+#include <math.h>
+#include <limits.h>
+
+#include "cnc_task.h"
+#include "cnc_task_ext.h"
+
+#include "key_task.h"
+#include "line.h"
+#include "arc.h"
+#include "fpga.h"
+#include "fpga_gpo.h"
+#include "controls.h"
+#include "step_dir.h"
+#include "imit_fifo.h"
+#include "prog_array.h"
+#include "my_lib.h"
+#include "aux_func.h"
+#include "cnc_func.h"
+#include "uv.h"
+#include "context.h"
+#include "backup.h"
+#include "feedback.h"
+#include "encoder.h"
+#include "soft_wdt.h"
+#include "pid.h"
+#include "center.h"
+#include "cnc_param.h"
+#include "center.h"
+
+/*
+ * return - step_id
+ */
+size_t enc_recalc_pos(point_t* const p_mtr_pt, const point_t* const p_mtr_uv_pt, const line_t* const p_line, const arc_t* const p_arc, size_t step_id) {
+	BOOL enc_changed = enc_valueChanged();
+
+	fpga_globalSnapshot();
+	int32_t pos_x = fpga_getPosX();
+	int32_t pos_x_enc = fpga_getPosXEnc();
+	int32_t pos_y = fpga_getPosY();
+	int32_t pos_y_enc = fpga_getPosYEnc();
+
+	int32_t enc_x = enc_getX();
+	int32_t enc_y = enc_getY();
+#ifdef PRINT
+	printf("Mtr (%d %d) EncReg (%d %d) Enc (%d %d) xyEnc (%d %d) ID %d\n",\
+			(int)p_mtr_pt->x, (int)p_mtr_pt->y, (int)enc_x_reg, (int)enc_y_reg, (int)enc_x, (int)enc_y, (int)pos_x_enc, (int)pos_y_enc, (int)step_id);
+#endif
+
+	// An encoder has a new value - recalculate step_id
+	if (enc_changed) {
+
+		if (enc_reg_valid) {
+			int32_t d_enc_x = enc_x - enc_x_reg; // Should be -1, 0, 1
+			int32_t d_enc_y = enc_y - enc_y_reg; // -1, 0, 1
+
+			int32_t d_pos_x_enc = pos_x_enc - pos_x_enc_reg; // Encoder step (5, -5)
+			int32_t d_pos_y_enc = pos_y_enc - pos_y_enc_reg;
+
+			int32_t dx = pos_x - pos_x_enc; // Should be 0 for stepper motors
+			int32_t dy = pos_y - pos_y_enc;
+
+			if (((d_enc_x && d_pos_x_enc) || abs(d_enc_x) > 1) || ((d_enc_y && d_pos_y_enc) || abs(d_enc_y) > 1)) {
+				fpoint_t mtr_mm, xy_mm;
+
+				if ((d_enc_x && d_pos_x_enc) || abs(d_enc_x) > 1) { // There were encoder and steps
+					mtr_mm.x = cnc_enc2mmX(enc_x) + cnc_steps2mmX(dx);
+					p_mtr_pt->x = cnc_mm2StepsX(mtr_mm.x);
+				}
+				else // use current position
+					mtr_mm.x = cnc_steps2mmX(p_mtr_pt.x);
+
+				if ((d_enc_y && d_pos_y_enc) || abs(d_enc_y) > 1) {
+					mtr_mm.y = cnc_enc2mmY(enc_y) + cnc_steps2mmY(dy);
+					p_mtr_pt->y = cnc_mm2StepsY(mtr_mm.y);
+				}
+				else
+					mtr_mm.y = cnc_steps2mmY(p_mtr_pt.y);
+
+				if (pa_plane() == PLANE_XYUV) {
+					fpoint_t mtr_uv_mm = steps_to_fpoint_mm(p_mtr_uv_pt, cnc_scaleUV());
+					xy_mm = uv_motors_to_XY(&mtr_mm, &mtr_uv_mm);
+				} else {
+					xy_mm = mtr_mm;
+				}
+
+				if (p_line->valid) {
+					step_id = line_getPos(p_line, &xy_mm);
+				} else if (p_arc->flag.valid) {
+					step_id = arc_getPos(p_arc, &xy_mm, cnc_scaleXY());
+				}
+#ifdef PRINT
+				printf("New (%d %d) ID %d\n", (int)p_mtr_pt->x, (int)p_mtr_pt->y, (int)step_id);
+#endif
+			}
+		}
+
+		enc_x_reg = enc_x;
+		enc_y_reg = enc_y;
+		pos_x_enc_reg = pos_x_enc;
+		pos_y_enc_reg = pos_y_enc;
+		enc_reg_valid = TRUE;
+	}
+
+	return step_id;
+}

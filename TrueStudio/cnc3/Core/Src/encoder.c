@@ -4,17 +4,17 @@
 #include "fpga.h"
 
 uint8_t enc_flags() {
-	return fpga_read_u16(ENC_FLAGS>>1) >> 8;
+	return fpga_read_u16(ENC_FLAGS>>1) & 0xFF;
 }
 
 void enc_clearFlags(uint8_t flags) {
-	fpga_write_u16(ENC_FLAGS>>1, (uint16_t)flags << 8);
+	fpga_write_u16(ENC_FLAGS>>1, (uint16_t)flags);
 }
 
-BOOL enc_valueChanged() {
+uint8_t enc_flagsAutoClear() {
 	uint16_t flags = fpga_read_u16(ENC_FLAGS>>1);
 	fpga_write_u16(ENC_FLAGS>>1, flags);
-	return flags != 0;
+	return flags & 0xFF;
 }
 
 void enc_clear() {

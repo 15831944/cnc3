@@ -139,9 +139,16 @@ int32_t fpga_getPosY() { return fpga_read_s32((POS32 + 8) >> 2); }
 int32_t fpga_getPosU() { return fpga_read_s32((POS32 + 0x10) >> 2); }
 int32_t fpga_getPosV() { return fpga_read_s32((POS32 + 0x18) >> 2); }
 
-// Encoder delta
-int32_t fpga_getDeltaX() { return fpga_read_s32( (POS32 + 4) >> 2 ); }
-int32_t fpga_getDeltaY() { return fpga_read_s32( (POS32 + 0xC) >> 2 ); }
+// Position at encoder
+int32_t fpga_getPosXEnc() { return fpga_read_s32( (POS32 + 4) >> 2 ); }
+int32_t fpga_getPosYEnc() { return fpga_read_s32( (POS32 + 0xC) >> 2 ); }
+
+void fpga_getPosXY(int32_t* const pos_x, int32_t* const pos_x_enc, int32_t* const pos_y, int32_t* const pos_y_enc) {
+	*pos_x		= fpga_read_s32(POS32 >> 2);
+	*pos_x_enc	= fpga_read_s32((POS32 >> 2) + 1);
+	*pos_y		= fpga_read_s32((POS32 >> 2) + 2);
+	*pos_y_enc	= fpga_read_s32((POS32 >> 2) + 3);
+}
 
 // Control module
 uint16_t fpga_getFlags() { return fpga_read_u16(IRQ_FLAGS>>1); }

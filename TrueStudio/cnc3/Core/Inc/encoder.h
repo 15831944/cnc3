@@ -5,7 +5,7 @@
 
 uint8_t enc_flags();
 void enc_clearFlags(uint8_t flags);
-BOOL enc_valueChanged();
+BOOL enc_flagsAutoClear();
 void enc_clear();
 uint16_t enc_getStatus();
 BOOL enc_getError();

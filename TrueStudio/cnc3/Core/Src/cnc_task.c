@@ -3,11 +3,13 @@
 #include <string.h>
 #include <float.h>
 #include <ctype.h>
-#include <fpga_gpo.h>
 #include <math.h>
 #include <limits.h>
 
 #include "cnc_task.h"
+#include "cnc_task_ext.h"
+#include "enc_recalc_pos.h"
+
 #include "key_task.h"
 #include "line.h"
 #include "arc.h"
@@ -70,13 +72,6 @@ static unsigned rb_attempts = ROLLBACK_ATTEMPTS, rb_attempt;
 static BOOL fault;
 
 uint8_t cnc_ena;
-static BOOL enc_mode = FALSE;
-
-void cnc_setEncModeXY(BOOL ena) {
-	if (state == ST_IDLE)
-		enc_mode = ena;
-}
-BOOL cnc_isEncMode() { return enc_mode; }
 
 BOOL cnc_fault() { return fault || soft_wdt(); }
 
@@ -150,8 +145,10 @@ void cnc_reqG92() {
 		fpga_setPos(2, param_reg[2]);
 		fpga_setPos(3, param_reg[3]);
 
-		if ((direct_valid & 0x30) == 0x30)
+		if ((direct_valid & 0x30) == 0x30) {
 			enc_setXY(param_reg[4], param_reg[5]);
+			clear_enc_reg();
+		}
 
 		fpga_setSoftPermit(TRUE);
 
@@ -182,6 +179,7 @@ void cnc_reqG92_xyuv_enc(int32_t x, int32_t y, int32_t u, int32_t v, int32_t enc
 		fpga_setPos(2, u);
 		fpga_setPos(3, v);
 		enc_setXY(enc_x, enc_y);
+		clear_enc_reg();
 
 		fpga_setSoftPermit(TRUE);
 
@@ -306,6 +304,7 @@ void cnc_clear1() {
 	pid_clear();
 
 	enc_mode = FALSE;
+	clear_enc_reg();
 }
 
 void cnc_clear() {
@@ -609,7 +608,6 @@ void cnc_onLoseConnection() {
 #endif
 }
 
-
 // Alarm state machine
 static void alarm_sm() {
 	limsw_reg &= LIM_SOFT_MSK | LIM_POWER_MSK | LIM_WIRE_MSK | LIM_ALARM_MSK | LIM_REV_MSK | LIM_FWD_MSK;
@@ -882,6 +880,7 @@ static void motor_sm() {
 			fpga_clearTimeout();
 			pa_gotoBegin();
 			pid_clear();
+			clear_enc_reg();
 
 //					if (rev_req) {
 //						rev_req = FALSE;
@@ -1162,71 +1161,8 @@ static void motor_sm() {
 			double t = 0, ts_xy = 0, ts_uv = 0;
 
 			if (enc_mode) {
-				BOOL enc_changed = enc_valueChanged();
-
-				// An encoder has a new value - recalculate step_id
-				if (enc_changed) {
-					static int32_t enc_x_reg = 0, enc_y_reg = 0;
-
-					fpga_globalSnapshot();
-					int32_t enc_x = enc_getX();
-					int32_t enc_y = enc_getY();
-					int32_t dx_enc = fpga_getDeltaX();
-					int32_t dy_enc = fpga_getDeltaY();
-#ifdef PRINT
-					printf("ENC\nOld (%d %d) Enc (%d %d) dXY (%d %d) ID %d\n", (int)mtr_pt.x, (int)mtr_pt.y, (int)enc_x, (int)enc_y, (int)dx_enc, (int)dy_enc, (int)step_id);
-#endif
-					if (dx_enc && dy_enc) {
-						fpoint_t mtr_mm;
-
-						if (dx_enc) {
-							if (enc_x == 0) // ?
-								mtr_mm.x = cnc_steps2mmX(dx_enc);
-							else if (enc_x > 0)
-								mtr_mm.x = cnc_enc2mmX(enc_x - 1) + cnc_steps2mmX(dx_enc);
-							else
-								mtr_mm.x = cnc_enc2mmX(enc_x + 1) + cnc_steps2mmX(dx_enc);
-
-							mtr_pt.x = cnc_mm2StepsX(mtr_mm.x);
-						}
-						else
-							mtr_mm.x = cnc_steps2mmX(mtr_pt.x);
-
-						if (dy_enc) {
-							if (enc_y == 0)
-								mtr_mm.y = cnc_steps2mmY(dy_enc);
-							else if (enc_y > 0)
-								mtr_mm.y = cnc_enc2mmY(enc_y - 1) + cnc_steps2mmY(dy_enc);
-							else
-								mtr_mm.y = cnc_enc2mmY(enc_y + 1) + cnc_steps2mmY(dy_enc);
-
-							mtr_pt.y = cnc_mm2StepsY(mtr_mm.y);
-						}
-						else
-							mtr_mm.y = cnc_steps2mmY(mtr_pt.y);
-
-						if (pa_plane() == PLANE_XYUV) {
-							fpoint_t mtr_uv_mm = steps_to_fpoint_mm(&mtr_uv_pt, cnc_scaleUV());
-							xy_mm = uv_motors_to_XY(&mtr_mm, &mtr_uv_mm);
-						} else {
-							xy_mm = mtr_mm;
-						}
-
-						if (line.valid) {
-							step_id = line_getPos(&line, &xy_mm);
-						} else if (arc.flag.valid) {
-							step_id = arc_getPos(&arc, &xy_mm, cnc_scaleXY());
-						}
-#ifdef PRINT
-					printf("New (%d %d) ID %d\n", (int)mtr_pt.x, (int)mtr_pt.y, (int)step_id);
-#endif
-					}
-
-					enc_x_reg = enc_x;
-					enc_y_reg = enc_y;
-				}
+				step_id = enc_recalc_pos(&mtr_pt, &mtr_uv_pt, &line, &arc, step_id);
 			}
-
 			++step_id;
 
 			if (fb_isEnabled())
@@ -1319,7 +1255,7 @@ static void motor_sm() {
 			}
 
 #ifdef PRINT
-//			cnc_printState();
+			cnc_printState();
 #endif
 		}
 		break;

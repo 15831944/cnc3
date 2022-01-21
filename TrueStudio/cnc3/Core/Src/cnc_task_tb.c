@@ -380,10 +380,10 @@ void cnc_enc_cut_tb() {
 	const char* test[] = {
 		"%",
 		"G92 X0 Y0",
-//		"G01 X0.003 Y0.003",
-//		"G01 X0.003 Y-0.003",
-//		"G01 X-0.003 Y-0.003",
-		"G01 X-0.100 Y0.100",
+//		"G01 X0.050 Y0.000",
+//		"G01 X0.000 Y0.050",
+//		"G01 X0.050 Y0.050",
+		"G01 X0.050 Y0.025",
 		"M02",
 		"%"
 	};
@@ -403,7 +403,8 @@ void cnc_enc_cut_tb() {
 	pa_print();
 
 	fb_enable(FALSE);
-//	fpga_setInputLevel(0x300);
-	fpga_setInputLevel(0);
+	cnc_setEncModeXY(TRUE);
+	fpga_setInputLevel(0x300); // Debug
+//	fpga_setInputLevel(0);
 	cnc_runReq();
 }

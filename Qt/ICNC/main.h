@@ -10,7 +10,7 @@
 // 0.2.2.0 Time AM PM for non-russian languages
 // 0.3.0.0 Slow speed, write default settings on the disk if settings are empty
 
-#define STONE
+//#define STONE
 //#define DEV
 #ifndef STONE
     #define SHOW_ENCODERS

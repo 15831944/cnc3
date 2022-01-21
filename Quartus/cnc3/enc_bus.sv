@@ -55,9 +55,9 @@ module enc_bus #(parameter
 						end
 			endcase
 	
-	always_ff @(posedge clk) begin
-		enc_clr		<= {8{write && wrhit && l_wraddr == 'h0 && be[0]}} & wrdata[7:0];
-		flag_clr		<= {8{write && wrhit && l_wraddr == 'h0 && be[1]}} & wrdata[15:8];
+	always_ff @(posedge clk) begin		
+		flag_clr		<= {8{write && wrhit && l_wraddr == 'h0 && be[0]}} & wrdata[7:0];
+		enc_clr		<= {8{write && wrhit && l_wraddr == 'h0 && be[1]}} & wrdata[15:8];
 		l_snapshot	<= write && wrhit && l_wraddr == 'h8 && be[0] & wrdata[0];
 	end
 	
@@ -71,7 +71,7 @@ module enc_bus #(parameter
 		else if (rdhit)
 			if (l_rdaddr < 16'h40)
 				case (l_rdaddr)
-					'h0: rddata <= {flag, 8'h0};
+					'h0: rddata <= {8'h0, flag};
 					'h2: rddata <= {error, ~ready};
 					'h4: rddata <= {8'h0, ena};
 					'h6: rddata <= {8'h0, dir};					

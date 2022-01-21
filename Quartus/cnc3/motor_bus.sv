@@ -56,7 +56,7 @@ module motor_bus #(parameter
 	reg swap_xy = 1'b0, swap_uv = 1'b0; // swap motors 0 and 1
 	reg oe = 1'b0;
 	wire [MOTORS-1:0] gen_step, gen_dir;
-	wire [MOTORS-1:0][31:0] coord, delta_enc;
+	wire [MOTORS-1:0][31:0] coord, coord_enc;
 	
 	task reset();
 		N			<= {MOTORS{32'h0}};
@@ -173,8 +173,8 @@ module motor_bus #(parameter
 				case (l_rdaddr[2:1])
 					'h0: rddata <= coord[l_rdaddr[4:3]][15:0];
 					'h1: rddata <= coord[l_rdaddr[4:3]][31:16];
-					'h2: rddata <= delta_enc[l_rdaddr[4:3]][15:0];
-					'h3: rddata <= delta_enc[l_rdaddr[4:3]][31:16];
+					'h2: rddata <= coord_enc[l_rdaddr[4:3]][15:0];
+					'h3: rddata <= coord_enc[l_rdaddr[4:3]][31:16];
 				endcase
 			else
 				rddata <= '0;
@@ -231,7 +231,7 @@ module motor_bus #(parameter
 		.clk, .aclr, .sclr,
 		.addr(l_wraddr[5:0]), .be, .wrdata, .write(write && wrhit && l_wraddr >= 'h80 && l_wraddr < 'hC0), .global_snapshot, .enc_changed(MOTORS'(enc_changed)),
 		.step(gen_step), .dir(gen_dir),
-		.coord, .dst(), .delta_enc
+		.coord, .dst(), .coord_enc
 	);
 	
 	assign imit_enc_step = gen_step[1:0];
@@ -298,7 +298,7 @@ module step_cnts #(
 	input write, global_snapshot,
 	input [MOTORS-1:0] enc_changed,
 	input [MOTORS-1:0] step, dir,
-	output [MOTORS-1:0][31:0] coord, dst, delta_enc
+	output [MOTORS-1:0][31:0] coord, dst, coord_enc
 );
 	genvar k;
 	
@@ -307,13 +307,13 @@ module step_cnts #(
 			step_dir_cnt coord_cnt(
 				.clk, .aclr, .sclr,
 				.addr(addr[1]), .be, .wrdata, .write(write && (addr[5:2] == 2 * k)), .snapshot(global_snapshot), .enc_changed(enc_changed[k]),
-				.step(step[k]), .dir(dir[k]), .cnt(coord[k]), .delta_enc(delta_enc[k])
+				.step(step[k]), .dir(dir[k]), .cnt(coord[k]), .cnt_enc(coord_enc[k])
 			);
 			
 			step_dir_cnt dst_cnt(
 				.clk, .aclr, .sclr,
 				.addr(addr[1]), .be, .wrdata, .write(write && (addr[5:2] == 2 * k + 1)), .snapshot(global_snapshot), .enc_changed(1'b0),
-				.step(step[k]), .dir(1'b0), .cnt(dst[k]), .delta_enc()
+				.step(step[k]), .dir(1'b0), .cnt(dst[k]), .cnt_enc()
 			);
 		end
 	endgenerate

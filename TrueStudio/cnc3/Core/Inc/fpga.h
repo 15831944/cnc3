@@ -237,8 +237,8 @@ int32_t fpga_getPosY();
 int32_t fpga_getPosU();
 int32_t fpga_getPosV();
 
-int32_t fpga_getDeltaX();
-int32_t fpga_getDeltaY();
+int32_t fpga_getPosXEnc();
+int32_t fpga_getPosYEnc();
 
 // Control module
 uint16_t fpga_getFlags();
