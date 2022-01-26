@@ -113,25 +113,23 @@ fpoint_t line_getPoint(const line_t* const line, size_t step_id, BOOL* const is_
 		return res;
 	}
 
-	{
-		fpoint_t res = {line->A.x + k * line->dx, line->A.y + k * line->dy};
+	fpoint_t res = {line->A.x + k * line->dx, line->A.y + k * line->dy};
 
-		if ( fabs(res.x - line->A.x) >= fabs(line->dx) ) {
-			res.x = line->B.x;
-			*is_last = TRUE;
-		}
-		else
-			*is_last = FALSE;
-
-		if ( fabs(res.y - line->A.y) >= fabs(line->dy) ) {
-			res.y = line->B.y;
-			*is_last &= TRUE;
-		}
-		else
-			*is_last = FALSE;
-
-		return res;
+	if ( fabs(res.x - line->A.x) >= fabs(line->dx) ) {
+		res.x = line->B.x;
+		*is_last = TRUE;
+	} else {
+		*is_last = FALSE;
 	}
+
+	if ( fabs(res.y - line->A.y) >= fabs(line->dy) ) {
+		res.y = line->B.y;
+		*is_last &= TRUE;
+	} else {
+		*is_last = FALSE;
+	}
+
+	return res;
 }
 
 //static double iilen2(const point_t* const A, const point_t* const B) {
@@ -146,22 +144,26 @@ static double len2(const fpoint_t* const A, const fpoint_t* const B) {
 	return dx * dx + dy * dy;
 }
 
-size_t line_getPos(const line_t* const line, const fpoint_t* const pt) {
+size_t line_getPos(const line_t* const line, const fpoint_t* const pt, BOOL* const is_last) {
 	double AC2 = len2(&line->A, pt);
 	double BC2 = len2(&line->B, pt);
 	double AB2 = line->length * line->length;
 	double denom = 2 * line->length * line->step;
 
-	double idx = (AB2 + AC2 - BC2) / denom;
+	double index = (AB2 + AC2 - BC2) / denom;
 
-	if (idx <= 0)
-		idx = 0;
-	else if (idx * line->step > line->length)
-		idx = floor(line->length / line->step);
-	else
-		idx = floor(idx);
+	if (index <= 0) {
+		index = 0;
+		*is_last = FALSE;
+	} else if (index * line->step > line->length) {
+		index = floor(line->length / line->step);
+		*is_last = TRUE;
+	} else {
+		index = round(index); // ?? floor
+		*is_last = FALSE;
+	}
 
-	return (size_t)idx;
+	return (size_t)index;
 }
 
 // ??
@@ -266,6 +268,7 @@ void line_print(const line_t* const line) {
 
 void line_test() {
 	static line_t line;
+	BOOL is_last;
 
 	fpoint_t A = {1, 1};
 	fpoint_t B = {5, 5};
@@ -276,9 +279,8 @@ void line_test() {
 
 	for (int k = 0; k < 20; k++) {
 		fpoint_print(&pt);
-
-		size_t i = line_getPos(&line, &pt);
-		printf("Line idx: %d\n", i);
+		size_t i = line_getPos(&line, &pt, &is_last);
+		printf("Line idx: %d last: %x\n", i, is_last);
 
 		pt.x++;
 	}

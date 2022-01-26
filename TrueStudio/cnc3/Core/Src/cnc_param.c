@@ -45,8 +45,10 @@ BOOL cnc_isIdle();
 
 // mm
 void cnc_setStep(double value) {
-	if (cnc_isIdle())
+	if (cnc_isIdle()) {
 		step = value < STEP_MIN ? STEP_MIN : value > STEP_MAX ? STEP_MAX : value;
+		step = round(step * 1e6) * 1e-6;
+	}
 }
 // mm
 double cnc_step() { return step; }

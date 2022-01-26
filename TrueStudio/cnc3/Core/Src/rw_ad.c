@@ -100,7 +100,7 @@ void ad_writeRegs(size_t addr, size_t len, const uint8_t buf[], size_t N) {
 					case 0x2D: cnc_setScaleEncY(*pfloat); break;
 					case 0x2E:
 						 if (wrdata & 1<<16) // mask
-							 cnc_setEncModeXY(wrdata & 1); // data
+							 cnc_setEncXYMode(wrdata & 1); // data
 
 						 if (wrdata & 1<<(16 + 8))
 							 cnc_enableUV((wrdata & 1<<8) != 0);
@@ -306,14 +306,14 @@ void ad_readRegs(uint32_t addr, size_t len) {
 					case 0x20: rddata = (uint32_t)gpo_cncEnabled()<<7 | (uint32_t)sem_enabled()<<6; break;
 
 					case 0x26: *pfloat = cnc_speed(); break;
-					case 0x27: *pfloat = cnc_step(); break;
-					case 0x28: *pfloat = cnc_scaleX(); break;
-					case 0x29: *pfloat = cnc_scaleY(); break;
-					case 0x2A: *pfloat = cnc_scaleU(); break;
-					case 0x2B: *pfloat = cnc_scaleV(); break;
-					case 0x2C: *pfloat = cnc_scaleEncX(); break;
-					case 0x2D: *pfloat = cnc_scaleEncY(); break;
-					case 0x2E: rddata = (uint32_t)cnc_uvEnabled()<<8 | (uint32_t)cnc_isEncMode()<<0;
+					case 0x27: *pfloat = (float)cnc_step(); break;
+					case 0x28: *pfloat = (float)cnc_scaleX(); break;
+					case 0x29: *pfloat = (float)cnc_scaleY(); break;
+					case 0x2A: *pfloat = (float)cnc_scaleU(); break;
+					case 0x2B: *pfloat = (float)cnc_scaleV(); break;
+					case 0x2C: *pfloat = (float)cnc_scaleEncX(); break;
+					case 0x2D: *pfloat = (float)cnc_scaleEncY(); break;
+					case 0x2E: rddata = (uint32_t)cnc_uvEnabled()<<8 | (uint32_t)cnc_isEncMode()<<0; break;
 
 					// Settings
 					case 0x30:

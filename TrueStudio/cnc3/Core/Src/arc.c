@@ -238,14 +238,14 @@ double deltaRadian(double a, double b, BOOL ccw) {
 	return d;
 }
 
-double arc_R_err(const arc_t* const arc, const fpoint_t* const pt) {
+double arc_radiusError(const arc_t* const arc, const fpoint_t* const pt) {
 	double dX = (double)pt->x - arc->C.x;
 	double dY = (double)pt->y - arc->C.y;
 	double R = sqrt(dX * dX + dY * dY);
 	return R - arc->R;
 }
 
-fpoint_t arc_err(const arc_t* const arc, const fpoint_t* const pt) {
+fpoint_t arc_error(const arc_t* const arc, const fpoint_t* const pt) {
 	fpoint_t err;
 
 	double Lx = (double)pt->x - arc->C.x; // from center
@@ -381,33 +381,38 @@ fpoint_t arc_getPoint(const arc_t* const arc, size_t step_id, BOOL* const is_las
 		return res;
 	}
 
-	{
-		if (!arc->flag.ccw)
-			delta_phi = -delta_phi;
+	if (!arc->flag.ccw)
+		delta_phi = -delta_phi;
 
-		double phi = arc->alpha + delta_phi;
+	double phi = arc->alpha + delta_phi;
 
-		phi = range360(phi);
-		fpoint_t res = {arc->R * cos(phi) + arc->C.x, arc->R * sin(phi) + arc->C.y};
-		*is_last = FALSE;
+	phi = range360(phi);
+	fpoint_t res = {arc->R * cos(phi) + arc->C.x, arc->R * sin(phi) + arc->C.y};
+	*is_last = FALSE;
 
-		return res;
-	}
+	return res;
 }
 
-size_t arc_getPos(const arc_t* const arc, const fpoint_t* const pt, const scale_t* const scale) {
+size_t arc_getPos(const arc_t* const arc, const fpoint_t* const pt, const scale_t* const scale, BOOL* const is_last) {
 	double R, phi;
+	size_t index, index_max;
 
 	polar(&arc->C, pt, &R, &phi, scale);
 
 	double delta_phi = deltaRadian(arc->alpha, phi, arc->flag.ccw);
 
+	double k = 1.0 / arc->step_rad;
+
+	index_max = (size_t)round(arc->delta * k);
+
 	if (delta_phi > arc->delta)
-		return 0;
-	else {
-		double k = delta_phi / arc->step_rad;
-		return (size_t)floor(k);
-	}
+		index = index_max;
+	else
+		index = (size_t)round(delta_phi * k); // ?? floor
+
+	*is_last = index >= index_max;
+
+	return index;
 }
 
 // for first step use main dir

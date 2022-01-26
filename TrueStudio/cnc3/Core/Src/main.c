@@ -238,7 +238,7 @@ int main(void)
 //  }
 
 //  uv_tb();
-  cnc_enc_cut_tb();
+//  cnc_enc_cut_tb();
 
   while (1)
   {

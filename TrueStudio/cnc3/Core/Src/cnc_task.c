@@ -303,7 +303,7 @@ void cnc_clear1() {
 
 	pid_clear();
 
-	enc_mode = FALSE;
+	cnc_clearEncXYMode();
 	clear_enc_reg();
 }
 
@@ -996,17 +996,18 @@ static void motor_sm() {
 							line_swap(&line);
 
 						if (update_pos_req) {
+							BOOL is_last; // don't use
 							update_pos_req = FALSE;
 
 							if (pa_plane() == PLANE_XYUV) {
 								fpoint_t mtr_mm = steps_to_fpoint_mm(&mtr_pt, cnc_scaleXY());
 								fpoint_t mtr_uv_mm = steps_to_fpoint_mm(&mtr_uv_pt, cnc_scaleUV());
 								fpoint_t xy_mm = uv_motors_to_XY(&mtr_mm, &mtr_uv_mm);
-								step_id = line_getPos(&line, &xy_mm);
+								step_id = line_getPos(&line, &xy_mm, &is_last);
 							}
 							else {
 								fpoint_t xy_mm = steps_to_fpoint_mm(&mtr_pt, cnc_scaleXY());
-								step_id = line_getPos(&line, &xy_mm);
+								step_id = line_getPos(&line, &xy_mm, &is_last);
 							}
 						}
 						else
@@ -1053,17 +1054,18 @@ static void motor_sm() {
 							arc_swap(&arc);
 
 						if (update_pos_req) {
+							BOOL is_last; // don't use
 							update_pos_req = FALSE;
 
 							if (pa_plane() == PLANE_XYUV) {
 								fpoint_t mtr_mm = steps_to_fpoint_mm(&mtr_pt, cnc_scaleXY());
 								fpoint_t mtr_uv_mm = steps_to_fpoint_mm(&mtr_uv_pt, cnc_scaleUV());
 								fpoint_t xy_mm = uv_motors_to_XY(&mtr_mm, &mtr_uv_mm);
-								step_id = arc_getPos(&arc, &xy_mm, cnc_scaleXY());
+								step_id = arc_getPos(&arc, &xy_mm, cnc_scaleXY(), &is_last);
 							}
 							else {
 								fpoint_t xy_mm = steps_to_fpoint_mm(&mtr_pt, cnc_scaleXY());
-								step_id = arc_getPos(&arc, &xy_mm, cnc_scaleXY());
+								step_id = arc_getPos(&arc, &xy_mm, cnc_scaleXY(), &is_last);
 							}
 						}
 						else
@@ -1160,10 +1162,16 @@ static void motor_sm() {
 			point_t next = {0, 0}, uv_next = {0, 0};
 			double t = 0, ts_xy = 0, ts_uv = 0;
 
-			if (enc_mode) {
-				step_id = enc_recalc_pos(&mtr_pt, &mtr_uv_pt, &line, &arc, step_id);
+			if (cnc_isEncMode()) {
+				step_id = enc_recalc_pos(&mtr_pt, &mtr_uv_pt, &line, &arc, step_id, &is_last[0]);
+
+				if (is_last[0]) {
+					state = ST_WAIT;
+					break;
+				}
 			}
-			++step_id;
+
+			step_id++;
 
 			if (fb_isEnabled())
 				if (hv_enabled) {

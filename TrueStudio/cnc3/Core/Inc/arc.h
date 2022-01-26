@@ -46,11 +46,11 @@ double range360(double value);
 double deltaRadian(double a, double b, BOOL ccw);
 
 fpoint_t arc_getPoint(const arc_t* const arc, size_t step_id, BOOL* const is_last, BOOL* const valid);
-size_t arc_getPos(const arc_t* const arc, const fpoint_t* const pt, const scale_t* const scale);
+size_t arc_getPos(const arc_t* const arc, const fpoint_t* const pt, const scale_t* const scale, BOOL* const is_last);
 
 double arc_y(const arc_t* const arc, const double x);
 double arc_x(const arc_t* const larc, const double y);
-fpoint_t arc_err(const arc_t* const arc, const fpoint_t* const pt);
+fpoint_t arc_error(const arc_t* const arc, const fpoint_t* const pt);
 
 dir_t arc_getDir(const arc_t* const arc, const fpoint_t* const pt, const scale_t* const scale);
 

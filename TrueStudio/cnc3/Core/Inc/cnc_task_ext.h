@@ -9,12 +9,6 @@
 #include "defines.h"
 #include "my_types.h"
 
-extern BOOL enc_mode, enc_reg_valid;
-extern int32_t enc_x_reg, enc_y_reg, pos_x_enc_reg, pos_y_enc_reg;
 
-void cnc_setEncModeXY(BOOL ena);
-BOOL cnc_isEncMode();
-
-void clear_enc_reg();
 
 #endif /* INC_CNC_TASK_EXT_H_ */

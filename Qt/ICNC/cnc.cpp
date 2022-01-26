@@ -816,7 +816,7 @@ bool Cnc::writeStep(float step, float scale_x, float scale_y, float scale_u, flo
             memcpy(&v[20], reinterpret_cast<uint8_t*>(&scale_enc_x), sizeof(float));
             memcpy(&v[24], reinterpret_cast<uint8_t*>(&scale_enc_y), sizeof(float));
 
-            uint32_t data = 1<<16 | encXY<<0;
+            uint32_t data = 1U<<16 | (uint32_t)encXY<<0; // enable mask and flag
             memcpy(&v[28], reinterpret_cast<uint8_t*>(&data), sizeof(uint32_t));
 
             m_com.write(ADDR::STEP, v);
@@ -877,13 +877,13 @@ bool Cnc::readStep(float &step, float &scaleX, float &scaleY, float &scaleU, flo
             vector<uint8_t> v = m_com.read(ADDR::STEP, size);
 
             if (v.size() == size) {
-                step = BitConverter::toUInt32(v, 0);
-                scaleX = BitConverter::toUInt32(v, 4);
-                scaleY = BitConverter::toUInt32(v, 8);
-                scaleU = BitConverter::toUInt32(v, 12);
-                scaleV = BitConverter::toUInt32(v, 16);
-                scaleEncX = BitConverter::toUInt32(v, 20);
-                scaleEncY = BitConverter::toUInt32(v, 24);
+                step = BitConverter::toFloat(v, 0);
+                scaleX = BitConverter::toFloat(v, 4);
+                scaleY = BitConverter::toFloat(v, 8);
+                scaleU = BitConverter::toFloat(v, 12);
+                scaleV = BitConverter::toFloat(v, 16);
+                scaleEncX = BitConverter::toFloat(v, 20);
+                scaleEncY = BitConverter::toFloat(v, 24);
                 encXY = v[28] & 1;
 
                 return true;

@@ -13,7 +13,7 @@
 	#define SOFT_WDT // for lose USB connection
 #else
 	#define VER_TYPE (2)
-	#define PRINT
+//	#define PRINT
 //	#define SOFT_WDT
 #endif
 

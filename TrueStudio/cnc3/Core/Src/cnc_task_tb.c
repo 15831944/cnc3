@@ -269,7 +269,7 @@ BOOL cnc_test_rev() {
 	line_swap(&uv_line);
 
 	fpoint_t xy_mm2 = uv_motors_to_XY(&mtr_mm, &mtr_uv_mm);
-	step_id = arc_getPos(&arc, &xy_mm2, cnc_scaleXY());
+	step_id = arc_getPos(&arc, &xy_mm2, cnc_scaleXY(), &is_last);
 
 	fpoint_t rev_xy_mm = arc_getPoint(&arc, step_id, &is_last, &valid);
 	fpoint_t rev_uv_mm = line_getPoint(&uv_line, step_id, &is_last, &valid);
@@ -380,10 +380,10 @@ void cnc_enc_cut_tb() {
 	const char* test[] = {
 		"%",
 		"G92 X0 Y0",
-//		"G01 X0.050 Y0.000",
-//		"G01 X0.000 Y0.050",
-//		"G01 X0.050 Y0.050",
 		"G01 X0.050 Y0.025",
+		"G01 X0.025 Y0.075",
+		"G01 X-0.025 Y0.050",
+		"G01 X0.000 Y0.000",
 		"M02",
 		"%"
 	};
@@ -403,7 +403,7 @@ void cnc_enc_cut_tb() {
 	pa_print();
 
 	fb_enable(FALSE);
-	cnc_setEncModeXY(TRUE);
+	cnc_setEncXYMode(TRUE);
 	fpga_setInputLevel(0x300); // Debug
 //	fpga_setInputLevel(0);
 	cnc_runReq();
