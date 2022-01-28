@@ -403,7 +403,7 @@ void cnc_enc_cut_tb() {
 	pa_print();
 
 	fb_enable(FALSE);
-	cnc_setEncXYMode(TRUE);
+	cnc_setEncMode(TRUE);
 	fpga_setInputLevel(0x300); // Debug
 //	fpga_setInputLevel(0);
 	cnc_runReq();

@@ -147,7 +147,7 @@ void cnc_reqG92() {
 
 		if ((direct_valid & 0x30) == 0x30) {
 			enc_setXY(param_reg[4], param_reg[5]);
-			clear_enc_reg();
+			cnc_clearEncModeRegs();
 		}
 
 		fpga_setSoftPermit(TRUE);
@@ -179,7 +179,7 @@ void cnc_reqG92_xyuv_enc(int32_t x, int32_t y, int32_t u, int32_t v, int32_t enc
 		fpga_setPos(2, u);
 		fpga_setPos(3, v);
 		enc_setXY(enc_x, enc_y);
-		clear_enc_reg();
+		cnc_clearEncModeRegs();
 
 		fpga_setSoftPermit(TRUE);
 
@@ -303,8 +303,7 @@ void cnc_clear1() {
 
 	pid_clear();
 
-	cnc_clearEncXYMode();
-	clear_enc_reg();
+	cnc_clearEncModeRegs();
 }
 
 void cnc_clear() {
@@ -319,6 +318,7 @@ void cnc_reset() {
 
 	pid_reset();
 	fb_reset();
+	cnc_resetEncMode();
 
 	pa_clear();
 
@@ -880,7 +880,7 @@ static void motor_sm() {
 			fpga_clearTimeout();
 			pa_gotoBegin();
 			pid_clear();
-			clear_enc_reg();
+			cnc_clearEncModeRegs();
 
 //					if (rev_req) {
 //						rev_req = FALSE;

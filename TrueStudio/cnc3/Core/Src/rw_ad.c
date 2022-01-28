@@ -100,7 +100,7 @@ void ad_writeRegs(size_t addr, size_t len, const uint8_t buf[], size_t N) {
 					case 0x2D: cnc_setScaleEncY(*pfloat); break;
 					case 0x2E:
 						 if (wrdata & 1<<16) // mask
-							 cnc_setEncXYMode(wrdata & 1); // data
+							 cnc_setEncMode(wrdata & 1); // data
 
 						 if (wrdata & 1<<(16 + 8))
 							 cnc_enableUV((wrdata & 1<<8) != 0);

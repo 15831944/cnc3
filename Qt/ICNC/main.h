@@ -11,7 +11,7 @@
 // 0.3.0.0 Slow speed, write default settings on the disk if settings are empty
 // 0.3.0.1 Fixed error step and scale
 
-#define STONE
+//#define STONE
 //#define DEV
 #ifndef STONE
     #define SHOW_ENCODERS

@@ -392,7 +392,7 @@ public:
                 "Reverse "    + (m_context.field.rev ? "(Yes)" : "(no)") + "\t" +
                 "Rollback "   + (m_context.field.rollback ? "(Yes)" : "(no)") + "\n" +
                 "HV Enabled " + (m_context.field.hv_ena ? "(Yes)" : "(no)") + "\t" +
-                "HV & FB"     + (m_context.field.hv_ena && m_context.field.fb ? "(Yes)" : "(no)") + "\t" +
+                "HV & FB "     + (m_context.field.hv_ena && m_context.field.fb ? "(Yes)" : "(no)") + "\t" +
                 "Attempt:\t"    + std::to_string(m_context.field.attempt) + " (" + std::to_string(m_context.field.attempts) + ")" + "\n" +
                 "Cur. speed:\t" + std::to_string( int(round(WireSpeed::toUMS(WireSpeed::TtoSpeed(m_context.field.T_cur)))) ) + " um/sec\n";
     }

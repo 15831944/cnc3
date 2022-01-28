@@ -35,19 +35,19 @@ union {
 int32_t enc_reg[2] = {0, 0};
 int32_t pos_enc_reg[2] = {0, 0};
 
-void cnc_setEncXYMode(BOOL ena) {
+void cnc_setEncMode(BOOL ena) {
 	if ( cnc_isIdle() ) {
 		enc_mode = ena;
-		clear_enc_reg();
+		cnc_clearEncModeRegs();
 	}
 }
-void cnc_clearEncXYMode() {
+void cnc_resetEncMode() {
 	enc_mode = FALSE;
-	clear_enc_reg();
+	cnc_clearEncModeRegs();
 }
 BOOL cnc_isEncMode() { return enc_mode; }
 
-void clear_enc_reg() {
+void cnc_clearEncModeRegs() {
 	enc_reg_valid.data = 0;
 	enc_reg[0] = enc_reg[1] = 0;
 	pos_enc_reg[0] = pos_enc_reg[1] = 0;

@@ -59,7 +59,7 @@ typedef struct {
 	pulse_t pulse;
 } cnc_param_t;
 
-void cnc_setEncXYMode(BOOL ena);
+void cnc_setEncMode(BOOL ena);
 BOOL cnc_isEncMode();
 
 void cnc_clearDirectParam(cnc_param_t* const par);

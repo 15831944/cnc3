@@ -74,7 +74,16 @@ float cnc_pidDec() { return dec * COE_DCODE_TO_VOLT; }
 /* Scale of motors and linear encoders
  * steps / mm
  */
-static double limitScale(double value) { return value < SCALE_MIN ? SCALE_MIN : value > SCALE_MAX ? SCALE_MAX : value; }
+static double limitScale(double value) {
+	if (value < SCALE_MIN)
+		value = SCALE_MIN;
+	else if  (value > SCALE_MAX)
+		value = SCALE_MAX;
+	else
+		value = round(value);
+
+	return value;
+}
 
 void cnc_setScaleX(double value) {
 	if (cnc_isIdle()) {
