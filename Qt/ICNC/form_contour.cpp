@@ -120,7 +120,7 @@ void FormContour::createButtons() {
     btnHome->setStatusTip(tr("Go to the home panel"));
 
     btnOpen = new QPushButton(tr("Open"));
-    btnOpen->setStatusTip(tr("Open project"));
+    btnOpen->setStatusTip(tr("Open a project"));
     btnOpen->setEnabled(false);
 
     btnSave = new QPushButton(tr("Save"));
@@ -132,13 +132,13 @@ void FormContour::createButtons() {
     btnSaveAs->setEnabled(false);
 
     btnBot = new QPushButton(tr("Load DXF"));
-    btnBot->setStatusTip(tr("Load DXF file"));
+    btnBot->setStatusTip(tr("Load a DXF file"));
 
     btnTop = new QPushButton;
     btnTop->setEnabled(false);
 
     btnPasses = new QPushButton(tr("Adjust"));
-    btnPasses->setStatusTip(tr("Adjust contour"));
+    btnPasses->setStatusTip(tr("Adjust the contour"));
 
     btnGenerate = new QPushButton(tr("Generate"));
     btnGenerate->setStatusTip(tr("Generate G-code"));
@@ -252,8 +252,8 @@ void FormContour::createViewControl() {
     btnNewContour = new QPushButton(tr("New Contour"));
     btnNewContour->setEnabled(false);
 
-    btnAddCutline = new QPushButton(tr("Add Cutline"));
-    btnAddCutline->setStatusTip(tr("Add new cutline before the first segment"));
+    btnAddCutline = new QPushButton(tr("Add Entry Line"));
+    btnAddCutline->setStatusTip(tr("Add a new cutline before the first segment"));
 
     btnDelete = new QPushButton(tr("Delete"));
     btnDelete->setStatusTip(tr("Delete selected contour"));
@@ -269,10 +269,10 @@ void FormContour::createViewControl() {
 
     vLayoutRight = new QVBoxLayout();
 
-    btnBegin = new QPushButton(tr("First"));
+    btnBegin = new QPushButton(tr("Set First"));
     btnBegin->setStatusTip(tr("Set as the first segment in the contour"));
 
-    btnChangeDir = new QPushButton(tr("Change direction"));
+    btnChangeDir = new QPushButton(tr("Change Direction"));
     btnChangeDir->setStatusTip(tr("Change contour direction"));
 
     btnEdit = new QPushButton();
@@ -280,23 +280,23 @@ void FormContour::createViewControl() {
 
     menuEdit = new QMenu;
 
-    actCutline = new QAction(tr("Use as Cutline"));
-    actCutline->setStatusTip(tr("Use segment as cutline"));
+    actCutline = new QAction(tr("Use as Entry line"));
+    actCutline->setStatusTip(tr("Use the segment as the Entry line"));
 
-    actExitPoint = new QAction(tr("Mark as the last segment"));
+    actExitPoint = new QAction(tr("Mark as the Last segment"));
     actExitPoint->setEnabled(false);
 
     actRotate = new QAction(tr("Rotate"));
-    actRotate->setStatusTip(tr("Rotate contour"));
+    actRotate->setStatusTip(tr("Rotate the contour"));
 
     actFlipLeftRight = new QAction(tr("Flip Left-Right"));
-    actFlipLeftRight->setStatusTip(tr("Flip contour Left-Right"));
+    actFlipLeftRight->setStatusTip(tr("Flip the contour Left-Right"));
 
     actFlipUpDown = new QAction(tr("Flip Up-Down"));
-    actFlipUpDown->setStatusTip(tr("Flip contour Up-Down"));
+    actFlipUpDown->setStatusTip(tr("Flip the contour Up-Down"));
 
     actResize = new QAction(tr("Resize"));
-    actResize->setStatusTip(tr("Resize contour"));
+    actResize->setStatusTip(tr("Resize the contour"));
 
     menuEdit->addAction(actCutline);
     menuEdit->addAction(actExitPoint);
@@ -406,7 +406,7 @@ void FormContour::on_btnBot_clicked() {
         bot.init(par.fileDir.toStdString(), par.contourFileName.toStdString());
 
         if (bot.parse()) {
-            txtMsg->setText(tr("Bottom layer loaded successfully") + "\n");
+            txtMsg->setText(tr("Bottom layer is loaded successfully") + "\n");
 
             file_open = true;
             emit fileNameChanged(par.contourFileName);
@@ -696,7 +696,7 @@ void FormContour::on_actCutline_triggered() {
         }
     }
     else {
-        txtMsg->setText("It works only for single unloop contour");
+        txtMsg->setText("It works only for a single unloop contour");
     }
 }
 
@@ -830,7 +830,7 @@ void FormContour::onGenerate() {
     const bool isCutLine = par.contours.at(0)->type() == CONTOUR_TYPE::CONTOUR_CUTLINE;
 
     if (count == 1 && isCutLine) {
-        txtMsg->setText(tr("No contour. Only cutline"));
+        txtMsg->setText(tr("No contour. There is only a cutline"));
         return;
     }
 

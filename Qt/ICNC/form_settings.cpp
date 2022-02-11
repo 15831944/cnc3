@@ -1,16 +1,14 @@
 #include "form_settings.h"
 #include <cstdint>
 #include <QToolTip>
+#include <QScrollArea>
 
 #include "program_param.h"
-#include <QScrollArea>
 
 // todo: message view
 FormSettings::FormSettings(ProgramParam& par, QWidget *parent) : QWidget(parent), par(par) {
     createSettingsWidget();
     createButtons();
-
-//    setFontPointSize(14);
 
     QScrollArea* scrollArea = new QScrollArea;
     scrollArea->setWidget(widgetSettings);
@@ -66,93 +64,52 @@ void FormSettings::createSettingsWidget() {
     comboLanguage->addItem("English");
     comboLanguage->addItem("Русский");
 
-    comboLanguage->setCurrentIndex(int(ProgramParam::lang));
-
     checkSwapXY = new QCheckBox(tr("Swap plot axes X, Y"));
-    checkSwapXY->setCheckState(ProgramParam::swapXY ? Qt::Checked : Qt::Unchecked);
-
     checkReverseX = new QCheckBox(tr("Reverse plot axis X"));
-    checkReverseX->setCheckState(ProgramParam::reverseX ? Qt::Checked : Qt::Unchecked);
-
     checkReverseY = new QCheckBox(tr("Reverse plot axis Y"));
-    checkReverseY->setCheckState(ProgramParam::reverseY ? Qt::Checked : Qt::Unchecked);
-
     checkShowXY = new QCheckBox(tr("Show plot axes names"));
-    checkShowXY->setCheckState(ProgramParam::showXY ? Qt::Checked : Qt::Unchecked);
 
     labelInputLevel = new QLabel(tr("Input Levels, bits") + ": ");
     numInputLevel = new QSpinBox;
     numInputLevel->setDisplayIntegerBase(16);
-//    QFont font = spinKeyLevel->font();
-//    font.setCapitalization(QFont::AllUppercase);
-//    spinKeyLevel->setFont(font);
     numInputLevel->setPrefix("0x");
-//    spinKeyLevel->setRange(INT32_MIN, INT32_MAX);
     numInputLevel->setRange(0, INT32_MAX);
-    numInputLevel->setValue(int(CncParam::inputLevel));
 
-    comboInputLevel = new QComboBox(this);
+    comboInputLevel = new QComboBox;
     comboInputLevel->addItem(tr(""));
     comboInputLevel->addItem(tr("Metal"));
     comboInputLevel->addItem(tr("Stone"));
     comboInputLevel->addItem(tr("Debug"));
 
-    checkStepDirEnable = new QCheckBox(tr("Enable servomotors"));
-    checkStepDirEnable->setCheckState(CncParam::sdEnable ? Qt::Checked : Qt::Unchecked);
-
-    checkEncXY = new QCheckBox(tr("Enable XY linear encoders"));
-    checkEncXY->setCheckState(CncParam::encXY ? Qt::Checked : Qt::Unchecked);
-
     checkReverseMotorX = new QCheckBox(tr("Reverse motor X"));
-    checkReverseMotorX->setCheckState(CncParam::reverseX ? Qt::Checked : Qt::Unchecked);
-
     checkReverseMotorY = new QCheckBox(tr("Reverse motor Y"));
-    checkReverseMotorY->setCheckState(CncParam::reverseY ? Qt::Checked : Qt::Unchecked);
-
-    checkReverseMotorU = new QCheckBox(tr("Reverse motor U"));
-    checkReverseMotorU->setCheckState(CncParam::reverseU ? Qt::Checked : Qt::Unchecked);
-
-    checkReverseMotorV = new QCheckBox(tr("Reverse motor V"));
-    checkReverseMotorV->setCheckState(CncParam::reverseV ? Qt::Checked : Qt::Unchecked);
-
     checkSwapMotorXY = new QCheckBox(tr("Swap motors X and Y"));
-    checkSwapMotorXY->setCheckState(CncParam::swapXY ? Qt::Checked : Qt::Unchecked);
-
+#ifndef STONE
+    checkStepDirEnable = new QCheckBox(tr("Enable servomotors"));
+    checkEncXY = new QCheckBox(tr("Enable XY linear encoders"));
+    checkReverseMotorU = new QCheckBox(tr("Reverse motor U"));
+    checkReverseMotorV = new QCheckBox(tr("Reverse motor V"));    
     checkSwapMotorUV = new QCheckBox(tr("Swap motors U and V"));
-    checkSwapMotorUV->setCheckState(CncParam::swapUV ? Qt::Checked : Qt::Unchecked);
-
     checkReverseEncX = new QCheckBox(tr("Reverse Encoder X"));
-    checkReverseEncX->setCheckState(CncParam::reverseEncX ? Qt::Checked : Qt::Unchecked);
-
     checkReverseEncY = new QCheckBox(tr("Reverse Encoder Y"));
-    checkReverseEncY->setCheckState(CncParam::reverseEncY ? Qt::Checked : Qt::Unchecked);
 
-    labelAcc = new QLabel(tr("Acceleration") + ":", this);
+    labelAcc = new QLabel(tr("Acceleration") + ":");
     fnumAcc = new QDoubleSpinBox(this);
     fnumAcc->setRange(1, 1000);
     fnumAcc->setSuffix(" " + tr("um/sec2")); // per 100 V
     fnumAcc->setDecimals(0);
     fnumAcc->setSingleStep(10);
-    fnumAcc->setValue(CncParam::acc);
-#ifdef STONE
-    fnumAcc->setEnabled(false);
-#endif
 
-    labelDec = new QLabel(tr("Deceleration") + ":", this);
+    labelDec = new QLabel(tr("Deceleration") + ":");
     fnumDec = new QDoubleSpinBox(this);
     fnumDec->setRange(1, 1000);
     fnumDec->setSuffix(" " + tr("um/sec2")); // per 100 V
     fnumDec->setDecimals(0);
     fnumDec->setSingleStep(10);
-    fnumDec->setValue(CncParam::dec);
-#ifdef STONE
-    fnumDec->setEnabled(false);
-#endif
 
     // Feedback
     groupFeedback = new QGroupBox(tr("Feedback enable"));
     groupFeedback->setCheckable(true);
-    groupFeedback->setChecked(CncParam::fb_ena);
 
     labelHighThld = new QLabel(tr("High threshold"));
     labelLowThld = new QLabel(tr("Low threshold"));
@@ -166,25 +123,21 @@ void FormSettings::createSettingsWidget() {
     numHighThld = new QSpinBox;
     labelHighThld->setBuddy(numHighThld);
     numHighThld->setRange(0, thld_max);
-    numHighThld->setValue(CncParam::high_thld);
     numHighThld->setSuffix(" " + tr("V"));
 
     numLowThld = new QSpinBox;
     labelLowThld->setBuddy(numLowThld);
     numLowThld->setRange(0, thld_max);
-    numLowThld->setValue(CncParam::low_thld);
     numLowThld->setSuffix(" " + tr("V"));
 
     numRbTimeout = new QSpinBox;
     labelRbTimeout->setBuddy(numRbTimeout);
     numRbTimeout->setRange(10, 60);
     numRbTimeout->setSuffix(" " + tr("sec"));
-    numRbTimeout->setValue(CncParam::rb_to);
 
     numRbAttempts = new QSpinBox;
     labelRbAttempts->setBuddy(numRbAttempts);
     numRbAttempts->setRange(1, 5);
-    numRbAttempts->setValue(CncParam::rb_attempts);
 
     fnumRbLength = new QDoubleSpinBox;
     labelRbLength->setBuddy(fnumRbLength);
@@ -192,7 +145,6 @@ void FormSettings::createSettingsWidget() {
     fnumRbLength->setSuffix(" " + tr("mm"));
     fnumRbLength->setDecimals(3);
     fnumRbLength->setSingleStep(0.01);
-    fnumRbLength->setValue(CncParam::rb_len);
 
     fnumRbSpeed = new QDoubleSpinBox;
     labelRbSpeed->setBuddy(fnumRbSpeed);
@@ -200,7 +152,6 @@ void FormSettings::createSettingsWidget() {
     fnumRbSpeed->setSuffix(" " + tr("mm/min"));
     fnumRbSpeed->setDecimals(1);
     fnumRbSpeed->setSingleStep(0.1);
-    fnumRbSpeed->setValue(CncParam::rb_speed);
 
     QGridLayout* gridFeedback = new QGridLayout;
     gridFeedback->addWidget(labelHighThld, 0, 0);
@@ -217,12 +168,12 @@ void FormSettings::createSettingsWidget() {
     gridFeedback->addWidget(fnumRbSpeed, 5, 1);
 
     groupFeedback->setLayout(gridFeedback);
+#endif
 
     //    
     numStep = new QDoubleSpinBox;
     labelStep = new QLabel(tr("Calculation step") + ": ");
     labelStep->setBuddy(numStep);
-    numStep->setValue(CncParam::step);
     numStep->setRange(0.001, 1.0);
     // todo: bind range with scale
     numStep->setSingleStep(0.001);
@@ -234,20 +185,13 @@ void FormSettings::createSettingsWidget() {
 
     labelX = new QLabel("X: ");
     labelY = new QLabel("Y: ");
-    labelU = new QLabel("U: ");
-    labelV = new QLabel("V: ");
-    labelEncX = new QLabel("X: ");
-    labelEncY = new QLabel("Y: ");
 
     labelPrecision = new QLabel(tr("Precision (steps/mm)"));
     labelMotor = new QLabel(tr("Motor"));
-    labelEncoder = new QLabel(tr("Encoder"));
 
-    //
     numScaleX = new QDoubleSpinBox;
     labelX->setBuddy(numScaleX);
     numScaleX->setRange(1, 1000000);
-    numScaleX->setValue(CncParam::scaleX);
     numScaleX->setDecimals(0);
 #ifdef STONE
     numScaleX->setEnabled(false);
@@ -256,51 +200,59 @@ void FormSettings::createSettingsWidget() {
     numScaleY = new QDoubleSpinBox;
     labelY->setBuddy(numScaleY);
     numScaleY->setRange(1, 1000000);
-    numScaleY->setValue(CncParam::scaleY);
     numScaleY->setDecimals(0);
 #ifdef STONE
     numScaleY->setEnabled(false);
 #endif
 
+#ifndef STONE
+    labelU = new QLabel("U: ");
+    labelV = new QLabel("V: ");
+    labelEncX = new QLabel("X: ");
+    labelEncY = new QLabel("Y: ");
+
+    labelEncoder = new QLabel(tr("Encoder"));
+
     numScaleU = new QDoubleSpinBox;
     labelU->setBuddy(numScaleU);
     numScaleU->setRange(1, 1000000);
-    numScaleU->setValue(CncParam::scaleU);
     numScaleU->setDecimals(0);
-#ifdef STONE
-    numScaleU->setEnabled(false);
-#endif
 
     numScaleV = new QDoubleSpinBox;
     labelV->setBuddy(numScaleV);
     numScaleV->setRange(1, 1000000);
-    numScaleV->setValue(CncParam::scaleV);
     numScaleV->setDecimals(0);
-#ifdef STONE
-    numScaleV->setEnabled(false);
-#endif
 
     numScaleEncX = new QDoubleSpinBox;
     labelEncX->setBuddy(numScaleEncX);
     numScaleEncX->setRange(1, 1000);
-    numScaleEncX->setValue(CncParam::scaleEncX);
     numScaleEncX->setDecimals(0);
-#ifdef STONE
-    numScaleEncX->setEnabled(false);
-#endif
 
     numScaleEncY = new QDoubleSpinBox;
     labelEncY->setBuddy(numScaleEncY);
     numScaleEncY->setRange(1, 1000);
-    numScaleEncY->setValue(CncParam::scaleEncY);
     numScaleEncY->setDecimals(0);
-#ifdef STONE
-    numScaleEncY->setEnabled(false);
 #endif
 
-    scaleNum = {numScaleX, numScaleY, numScaleU, numScaleV};
-    encScaleNum = {numScaleEncX, numScaleEncY};
+#ifndef STONE
+    checks = {
+        checkReverseX, checkReverseY, checkSwapXY, checkShowXY,
+        checkStepDirEnable, checkEncXY,
+        checkReverseMotorX, checkReverseMotorY, checkReverseMotorU, checkReverseMotorV,
+        checkSwapMotorXY, checkSwapMotorUV,
+        checkReverseEncX, checkReverseEncY
+    };
+    scaleNums = {numScaleX, numScaleY, numScaleU, numScaleV, numScaleEncX, numScaleEncY};
+#else
+    checks = {
+        checkReverseX, checkReverseY, checkSwapXY, checkShowXY,
+        checkReverseMotorX, checkReverseMotorY,
+        checkSwapMotorXY
+    };
+    scaleNums = {numScaleX, numScaleY};
+#endif
 
+    init();
     setFontPointSize(16);
 
     gridSettings = new QGridLayout;
@@ -338,9 +290,7 @@ void FormSettings::createSettingsWidget() {
 
     gridSettings->addWidget(checkReverseEncX, 19, 1, 1, 4);
     gridSettings->addWidget(checkReverseEncY, 20, 1, 1, 4);
-#endif
 
-#ifndef STONE
     gridSettings->addWidget(groupLabelNum(labelAcc, fnumAcc), 21, 1, 1, 2);
     gridSettings->addWidget(groupLabelNum(labelDec, fnumDec), 22, 1, 1, 2);
 
@@ -356,11 +306,11 @@ void FormSettings::createSettingsWidget() {
 #ifndef STONE
     gridSettings->addWidget(groupLabelNum(labelU, numScaleU), 26, 1, 1, 2);
     gridSettings->addWidget(groupLabelNum(labelV, numScaleV), 26, 3, 1, 2);
-#endif
 
     gridSettings->addWidget(labelEncoder, 27, 0);
     gridSettings->addWidget(groupLabelNum(labelEncX, numScaleEncX), 27, 1, 1, 2);
     gridSettings->addWidget(groupLabelNum(labelEncY, numScaleEncY), 27, 3, 1, 2);
+#endif
 
 //    gridSettings->addWidget(new QFrame, 0, 3, 8, 1);
 //    gridSettings->addWidget(new QFrame, 8, 0, 1, 4);
@@ -391,20 +341,20 @@ void FormSettings::createSettingsWidget() {
         emit showWarning("Interface language will be changed after reboot");
     });
 
-    connect(checkSwapXY, &QCheckBox::stateChanged, [&](int) {
-        ProgramParam::saveSwapXY(checkSwapXY->isChecked());
+    connect(checkSwapXY, &QCheckBox::stateChanged, [=](int state) {
+        ProgramParam::saveSwapXY(state == Qt::Checked);
     });
 
-    connect(checkReverseX, &QCheckBox::stateChanged, [&](int) {
-        ProgramParam::saveReverseX(checkReverseX->isChecked());
+    connect(checkReverseX, &QCheckBox::stateChanged, [=](int state) {
+        ProgramParam::saveReverseX(state == Qt::Checked);
     });
 
-    connect(checkReverseY, &QCheckBox::stateChanged, [&](int) {
-        ProgramParam::saveReverseY(checkReverseY->isChecked());
+    connect(checkReverseY, &QCheckBox::stateChanged, [=](int state) {
+        ProgramParam::saveReverseY(state == Qt::Checked);
     });
 
-    connect(checkShowXY, &QCheckBox::stateChanged, [&](int) {
-        ProgramParam::saveShowXY(checkShowXY->isChecked());
+    connect(checkShowXY, &QCheckBox::stateChanged, [=](int state) {
+        ProgramParam::saveShowXY(state == Qt::Checked);
     });
 
     connect(comboInputLevel, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&](int i) {
@@ -420,17 +370,20 @@ void FormSettings::createSettingsWidget() {
     });
 
     connect(numInputLevel, QOverload<int>::of(&QSpinBox::valueChanged), this, [&](int /*value*/) {
-        comboInputLevel->setCurrentIndex(0);
+        selectComboInputLevel(numInputLevel->value());
     });
 
     connect(checkReverseMotorX, &QCheckBox::stateChanged, this, &FormSettings::onStateChangedMotor);
     connect(checkReverseMotorY, &QCheckBox::stateChanged, this, &FormSettings::onStateChangedMotor);
+    connect(checkSwapMotorXY, &QCheckBox::stateChanged, this, &FormSettings::onStateChangedMotor);
+
+#ifndef STONE
     connect(checkReverseMotorU, &QCheckBox::stateChanged, this, &FormSettings::onStateChangedMotor);
     connect(checkReverseMotorV, &QCheckBox::stateChanged, this, &FormSettings::onStateChangedMotor);
-    connect(checkSwapMotorXY, &QCheckBox::stateChanged, this, &FormSettings::onStateChangedMotor);
     connect(checkSwapMotorUV, &QCheckBox::stateChanged, this, &FormSettings::onStateChangedMotor);    
     connect(checkReverseEncX, &QCheckBox::stateChanged, this, &FormSettings::onStateChangedMotor);
     connect(checkReverseEncY, &QCheckBox::stateChanged, this, &FormSettings::onStateChangedMotor);
+#endif
 
 //    connect(numHighThld, QOverload<int>::of(&QSpinBox::valueChanged), this, [&](int value) {
 //        if (value < numLowThld->value())
@@ -444,6 +397,98 @@ void FormSettings::createSettingsWidget() {
 
     connect(numScaleX, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &FormSettings::onNumScaleChanged);
     connect(numScaleY, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &FormSettings::onNumScaleChanged);
+//    connect(numScaleU, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &FormSettings::onNumScaleChanged);
+//    connect(numScaleV, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &FormSettings::onNumScaleChanged);
+
+//    connect(numScaleEncX, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &FormSettings::onNumScaleChanged);
+//    connect(numScaleEncY, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &FormSettings::onNumScaleChanged);
+}
+
+void FormSettings::init() {
+    comboLanguage->setCurrentIndex(int(ProgramParam::lang));
+    checkSwapXY->setCheckState(ProgramParam::swapXY ? Qt::Checked : Qt::Unchecked);
+    checkReverseX->setCheckState(ProgramParam::reverseX ? Qt::Checked : Qt::Unchecked);
+    checkReverseY->setCheckState(ProgramParam::reverseY ? Qt::Checked : Qt::Unchecked);
+    checkShowXY->setCheckState(ProgramParam::showXY ? Qt::Checked : Qt::Unchecked);
+    numInputLevel->setValue(int(CncParam::inputLevel));
+
+    selectComboInputLevel(numInputLevel->value());
+
+#ifndef STONE
+    checkStepDirEnable->setCheckState(CncParam::sdEnable ? Qt::Checked : Qt::Unchecked);
+    checkEncXY->setCheckState(CncParam::encXY ? Qt::Checked : Qt::Unchecked);
+#endif
+
+    for (QCheckBox* const o: checks)
+        o->blockSignals(true);
+
+    checkReverseMotorX->setCheckState(CncParam::reverseX ? Qt::Checked : Qt::Unchecked);
+    checkReverseMotorY->setCheckState(CncParam::reverseY ? Qt::Checked : Qt::Unchecked);
+    checkSwapMotorXY->setCheckState(CncParam::swapXY ? Qt::Checked : Qt::Unchecked);
+
+#ifndef STONE
+    checkReverseMotorU->setCheckState(CncParam::reverseU ? Qt::Checked : Qt::Unchecked);
+    checkReverseMotorV->setCheckState(CncParam::reverseV ? Qt::Checked : Qt::Unchecked);
+    checkSwapMotorUV->setCheckState(CncParam::swapUV ? Qt::Checked : Qt::Unchecked);
+    checkReverseEncX->setCheckState(CncParam::reverseEncX ? Qt::Checked : Qt::Unchecked);
+    checkReverseEncY->setCheckState(CncParam::reverseEncY ? Qt::Checked : Qt::Unchecked);
+#endif
+
+    onStateChangedMotor(0);
+
+    for (QCheckBox* const o: checks)
+        o->blockSignals(false);
+
+#ifndef STONE
+    fnumAcc->setValue(CncParam::acc);
+    fnumDec->setValue(CncParam::dec);
+    groupFeedback->setChecked(CncParam::fb_ena);
+
+    numHighThld->setValue(CncParam::high_thld);
+    numLowThld->setValue(CncParam::low_thld);
+    numRbTimeout->setValue(CncParam::rb_to);
+    numRbAttempts->setValue(CncParam::rb_attempts);
+    fnumRbLength->setValue(CncParam::rb_len);
+    fnumRbSpeed->setValue(CncParam::rb_speed);
+#endif
+
+    numStep->setValue(CncParam::step);
+
+    for (QDoubleSpinBox* const o: scaleNums)
+        o->blockSignals(true);
+
+    numScaleX->setValue(CncParam::scaleX);
+    numScaleY->setValue(CncParam::scaleY);
+#ifndef STONE
+    numScaleU->setValue(CncParam::scaleU);
+    numScaleV->setValue(CncParam::scaleV);
+
+    numScaleEncX->setValue(CncParam::scaleEncX);
+    numScaleEncY->setValue(CncParam::scaleEncY);
+#endif
+
+    onNumScaleChanged(0);
+
+    for (QDoubleSpinBox* const o: scaleNums)
+        o->blockSignals(false);
+}
+
+void FormSettings::reset() {
+    ProgramParam::loadDefaultParam();
+    init();
+}
+
+void FormSettings::selectComboInputLevel(int bits) {
+    comboInputLevel->blockSignals(true);
+
+    switch (bits) {
+    case (CncParam::INPUT_LEVEL_METAL): comboInputLevel->setCurrentIndex(1); break;
+    case (CncParam::INPUT_LEVEL_STONE): comboInputLevel->setCurrentIndex(2); break;
+    case (CncParam::INPUT_LEVEL_DEBUG): comboInputLevel->setCurrentIndex(3); break;
+    default: comboInputLevel->setCurrentIndex(0); break;
+    }
+
+    comboInputLevel->blockSignals(false);
 }
 
 void FormSettings::onNumScaleChanged(double) {
@@ -457,11 +502,19 @@ void FormSettings::onNumScaleChanged(double) {
 }
 
 void FormSettings::onStateChangedMotor(int /*state*/) {
+#ifndef STONE
     ProgramParam::saveMotorDir(
         checkReverseMotorX->isChecked(), checkReverseMotorY->isChecked(), checkReverseMotorU->isChecked(), checkReverseMotorV->isChecked(),
         checkSwapMotorXY->isChecked(), checkSwapMotorUV->isChecked(),
         checkReverseEncX->isChecked(), checkReverseEncY->isChecked()
     );
+#else
+    ProgramParam::saveMotorDir(
+        checkReverseMotorX->isChecked(), checkReverseMotorY->isChecked(), false, false,
+        checkSwapMotorXY->isChecked(), false,
+        false, false
+    );
+#endif
 }
 
 FormSettings::~FormSettings() {}
@@ -483,19 +536,12 @@ void FormSettings::setFontPointSize(int pointSize) {
     labelLanguage->setFont(font);
     labelInputLevel->setFont(font);
     labelStep->setFont(font);
-    labelAcc->setFont(font);
-    labelDec->setFont(font);
 
     labelX->setFont(font);
     labelY->setFont(font);
-    labelU->setFont(font);
-    labelV->setFont(font);
-    labelEncX->setFont(font);
-    labelEncY->setFont(font);
 
     labelPrecision->setFont(font);
     labelMotor->setFont(font);
-    labelEncoder->setFont(font);
 
     //
     font = comboLanguage->font();
@@ -510,38 +556,34 @@ void FormSettings::setFontPointSize(int pointSize) {
 
     numInputLevel->setFont(font);
     numStep->setFont(font);
-    fnumAcc->setFont(font);
-    fnumDec->setFont(font);
 
-    numScaleX->setFont(font);
-    numScaleY->setFont(font);
-    numScaleU->setFont(font);
-    numScaleV->setFont(font);
-    numScaleEncX->setFont(font);
-    numScaleEncY->setFont(font);
+    for (QDoubleSpinBox* const o: scaleNums)
+        o->setFont(font);
 
     font = checkSwapXY->font();
     font.setPointSize(pointSize + 2);
-    checkSwapXY->setFont(font);
-    checkReverseX->setFont(font);
-    checkReverseY->setFont(font);
-    checkShowXY->setFont(font);
-    checkStepDirEnable->setFont(font);
-    checkEncXY->setFont(font);
-    checkReverseMotorX->setFont(font);
-    checkReverseMotorY->setFont(font);
-    checkReverseMotorU->setFont(font);
-    checkReverseMotorV->setFont(font);
-    checkSwapMotorXY->setFont(font);
-    checkSwapMotorUV->setFont(font);
-    checkReverseEncX->setFont(font);
-    checkReverseEncY->setFont(font);
+
+    for (QCheckBox* const o: checks)
+        o->setFont(font);
+
+#ifndef STONE
+    labelEncoder->setFont(font);
+    labelU->setFont(font);
+    labelV->setFont(font);
+    labelEncX->setFont(font);
+    labelEncY->setFont(font);
+
+    labelAcc->setFont(font);
+    labelDec->setFont(font);
+    fnumAcc->setFont(font);
+    fnumDec->setFont(font);
 
     groupFeedback->setFont(font);
     labelHighThld->setFont(font);
     labelLowThld->setFont(font);
     numHighThld->setFont(font);
     numLowThld->setFont(font);
+#endif
 }
 
 void FormSettings::createButtons() {
@@ -623,9 +665,7 @@ void FormSettings::createButtons() {
     connect(btnRead, &QPushButton::clicked, this, [&]() {
         uint16_t input_lvl;
         bool sdEna, revX, revY, revU, revV, swapXY, swapUV, revEncX, revEncY;
-        bool fbEna;
-        uint32_t rbAttempts;
-        double low_thld, high_thld, rbTimeout, rbLength, rbSpeed, acc, dec;
+        double acc, dec;
 
         bool OK = par.cnc.readSettings(
                     input_lvl, sdEna, sdEna, revX, revY, revU, revV,
@@ -636,33 +676,37 @@ void FormSettings::createButtons() {
 
         if (OK) {
             ProgramParam::saveInputLevel(input_lvl);
-            numInputLevel->setValue(input_lvl);
-            comboInputLevel->setCurrentIndex(0);
-
             ProgramParam::saveStepDir(sdEna);
-            checkStepDirEnable->setCheckState(sdEna ? Qt::Checked : Qt::Unchecked);
+            ProgramParam::saveMotorDir(revX, revY, revU, revV, swapXY, swapUV, revEncX, revEncY);
+            ProgramParam::saveAcceleration(acc, dec);
 
-            ProgramParam::saveMotorDir(revX, revY, revU, revV, swapXY, swapUV, revEncX, revEncY);            
+            numInputLevel->setValue(input_lvl);
             checkReverseMotorX->setCheckState(revX ? Qt::Checked : Qt::Unchecked);
             checkReverseMotorY->setCheckState(revY ? Qt::Checked : Qt::Unchecked);
+            checkSwapMotorXY->setCheckState(swapXY ? Qt::Checked : Qt::Unchecked);            
+#ifndef STONE
+            checkStepDirEnable->setCheckState(sdEna ? Qt::Checked : Qt::Unchecked);
             checkReverseMotorU->setCheckState(revU ? Qt::Checked : Qt::Unchecked);
             checkReverseMotorV->setCheckState(revV ? Qt::Checked : Qt::Unchecked);
-            checkSwapMotorXY->setCheckState(swapXY ? Qt::Checked : Qt::Unchecked);
             checkSwapMotorUV->setCheckState(swapUV ? Qt::Checked : Qt::Unchecked);
             checkReverseEncX->setCheckState(revEncX ? Qt::Checked : Qt::Unchecked);
             checkReverseEncY->setCheckState(revEncY ? Qt::Checked : Qt::Unchecked);
-
-            ProgramParam::saveAcceleration(acc, dec);
             fnumAcc->setValue(acc);
             fnumDec->setValue(dec);
+#endif
         }
         else
             qDebug("Read Input Levels ERROR!\n");
 
+#ifndef STONE
+        bool fbEna;
+        uint32_t rbAttempts;
+        double low_thld, high_thld, rbTimeout, rbLength, rbSpeed;
+
         if (OK)
             OK = par.cnc.readFeedback(fbEna, low_thld, high_thld, rbTimeout, rbAttempts, rbLength, rbSpeed);
 
-        if (OK) {
+        if (OK) {            
             ProgramParam::saveFeedbackParam(fbEna, low_thld, high_thld, rbTimeout, rbAttempts, rbLength, rbSpeed);
 
             numLowThld->blockSignals(true);
@@ -679,14 +723,10 @@ void FormSettings::createButtons() {
 
             numLowThld->blockSignals(false);
             numHighThld->blockSignals(false);
-            emit showInfo("Read OK");
-        }
-        else {
+        } else {
             groupFeedback->setChecked(false);
-            emit showError("Read ERROR!");
         }
 
-#ifndef STONE
         float step;
         bool encXY;
         float scaleX, scaleY, scaleU, scaleV, scaleEncX, scaleEncY;
@@ -706,34 +746,51 @@ void FormSettings::createButtons() {
             checkEncXY->setCheckState(encXY ? Qt::Checked : Qt::Unchecked);
         }
 #endif
+
+        if (OK)
+            emit showInfo("Read OK");
+        else
+            emit showError("Read ERROR!");
     });
 
     connect(btnWrite, &QPushButton::clicked, this, [&]() {
         uint16_t input_lvl = static_cast<uint16_t>(numInputLevel->value() & 0xFFFF);
-        bool sd_oe = checkStepDirEnable->isChecked();
-        bool encXY = checkEncXY->isChecked();
+        bool sd_oe = checkStepDirEnable ? checkStepDirEnable->isChecked() : false;
+        bool encXY = checkEncXY ? checkEncXY->isChecked() : false;
         bool revX = checkReverseMotorX->isChecked();
         bool revY = checkReverseMotorY->isChecked();
-        bool revU = checkReverseMotorU->isChecked();
-        bool revV = checkReverseMotorV->isChecked();
+        bool revU = checkReverseMotorU ? checkReverseMotorU->isChecked() : false;
+        bool revV = checkReverseMotorV ? checkReverseMotorV->isChecked() : false;
         bool swapXY = checkSwapMotorXY->isChecked();
-        bool swapUV = checkSwapMotorUV->isChecked();
-        bool revEncX = checkReverseEncX->isChecked();
-        bool revEncY = checkReverseEncY->isChecked();        
-        double acc = fnumAcc->value();
-        double dec = fnumDec->value();
+        bool swapUV = checkSwapMotorUV ? checkSwapMotorUV->isChecked() : false;
+        bool revEncX = checkReverseEncX ? checkReverseEncX->isChecked() : false;
+        bool revEncY = checkReverseEncY ? checkReverseEncY->isChecked() : false;
+        double acc = fnumAcc ? fnumAcc->value() : CncParam::DEFAULT_ACC;
+        double dec = fnumDec ? fnumDec->value() : CncParam::DEFAULT_DEC;
 
+#ifndef STONE
         float step = numStep->value();
+#else
+        const float step = CncParam::DEFAULT_STEP;
+#endif
+
+#ifndef STONE
         float scaleX = numScaleX->value();
         float scaleY = numScaleY->value();
-        float scaleU = numScaleU->value();
-        float scaleV = numScaleV->value();
-        float scaleEncX = numScaleEncX->value();
-        float scaleEncY = numScaleEncY->value();
+#else
+        const float scaleX = CncParam::DEFAULT_SCALE_XY;
+        const float scaleY = CncParam::DEFAULT_SCALE_XY;
+#endif
+        float scaleU = numScaleU ? numScaleU->value() : CncParam::DEFAULT_SCALE_UV;
+        float scaleV = numScaleV ? numScaleV->value() : CncParam::DEFAULT_SCALE_UV;
+        float scaleEncX = numScaleEncX ? numScaleEncX->value() : CncParam::DEFAULT_SCALE_ENC_XY;
+        float scaleEncY = numScaleEncY ? numScaleEncY->value() : CncParam::DEFAULT_SCALE_ENC_XY;
 
         ProgramParam::saveInputLevel(input_lvl);
         ProgramParam::saveMotorDir(revX, revY, revU, revV, swapXY, swapUV, revEncX, revEncY);
+#ifndef STONE
         ProgramParam::saveAcceleration(acc, dec);
+#endif
         ProgramParam::saveStep(step, scaleX, scaleY, scaleU, scaleV, scaleEncX, scaleEncY, encXY);
 
         bool OK =   par.cnc.writeSettings(
@@ -745,7 +802,7 @@ void FormSettings::createButtons() {
                         acc, dec
                     );
 
-
+#ifndef STONE
         if (numHighThld->value() < numLowThld->value())
             numHighThld->setValue( numLowThld->value() );
 
@@ -772,8 +829,9 @@ void FormSettings::createButtons() {
 
         if (OK)
             OK &= par.cnc.writeStep(step, scaleX, scaleY, scaleU, scaleV, scaleEncX, scaleEncY, encXY);
+#endif
 
-#if defined(STONE)
+#ifdef STONE
         if (OK)
             OK &= par.cnc.writeSemaphoreCncEnable(true);
 #else
@@ -787,6 +845,10 @@ void FormSettings::createButtons() {
         }
         else
             emit showError("Write ERROR!");
+    });
+
+    connect(btnDefault, &QPushButton::clicked, this, [&]() {
+        reset();
     });
 
     connect(btnHelp, &QPushButton::clicked, this, [&]() { emit helpPageClicked(help_file); });

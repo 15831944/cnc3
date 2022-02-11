@@ -200,6 +200,7 @@ public:
     static bool loadAcceleration(double& acc, double& dec);
     static bool loadStep(double& step, double& scaleX, double& scaleY, double& scaleU, double& scaleV, double& scaleEncX, double& scaleEncY, bool& encXY);
     static void loadParam();
+    static void loadDefaultParam();
 };
 
 #endif // PROGRAMPARAM_H

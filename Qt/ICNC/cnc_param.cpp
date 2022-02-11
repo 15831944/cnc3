@@ -61,3 +61,24 @@ double CncParam::scaleEncoder(size_t i) {
     default: return CncParam::DEFAULT_SCALE_ENC_XY;
     }
 }
+
+void CncParam::reset() {
+    inputLevel = DEFAULT_INPUT_LEVEL;
+    sdEnable = DEFAULT_SD_ENA;
+    reverseX = reverseY = reverseU = reverseV = false;
+    swapXY = swapUV = false;
+    reverseEncX = reverseEncY = false;
+    step = DEFAULT_STEP;
+    scaleX =  scaleY = scaleU = scaleV = DEFAULT_SCALE_UV;
+    scaleEncX = scaleEncY = DEFAULT_SCALE_ENC_XY;
+    encXY = false;
+    fb_ena = false;
+    rb_attempts = DEFAULT_RB_ATTEMPTS;
+    low_thld = 0;
+    high_thld = 200;
+    rb_to = DEFAULT_RB_TO;
+    rb_len = DEFAULT_RB_LEN;
+    rb_speed = DEFAULT_RB_SPEED;
+    acc = DEFAULT_ACC;
+    dec = DEFAULT_DEC;
+}

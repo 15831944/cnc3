@@ -96,7 +96,7 @@ bool DxfIntersect::intersect(const DxfLine& A, const DxfArc& B, fpoint_t (&pt)[2
     return false;
 }
 
-bool DxfIntersect::intersect(const DxfArc& A, const DxfArc& B, fpoint_t (&pt)[2], double (&angleA)[2], double (&angleB)[2]) {
+bool DxfIntersect::intersect(const DxfArc& A, const DxfArc& B, double (&angleA)[2], double (&angleB)[2]) {
     if (A.intersected(B)) {
         double R1 = A.radius();
         double R2 = B.radius();
@@ -113,6 +113,7 @@ bool DxfIntersect::intersect(const DxfArc& A, const DxfArc& B, fpoint_t (&pt)[2]
 
         double h = sqrt(R1__2 - a*a);
 
+        fpoint_t pt[2];
         pt[0].x = A.center().x + (a * _dx + h * _dy) / d;
         pt[1].x = A.center().x + (a * _dx - h * _dy) / d;
 
@@ -121,11 +122,30 @@ bool DxfIntersect::intersect(const DxfArc& A, const DxfArc& B, fpoint_t (&pt)[2]
 
         angleA[0] = atangent(A.center(), pt[0], R1);
         angleA[1] = atangent(A.center(), pt[1], R1);
-//        if (angleA[0] > angleA[1]) swap(angleA[0], angleA[1]);
 
         angleB[0] = atangent(B.center(), pt[0], R2);
         angleB[1] = atangent(B.center(), pt[1], R2);
-//        if (angleB[0] > angleB[1]) swap(angleB[0], angleB[1]);
+
+        bool swap_req;
+        if (B.radius() > A.radius()) {
+            double dB[2];
+            dB[0] = DxfArc::deltaAngle(B.CCW(), angleB[0], B.endAngle());
+            dB[1] = DxfArc::deltaAngle(B.CCW(), angleB[1], B.endAngle());
+            swap_req = fabs(dB[1]) < fabs(dB[0]);
+        } else {
+            double dA[2];
+            dA[0] = DxfArc::deltaAngle(A.CCW(), angleA[0], A.endAngle());
+            dA[1] = DxfArc::deltaAngle(A.CCW(), angleA[1], A.endAngle());
+            swap_req = fabs(dA[1]) < fabs(dA[0]);
+        }
+
+        if (swap_req) {
+            swap(angleA[0], angleA[1]);
+            swap(angleB[0], angleB[1]);
+            swap(pt[0], pt[1]);
+        }
+
+        return true;
     }
 
     return false;

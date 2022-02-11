@@ -18,42 +18,47 @@ class FormSettings : public QWidget
     const QString help_file = "settings.html";
     ProgramParam& par;
 
-    QVBoxLayout *mainLayout;
+    QVBoxLayout *mainLayout = nullptr;
 
-    QPushButton *btnHome, *btnRead, *btnWrite, *btnDefault, *btn4, *btn5, *btn6, *btn7, *btn8, *btn9, *btn10, *btn11, *btn12, *btnHelp;
-    QGridLayout* gridButtons;
+    QPushButton *btnHome = nullptr, *btnRead = nullptr, *btnWrite = nullptr, *btnDefault = nullptr,\
+        *btn4 = nullptr, *btn5 = nullptr, *btn6 = nullptr, *btn7 = nullptr, *btn8 = nullptr, *btn9 = nullptr, *btn10 = nullptr, *btn11 = nullptr, *btn12 = nullptr,\
+        *btnHelp = nullptr;
+    QGridLayout* gridButtons = nullptr;
 
-    QWidget *widgetSettings;
-    QGridLayout *gridSettings;
+    QWidget *widgetSettings = nullptr;
+    QGridLayout *gridSettings = nullptr;
 
-    QLabel *labelTitle, *labelCNC, *labelLanguage, *labelInputLevel, *labelStep, *labelX, *labelY, *labelU, *labelV, *labelEncX,\
-        *labelEncY, *labelPrecision, *labelMotor, *labelEncoder, *labelAcc, *labelDec;
+    QLabel *labelTitle = nullptr, *labelCNC = nullptr, *labelLanguage = nullptr, *labelInputLevel = nullptr, *labelStep = nullptr,\
+        *labelX = nullptr, *labelY = nullptr, *labelU = nullptr, *labelV = nullptr, *labelEncX = nullptr,\
+        *labelEncY = nullptr, *labelPrecision = nullptr, *labelMotor = nullptr, *labelEncoder = nullptr, *labelAcc = nullptr, *labelDec = nullptr;
 
-    QComboBox* comboLanguage;
-    QCheckBox *checkReverseX, *checkReverseY, *checkSwapXY, *checkShowXY,\
-        *checkStepDirEnable, *checkEncXY,\
-        *checkReverseMotorX, *checkReverseMotorY, *checkReverseMotorU, *checkReverseMotorV, *checkSwapMotorXY, *checkSwapMotorUV,\
-        *checkReverseEncX, *checkReverseEncY;
+    QComboBox* comboLanguage = nullptr;
+    QCheckBox *checkReverseX = nullptr, *checkReverseY = nullptr, *checkSwapXY = nullptr, *checkShowXY = nullptr,\
+        *checkStepDirEnable = nullptr, *checkEncXY = nullptr,\
+        *checkReverseMotorX = nullptr, *checkReverseMotorY = nullptr, *checkReverseMotorU = nullptr, *checkReverseMotorV = nullptr,\
+        *checkSwapMotorXY = nullptr, *checkSwapMotorUV = nullptr,\
+        *checkReverseEncX = nullptr, *checkReverseEncY = nullptr;
 
-    QSpinBox *numInputLevel;
-    QComboBox* comboInputLevel;
+    QSpinBox *numInputLevel = nullptr;
+    QComboBox* comboInputLevel = nullptr;
 
-    QGroupBox *groupFeedback;
-    QLabel *labelLowThld, *labelHighThld, *labelRbTimeout, *labelRbAttempts, *labelRbLength, *labelRbSpeed;
-    QSpinBox *numLowThld, *numHighThld, *numRbTimeout, *numRbAttempts;
-    QDoubleSpinBox *fnumRbLength, *fnumRbSpeed;
+    QGroupBox *groupFeedback = nullptr;
+    QLabel *labelLowThld = nullptr, *labelHighThld = nullptr, *labelRbTimeout = nullptr, *labelRbAttempts = nullptr, *labelRbLength = nullptr, *labelRbSpeed = nullptr;
+    QSpinBox *numLowThld = nullptr, *numHighThld = nullptr, *numRbTimeout = nullptr, *numRbAttempts = nullptr;
+    QDoubleSpinBox *fnumRbLength = nullptr, *fnumRbSpeed = nullptr;
 
-    QDoubleSpinBox *numStep, *numScaleX, *numScaleY, *numScaleU, *numScaleV, *numScaleEncX, *numScaleEncY, *fnumAcc, *fnumDec;
+    QDoubleSpinBox *numStep = nullptr, *numScaleX = nullptr, *numScaleY = nullptr, *numScaleU = nullptr, *numScaleV = nullptr,\
+        *numScaleEncX = nullptr, *numScaleEncY = nullptr,\
+        *fnumAcc = nullptr, *fnumDec = nullptr;
 
-    std::vector<QDoubleSpinBox*> scaleNum;
-    std::vector<QDoubleSpinBox*> encScaleNum;
-
+    std::vector<QCheckBox*> checks;
+    std::vector<QDoubleSpinBox*> scaleNums;
     std::vector<QPushButton*> buttons;
-
-    std::vector<QSpinBox*> spinBoxes;
 
     void createButtons();
     void createSettingsWidget();
+    void init();
+    void selectComboInputLevel(int bits);
 
     static QGroupBox* groupLabelNum(QLabel* label, QDoubleSpinBox* num);
     static QGroupBox* groupLabelNum(QLabel* label, QSpinBox* num, QComboBox* combo);
@@ -70,6 +75,8 @@ public:
 //    explicit FormSettings(QWidget *parent = nullptr);
     FormSettings(ProgramParam& par, QWidget *parent = nullptr);
     ~FormSettings();
+
+    void reset();
 
     void setFontPointSize(int pointSize);
 

@@ -1,9 +1,9 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-		<title>Contour Editor</title>
-		<style>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Contour Editor</title>
+    <style>
 			h1 {text-align: center;}
 			h2 {text-align: center;}
 			code {
@@ -12,45 +12,70 @@
 			}
 			font.button {color:Green;}
 		</style>
-	</head>
-	<body>
-		<table width="800" bgcolor="lightyellow" align="center">
-			<tr>
-				<td>
-					<a href="home.html#top">Back</a><br>
-					<h1 id="top">Countour editor</h1>
-					<h2>Buttons</h2>
-					<h3 id="home"><font class="button">Home</font> - go to the home panel</h3>
-					<h3><font class="button">Load DXF</font> - load DXF file</h3>
-					<p>Загрузить контур реза в формате DXF. Поддерживаются только контуры состоящие из линий и дуг.</p>
-					<h3><font class="button"><a href="passes.html#top">Параметры</a></font> - регулировка параметров реза</h3>
-					<p>Настройка смещения проволоки и режимов работы станка во время реза.</p>
-					<h3><font class="button">Генер.</font> - генерация программы ЧПУ</h3>
-					<p>Генерация программы реза в формате G-код на основание контура и заданных параметров реза. При успешной генерации программы происходит автоматический переход в рабочую панель.</p>
-					<h3><font class="button">Линия захода</font> - добавление в проект линии захода</h3>
-					<p>Линия захода добавляется к первой точке контура, выделенной красным квадратиком на чертеже.</p>
-					<h3><font class="button">Удалить</font> - удалить выбранный контур из проекта</h3>
-					<h3><font class="button">Очистить</font> - удалить все контуры из проекта</h3>
-					<h3><font class="button">Первый</font> - сделать выделенный сегмент первым в контуре</h3>
-					<h3><font class="button">Изм. направление</font></h3>
-					<p>Изменить порядок следования сегментов в контуре на обратный. Нажатие меняет направление обхода контура.</p>
-					<h3>Меню <font class="button">Редактировать</font></h3>
-					<ul>
-						<li><h4><font class="button">Использовать как линию захода</font></h4></li>
-						<p>Использовать выбранный сегмент контура в качестве линии захода.</p>
-						<li><h4><font class="button">Поворот</font></h4></li>
-						<p>Поворот выбранного контура на заданный угол.</p>
-						<li><h4><font class="button">Перевернуть слево-направо</font></h4></li>
-						<p>Перевернуть выбранный контур слево-направо.</p>
-						<li><h4><font class="button">Перевернуть сверху-вниз</font></h4></li>
-						<p>Перевернуть выбранный контур сверху-вниз.</p>
-						<li><h4><font class="button">Изменить размер</font></h4></li>
-						<p>Изменить размеры выбранного контура.</p>
-					</ul>
-					<br>
-					<p><a href="#top">Вверх</a></p>
-				</td>
-			</tr>
-		</table>
-	</body>
+  </head>
+  <body>
+    <table align="center" width="800" bgcolor="lightyellow">
+      <tbody>
+        <tr>
+          <td> <a href="home.html#top">Back</a><br>
+            <h1 id="top">Contour Editor</h1>
+            <h2>Buttons</h2>
+            <h3 id="home"><font class="button">Home</font> - go to the
+              Home panel</h3>
+            <h3><font class="button">Load DXF</font> - load DXF file</h3>
+            <p>Загрузить контур реза в формате DXF. Поддерживаются
+              только контуры состоящие из линий и дуг.</p>
+            <h3><font class="button"><a href="passes.html#top">Adjust</a></font>
+              - adjustment of parameters and cutting modes</h3>
+            <p>Adjustment of wire offsets and cutting modes.</p>
+            <h3><font class="button">Generate</font> - generate G-code</h3>
+            <p>Генерация программы реза в формате G-код на основание
+              контура и заданных параметров реза. При успешной генерации
+              программы происходит автоматический переход в рабочую
+              панель.</p>
+            <h3><font class="button">Add Entry Line</font> - add a new
+              cutline before the first segment</h3>
+            <p>Линия захода добавляется к первой точке контура,
+              выделенной красным квадратиком на чертеже.</p>
+            <h3><font class="button">Delete</font> - delete the selected
+              contour from the project</h3>
+            <h3><font class="button">Clear</font> - delete all contours
+              from the project</h3>
+            <h3><font class="button">Set First</font> - to do the
+              selected segment the first in the contour</h3>
+            <h3><font class="button">Change Direction</font> - change
+              contour direction<br>
+            </h3>
+            <p>Reverse the order of the segments in the contour.
+              Operation changes the cut direction.</p>
+            <h3>Menu <font class="button">Edit</font></h3>
+            <ul>
+              <li>
+                <h4><font class="button">Use as Entry Line</font></h4>
+              </li>
+              <p>Use the selected contour segment as the entry line.</p>
+              <li>
+                <h4><font class="button">Rotate</font></h4>
+              </li>
+              <p>Rotate the selected contour by the given angle.</p>
+              <li>
+                <h4><font class="button">Flip Left-Right</font></h4>
+              </li>
+              <p>Flip the selected contour from left to right.</p>
+              <li>
+                <h4><font class="button">Flip Up-Down</font></h4>
+              </li>
+              <p>Flip the selected contour from up to down.</p>
+              <li>
+                <h4><font class="button">Resize</font></h4>
+              </li>
+              <p>Resize the selected contour.</p>
+            </ul>
+            <br>
+            <p><a href="#top">Up</a></p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
 </html>

@@ -461,6 +461,14 @@ void ProgramParam::loadParam() {
     loadStepDir(OK);
 }
 
+void ProgramParam::loadDefaultParam() {
+    lang = InterfaceLanguage::ENGLISH;
+    swapXY = false;
+    reverseX = reverseY = false;
+    showXY = false;
+    CncParam::reset();
+}
+
 //
 void ProgramParam::saveSwapXY(bool value) {
     QSettings settings(org, app);

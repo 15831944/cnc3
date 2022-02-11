@@ -203,7 +203,7 @@ void FormPassesStone::createPasses() {
 //    comboTabMode = new QComboBox;
 //    labelTabMode->setBuddy(comboTabMode);
 
-    checkTabPause = new QCheckBox(tr("Indent Pause"));
+    checkTabPause = new QCheckBox(tr("Tab Pause"));
     checkTabPause->setEnabled(false);
 
 //    labelPumpDelay = new QLabel(tr("Pump On Delay"));
@@ -224,7 +224,7 @@ void FormPassesStone::createPasses() {
     inputSpeed->setMinimum(0.1);
     inputSpeed->setMaximum(18);
 
-    checkSegmentPause = new QCheckBox(tr("Add pause after each segment"));
+    checkSegmentPause = new QCheckBox(tr("Add a pause after each segment"));
     inputSegmentPause = new QSpinBox;
     inputSegmentPause->setSuffix(" " + tr("sec"));
     inputSegmentPause->setRange(1, 600);
@@ -740,7 +740,7 @@ void FormPassesStone::createButtons() {
 
     btnOpen = new QPushButton(tr("Open"));
     btnOpen->setEnabled(false);
-    btnOpen->setStatusTip(tr("Open contour settings from a file"));
+    btnOpen->setStatusTip(tr("Open contour settings from the file"));
 
     btnSave = new QPushButton(tr("Save"));
     btnSave->setEnabled(false);

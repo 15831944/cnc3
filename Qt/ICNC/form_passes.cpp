@@ -536,7 +536,6 @@ void FormPasses::createButtons() {
     btnSaveAs->setEnabled(true);
 
     btnDefault = new QPushButton(tr("Default"));
-    btnDefault->setEnabled(false);
     btnDefault->setStatusTip(tr("Set default values"));
 
     btn5 = new QPushButton;
@@ -588,6 +587,11 @@ void FormPasses::createButtons() {
     connect(btnSaveAs, &QPushButton::clicked, this, &FormPasses::on_btnSaveAs_clicked);
 
     connect(btnHelp, &QPushButton::clicked, this, [&]() { emit helpPageClicked(help_file); });
+
+    connect(btnDefault, &QPushButton::clicked, this, [&]() {
+        par.setDefaultCutParam();
+        initPasses();
+    });
 }
 
 void FormPasses::initComboMode() {

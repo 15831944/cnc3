@@ -1361,14 +1361,11 @@ bool Dxf::intersect(bool loop, OFFSET_SIDE side, double offset) {
                 else if (B->type() == ENTITY_TYPE::ARC) {
                     DxfArc& AA = dynamic_cast<DxfArc&>(*A);
                     DxfArc& AB = dynamic_cast<DxfArc&>(*B);
-                    fpoint_t pt[2];
                     double angleA[2], angleB[2];
 
-                    if (DxfIntersect::intersect(AA, AB, pt, angleA, angleB)) {
-                        AA.setStartAngle(angleA[0]);
-                        AA.setEndAngle(angleA[1]);
+                    if (DxfIntersect::intersect(AA, AB, angleA, angleB)) {
+                        AA.setEndAngle(angleA[0]);
                         AB.setStartAngle(angleB[0]);
-                        AB.setEndAngle(angleB[1]);
                     }
                     else {
                         AA.offset(~side, offset);

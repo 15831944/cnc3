@@ -1,6 +1,7 @@
 #ifndef CNC_PARAM_H
 #define CNC_PARAM_H
 
+#include "main.h"
 #include "my_types.h"
 
 struct CncParam {
@@ -63,6 +64,8 @@ struct CncParam {
 
     static double scale(size_t i);
     static double scaleEncoder(size_t i);
+
+    static void reset();
 };
 
 #endif // CNC_PARAM_H
