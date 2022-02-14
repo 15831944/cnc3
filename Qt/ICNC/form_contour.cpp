@@ -252,7 +252,7 @@ void FormContour::createViewControl() {
     btnNewContour = new QPushButton(tr("New Contour"));
     btnNewContour->setEnabled(false);
 
-    btnAddCutline = new QPushButton(tr("Add Entry Line"));
+    btnAddCutline = new QPushButton(tr("Entry Line"));
     btnAddCutline->setStatusTip(tr("Add a new cutline before the first segment"));
 
     btnDelete = new QPushButton(tr("Delete"));
@@ -270,7 +270,7 @@ void FormContour::createViewControl() {
     vLayoutRight = new QVBoxLayout();
 
     btnBegin = new QPushButton(tr("Set First"));
-    btnBegin->setStatusTip(tr("Set as the first segment in the contour"));
+    btnBegin->setStatusTip(tr("Set the selected segment the first in the contour"));
 
     btnChangeDir = new QPushButton(tr("Change Direction"));
     btnChangeDir->setStatusTip(tr("Change contour direction"));
@@ -281,7 +281,7 @@ void FormContour::createViewControl() {
     menuEdit = new QMenu;
 
     actCutline = new QAction(tr("Use as Entry line"));
-    actCutline->setStatusTip(tr("Use the segment as the Entry line"));
+    actCutline->setStatusTip(tr("Use selected segment as the Entry line"));
 
     actExitPoint = new QAction(tr("Mark as the Last segment"));
     actExitPoint->setEnabled(false);
