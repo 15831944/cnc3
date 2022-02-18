@@ -85,7 +85,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(m_formHome, &FormHome::centerPageClicked, this, &MainWindow::onCenterPageClicked);
 
     connect(m_formHome, &FormHome::testPageClicked, this, &MainWindow::onTestPageClicked);
-    connect(m_formEdit, &FormEdit::testPageClicked, this, &MainWindow::onTestPageClicked);
 
     connect(m_formContour, &FormContour::passesPageClicked, this, &MainWindow::onPassesPageClicked);
 
@@ -244,111 +243,103 @@ void MainWindow::onFileNameChanged(const QString& file_name) {
 }
 
 void MainWindow::onContourPageClicked() {
-    if (!m_stackedWidget || !m_formContour) return;
-
-    onFileNameChanged(m_formContour->getFileName());
-
-    this->setWindowTitle(tr("Load DXF contours"));
-    m_stackedWidget->setCurrentWidget(m_formContour);
-    m_formContour->init();
+    if (m_stackedWidget && m_formContour) {
+        onFileNameChanged(m_formContour->getFileName());
+        this->setWindowTitle(m_formContour->objectName());
+        m_stackedWidget->setCurrentWidget(m_formContour);
+        m_formContour->init();
+    }
 }
 
 void MainWindow::onEditPageClicked(bool auto_plot) {
-    if (!m_stackedWidget || !m_formEdit) return;
-
-    this->setWindowTitle(tr("Code Editor"));
-    onFileNameChanged(m_formEdit->getFileName());
-    m_stackedWidget->setCurrentWidget(m_formEdit);
-    m_formEdit->init(auto_plot);
+    if (m_stackedWidget && m_formEdit) {
+        this->setWindowTitle(m_formEdit->objectName());
+        onFileNameChanged(m_formEdit->getFileName());
+        m_stackedWidget->setCurrentWidget(m_formEdit);
+        m_formEdit->init(auto_plot);
+    }
 }
 
 void MainWindow::onRunPageClicked(bool recovery) {
-    if (!m_stackedWidget || !m_formRun) return;
-
-    labelTitle->setText("");
-
-    this->setWindowTitle(tr("Job Panel"));
-    m_stackedWidget->setCurrentWidget(m_formRun);
-    m_formRun->init(recovery);
+    if (m_stackedWidget && m_formRun) {
+        labelTitle->setText("");
+        this->setWindowTitle(m_formRun->objectName());
+        m_stackedWidget->setCurrentWidget(m_formRun);
+        m_formRun->init(recovery);
+    }
 }
 
 void MainWindow::onSettingsPageClicked() {
-    if (!m_stackedWidget || !m_formSettings) return;
-
-    labelTitle->setText("");
-
-    this->setWindowTitle(tr("CNC Settigns"));
-    m_stackedWidget->setCurrentWidget(m_formSettings);
+    if (m_stackedWidget && m_formSettings) {
+        labelTitle->setText("");
+        this->setWindowTitle(m_formSettings->objectName());
+        m_stackedWidget->setCurrentWidget(m_formSettings);
+    }
 }
 
 void MainWindow::onPultPageClicked() {
-    if (!m_stackedWidget || !m_formPult) return;
-
-    labelTitle->setText("");
-
-    this->setWindowTitle(tr("CNC Pult"));
-    m_stackedWidget->setCurrentWidget(m_formPult);
-    m_formPult->init();
+    if (m_stackedWidget && m_formPult) {
+        labelTitle->setText("");
+        this->setWindowTitle(m_formPult->objectName());
+        m_stackedWidget->setCurrentWidget(m_formPult);
+        m_formPult->init();
+    }
 }
 
 void MainWindow::onCenterPageClicked() {
-    if (!m_stackedWidget || !m_formCenter) return;
-
-    labelTitle->setText("");
-
-    this->setWindowTitle(tr("Centering"));
-    m_stackedWidget->setCurrentWidget(m_formCenter);
-    m_formCenter->init();
+    if (m_stackedWidget && m_formCenter) {
+        labelTitle->setText("");
+        this->setWindowTitle(m_formCenter->objectName());
+        m_stackedWidget->setCurrentWidget(m_formCenter);
+        m_formCenter->init();
+    }
 }
 
 void MainWindow::onTestPageClicked() {
-    if (!m_stackedWidget || !m_formTest) return;
-
-    labelTitle->setText("");
-
-    this->setWindowTitle(tr("Test"));
-    m_stackedWidget->setCurrentWidget(m_formTest);
+    if (m_stackedWidget && m_formTest) {
+        labelTitle->setText("");
+        this->setWindowTitle(m_formTest->objectName());
+        m_stackedWidget->setCurrentWidget(m_formTest);
+    }
 }
 
 //
 void MainWindow::onHomePageClicked() {
-    if (!m_stackedWidget || !m_formHome) return;
-
-    labelTitle->setText("");
-
-    this->setWindowTitle(tr("Home Panel"));
-    m_stackedWidget->setCurrentWidget(m_formHome);    
+    if (m_stackedWidget && m_formHome) {
+        labelTitle->setText("");
+        this->setWindowTitle(m_formHome->objectName());
+        m_stackedWidget->setCurrentWidget(m_formHome);
+    }
 }
 
 void MainWindow::onPassesPageClicked() {
-    if (!m_stackedWidget || !m_formPasses) return;
-
-    labelTitle->setText("");
-
-    this->setWindowTitle(tr("Cutting settings"));
-    m_stackedWidget->setCurrentWidget(m_formPasses);
+    if (m_stackedWidget && m_formPasses) {
+        labelTitle->setText("");
+        this->setWindowTitle(m_formPasses->objectName());
+        m_stackedWidget->setCurrentWidget(m_formPasses);
+    }
 }
 
 void MainWindow::onHelpPageClicked(QWidget *source, const QString& helpHtmlFileName) {
-    if (!m_stackedWidget || !m_formHelp || !source || helpHtmlFileName.isEmpty()) return;
-
-    labelTitle->setText("");
-
-    this->setWindowTitle(tr("Help"));
-    m_helpWidget = source;
-    m_stackedWidget->setCurrentWidget(m_formHelp);
-    m_formHelp->init(helpHtmlFileName);
+    if (m_stackedWidget && m_formHelp && source && !helpHtmlFileName.isEmpty()) {
+        labelTitle->setText("");
+        this->setWindowTitle(m_formHelp->objectName());
+        m_helpWidget = source;
+        m_stackedWidget->setCurrentWidget(m_formHelp);
+        m_formHelp->init(helpHtmlFileName);
+    }
 }
 
 void MainWindow::onBackHelpClicked() {
     if (m_stackedWidget && m_helpWidget) {
+        labelTitle->setText("");
+        this->setWindowTitle(m_helpWidget->objectName()); // restore windows name
         m_stackedWidget->setCurrentWidget(m_helpWidget);
         m_helpWidget = nullptr;
     }
 }
 
-void MainWindow::keyPressEvent(QKeyEvent *event)
-{
+void MainWindow::keyPressEvent(QKeyEvent *event) {
     if (event && event->key() == Qt::Key::Key_F11) {
         setWindowState(isFullScreen() ? Qt::WindowNoState : Qt::WindowFullScreen);
     }
@@ -366,5 +357,6 @@ void MainWindow::showEvent(QShowEvent *event) {
         par.cnc.writeCncEnable(true);
 #endif
     }
+
     if (event) event->ignore();
 }

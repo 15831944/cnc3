@@ -17,6 +17,7 @@ FormEdit::FormEdit(ProgramParam& par, QWidget *parent) :
     select_ena(false),
     file_open(false)
 {
+    this->setObjectName(tr("G-code Editor"));
     createButtons();
 
     txtEditor = new CodeEditor;
@@ -81,7 +82,7 @@ QString FormEdit::getFileName() const {
 
 void FormEdit::createButtons() {
     btnHome = new QPushButton(tr("Home"));
-    btnHome->setStatusTip(tr("Go to the home panel"));
+    btnHome->setStatusTip(tr("Go to the Home panel"));
 
     btnNew = new QPushButton(tr("New"));
     btnNew->setStatusTip(tr("Create a new G-code file"));
@@ -120,7 +121,7 @@ void FormEdit::createButtons() {
     btn11->setEnabled(false);
 
     btnRun = new QPushButton(tr("Run"));
-    btnRun->setStatusTip(tr("Open working panel"));
+    btnRun->setStatusTip(tr("Open Work panel"));
 
     btnHelp = new QPushButton(tr("Help"));
 

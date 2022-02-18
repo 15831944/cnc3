@@ -7,6 +7,7 @@ using namespace std;
 FormPult::FormPult(ProgramParam& par, QWidget *parent) :
     QWidget(parent), par(par), cncReaderEna(false), adcEnable(false), cutStateAbortReq(false), wireSpeedMode(WireSpeed::Mode::MMM)
 {
+    this->setObjectName(tr("CNC Pult"));
     pultWidget = new PultWidget;
     createButtonLayout();
 

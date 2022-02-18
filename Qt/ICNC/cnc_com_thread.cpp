@@ -175,6 +175,16 @@ int CncComThread::readPort(ComPacket &rxd, int timeout_ms) {
     }
 }
 
+void CncComThread::clearReadPort(int timeout) {
+    if (timeout) {
+        if (timeout < 10) timeout = 10;
+        m_port->waitForReadyRead(timeout);
+    }
+
+    while (m_port->waitForReadyRead(10))
+        m_port->readAll();
+}
+
 // by 255 bytes
 void CncComThread::writeBytes(uint32_t addr, const std::vector<uint8_t> &bytes) {
     if (bytes.size()) {
@@ -230,6 +240,39 @@ void CncComThread::writeBytes(uint32_t addr, const std::vector<uint8_t> &bytes) 
     }
 }
 
+// write without acknowledges
+// by 255 bytes
+void CncComThread::writeBytesFast(uint32_t addr, const std::vector<uint8_t> &bytes) {
+    if (bytes.size()) {
+        if ((addr & 0xF0000000) != 0)
+            throw runtime_error( string_format("Address error: 0x%08x", int(addr)) );
+
+        if (!m_port || !m_port->isOpen())
+            throw runtime_error("COM port isn't opened");
+
+        m_txpack.createWritePacket(addr, bytes, 0, bytes.size());
+
+        m_port->write(reinterpret_cast<const char*>(m_txpack.rawData()), qint64(m_txpack.rawSize()));
+        m_port->flush();
+
+#ifdef PRINT_CNC_COM_DEBUG
+        qDebug("Write to address 0x%08x bytes %d:\n%s\n", (int)addr, (int)bytes.size(), m_txpack.toString().c_str());
+#endif
+
+        if (m_port->waitForBytesWritten(TIMEOUT)) {
+            clearReadPort(0);
+        } else {
+#ifdef PRINT_CNC_COM_DEBUG
+        qDebug("Write timeout\n");
+#endif
+        }
+    } else {
+#ifdef PRINT_CNC_COM_DEBUG
+        qDebug("No write data\n");
+#endif
+    }
+}
+
 // by 255 bytes
 void CncComThread::writeBytes(uint32_t addr, const uint8_t* data, size_t size, size_t begin, size_t length) {
     if (begin < size) {
@@ -245,6 +288,25 @@ void CncComThread::writeBytes(uint32_t addr, const uint8_t* data, size_t size, s
             m_wrbytes.resize(length);
             memcpy(m_wrbytes.data(), data, m_wrbytes.size());
             writeBytes(addr, m_wrbytes);
+        }
+    }
+}
+
+// by 255 bytes
+void CncComThread::writeBytesFast(uint32_t addr, const uint8_t* data, size_t size, size_t begin, size_t length) {
+    if (begin < size) {
+        data += begin;
+
+        if (begin + length > size)
+            length = static_cast<uint8_t>(size - begin);
+
+        if (length != 0) {
+            if (length > UINT8_MAX)
+                length = UINT8_MAX;
+
+            m_wrbytes.resize(length);
+            memcpy(m_wrbytes.data(), data, m_wrbytes.size());
+            writeBytesFast(addr, m_wrbytes);
         }
     }
 }
@@ -366,12 +428,12 @@ void CncComThread::run() {
                             }
                         }
                     } else {
-                        emit timeout(tr("Wait read response timeout"));
+                        emit timeout(tr("Read response timeout"));
                         break;
                     }
                 }
             } else {
-                emit timeout(tr("Wait write request timeout"));
+                emit timeout(tr("Write request timeout"));
             }
         }
 
@@ -405,8 +467,30 @@ void CncComThread::write(uint32_t addr, const void* const data, const size_t siz
     }
 }
 
+void CncComThread::writeFast(uint32_t addr, const void * const data, size_t size) {
+    const size_t max = ComPacket::MAX;
+    const QMutexLocker portLocker(&m_mutexPort);
+    size_t pos = 0, len = 0;
+    size_t rem = size;
+
+    while (rem > 0) {
+        len = rem > max ? max : rem;
+
+        // write by 255 bytes
+        this->writeBytesFast(addr, reinterpret_cast<const uint8_t*>(data), size, pos, len);
+
+        addr += len;
+        pos += len;
+        rem -= len;
+    }
+}
+
 void CncComThread::write(uint32_t addr, const vector<uint8_t>& bytes) {
     write(addr, bytes.data(), bytes.size());
+}
+
+void CncComThread::writeFast(uint32_t addr, const std::vector<uint8_t> &bytes) {
+    writeFast(addr, bytes.data(), bytes.size());
 }
 
 // Data don't reverse

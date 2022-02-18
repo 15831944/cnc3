@@ -20,7 +20,7 @@ class FormPasses : public QWidget {
     const QString help_file = "passes.html";
     ProgramParam& par;
 
-    QRadioButton *leftSide, *rightSide;
+    QRadioButton *radioLeftSide, *radioRightSide;
     QGroupBox* groupSide;
 
     QLabel *labelTimes, *labelOverlap, *labelTab;

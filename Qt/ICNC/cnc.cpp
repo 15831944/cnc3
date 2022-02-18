@@ -57,6 +57,10 @@ bool Cnc::reset() {
     return false;
 }
 
+void Cnc::clearReadPort() {
+    m_com.clearReadPort();
+}
+
 bool Cnc::writeProgArray(const vector<uint8_t>& bytes) {
     try {
         qDebug("Write to Program Array %d bytes\n", int(bytes.size()));
@@ -64,6 +68,20 @@ bool Cnc::writeProgArray(const vector<uint8_t>& bytes) {
             m_com.write(ADDR::PA, bytes);
             m_com.write32(ADDR::PA_RDADDR, 0);
             m_com.write32(ADDR::PA_WRADDR, static_cast<uint32_t>(bytes.size()));
+            return true;
+        }
+    } catch (...) {}
+
+    return false;
+}
+
+bool Cnc::writeProgArrayFast(const std::vector<uint8_t>& bytes) {
+    try {
+        qDebug("Write to Program Array %d bytes (fast)\n", int(bytes.size()));
+        if (isOpen()) {
+            m_com.writeFast(ADDR::PA, bytes);
+//            m_com.write32(ADDR::PA_RDADDR, 0);
+//            m_com.write32(ADDR::PA_WRADDR, static_cast<uint32_t>(bytes.size()));
             return true;
         }
     } catch (...) {}

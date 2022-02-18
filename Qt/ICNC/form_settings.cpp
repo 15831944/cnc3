@@ -7,6 +7,7 @@
 
 // todo: message view
 FormSettings::FormSettings(ProgramParam& par, QWidget *parent) : QWidget(parent), par(par) {
+    this->setObjectName(tr("CNC Settings"));
     createSettingsWidget();
     createButtons();
 
@@ -64,9 +65,9 @@ void FormSettings::createSettingsWidget() {
     comboLanguage->addItem("English");
     comboLanguage->addItem("Русский");
 
-    checkSwapXY = new QCheckBox(tr("Swap plot axes X, Y"));
     checkReverseX = new QCheckBox(tr("Reverse plot axis X"));
     checkReverseY = new QCheckBox(tr("Reverse plot axis Y"));
+    checkSwapXY = new QCheckBox(tr("Swap plot axes X, Y"));
     checkShowXY = new QCheckBox(tr("Show plot axes names"));
 
     labelInputLevel = new QLabel(tr("Input Levels, bits") + ": ");
@@ -85,8 +86,8 @@ void FormSettings::createSettingsWidget() {
     checkReverseMotorY = new QCheckBox(tr("Reverse motor Y"));
     checkSwapMotorXY = new QCheckBox(tr("Swap motors X and Y"));
 #ifndef STONE
-    checkStepDirEnable = new QCheckBox(tr("Enable servomotors"));
-    checkEncXY = new QCheckBox(tr("Enable XY linear encoders"));
+    checkStepDirEnable = new QCheckBox(tr("Use servomotors"));
+    checkEncXY = new QCheckBox(tr("Use linear encoders for X, Y axes"));
     checkReverseMotorU = new QCheckBox(tr("Reverse motor U"));
     checkReverseMotorV = new QCheckBox(tr("Reverse motor V"));    
     checkSwapMotorUV = new QCheckBox(tr("Swap motors U and V"));
@@ -261,9 +262,9 @@ void FormSettings::createSettingsWidget() {
     gridSettings->addWidget(new QFrame, 1, 0, 1, 4);
 
     gridSettings->addWidget(groupLabelCombo(labelLanguage, comboLanguage), 2, 1, 1, 2);
-    gridSettings->addWidget(checkSwapXY, 3, 1, 1, 4);
-    gridSettings->addWidget(checkReverseX, 4, 1, 1, 4);
-    gridSettings->addWidget(checkReverseY, 5, 1, 1, 4);
+    gridSettings->addWidget(checkReverseX, 3, 1, 1, 4);
+    gridSettings->addWidget(checkReverseY, 4, 1, 1, 4);
+    gridSettings->addWidget(checkSwapXY, 5, 1, 1, 4);
     gridSettings->addWidget(checkShowXY, 6, 1, 1, 4);
 
     gridSettings->addWidget(new QFrame, 7, 0, 1, 4);
@@ -588,7 +589,7 @@ void FormSettings::setFontPointSize(int pointSize) {
 
 void FormSettings::createButtons() {
     btnHome = new QPushButton(tr("Back"));
-    btnHome->setStatusTip(tr("Back to the home panel"));
+    btnHome->setStatusTip(tr("Return to the Home panel"));
 
     btnRead = new QPushButton(tr("Read"));
     btnRead->setStatusTip(tr("Read settings from CNC"));
@@ -597,7 +598,7 @@ void FormSettings::createButtons() {
     btnWrite->setStatusTip(tr("Write settings"));
 
     btnDefault = new QPushButton(tr("Default"));
-    btnDefault->setStatusTip(tr("Default settings"));
+    btnDefault->setStatusTip(tr("Set default settings"));
 
     btn4 = new QPushButton();
     btn4->setText(tr(""));

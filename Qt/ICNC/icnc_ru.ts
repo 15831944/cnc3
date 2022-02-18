@@ -11,8 +11,8 @@
     <message>
         <location filename="center_widget.cpp" line="44"/>
         <location filename="center_widget.cpp" line="62"/>
-        <location filename="center_widget.cpp" line="258"/>
-        <location filename="center_widget.cpp" line="266"/>
+        <location filename="center_widget.cpp" line="260"/>
+        <location filename="center_widget.cpp" line="268"/>
         <source>mm</source>
         <translation>мм</translation>
     </message>
@@ -27,29 +27,29 @@
         <translation>Откат</translation>
     </message>
     <message>
-        <location filename="center_widget.cpp" line="102"/>
-        <location filename="center_widget.cpp" line="274"/>
+        <location filename="center_widget.cpp" line="104"/>
+        <location filename="center_widget.cpp" line="276"/>
         <source>V</source>
         <translation>В</translation>
     </message>
     <message>
-        <location filename="center_widget.cpp" line="113"/>
+        <location filename="center_widget.cpp" line="115"/>
         <source>Attempts</source>
         <translation>Попыток</translation>
     </message>
     <message>
-        <location filename="center_widget.cpp" line="270"/>
+        <location filename="center_widget.cpp" line="272"/>
         <source>Voltage</source>
         <translation>Напряжение</translation>
     </message>
     <message>
-        <location filename="center_widget.cpp" line="278"/>
+        <location filename="center_widget.cpp" line="280"/>
         <source>Speed</source>
         <translation>Скорость</translation>
     </message>
     <message>
-        <location filename="center_widget.cpp" line="145"/>
-        <location filename="center_widget.cpp" line="371"/>
+        <location filename="center_widget.cpp" line="147"/>
+        <location filename="center_widget.cpp" line="373"/>
         <source>mm/min</source>
         <translation>мм/мин</translation>
     </message>
@@ -74,29 +74,29 @@
         <translation>По трем точкам</translation>
     </message>
     <message>
-        <location filename="center_widget.cpp" line="90"/>
+        <location filename="center_widget.cpp" line="92"/>
         <source>Drum Velocity</source>
         <translation>Скорость барабана</translation>
     </message>
     <message>
-        <location filename="center_widget.cpp" line="97"/>
+        <location filename="center_widget.cpp" line="99"/>
         <source>Threshold</source>
         <translation>Порог</translation>
     </message>
     <message>
-        <location filename="center_widget.cpp" line="106"/>
+        <location filename="center_widget.cpp" line="108"/>
         <source>Touches</source>
         <translation>Касаний</translation>
     </message>
     <message>
-        <location filename="center_widget.cpp" line="120"/>
-        <location filename="center_widget.cpp" line="128"/>
-        <location filename="center_widget.cpp" line="136"/>
+        <location filename="center_widget.cpp" line="122"/>
+        <location filename="center_widget.cpp" line="130"/>
+        <location filename="center_widget.cpp" line="138"/>
         <source>Angle</source>
         <translation>Угол</translation>
     </message>
     <message>
-        <location filename="center_widget.cpp" line="155"/>
+        <location filename="center_widget.cpp" line="157"/>
         <source>Reset position</source>
         <translation>Сброс положения</translation>
     </message>
@@ -106,16 +106,16 @@
         <translation>Грубая скорость</translation>
     </message>
     <message>
-        <location filename="center_widget.cpp" line="80"/>
+        <location filename="center_widget.cpp" line="81"/>
         <source>Fine speed</source>
         <translation>Точная скорость</translation>
     </message>
     <message>
-        <location filename="center_widget.cpp" line="76"/>
-        <location filename="center_widget.cpp" line="87"/>
-        <location filename="center_widget.cpp" line="146"/>
-        <location filename="center_widget.cpp" line="282"/>
-        <location filename="center_widget.cpp" line="382"/>
+        <location filename="center_widget.cpp" line="77"/>
+        <location filename="center_widget.cpp" line="89"/>
+        <location filename="center_widget.cpp" line="148"/>
+        <location filename="center_widget.cpp" line="284"/>
+        <location filename="center_widget.cpp" line="384"/>
         <source>um/sec</source>
         <translation>мкм/сек</translation>
     </message>
@@ -145,6 +145,21 @@
     <message>
         <source>Wire</source>
         <translation type="obsolete">Проволока</translation>
+    </message>
+</context>
+<context>
+    <name>CncComThread</name>
+    <message>
+        <location filename="cnc_com_thread.cpp" line="369"/>
+        <source>Read response timeout</source>
+        <oldsource>Wait read response timeout</oldsource>
+        <translation>Таймаут чтения</translation>
+    </message>
+    <message>
+        <location filename="cnc_com_thread.cpp" line="374"/>
+        <source>Write request timeout</source>
+        <oldsource>Wait write request timeout</oldsource>
+        <translation>Таймаут записи</translation>
     </message>
 </context>
 <context>
@@ -234,7 +249,7 @@
 <context>
     <name>FormCenter</name>
     <message>
-        <location filename="form_center.cpp" line="73"/>
+        <location filename="form_center.cpp" line="74"/>
         <source>Home</source>
         <translation>Главная</translation>
     </message>
@@ -244,67 +259,72 @@
         <translation type="vanished">Переход на главную панель</translation>
     </message>
     <message>
-        <location filename="form_center.cpp" line="74"/>
+        <location filename="form_center.cpp" line="10"/>
+        <source>Centring Panel</source>
+        <translation>Центровка</translation>
+    </message>
+    <message>
+        <location filename="form_center.cpp" line="75"/>
         <source>Go to the Home panel</source>
         <translation>Переход на главную панель</translation>
     </message>
     <message>
-        <location filename="form_center.cpp" line="76"/>
+        <location filename="form_center.cpp" line="77"/>
         <source>X-</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="form_center.cpp" line="77"/>
+        <location filename="form_center.cpp" line="78"/>
         <source>Decrease X</source>
         <translation>Уменьшение X</translation>
     </message>
     <message>
-        <location filename="form_center.cpp" line="79"/>
+        <location filename="form_center.cpp" line="80"/>
         <source>X+</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="form_center.cpp" line="80"/>
+        <location filename="form_center.cpp" line="81"/>
         <source>Increase X</source>
         <translation>Увеличение X</translation>
     </message>
     <message>
-        <location filename="form_center.cpp" line="82"/>
+        <location filename="form_center.cpp" line="83"/>
         <source>Y-</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="form_center.cpp" line="83"/>
+        <location filename="form_center.cpp" line="84"/>
         <source>Decrease Y</source>
         <translation>Уменьшение Y</translation>
     </message>
     <message>
-        <location filename="form_center.cpp" line="85"/>
+        <location filename="form_center.cpp" line="86"/>
         <source>Y+</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="form_center.cpp" line="86"/>
+        <location filename="form_center.cpp" line="87"/>
         <source>Increase Y</source>
         <translation>Увеличение Y</translation>
     </message>
     <message>
-        <location filename="form_center.cpp" line="88"/>
+        <location filename="form_center.cpp" line="89"/>
         <source>Center</source>
         <translation>Центр</translation>
     </message>
     <message>
-        <location filename="form_center.cpp" line="89"/>
+        <location filename="form_center.cpp" line="90"/>
         <source>Find a center</source>
         <translation>Найти центр</translation>
     </message>
     <message>
-        <location filename="form_center.cpp" line="99"/>
+        <location filename="form_center.cpp" line="100"/>
         <source>Voltage</source>
         <translation>Напряжение</translation>
     </message>
     <message>
-        <location filename="form_center.cpp" line="101"/>
+        <location filename="form_center.cpp" line="102"/>
         <source>Enable weak high voltage</source>
         <translation>Включение слабого высокого напряжения</translation>
     </message>
@@ -313,17 +333,17 @@
         <translation type="vanished">Центровка</translation>
     </message>
     <message>
-        <location filename="form_center.cpp" line="103"/>
+        <location filename="form_center.cpp" line="104"/>
         <source>Hold</source>
         <translation>Держать</translation>
     </message>
     <message>
-        <location filename="form_center.cpp" line="106"/>
+        <location filename="form_center.cpp" line="107"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="form_center.cpp" line="108"/>
+        <location filename="form_center.cpp" line="109"/>
         <source>Help</source>
         <translation>Помощь</translation>
     </message>
@@ -378,148 +398,200 @@
 <context>
     <name>FormContour</name>
     <message>
-        <location filename="form_contour.cpp" line="64"/>
-        <location filename="form_contour.cpp" line="119"/>
+        <location filename="form_contour.cpp" line="23"/>
+        <source>Contour Editor</source>
+        <translation>Редактор контура</translation>
+    </message>
+    <message>
+        <location filename="form_contour.cpp" line="65"/>
+        <location filename="form_contour.cpp" line="120"/>
         <source>Home</source>
         <translation>Главная</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="66"/>
-        <location filename="form_contour.cpp" line="122"/>
+        <location filename="form_contour.cpp" line="67"/>
+        <location filename="form_contour.cpp" line="123"/>
         <source>Open</source>
         <translation>Открыть</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="69"/>
-        <location filename="form_contour.cpp" line="126"/>
+        <location filename="form_contour.cpp" line="70"/>
+        <location filename="form_contour.cpp" line="127"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="72"/>
-        <location filename="form_contour.cpp" line="130"/>
+        <location filename="form_contour.cpp" line="73"/>
+        <location filename="form_contour.cpp" line="131"/>
         <source>Save as</source>
         <translation>Сохр. как</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="75"/>
+        <location filename="form_contour.cpp" line="76"/>
         <source>Load XY</source>
         <translation>Загр. XY</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="77"/>
+        <location filename="form_contour.cpp" line="78"/>
         <source>Load UV</source>
         <translation>Загр. UV</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="80"/>
+        <location filename="form_contour.cpp" line="81"/>
         <source>Passes</source>
         <translation>Проходы</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="82"/>
-        <location filename="form_contour.cpp" line="143"/>
+        <location filename="form_contour.cpp" line="83"/>
+        <location filename="form_contour.cpp" line="144"/>
         <source>Generate</source>
         <translation>Генер.</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="99"/>
-        <location filename="form_contour.cpp" line="161"/>
+        <location filename="form_contour.cpp" line="100"/>
+        <location filename="form_contour.cpp" line="162"/>
         <source>Help</source>
         <translation>Помощь</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="120"/>
-        <source>Go to the home panel</source>
+        <location filename="form_contour.cpp" line="121"/>
+        <source>Go to the Home panel</source>
+        <oldsource>Go to the home panel</oldsource>
         <translation>Перейти на главную панель</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="123"/>
-        <source>Open project</source>
-        <translation>Открыть проект из файла</translation>
+        <location filename="form_contour.cpp" line="124"/>
+        <source>Open a project</source>
+        <translation>Открыть проект</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="127"/>
+        <location filename="form_contour.cpp" line="256"/>
+        <source>Entry Line</source>
+        <translation>Линия захода</translation>
+    </message>
+    <message>
+        <location filename="form_contour.cpp" line="257"/>
+        <source>Add a new cutline before the first segment</source>
+        <translation>Добавить новую линию захода перед первым сегментом контура</translation>
+    </message>
+    <message>
+        <location filename="form_contour.cpp" line="273"/>
+        <source>Set First</source>
+        <translation>Первый</translation>
+    </message>
+    <message>
+        <location filename="form_contour.cpp" line="274"/>
+        <source>Set the selected segment the first in the contour</source>
+        <translation>Сделать выбранный сегмент первым в контуре</translation>
+    </message>
+    <message>
+        <location filename="form_contour.cpp" line="276"/>
+        <source>Change Direction</source>
+        <translation>Изм. направление</translation>
+    </message>
+    <message>
+        <location filename="form_contour.cpp" line="285"/>
+        <source>Use selected segment as the Entry line</source>
+        <translation>Использовать выделенный сегмент как линию захода</translation>
+    </message>
+    <message>
+        <location filename="form_contour.cpp" line="287"/>
+        <source>Mark as the Last segment</source>
+        <translation>Пометить как последний</translation>
+    </message>
+    <message>
+        <location filename="form_contour.cpp" line="410"/>
+        <source>Bottom layer is loaded successfully</source>
+        <translation>Нижний слой загружен успешно</translation>
+    </message>
+    <message>
+        <location filename="form_contour.cpp" line="834"/>
+        <source>No contour. There is only a cutline</source>
+        <translation>Нет контура, имеется только линия захода</translation>
+    </message>
+    <message>
+        <source>Open project</source>
+        <translation type="vanished">Открыть проект из файла</translation>
+    </message>
+    <message>
+        <location filename="form_contour.cpp" line="128"/>
         <source>Save current project</source>
         <translation>Сохранить проект</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="131"/>
+        <location filename="form_contour.cpp" line="132"/>
         <source>Save current project with a new name</source>
         <translation>Сохранить проект в новый файл</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="134"/>
+        <location filename="form_contour.cpp" line="135"/>
         <source>Load DXF</source>
         <translation>Загр. DXF</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="135"/>
-        <source>Load DXF file</source>
-        <translation>Загрузить-контур из DXF-файла</translation>
+        <location filename="form_contour.cpp" line="136"/>
+        <source>Load a DXF file</source>
+        <translation>Загрузить DXF файл</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="140"/>
+        <location filename="form_contour.cpp" line="141"/>
         <source>Adjust</source>
         <translation>Параметры</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="141"/>
-        <source>Adjust contour</source>
-        <translation>Настроить контур</translation>
+        <location filename="form_contour.cpp" line="142"/>
+        <source>Adjust the contour</source>
+        <translation>Параметры обработки</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="144"/>
+        <location filename="form_contour.cpp" line="145"/>
         <source>Generate G-code</source>
         <translation>Генерировать G-код</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="206"/>
+        <location filename="form_contour.cpp" line="207"/>
         <source>Contours</source>
         <translation>Контуры</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="207"/>
+        <location filename="form_contour.cpp" line="208"/>
         <source>Current</source>
         <translation>Текущий</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="252"/>
+        <location filename="form_contour.cpp" line="253"/>
         <source>New Contour</source>
         <translation>Новый</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="255"/>
         <source>Add Cutline</source>
-        <translation>Линия захода</translation>
+        <translation type="vanished">Линия захода</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="256"/>
         <source>Add new cutline before the first segment</source>
-        <translation>Добавить линию захода перед первым сегментом контура</translation>
+        <translation type="vanished">Добавить линию захода перед первым сегментом контура</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="273"/>
         <source>Set as the first segment in the contour</source>
-        <translation>Сделать выбранный сегмент первым в контуре</translation>
+        <translation type="vanished">Сделать выбранный сегмент первым в контуре</translation>
     </message>
     <message>
         <location filename="form_contour.cpp" line="284"/>
-        <source>Use segment as cutline</source>
-        <translation>Использовать выбранный сегмент в качестве линии захода</translation>
+        <source>Use as Entry line</source>
+        <oldsource>Use segment as cutline</oldsource>
+        <translation>Исп. как линия захода</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="286"/>
         <source>Mark as the last segment</source>
-        <translation>Отметить выбранный сегмент как послений в контуре</translation>
+        <translation type="vanished">Отметить выбранный сегмент как послений в контуре</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="419"/>
+        <location filename="form_contour.cpp" line="420"/>
         <source>Removed unconnected segments from DXF</source>
         <translation>Удаленные не соединенные сегменты в файле DXF</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="429"/>
+        <location filename="form_contour.cpp" line="430"/>
         <source>Removed extra tails from DXF</source>
         <translation>Удаленные лишнии хвосты из файла DXF</translation>
     </message>
@@ -528,53 +600,50 @@
         <translation type="vanished">Добавить линию захода перед первым сегментом контура</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="258"/>
+        <location filename="form_contour.cpp" line="259"/>
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="259"/>
+        <location filename="form_contour.cpp" line="260"/>
         <source>Delete selected contour</source>
         <translation>Удалить выбранный контур</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="261"/>
+        <location filename="form_contour.cpp" line="262"/>
         <source>Clear</source>
         <translation>Очистить</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="262"/>
+        <location filename="form_contour.cpp" line="263"/>
         <source>Clear all contours</source>
         <translation>Очистить все контуры</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="272"/>
         <source>First</source>
-        <translation>Первый</translation>
+        <translation type="vanished">Первый</translation>
     </message>
     <message>
         <source>Set as first segment in contour</source>
         <translation type="vanished">Сделать первым элементом в контуре</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="275"/>
         <source>Change direction</source>
-        <translation>Изм. направление</translation>
+        <translation type="vanished">Изм. направление</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="276"/>
+        <location filename="form_contour.cpp" line="277"/>
         <source>Change contour direction</source>
         <translation>Изменить направление обхода контура</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="279"/>
+        <location filename="form_contour.cpp" line="280"/>
         <source>Edit</source>
         <translation>Редактировать</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="283"/>
         <source>Use as Cutline</source>
-        <translation>Использовать как линию захода</translation>
+        <translation type="vanished">Использовать как линию захода</translation>
     </message>
     <message>
         <source>Use segment as Cutline</source>
@@ -594,59 +663,58 @@
         <translation type="vanished">Пометить как  выходной сегмент</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="289"/>
+        <location filename="form_contour.cpp" line="290"/>
         <source>Rotate</source>
         <translation>Поворот</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="290"/>
-        <source>Rotate contour</source>
-        <translation>Поворот контура на заданный угол</translation>
+        <location filename="form_contour.cpp" line="291"/>
+        <source>Rotate the contour</source>
+        <translation>Повернуть контур</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="292"/>
+        <location filename="form_contour.cpp" line="293"/>
         <source>Flip Left-Right</source>
         <translation>Перевернуть слева-направо</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="293"/>
-        <source>Flip contour Left-Right</source>
+        <location filename="form_contour.cpp" line="294"/>
+        <source>Flip the contour Left-Right</source>
         <translation>Перевернуть контур слево-направо</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="295"/>
+        <location filename="form_contour.cpp" line="296"/>
         <source>Flip Up-Down</source>
         <translation>Перевернуть сверху-вниз</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="296"/>
-        <source>Flip contour Up-Down</source>
+        <location filename="form_contour.cpp" line="297"/>
+        <source>Flip the contour Up-Down</source>
         <translation>Перевернуть контур сверху-вниз</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="298"/>
+        <location filename="form_contour.cpp" line="299"/>
         <source>Resize</source>
-        <translation>Изменить размер</translation>
+        <translation>Изм. размер</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="299"/>
-        <source>Resize contour</source>
+        <location filename="form_contour.cpp" line="300"/>
+        <source>Resize the contour</source>
         <translation>Изменить размер контура</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="373"/>
+        <location filename="form_contour.cpp" line="374"/>
         <source>Open DXF file</source>
         <translation>Открыть DXF файл</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="374"/>
+        <location filename="form_contour.cpp" line="375"/>
         <source>DXF files</source>
         <translation>Файлы DXF</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="409"/>
         <source>Bottom layer loaded successfully</source>
-        <translation>Нижний контур загружен успешно</translation>
+        <translation type="vanished">Нижний контур загружен успешно</translation>
     </message>
     <message>
         <source>Removed unconnected segments from Dxf</source>
@@ -657,142 +725,148 @@
         <translation type="vanished">Удалены лишние хвосты из Dxf</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="439"/>
+        <location filename="form_contour.cpp" line="440"/>
         <source>Bottom layer DXF segments sorting error</source>
         <translation>Ошибка сортировки нижнего контура</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="447"/>
+        <location filename="form_contour.cpp" line="448"/>
         <source>Bottom layer DXF parsing error</source>
         <translation>Ошибка файла нижнего контура</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="826"/>
+        <location filename="form_contour.cpp" line="827"/>
         <source>No contour</source>
         <translation>Нет контура</translation>
     </message>
     <message>
-        <location filename="form_contour.cpp" line="833"/>
         <source>No contour. Only cutline</source>
-        <translation>Нет контура. Только линия входа</translation>
+        <translation type="vanished">Нет контура. Только линия входа</translation>
     </message>
 </context>
 <context>
     <name>FormEdit</name>
     <message>
-        <location filename="form_edit.cpp" line="83"/>
+        <location filename="form_edit.cpp" line="84"/>
         <source>Home</source>
         <translation>Главная</translation>
     </message>
     <message>
-        <location filename="form_edit.cpp" line="84"/>
-        <source>Go to the home panel</source>
+        <location filename="form_edit.cpp" line="85"/>
+        <source>Go to the Home panel</source>
+        <oldsource>Go to the home panel</oldsource>
         <translation>Перейти на главную панель</translation>
     </message>
     <message>
-        <location filename="form_edit.cpp" line="86"/>
+        <location filename="form_edit.cpp" line="87"/>
         <source>New</source>
         <translation>Новый</translation>
     </message>
     <message>
-        <location filename="form_edit.cpp" line="87"/>
+        <location filename="form_edit.cpp" line="88"/>
         <source>Create a new G-code file</source>
         <translation>Создать новый файл G-кода</translation>
     </message>
     <message>
-        <location filename="form_edit.cpp" line="89"/>
+        <location filename="form_edit.cpp" line="90"/>
         <source>Open</source>
         <translation>Открыть</translation>
     </message>
     <message>
-        <location filename="form_edit.cpp" line="92"/>
+        <location filename="form_edit.cpp" line="93"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="form_edit.cpp" line="96"/>
+        <location filename="form_edit.cpp" line="97"/>
         <source>Save as</source>
         <translation>Сохр. как</translation>
     </message>
     <message>
-        <location filename="form_edit.cpp" line="97"/>
+        <location filename="form_edit.cpp" line="98"/>
         <source>Save G-code file with a new name</source>
         <translation>Сохранить G-код в новый файл</translation>
     </message>
     <message>
-        <location filename="form_edit.cpp" line="99"/>
+        <location filename="form_edit.cpp" line="100"/>
         <source>Plot</source>
         <translation>Чертёж</translation>
     </message>
     <message>
-        <location filename="form_edit.cpp" line="100"/>
+        <location filename="form_edit.cpp" line="101"/>
         <source>Show the plot</source>
         <translation>Показать чертёж</translation>
     </message>
     <message>
-        <location filename="form_edit.cpp" line="106"/>
+        <location filename="form_edit.cpp" line="107"/>
         <source>to Contour</source>
         <translation>в Контур</translation>
     </message>
     <message>
-        <location filename="form_edit.cpp" line="107"/>
+        <location filename="form_edit.cpp" line="108"/>
         <source>Convert G-code file into a contour</source>
         <translation>Преобразовать файл G-кода в контур</translation>
     </message>
     <message>
-        <location filename="form_edit.cpp" line="122"/>
+        <location filename="form_edit.cpp" line="123"/>
         <source>Run</source>
         <translation>Работа</translation>
     </message>
     <message>
-        <location filename="form_edit.cpp" line="123"/>
-        <source>Open working panel</source>
+        <location filename="form_edit.cpp" line="124"/>
+        <source>Open Work panel</source>
+        <oldsource>Open Run panel</oldsource>
         <translation>Перейти в рабочую панель</translation>
     </message>
     <message>
-        <location filename="form_edit.cpp" line="125"/>
+        <location filename="form_edit.cpp" line="126"/>
         <source>Help</source>
         <translation>Помощь</translation>
     </message>
     <message>
-        <location filename="form_edit.cpp" line="386"/>
+        <location filename="form_edit.cpp" line="397"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
-        <location filename="form_edit.cpp" line="387"/>
+        <location filename="form_edit.cpp" line="398"/>
         <source>The contour is not empty</source>
         <translation>Контур не пустой</translation>
     </message>
     <message>
-        <location filename="form_edit.cpp" line="388"/>
+        <location filename="form_edit.cpp" line="399"/>
         <source>Do you want to overwrite it?</source>
         <translation>Вы хотите перезаписать его?</translation>
     </message>
     <message>
-        <location filename="form_edit.cpp" line="389"/>
+        <location filename="form_edit.cpp" line="400"/>
         <source>Yes</source>
         <translation>Да</translation>
     </message>
     <message>
-        <location filename="form_edit.cpp" line="390"/>
+        <location filename="form_edit.cpp" line="401"/>
         <source>No</source>
         <translation>Нет</translation>
     </message>
     <message>
-        <location filename="form_edit.cpp" line="90"/>
-        <location filename="form_edit.cpp" line="199"/>
+        <location filename="form_edit.cpp" line="91"/>
+        <location filename="form_edit.cpp" line="200"/>
         <source>Open G-code file</source>
         <translation>Открыть файл G-кода</translation>
     </message>
     <message>
-        <location filename="form_edit.cpp" line="199"/>
+        <location filename="form_edit.cpp" line="20"/>
+        <source>G-code Editor</source>
+        <translation>Редактор G-кода</translation>
+    </message>
+    <message>
+        <location filename="form_edit.cpp" line="200"/>
         <source>All files</source>
         <translation>Все файлы</translation>
     </message>
     <message>
-        <location filename="form_edit.cpp" line="199"/>
-        <location filename="form_edit.cpp" line="327"/>
+        <location filename="form_edit.cpp" line="200"/>
+        <location filename="form_edit.cpp" line="338"/>
         <source>G-code files</source>
         <oldsource>G-code (*.nc *.NC)</oldsource>
         <translation>G-код файлы</translation>
@@ -802,18 +876,18 @@
         <translation type="vanished">Все файлы (*)</translation>
     </message>
     <message>
-        <location filename="form_edit.cpp" line="93"/>
-        <location filename="form_edit.cpp" line="325"/>
+        <location filename="form_edit.cpp" line="94"/>
+        <location filename="form_edit.cpp" line="336"/>
         <source>Save G-code file</source>
         <translation>Сохранить G-код</translation>
     </message>
     <message>
-        <location filename="form_edit.cpp" line="343"/>
+        <location filename="form_edit.cpp" line="354"/>
         <source>Play</source>
         <translation>Проиграть</translation>
     </message>
     <message>
-        <location filename="form_edit.cpp" line="349"/>
+        <location filename="form_edit.cpp" line="360"/>
         <source>Stop</source>
         <translation>Стоп</translation>
     </message>
@@ -821,20 +895,29 @@
 <context>
     <name>FormHelp</name>
     <message>
-        <location filename="form_help.cpp" line="32"/>
+        <location filename="form_help.cpp" line="7"/>
+        <source>Help</source>
+        <translation>Помощь</translation>
+    </message>
+    <message>
+        <location filename="form_help.cpp" line="33"/>
         <source>Help file is not found</source>
         <oldsource>Help file not found</oldsource>
         <translation>Файл помощи не найден</translation>
     </message>
     <message>
-        <location filename="form_help.cpp" line="48"/>
+        <location filename="form_help.cpp" line="49"/>
         <source>Back</source>
         <translation>Назад</translation>
     </message>
     <message>
-        <location filename="form_help.cpp" line="49"/>
+        <location filename="form_help.cpp" line="50"/>
+        <source>Exit Help</source>
+        <translation>Выйти из помощи</translation>
+    </message>
+    <message>
         <source>Quit the help panel</source>
-        <translation>Выйти из панели помощи</translation>
+        <translation type="vanished">Выйти из панели помощи</translation>
     </message>
 </context>
 <context>
@@ -844,22 +927,23 @@
         <translation type="vanished">Главная панель</translation>
     </message>
     <message>
-        <location filename="form_home.cpp" line="103"/>
+        <location filename="form_home.cpp" line="11"/>
+        <location filename="form_home.cpp" line="104"/>
         <source>Home</source>
         <translation>Главная</translation>
     </message>
     <message>
-        <location filename="form_home.cpp" line="106"/>
+        <location filename="form_home.cpp" line="107"/>
         <source>Contour</source>
         <translation>Контур</translation>
     </message>
     <message>
-        <location filename="form_home.cpp" line="109"/>
+        <location filename="form_home.cpp" line="110"/>
         <source>G-code</source>
         <translation>G-код</translation>
     </message>
     <message>
-        <location filename="form_home.cpp" line="112"/>
+        <location filename="form_home.cpp" line="113"/>
         <source>Run</source>
         <translation>Работа</translation>
     </message>
@@ -868,7 +952,7 @@
         <translation type="vanished">Настройки</translation>
     </message>
     <message>
-        <location filename="form_home.cpp" line="263"/>
+        <location filename="form_home.cpp" line="276"/>
         <source>Serial port is not found</source>
         <translation>Последовательный порт не найден</translation>
     </message>
@@ -877,17 +961,17 @@
         <translation type="vanished">Восстановить G-код</translation>
     </message>
     <message>
-        <location filename="form_home.cpp" line="128"/>
+        <location filename="form_home.cpp" line="129"/>
         <source>Recovery</source>
         <translation>Восстан.</translation>
     </message>
     <message>
-        <location filename="form_home.cpp" line="118"/>
+        <location filename="form_home.cpp" line="119"/>
         <source>Pult</source>
         <translation>Пульт</translation>
     </message>
     <message>
-        <location filename="form_home.cpp" line="138"/>
+        <location filename="form_home.cpp" line="139"/>
         <source>Test</source>
         <translation>Тест</translation>
     </message>
@@ -896,108 +980,113 @@
         <translation type="vanished">Свернуть программу</translation>
     </message>
     <message>
-        <location filename="form_home.cpp" line="144"/>
+        <location filename="form_home.cpp" line="145"/>
         <source>Minimize</source>
         <translation>Свернуть</translation>
     </message>
     <message>
-        <location filename="form_home.cpp" line="147"/>
+        <location filename="form_home.cpp" line="148"/>
         <source>Shutdown</source>
         <translation>Выкл.</translation>
     </message>
     <message>
-        <location filename="form_home.cpp" line="151"/>
+        <location filename="form_home.cpp" line="152"/>
         <source>Help</source>
         <translation>Помощь</translation>
     </message>
     <message>
-        <location filename="form_home.cpp" line="23"/>
+        <location filename="form_home.cpp" line="24"/>
         <source>Welcome</source>
         <translation>Приветствие</translation>
     </message>
     <message>
-        <location filename="form_home.cpp" line="27"/>
+        <location filename="form_home.cpp" line="28"/>
         <source>Slicing</source>
         <translation>Нарезка</translation>
     </message>
     <message>
-        <location filename="form_home.cpp" line="31"/>
+        <location filename="form_home.cpp" line="32"/>
         <source>Comb</source>
         <translation>Гребёнка</translation>
     </message>
     <message>
-        <location filename="form_home.cpp" line="36"/>
+        <location filename="form_home.cpp" line="37"/>
         <source>UV Sizing</source>
         <translation>Калибровка UV</translation>
     </message>
     <message>
-        <location filename="form_home.cpp" line="107"/>
+        <location filename="form_home.cpp" line="108"/>
         <source>Load and edit a contour</source>
         <translation>Редактировать контур</translation>
     </message>
     <message>
-        <location filename="form_home.cpp" line="110"/>
+        <location filename="form_home.cpp" line="111"/>
         <source>Open G-code editor</source>
         <translation>Редактировать программу G-код</translation>
     </message>
     <message>
-        <location filename="form_home.cpp" line="113"/>
-        <source>Open working panel</source>
+        <location filename="form_home.cpp" line="114"/>
+        <source>Open Work panel</source>
+        <oldsource>Open Run panel</oldsource>
         <translation>Открыть рабочую панель</translation>
     </message>
     <message>
-        <location filename="form_home.cpp" line="115"/>
+        <location filename="form_home.cpp" line="116"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="form_home.cpp" line="116"/>
+        <location filename="form_home.cpp" line="117"/>
         <source>Change CNC settings</source>
         <translation>Изменить настройки ЧПУ</translation>
     </message>
     <message>
-        <location filename="form_home.cpp" line="119"/>
+        <location filename="form_home.cpp" line="120"/>
         <source>Manual ruling of the CNC</source>
         <translation>Открыть панель ручного управления</translation>
     </message>
     <message>
-        <location filename="form_home.cpp" line="122"/>
+        <location filename="form_home.cpp" line="123"/>
         <source>Center</source>
         <translation>Центр</translation>
     </message>
     <message>
-        <location filename="form_home.cpp" line="129"/>
+        <location filename="form_home.cpp" line="130"/>
         <source>Recovery the last job</source>
         <translation>Восстановить последнее прерванное задание</translation>
     </message>
     <message>
-        <location filename="form_home.cpp" line="145"/>
+        <location filename="form_home.cpp" line="146"/>
         <source>Minimize CNC program and open Linux desktop</source>
         <translation>Свернуть программу и показать рабочий стол</translation>
     </message>
     <message>
-        <location filename="form_home.cpp" line="148"/>
+        <location filename="form_home.cpp" line="149"/>
         <source>Shutdown CNC</source>
         <translation>Выключить ЧПУ</translation>
     </message>
     <message>
-        <location filename="form_home.cpp" line="257"/>
         <source>Info</source>
         <oldsource>Info: </oldsource>
-        <translation>Информация</translation>
+        <translation type="vanished">Информация</translation>
     </message>
     <message>
         <source>Connecting...</source>
         <translation type="vanished">Соединение...</translation>
     </message>
     <message>
-        <location filename="form_home.cpp" line="257"/>
+        <location filename="form_home.cpp" line="270"/>
         <source>Connecting</source>
         <translation>Соединение</translation>
     </message>
     <message>
-        <location filename="form_home.cpp" line="263"/>
-        <location filename="form_home.cpp" line="269"/>
+        <location filename="form_home.cpp" line="270"/>
+        <source>Attempt</source>
+        <translation>Попытка</translation>
+    </message>
+    <message>
+        <location filename="form_home.cpp" line="276"/>
+        <location filename="form_home.cpp" line="282"/>
         <source>Error</source>
         <oldsource>Error: </oldsource>
         <translation>Ошибка</translation>
@@ -1007,7 +1096,7 @@
         <translation type="vanished">Последовательный порт не найден</translation>
     </message>
     <message>
-        <location filename="form_home.cpp" line="269"/>
+        <location filename="form_home.cpp" line="282"/>
         <source>No connection. Check conection between computer and CNC board</source>
         <translation>Нет соединения. Проверьте соединение между компьютером и платой ЧПУ</translation>
     </message>
@@ -1236,8 +1325,9 @@
     </message>
     <message>
         <location filename="form_passes.cpp" line="527"/>
-        <source>Back to contour panel</source>
-        <translation>Вернуться на панель контура реза</translation>
+        <source>Return to Contour editor</source>
+        <oldsource>Return to Contour panel</oldsource>
+        <translation>Вернуться в панель редактора контура реза</translation>
     </message>
     <message>
         <location filename="form_passes.cpp" line="535"/>
@@ -1256,17 +1346,17 @@
         <translation>Недорез</translation>
     </message>
     <message>
-        <location filename="form_passes.cpp" line="540"/>
+        <location filename="form_passes.cpp" line="539"/>
         <source>Set default values</source>
         <translation>Установить значения по умолчанию</translation>
     </message>
     <message>
-        <location filename="form_passes.cpp" line="566"/>
+        <location filename="form_passes.cpp" line="565"/>
         <source>Help</source>
         <translation>Помощь</translation>
     </message>
     <message>
-        <location filename="form_passes.cpp" line="597"/>
+        <location filename="form_passes.cpp" line="601"/>
         <source>Mode</source>
         <translation>Режим</translation>
     </message>
@@ -1275,71 +1365,81 @@
     <name>FormPassesStone</name>
     <message>
         <location filename="form_passes_stone.cpp" line="15"/>
+        <location filename="form_passes_stone.cpp" line="16"/>
         <source>Contour Adjustments</source>
         <translation>Параметры реза</translation>
     </message>
     <message>
-        <location filename="form_passes_stone.cpp" line="57"/>
+        <location filename="form_passes_stone.cpp" line="58"/>
         <source>Additional Offset</source>
         <translation>Дополнительное смещение</translation>
     </message>
     <message>
-        <location filename="form_passes_stone.cpp" line="60"/>
-        <location filename="form_passes_stone.cpp" line="90"/>
-        <location filename="form_passes_stone.cpp" line="133"/>
+        <location filename="form_passes_stone.cpp" line="61"/>
+        <location filename="form_passes_stone.cpp" line="91"/>
+        <location filename="form_passes_stone.cpp" line="134"/>
         <source>mm</source>
         <translation>мм</translation>
     </message>
     <message>
-        <location filename="form_passes_stone.cpp" line="68"/>
-        <location filename="form_passes_stone.cpp" line="98"/>
+        <location filename="form_passes_stone.cpp" line="69"/>
+        <location filename="form_passes_stone.cpp" line="99"/>
         <source>Left Offset</source>
         <translation>Левое смещение</translation>
     </message>
     <message>
-        <location filename="form_passes_stone.cpp" line="69"/>
-        <location filename="form_passes_stone.cpp" line="99"/>
+        <location filename="form_passes_stone.cpp" line="70"/>
+        <location filename="form_passes_stone.cpp" line="100"/>
         <source>Right Offset</source>
         <translation>Правое смещение</translation>
     </message>
     <message>
-        <location filename="form_passes_stone.cpp" line="87"/>
+        <location filename="form_passes_stone.cpp" line="88"/>
         <source>Wire Offset</source>
         <oldsource>Cutting Offset</oldsource>
         <translation>Смещение проволоки</translation>
     </message>
     <message>
-        <location filename="form_passes_stone.cpp" line="130"/>
+        <location filename="form_passes_stone.cpp" line="131"/>
         <source>Overlap</source>
         <oldsource>Overlapping</oldsource>
         <translation>Перерез</translation>
+    </message>
+    <message>
+        <location filename="form_passes_stone.cpp" line="228"/>
+        <source>Add a pause after each segment</source>
+        <translation>Добавить паузу после каждого сегмента</translation>
+    </message>
+    <message>
+        <location filename="form_passes_stone.cpp" line="744"/>
+        <source>Open contour settings from the file</source>
+        <translation>Открыть настройки обработки из файла</translation>
     </message>
     <message>
         <source>Tab</source>
         <translation type="vanished">Недорез</translation>
     </message>
     <message>
-        <location filename="form_passes_stone.cpp" line="146"/>
+        <location filename="form_passes_stone.cpp" line="147"/>
         <source>None</source>
         <translation>Нет</translation>
     </message>
     <message>
-        <location filename="form_passes_stone.cpp" line="148"/>
+        <location filename="form_passes_stone.cpp" line="149"/>
         <source>Last segment</source>
         <translation>Последний сегмент</translation>
     </message>
     <message>
-        <location filename="form_passes_stone.cpp" line="206"/>
         <source>Indent Pause</source>
         <oldsource>Tab Pause</oldsource>
-        <translation>Остановка перед недорезом</translation>
+        <translation type="vanished">Остановка перед недорезом</translation>
     </message>
     <message>
         <source>Pump On Delay</source>
         <translation type="vanished">Пауза по вкл. насоса</translation>
     </message>
     <message>
-        <location filename="form_passes_stone.cpp" line="229"/>
+        <location filename="form_passes_stone.cpp" line="230"/>
         <source>sec</source>
         <translation>сек</translation>
     </message>
@@ -1352,93 +1452,97 @@
         <translation type="vanished">Недорез</translation>
     </message>
     <message>
-        <location filename="form_passes_stone.cpp" line="138"/>
+        <location filename="form_passes_stone.cpp" line="139"/>
         <source>Tab width</source>
         <translation>Недорез</translation>
     </message>
     <message>
-        <location filename="form_passes_stone.cpp" line="218"/>
+        <location filename="form_passes_stone.cpp" line="207"/>
+        <source>Tab Pause</source>
+        <translation>Сделать паузу перед недорезом</translation>
+    </message>
+    <message>
+        <location filename="form_passes_stone.cpp" line="219"/>
         <source>Cutting Speed</source>
         <translation>Скорость реза</translation>
     </message>
     <message>
-        <location filename="form_passes_stone.cpp" line="221"/>
+        <location filename="form_passes_stone.cpp" line="222"/>
         <source>mm/min</source>
         <translation>мм/мин</translation>
     </message>
     <message>
-        <location filename="form_passes_stone.cpp" line="227"/>
         <source>Add pause after each segment</source>
-        <translation>Добавить паузу после каждого сегмента</translation>
+        <translation type="vanished">Добавить паузу после каждого сегмента</translation>
     </message>
     <message>
-        <location filename="form_passes_stone.cpp" line="712"/>
+        <location filename="form_passes_stone.cpp" line="713"/>
         <source>Cutting: Save File Error</source>
         <translation>Рез: Ошибка сохранения файла</translation>
     </message>
     <message>
-        <location filename="form_passes_stone.cpp" line="722"/>
+        <location filename="form_passes_stone.cpp" line="723"/>
         <source>Save cutting settings</source>
         <translation>Сохранение параметров реза</translation>
     </message>
     <message>
-        <location filename="form_passes_stone.cpp" line="724"/>
+        <location filename="form_passes_stone.cpp" line="725"/>
         <source>Cutting settings files</source>
         <oldsource>Cutting settings file</oldsource>
         <translation>Файлы параметров реза</translation>
     </message>
     <message>
-        <location filename="form_passes_stone.cpp" line="738"/>
+        <location filename="form_passes_stone.cpp" line="739"/>
         <source>Back</source>
         <translation>Назад</translation>
     </message>
     <message>
-        <location filename="form_passes_stone.cpp" line="739"/>
-        <source>Return to the contour panel</source>
+        <location filename="form_passes_stone.cpp" line="740"/>
+        <source>Return to the Contour editor</source>
+        <oldsource>Return to the Contour panel</oldsource>
         <translation>Вернуться в редактор контура</translation>
     </message>
     <message>
-        <location filename="form_passes_stone.cpp" line="741"/>
+        <location filename="form_passes_stone.cpp" line="742"/>
         <source>Open</source>
         <translation>Открыть</translation>
     </message>
     <message>
-        <location filename="form_passes_stone.cpp" line="743"/>
         <source>Open contour settings from a file</source>
-        <translation>Открыть параметры контура из файла</translation>
+        <translation type="vanished">Открыть параметры контура из файла</translation>
     </message>
     <message>
-        <location filename="form_passes_stone.cpp" line="745"/>
+        <location filename="form_passes_stone.cpp" line="746"/>
         <source>Save</source>
         <translation>Сохранение</translation>
     </message>
     <message>
-        <location filename="form_passes_stone.cpp" line="747"/>
+        <location filename="form_passes_stone.cpp" line="748"/>
         <source>Save contour settings</source>
         <translation>Сохранить параметры контура</translation>
     </message>
     <message>
-        <location filename="form_passes_stone.cpp" line="749"/>
+        <location filename="form_passes_stone.cpp" line="750"/>
         <source>Save as</source>
         <translation>Сохр. как</translation>
     </message>
     <message>
-        <location filename="form_passes_stone.cpp" line="751"/>
+        <location filename="form_passes_stone.cpp" line="752"/>
         <source>Save contour settings into a new file</source>
         <translation>Сохранить параметры контура в новый файл</translation>
     </message>
     <message>
-        <location filename="form_passes_stone.cpp" line="753"/>
+        <location filename="form_passes_stone.cpp" line="754"/>
         <source>Default</source>
         <translation>Сброс</translation>
     </message>
     <message>
-        <location filename="form_passes_stone.cpp" line="754"/>
+        <location filename="form_passes_stone.cpp" line="755"/>
         <source>Set default values</source>
         <translation>Установить значения по умолчанию</translation>
     </message>
     <message>
-        <location filename="form_passes_stone.cpp" line="780"/>
+        <location filename="form_passes_stone.cpp" line="781"/>
         <source>Help</source>
         <translation>Помощь</translation>
     </message>
@@ -1446,23 +1550,23 @@
 <context>
     <name>FormPult</name>
     <message>
-        <location filename="form_pult.cpp" line="18"/>
+        <location filename="form_pult.cpp" line="19"/>
         <source>Pult</source>
         <translation>Пульт</translation>
     </message>
     <message>
-        <location filename="form_pult.cpp" line="67"/>
+        <location filename="form_pult.cpp" line="68"/>
         <source>Home</source>
         <translation>Главная</translation>
     </message>
     <message>
-        <location filename="form_pult.cpp" line="68"/>
+        <location filename="form_pult.cpp" line="69"/>
         <source>Go to Home panel</source>
         <oldsource>Goto Home panel</oldsource>
         <translation>Перейти на главную панель</translation>
     </message>
     <message>
-        <location filename="form_pult.cpp" line="70"/>
+        <location filename="form_pult.cpp" line="71"/>
         <source>Help</source>
         <translation>Помощь</translation>
     </message>
@@ -1471,89 +1575,94 @@
         <translation type="vanished">Проволока</translation>
     </message>
     <message>
-        <location filename="form_pult.cpp" line="72"/>
+        <location filename="form_pult.cpp" line="10"/>
+        <source>CNC Pult</source>
+        <translation>Пульт ЧПУ</translation>
+    </message>
+    <message>
+        <location filename="form_pult.cpp" line="73"/>
         <source>Break</source>
         <translation>Обрыв</translation>
     </message>
     <message>
-        <location filename="form_pult.cpp" line="74"/>
+        <location filename="form_pult.cpp" line="75"/>
         <source>Wire break control on/off</source>
         <translation>Вкл./выкл. контроль обрыва проволоки</translation>
     </message>
     <message>
-        <location filename="form_pult.cpp" line="76"/>
+        <location filename="form_pult.cpp" line="77"/>
         <source>Pump</source>
         <translation>Насос</translation>
     </message>
     <message>
-        <location filename="form_pult.cpp" line="78"/>
+        <location filename="form_pult.cpp" line="79"/>
         <source>Pump on/off</source>
         <translation>Вкл./выкл. насос</translation>
     </message>
     <message>
-        <location filename="form_pult.cpp" line="80"/>
-        <location filename="form_pult.cpp" line="257"/>
+        <location filename="form_pult.cpp" line="81"/>
+        <location filename="form_pult.cpp" line="258"/>
         <source>Drum</source>
         <translation>Барабан</translation>
     </message>
     <message>
-        <location filename="form_pult.cpp" line="82"/>
+        <location filename="form_pult.cpp" line="83"/>
         <source>Wire drum on/off</source>
         <translation>Вкл./выкл. вращение барабана</translation>
     </message>
     <message>
-        <location filename="form_pult.cpp" line="84"/>
-        <location filename="form_pult.cpp" line="101"/>
-        <location filename="form_pult.cpp" line="115"/>
-        <location filename="form_pult.cpp" line="129"/>
-        <location filename="form_pult.cpp" line="143"/>
+        <location filename="form_pult.cpp" line="85"/>
+        <location filename="form_pult.cpp" line="102"/>
+        <location filename="form_pult.cpp" line="116"/>
+        <location filename="form_pult.cpp" line="130"/>
+        <location filename="form_pult.cpp" line="144"/>
         <source>DEC</source>
         <translation>Умен.</translation>
     </message>
     <message>
-        <location filename="form_pult.cpp" line="85"/>
+        <location filename="form_pult.cpp" line="86"/>
         <source>Drum velocity decrement</source>
         <translation>Уменьшить скорость барабана</translation>
     </message>
     <message>
-        <location filename="form_pult.cpp" line="87"/>
-        <location filename="form_pult.cpp" line="108"/>
-        <location filename="form_pult.cpp" line="122"/>
-        <location filename="form_pult.cpp" line="136"/>
-        <location filename="form_pult.cpp" line="150"/>
+        <location filename="form_pult.cpp" line="88"/>
+        <location filename="form_pult.cpp" line="109"/>
+        <location filename="form_pult.cpp" line="123"/>
+        <location filename="form_pult.cpp" line="137"/>
+        <location filename="form_pult.cpp" line="151"/>
         <source>INC</source>
         <translation>Увел.</translation>
     </message>
     <message>
-        <location filename="form_pult.cpp" line="88"/>
+        <location filename="form_pult.cpp" line="89"/>
         <source>Drum velocity increment</source>
         <translation>Увеличить скорость барабана</translation>
     </message>
     <message>
-        <location filename="form_pult.cpp" line="92"/>
-        <location filename="form_pult.cpp" line="263"/>
+        <location filename="form_pult.cpp" line="93"/>
+        <location filename="form_pult.cpp" line="264"/>
         <source>Voltage</source>
         <translation>Напряжение</translation>
     </message>
     <message>
-        <location filename="form_pult.cpp" line="94"/>
+        <location filename="form_pult.cpp" line="95"/>
         <source>Enable high voltage if drum and pump enabled</source>
         <translation>Вкл./выкл. высокого напряжения</translation>
     </message>
     <message>
-        <location filename="form_pult.cpp" line="259"/>
+        <location filename="form_pult.cpp" line="260"/>
         <source>Width</source>
         <oldsource>Width: </oldsource>
         <translation>Ширина</translation>
     </message>
     <message>
-        <location filename="form_pult.cpp" line="261"/>
+        <location filename="form_pult.cpp" line="262"/>
         <source>Ratio</source>
         <oldsource>Ratio: </oldsource>
         <translation>Скважность</translation>
     </message>
     <message>
-        <location filename="form_pult.cpp" line="265"/>
+        <location filename="form_pult.cpp" line="266"/>
         <source>Current</source>
         <oldsource>Current: </oldsource>
         <translation>Ток</translation>
@@ -1562,18 +1671,18 @@
 <context>
     <name>FormRun</name>
     <message>
-        <location filename="form_run.cpp" line="86"/>
+        <location filename="form_run.cpp" line="87"/>
         <source>Home</source>
         <translation>Главная</translation>
     </message>
     <message>
-        <location filename="form_run.cpp" line="87"/>
+        <location filename="form_run.cpp" line="88"/>
         <source>Go to Home panel</source>
         <oldsource>Goto Home panel</oldsource>
         <translation>Перейти на главную панель</translation>
     </message>
     <message>
-        <location filename="form_run.cpp" line="89"/>
+        <location filename="form_run.cpp" line="90"/>
         <source>Help</source>
         <translation>Помощь</translation>
     </message>
@@ -1582,115 +1691,121 @@
         <translation type="vanished">Проволока</translation>
     </message>
     <message>
-        <location filename="form_run.cpp" line="91"/>
+        <location filename="form_run.cpp" line="10"/>
+        <source>Work Panel</source>
+        <oldsource>Run Panel</oldsource>
+        <translation>Рабочая панель</translation>
+    </message>
+    <message>
+        <location filename="form_run.cpp" line="92"/>
         <source>Break</source>
         <translation>Обрыв</translation>
     </message>
     <message>
-        <location filename="form_run.cpp" line="93"/>
+        <location filename="form_run.cpp" line="94"/>
         <source>Wire break control on/off</source>
         <oldsource>Wire control on/off</oldsource>
         <translation>Вкл./выкл. контроль обрыва проволоки</translation>
     </message>
     <message>
-        <location filename="form_run.cpp" line="95"/>
+        <location filename="form_run.cpp" line="96"/>
         <source>Pump</source>
         <translation>Насос</translation>
     </message>
     <message>
-        <location filename="form_run.cpp" line="97"/>
+        <location filename="form_run.cpp" line="98"/>
         <source>Pump on/off</source>
         <translation>Вкл./выкл. насос</translation>
     </message>
     <message>
-        <location filename="form_run.cpp" line="99"/>
-        <location filename="form_run.cpp" line="276"/>
+        <location filename="form_run.cpp" line="100"/>
+        <location filename="form_run.cpp" line="277"/>
         <source>Drum</source>
         <translation>Барабан</translation>
     </message>
     <message>
-        <location filename="form_run.cpp" line="101"/>
+        <location filename="form_run.cpp" line="102"/>
         <source>Wire drum on/off</source>
         <translation>Вкл./выкл. вращение барабана</translation>
     </message>
     <message>
-        <location filename="form_run.cpp" line="103"/>
-        <location filename="form_run.cpp" line="119"/>
-        <location filename="form_run.cpp" line="133"/>
-        <location filename="form_run.cpp" line="147"/>
-        <location filename="form_run.cpp" line="161"/>
+        <location filename="form_run.cpp" line="104"/>
+        <location filename="form_run.cpp" line="120"/>
+        <location filename="form_run.cpp" line="134"/>
+        <location filename="form_run.cpp" line="148"/>
+        <location filename="form_run.cpp" line="162"/>
         <source>DEC</source>
         <translation>Умен.</translation>
     </message>
     <message>
-        <location filename="form_run.cpp" line="104"/>
+        <location filename="form_run.cpp" line="105"/>
         <source>Drum velocity decrement</source>
         <translation>Уменьшить скорость барабана</translation>
     </message>
     <message>
-        <location filename="form_run.cpp" line="106"/>
-        <location filename="form_run.cpp" line="126"/>
-        <location filename="form_run.cpp" line="140"/>
-        <location filename="form_run.cpp" line="154"/>
-        <location filename="form_run.cpp" line="168"/>
+        <location filename="form_run.cpp" line="107"/>
+        <location filename="form_run.cpp" line="127"/>
+        <location filename="form_run.cpp" line="141"/>
+        <location filename="form_run.cpp" line="155"/>
+        <location filename="form_run.cpp" line="169"/>
         <source>INC</source>
         <translation>Увел.</translation>
     </message>
     <message>
-        <location filename="form_run.cpp" line="107"/>
+        <location filename="form_run.cpp" line="108"/>
         <source>Drum velocity increment</source>
         <translation>Увеличить скорость барабана</translation>
     </message>
     <message>
-        <location filename="form_run.cpp" line="112"/>
-        <location filename="form_run.cpp" line="282"/>
+        <location filename="form_run.cpp" line="113"/>
+        <location filename="form_run.cpp" line="283"/>
         <source>Voltage</source>
         <translation>Напряжение</translation>
     </message>
     <message>
-        <location filename="form_run.cpp" line="278"/>
+        <location filename="form_run.cpp" line="279"/>
         <source>Width</source>
         <oldsource>Width: </oldsource>
         <translation>Ширина</translation>
     </message>
     <message>
-        <location filename="form_run.cpp" line="280"/>
+        <location filename="form_run.cpp" line="281"/>
         <source>Ratio</source>
         <oldsource>Ratio: </oldsource>
         <translation>Скважность</translation>
     </message>
     <message>
-        <location filename="form_run.cpp" line="284"/>
+        <location filename="form_run.cpp" line="285"/>
         <source>Current</source>
         <oldsource>Current: </oldsource>
         <translation>Ток</translation>
     </message>
     <message>
-        <location filename="form_run.cpp" line="470"/>
-        <location filename="form_run.cpp" line="482"/>
-        <location filename="form_run.cpp" line="493"/>
+        <location filename="form_run.cpp" line="478"/>
+        <location filename="form_run.cpp" line="490"/>
+        <location filename="form_run.cpp" line="501"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="form_run.cpp" line="470"/>
+        <location filename="form_run.cpp" line="478"/>
         <source>No G-code</source>
         <translation>Нет  G-кода</translation>
     </message>
     <message>
-        <location filename="form_run.cpp" line="482"/>
+        <location filename="form_run.cpp" line="490"/>
         <source>G-code error</source>
         <translation>Ошибка G-код</translation>
     </message>
     <message>
-        <location filename="form_run.cpp" line="493"/>
+        <location filename="form_run.cpp" line="501"/>
         <source>No CNC connection</source>
         <translation>Нет связи с ЧПУ</translation>
     </message>
     <message>
-        <location filename="form_run.cpp" line="533"/>
-        <location filename="form_run.cpp" line="544"/>
-        <location filename="form_run.cpp" line="561"/>
+        <location filename="form_run.cpp" line="541"/>
+        <location filename="form_run.cpp" line="552"/>
+        <location filename="form_run.cpp" line="569"/>
         <source>Start</source>
         <translation>Старт</translation>
     </message>
@@ -1699,72 +1814,72 @@
         <translation type="vanished">Реверс</translation>
     </message>
     <message>
-        <location filename="form_run.cpp" line="533"/>
-        <location filename="form_run.cpp" line="544"/>
-        <location filename="form_run.cpp" line="561"/>
+        <location filename="form_run.cpp" line="541"/>
+        <location filename="form_run.cpp" line="552"/>
+        <location filename="form_run.cpp" line="569"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="form_run.cpp" line="533"/>
-        <location filename="form_run.cpp" line="544"/>
-        <location filename="form_run.cpp" line="561"/>
+        <location filename="form_run.cpp" line="541"/>
+        <location filename="form_run.cpp" line="552"/>
+        <location filename="form_run.cpp" line="569"/>
         <source>Back</source>
         <translation>Назад</translation>
     </message>
     <message>
-        <location filename="form_run.cpp" line="534"/>
-        <location filename="form_run.cpp" line="545"/>
-        <location filename="form_run.cpp" line="562"/>
+        <location filename="form_run.cpp" line="542"/>
+        <location filename="form_run.cpp" line="553"/>
+        <location filename="form_run.cpp" line="570"/>
         <source>Start cutting</source>
         <translation>Начать рез</translation>
     </message>
     <message>
-        <location filename="form_run.cpp" line="534"/>
-        <location filename="form_run.cpp" line="545"/>
-        <location filename="form_run.cpp" line="562"/>
+        <location filename="form_run.cpp" line="542"/>
+        <location filename="form_run.cpp" line="553"/>
+        <location filename="form_run.cpp" line="570"/>
         <source>Go to back</source>
         <translation>Двигаться в обратную сторону</translation>
     </message>
     <message>
-        <location filename="form_run.cpp" line="534"/>
-        <location filename="form_run.cpp" line="545"/>
-        <location filename="form_run.cpp" line="562"/>
+        <location filename="form_run.cpp" line="542"/>
+        <location filename="form_run.cpp" line="553"/>
+        <location filename="form_run.cpp" line="570"/>
         <source>Cancel program</source>
         <translation>Отменить программу</translation>
     </message>
     <message>
-        <location filename="form_run.cpp" line="555"/>
-        <location filename="form_run.cpp" line="572"/>
-        <location filename="form_run.cpp" line="584"/>
+        <location filename="form_run.cpp" line="563"/>
+        <location filename="form_run.cpp" line="580"/>
+        <location filename="form_run.cpp" line="592"/>
         <source>Stop</source>
         <translation>Стоп</translation>
     </message>
     <message>
-        <location filename="form_run.cpp" line="556"/>
-        <location filename="form_run.cpp" line="573"/>
-        <location filename="form_run.cpp" line="585"/>
+        <location filename="form_run.cpp" line="564"/>
+        <location filename="form_run.cpp" line="581"/>
+        <location filename="form_run.cpp" line="593"/>
         <source>Make a pause</source>
         <translation>Сделать паузу</translation>
     </message>
     <message>
-        <location filename="form_run.cpp" line="578"/>
+        <location filename="form_run.cpp" line="586"/>
         <source>Shortcut</source>
         <translation>Коротко</translation>
     </message>
     <message>
-        <location filename="form_run.cpp" line="579"/>
+        <location filename="form_run.cpp" line="587"/>
         <source>Fast return to start position</source>
         <translation>Быстрый возврат на начальную позицию</translation>
     </message>
     <message>
-        <location filename="form_run.cpp" line="579"/>
-        <location filename="form_run.cpp" line="591"/>
+        <location filename="form_run.cpp" line="587"/>
+        <location filename="form_run.cpp" line="599"/>
         <source>Reset CNC</source>
         <translation>Сброс ЧПУ</translation>
     </message>
     <message>
-        <location filename="form_run.cpp" line="590"/>
+        <location filename="form_run.cpp" line="598"/>
         <source>Reset</source>
         <translation>Сброс</translation>
     </message>
@@ -1777,178 +1892,194 @@
         <translation type="vanished">Настройки</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="59"/>
+        <location filename="form_settings.cpp" line="58"/>
         <source>Application settings</source>
         <translation>Настройки программы</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="60"/>
+        <location filename="form_settings.cpp" line="59"/>
         <source>CNC parameters</source>
         <oldsource>&lt;h3&gt;CNC parameters&lt;/h3&gt;</oldsource>
         <translation>Параметры работы ЧПУ</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="71"/>
+        <location filename="form_settings.cpp" line="70"/>
         <source>Swap plot axes X, Y</source>
         <translation>Поменять местами оси X, Y на чертеже</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="74"/>
+        <location filename="form_settings.cpp" line="68"/>
         <source>Reverse plot axis X</source>
         <oldsource>Reverse X axis</oldsource>
         <translation>Изменить направление оси X на чертеже</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="77"/>
+        <location filename="form_settings.cpp" line="69"/>
         <source>Reverse plot axis Y</source>
         <oldsource>Reverse Y axis</oldsource>
         <translation>Изменить направление оси Y на чертеже</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="80"/>
+        <location filename="form_settings.cpp" line="71"/>
         <source>Show plot axes names</source>
         <oldsource>Show plot axes</oldsource>
         <translation>Отображать оси на чертеже</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="83"/>
+        <location filename="form_settings.cpp" line="73"/>
         <source>Input Levels, bits</source>
         <oldsource>Input Levels, bits: </oldsource>
         <translation>Входные уровни, биты</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="96"/>
+        <location filename="form_settings.cpp" line="81"/>
         <source>Metal</source>
         <translation>Металл</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="97"/>
+        <location filename="form_settings.cpp" line="82"/>
         <source>Stone</source>
         <translation>Камень</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="100"/>
         <source>Servomotors enable</source>
-        <translation>Включение серводвигателей</translation>
+        <translation type="vanished">Включение серводвигателей</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="103"/>
+        <location filename="form_settings.cpp" line="85"/>
         <source>Reverse motor X</source>
         <oldsource>Invert motor X</oldsource>
         <translation>Изменить направление оси X в ЧПУ</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="106"/>
+        <location filename="form_settings.cpp" line="86"/>
         <source>Reverse motor Y</source>
         <oldsource>Invert motor Y</oldsource>
         <translation>Изменить направление оси Y в ЧПУ</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="109"/>
+        <location filename="form_settings.cpp" line="91"/>
         <source>Reverse motor U</source>
         <translation>Изменить направление оси U в ЧПУ</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="112"/>
+        <location filename="form_settings.cpp" line="92"/>
         <source>Reverse motor V</source>
         <translation>Изменить направление оси V в ЧПУ</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="115"/>
+        <location filename="form_settings.cpp" line="87"/>
         <source>Swap motors X and Y</source>
         <translation>Поменять местами оси X и Y в ЧПУ</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="118"/>
+        <location filename="form_settings.cpp" line="10"/>
+        <source>CNC Settings</source>
+        <translation>Настройки ЧПУ</translation>
+    </message>
+    <message>
+        <location filename="form_settings.cpp" line="89"/>
+        <source>Use servomotors</source>
+        <oldsource>Enable servomotors</oldsource>
+        <translation>Использовать сервоприводы</translation>
+    </message>
+    <message>
+        <location filename="form_settings.cpp" line="90"/>
+        <source>Use linear encoders for X, Y axes</source>
+        <oldsource>Enable XY linear encoders</oldsource>
+        <translation>Использовать линейные энкодеры для осей X, Y</translation>
+    </message>
+    <message>
+        <location filename="form_settings.cpp" line="93"/>
         <source>Swap motors U and V</source>
         <translation>Поменять местами оси U и V в ЧПУ</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="121"/>
+        <location filename="form_settings.cpp" line="94"/>
         <source>Reverse Encoder X</source>
         <translation>Изменить направление энкодера X</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="124"/>
+        <location filename="form_settings.cpp" line="95"/>
         <source>Reverse Encoder Y</source>
         <translation>Изменить направление энкодера Y</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="127"/>
+        <location filename="form_settings.cpp" line="97"/>
         <source>Acceleration</source>
         <translation>Ускорение</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="130"/>
-        <location filename="form_settings.cpp" line="141"/>
+        <location filename="form_settings.cpp" line="100"/>
+        <location filename="form_settings.cpp" line="107"/>
         <source>um/sec2</source>
         <translation>мкм/сек2</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="138"/>
+        <location filename="form_settings.cpp" line="104"/>
         <source>Deceleration</source>
         <translation>Торможение</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="150"/>
+        <location filename="form_settings.cpp" line="112"/>
         <source>Feedback enable</source>
         <translation>Включить обратную связь</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="154"/>
+        <location filename="form_settings.cpp" line="115"/>
         <source>High threshold</source>
         <translation>Верхний порог</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="155"/>
+        <location filename="form_settings.cpp" line="116"/>
         <source>Low threshold</source>
         <oldsource>Middle threshold</oldsource>
         <translation>Нижний порог</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="156"/>
+        <location filename="form_settings.cpp" line="117"/>
         <source>Rollback timeout</source>
         <translation>Время ожидания отката</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="157"/>
+        <location filename="form_settings.cpp" line="118"/>
         <source>Rollback attempts</source>
         <translation>Количество попыток отката</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="158"/>
+        <location filename="form_settings.cpp" line="119"/>
         <source>Rollback length</source>
         <translation>Длина отката</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="159"/>
+        <location filename="form_settings.cpp" line="120"/>
         <source>Rollback speed</source>
         <translation>Скорость отката</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="167"/>
-        <location filename="form_settings.cpp" line="173"/>
+        <location filename="form_settings.cpp" line="127"/>
+        <location filename="form_settings.cpp" line="132"/>
         <source>V</source>
         <translation>В</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="178"/>
+        <location filename="form_settings.cpp" line="137"/>
         <source>sec</source>
         <translation>сек</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="189"/>
-        <location filename="form_settings.cpp" line="225"/>
+        <location filename="form_settings.cpp" line="146"/>
+        <location filename="form_settings.cpp" line="182"/>
         <source>mm</source>
         <translation>мм</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="197"/>
+        <location filename="form_settings.cpp" line="153"/>
         <source>mm/min</source>
         <translation>мм/мин</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="219"/>
+        <location filename="form_settings.cpp" line="176"/>
         <source>Calculation step</source>
         <translation>Шаг вычислений</translation>
     </message>
@@ -1957,7 +2088,7 @@
         <translation type="vanished">Отладка</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="98"/>
+        <location filename="form_settings.cpp" line="83"/>
         <source>Debug</source>
         <translation>Отладка</translation>
     </message>
@@ -1967,53 +2098,65 @@
         <translation type="vanished">Шаг вычислений, мм</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="234"/>
+        <location filename="form_settings.cpp" line="190"/>
         <source>Precision (steps/mm)</source>
         <oldsource>Scale (steps/mm)</oldsource>
         <translation>Точность (шагов/мм)</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="235"/>
+        <location filename="form_settings.cpp" line="191"/>
         <source>Motor</source>
         <translation>Двигатель</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="236"/>
+        <location filename="form_settings.cpp" line="215"/>
         <source>Encoder</source>
         <translation>Энкодер</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="507"/>
+        <location filename="form_settings.cpp" line="591"/>
         <source>Back</source>
         <translation>Назад</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="508"/>
-        <source>Back to the home panel</source>
+        <location filename="form_settings.cpp" line="592"/>
+        <source>Return to the Home panel</source>
+        <oldsource>Back to the home panel</oldsource>
         <translation>Вернуться на главную панель</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="510"/>
+        <location filename="form_settings.cpp" line="594"/>
         <source>Read</source>
         <translation>Чтение</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="511"/>
+        <location filename="form_settings.cpp" line="595"/>
         <source>Read settings from CNC</source>
         <translation>Прочитать настройки из ЧПУ</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="513"/>
+        <location filename="form_settings.cpp" line="597"/>
         <source>Write</source>
         <translation>Запись</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="514"/>
+        <location filename="form_settings.cpp" line="598"/>
         <source>Write settings</source>
         <translation>Записать настройки</translation>
     </message>
     <message>
-        <location filename="form_settings.cpp" line="557"/>
+        <location filename="form_settings.cpp" line="600"/>
+        <source>Default</source>
+        <translation>Сброс</translation>
+    </message>
+    <message>
+        <location filename="form_settings.cpp" line="601"/>
+        <source>Set default settings</source>
+        <oldsource>Default settings</oldsource>
+        <translation>Установить настройки по умолчанию</translation>
+    </message>
+    <message>
+        <location filename="form_settings.cpp" line="640"/>
         <source>Help</source>
         <translation>Помощь</translation>
     </message>
@@ -2061,8 +2204,14 @@
         <translation>Помощь</translation>
     </message>
     <message>
-        <location filename="form_test.cpp" line="115"/>
-        <location filename="form_test.cpp" line="121"/>
+        <location filename="form_test.cpp" line="24"/>
+        <source>Diagnostics</source>
+        <oldsource>Diagnostic panel</oldsource>
+        <translation>Диагностика</translation>
+    </message>
+    <message>
+        <location filename="form_test.cpp" line="114"/>
+        <location filename="form_test.cpp" line="120"/>
         <source>Error: No G-code program</source>
         <oldsource>Error: No G-code program
 </oldsource>
@@ -2094,56 +2243,47 @@
         <translation>Меатэк</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="251"/>
         <source>Load DXF contours</source>
-        <translation>Загрузка контуров DXF</translation>
+        <translation type="vanished">Загрузка контуров DXF</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="259"/>
         <source>Code Editor</source>
         <oldsource>Code Edit Page</oldsource>
-        <translation>Редактор G-код</translation>
+        <translation type="vanished">Редактор G-код</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="299"/>
         <source>Centering</source>
-        <translation>Центровка</translation>
+        <translation type="vanished">Центровка</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="328"/>
         <source>Cutting settings</source>
-        <translation>Параметры реза</translation>
+        <translation type="vanished">Параметры реза</translation>
     </message>
     <message>
         <source>Run Page</source>
         <translation type="vanished">Рабочая панель</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="270"/>
         <source>Job Panel</source>
-        <translation>Рабочая панель</translation>
+        <translation type="vanished">Рабочая панель</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="280"/>
         <source>CNC Settigns</source>
-        <translation>Настройки ЧПУ</translation>
+        <translation type="vanished">Настройки ЧПУ</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="289"/>
         <source>CNC Pult</source>
-        <translation>Пульт ЧПУ</translation>
+        <translation type="vanished">Пульт ЧПУ</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="309"/>
         <source>Test</source>
         <oldsource>Test Page</oldsource>
-        <translation>Тестирование</translation>
+        <translation type="vanished">Тестирование</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="319"/>
         <source>Home Panel</source>
         <oldsource>Home Page</oldsource>
-        <translation>Главная панель</translation>
+        <translation type="vanished">Главная панель</translation>
     </message>
     <message>
         <source>Passes Panel</source>
@@ -2151,9 +2291,8 @@
         <translation type="vanished">Панель параметров реза</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="337"/>
         <source>Help</source>
-        <translation>Помощь</translation>
+        <translation type="vanished">Помощь</translation>
     </message>
 </context>
 <context>
@@ -2210,26 +2349,26 @@
 <context>
     <name>PultWidget</name>
     <message>
-        <location filename="pult_widget.cpp" line="129"/>
-        <location filename="pult_widget.cpp" line="340"/>
+        <location filename="pult_widget.cpp" line="52"/>
+        <location filename="pult_widget.cpp" line="234"/>
         <source>Motor</source>
         <translation>Двигатель</translation>
     </message>
     <message>
-        <location filename="pult_widget.cpp" line="130"/>
-        <location filename="pult_widget.cpp" line="341"/>
+        <location filename="pult_widget.cpp" line="53"/>
+        <location filename="pult_widget.cpp" line="235"/>
         <source>Encoder</source>
         <translation>Энкодер</translation>
     </message>
     <message>
-        <location filename="pult_widget.cpp" line="131"/>
-        <location filename="pult_widget.cpp" line="525"/>
+        <location filename="pult_widget.cpp" line="236"/>
+        <location filename="pult_widget.cpp" line="421"/>
         <source>mm</source>
         <translation>мм</translation>
     </message>
     <message>
-        <location filename="pult_widget.cpp" line="132"/>
-        <location filename="pult_widget.cpp" line="526"/>
+        <location filename="pult_widget.cpp" line="237"/>
+        <location filename="pult_widget.cpp" line="422"/>
         <source>steps</source>
         <translation>шагов</translation>
     </message>
@@ -2242,12 +2381,12 @@
         <translation type="vanished">Назад</translation>
     </message>
     <message>
-        <location filename="pult_widget.cpp" line="211"/>
+        <location filename="pult_widget.cpp" line="316"/>
         <source>Workpiece</source>
         <translation>Заготовка</translation>
     </message>
     <message>
-        <location filename="pult_widget.cpp" line="212"/>
+        <location filename="pult_widget.cpp" line="317"/>
         <source>Wire</source>
         <translation>Проволока</translation>
     </message>
@@ -2256,17 +2395,17 @@
         <translation type="vanished">ВН</translation>
     </message>
     <message>
-        <location filename="pult_widget.cpp" line="214"/>
+        <location filename="pult_widget.cpp" line="319"/>
         <source>Shunt</source>
         <translation>Шунт</translation>
     </message>
     <message>
-        <location filename="pult_widget.cpp" line="242"/>
+        <location filename="pult_widget.cpp" line="347"/>
         <source>Cancel</source>
         <translation>Стоп</translation>
     </message>
     <message>
-        <location filename="pult_widget.cpp" line="243"/>
+        <location filename="pult_widget.cpp" line="348"/>
         <source>Cancel current process</source>
         <translation>Остановить перемещение</translation>
     </message>
@@ -2275,17 +2414,17 @@
         <translation type="vanished">Стоп</translation>
     </message>
     <message>
-        <location filename="pult_widget.cpp" line="245"/>
+        <location filename="pult_widget.cpp" line="350"/>
         <source>Hold</source>
         <translation>Держать</translation>
     </message>
     <message>
-        <location filename="pult_widget.cpp" line="247"/>
+        <location filename="pult_widget.cpp" line="352"/>
         <source>Holding of stepper motors on/off</source>
         <translation>Вкл./выкл. удержание шаговых двигателей</translation>
     </message>
     <message>
-        <location filename="pult_widget.cpp" line="339"/>
+        <location filename="pult_widget.cpp" line="51"/>
         <source>Scale (steps/mm)</source>
         <translation>Масштаб (шагов/мм)</translation>
     </message>
@@ -2294,63 +2433,61 @@
         <translation type="vanished">Старт</translation>
     </message>
     <message>
-        <location filename="pult_widget.cpp" line="209"/>
+        <location filename="pult_widget.cpp" line="314"/>
         <source>Discharge Gap</source>
         <translation>Искровой зазор</translation>
     </message>
     <message>
-        <location filename="pult_widget.cpp" line="210"/>
+        <location filename="pult_widget.cpp" line="315"/>
         <source>Reverse Voltage</source>
         <translation>Обратное напр.</translation>
     </message>
     <message>
-        <location filename="pult_widget.cpp" line="213"/>
+        <location filename="pult_widget.cpp" line="318"/>
         <source>High Voltage</source>
         <translation>Высокое напр.</translation>
     </message>
     <message>
-        <location filename="pult_widget.cpp" line="352"/>
+        <location filename="pult_widget.cpp" line="64"/>
         <source>Move</source>
         <translation>Старт</translation>
     </message>
     <message>
-        <location filename="pult_widget.cpp" line="353"/>
+        <location filename="pult_widget.cpp" line="65"/>
         <source>Relative movement on dX, dY with given speed</source>
         <translation>Начать перемещение на расстояние dX, dY с заданной скоростью</translation>
     </message>
     <message>
-        <location filename="pult_widget.cpp" line="355"/>
+        <location filename="pult_widget.cpp" line="67"/>
         <source>Set</source>
         <translation>Установить</translation>
     </message>
     <message>
-        <location filename="pult_widget.cpp" line="356"/>
+        <location filename="pult_widget.cpp" line="68"/>
         <source>Set position X, Y</source>
         <translation>Установить счетчики положения в значения X, Y</translation>
     </message>
     <message>
-        <location filename="pult_widget.cpp" line="358"/>
         <source>Apply</source>
-        <translation>Применить</translation>
+        <translation type="vanished">Применить</translation>
     </message>
     <message>
-        <location filename="pult_widget.cpp" line="359"/>
         <source>Apply scale</source>
-        <translation>Применить масштаб</translation>
+        <translation type="vanished">Применить масштаб</translation>
     </message>
     <message>
-        <location filename="pult_widget.cpp" line="538"/>
+        <location filename="pult_widget.cpp" line="434"/>
         <source>Speed</source>
         <oldsource>Speed:</oldsource>
         <translation>Скорость</translation>
     </message>
     <message>
-        <location filename="pult_widget.cpp" line="544"/>
+        <location filename="pult_widget.cpp" line="441"/>
         <source>mm/min</source>
         <translation>мм/мин</translation>
     </message>
     <message>
-        <location filename="pult_widget.cpp" line="545"/>
+        <location filename="pult_widget.cpp" line="442"/>
         <source>um/sec</source>
         <translation>мкм/сек</translation>
     </message>
@@ -2358,12 +2495,12 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="main.cpp" line="34"/>
+        <location filename="main.cpp" line="33"/>
         <source>Meatec CNC</source>
         <translation>ЧПУ Меатэк</translation>
     </message>
     <message>
-        <location filename="cnc.cpp" line="645"/>
+        <location filename="cnc.cpp" line="602"/>
         <source>CNC</source>
         <translation>ЧПУ</translation>
     </message>
@@ -2372,22 +2509,22 @@
         <translation type="vanished">от</translation>
     </message>
     <message>
-        <location filename="cnc.cpp" line="646"/>
+        <location filename="cnc.cpp" line="603"/>
         <source>on</source>
         <translation>от</translation>
     </message>
     <message>
-        <location filename="cnc.cpp" line="648"/>
+        <location filename="cnc.cpp" line="605"/>
         <source>at</source>
         <translation>на</translation>
     </message>
     <message>
-        <location filename="cnc.cpp" line="650"/>
+        <location filename="cnc.cpp" line="607"/>
         <source>MHz</source>
         <translation>МГц</translation>
     </message>
     <message>
-        <location filename="fpga.cpp" line="162"/>
+        <location filename="fpga.cpp" line="142"/>
         <source>FPGA</source>
         <translation>ПЛИС</translation>
     </message>

@@ -10,8 +10,7 @@
 #include "aux_func.h"
 #include "cnc_func.h"
 
-__attribute__ ((section(".buffers"), used))
-static char data[PA_SIZE];
+__attribute__ ((section(".buffers"), used)) static char data[PA_SIZE];
 
 static pa_control_t pa = {0, 0, 0, 0, 0, PLANE_UNKNOWN};
 

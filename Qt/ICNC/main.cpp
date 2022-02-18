@@ -26,7 +26,6 @@ int main(int argc, char *argv[]) {
     qApp->installTranslator(&translator);
     qDebug("Hello world!");
 
-    MainWindow w;
     QIcon icon("icnc.png");
 //    w.setWindowIcon(icon);
 //    w.setWindowIconText(QObject::tr("Meatec CNC"));
@@ -36,6 +35,7 @@ int main(int argc, char *argv[]) {
 
 //    int fontSize = ProgramParam::loadFontSize();
 
+    MainWindow w;
     w.show();
 
 //    QTimer::singleShot(0, &w, &MainWindow::onLoad);

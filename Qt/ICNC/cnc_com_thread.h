@@ -12,9 +12,7 @@
 #include "com_packet.h"
 #include "main.h"
 
-#ifdef DEV
-    #define PRINT_CNC_COM_DEBUG
-#endif
+//#define PRINT_CNC_COM_DEBUG
 
 // Class provides communication with CNC
 class CncComThread : public QThread {
@@ -43,16 +41,27 @@ public:
     void close();
     bool asyncReady();
 
+    void clearReadPort(int timeout = TIMEOUT);
+
 private:
-    int readPort(ComPacket& rxd, int timeout_ms = 30000);
+    int readPort(ComPacket& rxd, int timeout_ms = 30000);    
+
     void writeBytes(uint32_t addr, const std::vector<uint8_t>& bytes);
+    void writeBytesFast(uint32_t addr, const std::vector<uint8_t>& bytes);
+
     void writeBytes(uint32_t addr, const uint8_t* bytes, size_t size, size_t begin, size_t length);
+    void writeBytesFast(uint32_t addr, const uint8_t* bytes, size_t size, size_t begin, size_t length);
+
     std::vector<uint8_t> readBytes(uint32_t addr, size_t length, ComPacket::Command command = ComPacket::Command::CMD_READ);
     void run() override;
 
 public:
     void write(uint32_t addr, const void* const data, size_t size);
+    void writeFast(uint32_t addr, const void* const data, size_t size);
+
     void write(uint32_t addr, const std::vector<uint8_t>& bytes);
+    void writeFast(uint32_t addr, const std::vector<uint8_t>& bytes);
+
     void write16(uint32_t addr, uint16_t data);
     void write32(uint32_t addr, uint32_t data);
     void write48(uint32_t addr, uint64_t data);

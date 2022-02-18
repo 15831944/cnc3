@@ -7,6 +7,7 @@ using namespace std;
 FormCenter::FormCenter(ProgramParam& par, QWidget *parent) :
     QWidget(parent), par(par), cncReaderEna(false), adcEnable(false), wireSpeedMode(WireSpeed::Mode::MMM)
 {
+    this->setObjectName(tr("Centring Panel"));
     centerWidget = new CenterWidget(this);
     addButtons();
 

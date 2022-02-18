@@ -4,6 +4,7 @@
 #include <QCoreApplication>
 
 FormHelp::FormHelp(const ProgramParam& par, QWidget *parent) : QWidget(parent), par(par) {
+    this->setObjectName(tr("Help"));
     createButtons();
 
     browser = new QTextBrowser(this);
@@ -33,6 +34,8 @@ void FormHelp::init(const QString& helpHtmlFile) {
                 R"(<h3 align="center">)" + QCoreApplication::applicationDirPath() + "/" + url.path() + R"(</h3>)";
         browser->setHtml(html);
     }
+
+    browser->setFocus(Qt::FocusReason::OtherFocusReason);
 }
 
 void FormHelp::setFontPointSize(int pointSize) {
@@ -46,7 +49,7 @@ void FormHelp::setFontPointSize(int pointSize) {
 void FormHelp::createButtons() {
     btnBack = new QPushButton();
     btnBack->setText(tr("Back"));
-    btnBack->setStatusTip(tr("Quit the help panel"));
+    btnBack->setStatusTip(tr("Exit Help"));
 
     btn1 = new QPushButton();
     btn1->setEnabled(false);

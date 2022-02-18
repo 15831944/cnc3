@@ -10,8 +10,7 @@ namespace Ui {
 class FormTest;
 }
 
-class FormTest : public QWidget
-{
+class FormTest : public QWidget {
     Q_OBJECT
 
 public:
@@ -33,10 +32,17 @@ private slots:
 
     void on_btnReadGCode_clicked();
 
+    void on_btnMemTest_clicked();
+
 private:
+    const std::string job_dir = "c:\\Work\\Meatec\\Prototype\\NC\\";
+
     Ui::FormTest *ui;
     ProgramParam& par;
     auxItems::Reporter m_report;
+
+    void clear();
+    void writeln(const QString& s);
 };
 
 #endif // FORMTEST_H

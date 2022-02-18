@@ -20,6 +20,7 @@ FormContour::FormContour(ProgramParam& par, QWidget *parent) :
     m_contour_num(0), m_row(0), m_column(0),
     file_open(false)
 {
+    this->setObjectName(tr("Contour Editor"));
     createButtons();
 
     txtMsg = new QTextEdit();
@@ -117,7 +118,7 @@ void FormContour::createButtons() {
     gridButtons->addWidget(btnHelp, 0, 13);
 #else
     btnHome = new QPushButton(tr("Home"));
-    btnHome->setStatusTip(tr("Go to the home panel"));
+    btnHome->setStatusTip(tr("Go to the Home panel"));
 
     btnOpen = new QPushButton(tr("Open"));
     btnOpen->setStatusTip(tr("Open a project"));
@@ -242,8 +243,8 @@ void FormContour::createGridView() {
     connect(viewContours, &QTableView::clicked, this, &FormContour::onViewContoursClicked);
     connect(viewContours, &QTableView::activated, this, &FormContour::onViewContoursClicked);
 
-    connect(viewContour, &QTableView::clicked, this, &FormContour::onViewContourClicked);
-    connect(viewContour, &QTableView::activated, this, &FormContour::onViewContourClicked);
+    connect(viewContour, &QTableView::clicked, this, &FormContour::onViewContourClicked); // one mouse click
+    connect(viewContour, &QTableView::activated, this, &FormContour::onViewContourClicked); // two mouse click or Enter
 }
 
 void FormContour::createViewControl() {

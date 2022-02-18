@@ -161,7 +161,11 @@ public:
 
     bool reset();
 
+    void clearReadPort();
+
     bool writeProgArray(const std::vector<uint8_t>& bytes);
+    bool writeProgArrayFast(const std::vector<uint8_t>& bytes);
+
     std::vector<uint8_t> readProgArray();
     bool write(const std::list<std::string>& frames);
     bool writeFromFile(const std::string& fileName = "test.nc");

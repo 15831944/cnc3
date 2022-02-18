@@ -12,6 +12,7 @@
 using namespace std;
 
 FormPassesStone::FormPassesStone(ProgramParam& par, QWidget *parent) : QWidget(parent), par(par), m_pass_num(1), m_row(0) {
+    this->setObjectName(tr("Contour Adjustments"));
     QLabel* labelTitle = new QLabel(R"(<h1>)" + tr("Contour Adjustments") + R"(</h1>)");
     labelTitle->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
@@ -181,13 +182,13 @@ void FormPassesStone::createPasses() {
 //    onePassTab = new QRadioButton(tr("Onepass Cutting"));
 //    multiPassTab = new QRadioButton(tr("Multipass Cutting"));
 
-//    groupTab = new QGroupBox(tr("Indent"));
+//    groupTab = new QGroupBox(tr("Tab"));
 //    groupTab->setLayout(new QHBoxLayout);
 //    groupTab->layout()->addWidget(onePassTab);
 //    groupTab->layout()->addWidget(multiPassTab);
 //    groupTab->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
-//    labelTabOffset = new QLabel(tr("Indent Offset"));
+//    labelTabOffset = new QLabel(tr("Tab Offset"));
 //    inputTabOffset = new QDoubleSpinBox;
 //    labelTabOffset->setBuddy(inputTabOffset);
 //    inputTabOffset->setSuffix(" " + tr("mm"));
@@ -199,7 +200,7 @@ void FormPassesStone::createPasses() {
 //    comboCutMode = new QComboBox;
 //    labelCutMode->setBuddy(comboCutMode);
 
-//    labelTabMode = new QLabel(tr("Indent Mode"));
+//    labelTabMode = new QLabel(tr("Tab Mode"));
 //    comboTabMode = new QComboBox;
 //    labelTabMode->setBuddy(comboTabMode);
 
@@ -736,7 +737,7 @@ void FormPassesStone::on_btnSaveAs_clicked() {
 
 void FormPassesStone::createButtons() {
     btnBack = new QPushButton(tr("Back"));
-    btnBack->setStatusTip(tr("Return to the contour panel"));
+    btnBack->setStatusTip(tr("Return to the Contour editor"));
 
     btnOpen = new QPushButton(tr("Open"));
     btnOpen->setEnabled(false);

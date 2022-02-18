@@ -13,32 +13,23 @@
 using namespace std;
 using namespace auxItems;
 
-const string job_dir = "c:\\Work\\Meatec\\Prototype\\NC\\";
-
-FormTest::FormTest(ProgramParam &par, QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::FormTest),
-    par(par),
-    m_report(ui->txtMsg)
-{
+FormTest::FormTest(ProgramParam &par, QWidget *parent): QWidget(parent), ui(new Ui::FormTest), par(par), m_report(ui->txtMsg) {
+    this->setObjectName(tr("Diagnostics"));
     ui->setupUi(this);
 }
 
-FormTest::~FormTest()
-{
+FormTest::~FormTest() {
     if (ui) {
         delete ui;
         ui = nullptr;
     }
 }
 
-void FormTest::on_btnHome_clicked()
-{
+void FormTest::on_btnHome_clicked() {
     emit homePageClicked();
 }
 
-void FormTest::on_btnQuickTest_clicked()
-{
+void FormTest::on_btnQuickTest_clicked() {
     m_report.clear();
     par.cnc.bindReporter(&m_report);
 
@@ -60,8 +51,7 @@ void FormTest::on_btnQuickTest_clicked()
         m_report.write("No CNC connection");
 }
 
-void FormTest::on_btnFullTest_clicked()
-{
+void FormTest::on_btnFullTest_clicked() {
     m_report.clear();
     par.cnc.bindReporter(&m_report);
 
@@ -99,13 +89,11 @@ void FormTest::on_btnFullTest_clicked()
         m_report.write("No CNC connection");
 }
 
-void FormTest::on_btnGCode_clicked()
-{
+void FormTest::on_btnGCode_clicked() {
     emit editPageClicked();
 }
 
-void FormTest::on_btnImit_clicked()
-{
+void FormTest::on_btnImit_clicked() {
     m_report.clear();
     par.cnc.bindReporter(&m_report);
 
@@ -184,4 +172,56 @@ void FormTest::on_btnReadGCode_clicked() {
         file.write(txt.c_str());
         file.close();
     }
+}
+
+void FormTest::on_btnMemTest_clicked() {
+    bool OK;
+    std::vector<uint8_t> bytes;
+    QElapsedTimer timer;
+
+    clear();
+
+    writeln("Write/Read CNC memory test");
+    writeln("**************************");
+    size_t pa_size = par.cnc.readUInt32(ADDR::PA_SIZE, 0, &OK);
+    writeln(QString::asprintf("Program array size: %d bytes\n", (int)pa_size));
+
+    if (!pa_size) {
+        writeln("Program array size error\n");
+        return;
+    }
+
+    writeln("Write a line code\n");
+
+    bytes.resize(pa_size);
+    for (int i = 0; i < (int)(pa_size >> 2); i++) {
+        uint32_t data = pa_size - i;
+        uint8_t* ptr = reinterpret_cast<uint8_t*>(&data);
+        bytes[(i<<2)] = ptr[0];
+        bytes[(i<<2) + 1] = ptr[1];
+        bytes[(i<<2) + 2] = ptr[2];
+        bytes[(i<<2) + 3] = ptr[3];
+    }
+
+    timer.start();
+    OK = par.cnc.writeProgArrayFast(bytes); // todo to async
+    int t = timer.elapsed();
+
+    par.cnc.clearReadPort();
+    double wr_speed = bytes.size() * 1e3 / t;
+
+    if (OK)
+        writeln(QString::asprintf("Elapsed time: %g sec. Write speed: %g kB/s\n", t / 1e3, wr_speed / 1024.0));
+    else
+        writeln("Write error\n");
+}
+
+void FormTest::clear() {
+    ui->txtMsg->clear();
+    ui->txtMsg->repaint();
+}
+
+void FormTest::writeln(const QString &s){
+    ui->txtMsg->append(s + "\n");
+    ui->txtMsg->repaint();
 }

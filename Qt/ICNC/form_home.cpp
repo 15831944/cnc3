@@ -8,6 +8,7 @@
 #include "debug.h"
 
 FormHome::FormHome(ProgramParam& par, QWidget *parent) : QWidget(parent), par(par) {
+    this->setObjectName(tr("Home"));
     createButtons();
 
     QHBoxLayout *hboxApps = new QHBoxLayout;
@@ -110,7 +111,7 @@ void FormHome::createButtons() {
     btnGCode->setStatusTip(tr("Open G-code editor"));
 
     btnRun = new QPushButton(tr("Run"));
-    btnRun->setStatusTip(tr("Open working panel"));
+    btnRun->setStatusTip(tr("Open Work panel"));
 
     btnSettings = new QPushButton(tr("Settings"));
     btnSettings->setStatusTip(tr("Change CNC settings"));
@@ -134,8 +135,9 @@ void FormHome::createButtons() {
     btn9 = new QPushButton;
     btn9->setEnabled(false);
 
-#if defined(DEV)
+#if defined(TEST_PANEL)
     btnTest = new QPushButton(tr("Test"));
+    btnTest->setStatusTip(tr("Diagnostic Panel"));
 #else
     btnTest = new QPushButton;
     btnTest->setEnabled(false);
@@ -266,7 +268,7 @@ void FormHome::connectCnc(bool reset) {
 }
 
 void FormHome::showConnecting(int attempt) {
-    QString s = R"(<p><b>)" + tr("Info") + ": " + R"(</b>)" + tr("Connecting.") + " " + "Attempt" + " " + QString::number(attempt) + "..." + R"(</p>)";
+    QString s = R"(<p>)" + tr("Connecting") + ". " + tr("Attempt") + " " + QString::number(attempt) + "..." + R"(</p>)";
     QString info = info_header + R"(<p style="text-align:center;"><h3>)" + s + R"(</h3></p>)";
     txtInfo->setHtml(info);
 }

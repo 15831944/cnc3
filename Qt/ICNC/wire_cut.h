@@ -42,7 +42,7 @@ struct cut_t {
         cutline_mode_id(0),        
         offset_side(OFFSET_SIDE::RIGHT),
         aux_offset_side(OFFSET_SIDE::LEFT),
-        offset_ena(false),
+        offset_ena(true),
         aux_offset_ena(false),
         tab_multi_pass(true),
         tab_pause(false),

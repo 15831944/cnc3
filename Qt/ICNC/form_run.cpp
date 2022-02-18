@@ -7,6 +7,7 @@ using namespace std;
 FormRun::FormRun(ProgramParam& par, QWidget *parent) :
     QWidget(parent), par(par), cncReaderEna(false), adcEnable(false), currentCursorPosition(0), cutStateAbortReq(false), m_speed(WireSpeed()), remain_tmr(0)
 {
+    this->setObjectName(tr("Work Panel"));
     runWidget = new RunWidget(this);
     createSpinBoxes(); // row 0
     addButtons(); // row 1

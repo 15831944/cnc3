@@ -12,7 +12,9 @@
 using namespace std;
 
 FormPasses::FormPasses(ProgramParam& par, QWidget *parent) : QWidget(parent), par(par), m_pass_num(1), m_row(0) {
-    QLabel* labelTitle = new QLabel(R"(<h1>)" + tr("Cutting settings") + R"(</h1>)");
+    this->setObjectName(tr("Cutting settings"));
+
+    QLabel* labelTitle = new QLabel(R"(<h1>)" + this->objectName() + R"(</h1>)");
     labelTitle->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
     createPasses();
@@ -23,7 +25,7 @@ FormPasses::FormPasses(ProgramParam& par, QWidget *parent) : QWidget(parent), pa
                btnNewMode, btnDeleteMode, btnOpenModes, btnSaveModes, btnSaveAsModes, btnDefaultModes
               };
     labels = {labelTimes, labelOverlap, labelTab, labelTabOffset, labelTabMode, labelCutMode, labelPumpDelay, tableTitle};
-    radio = {leftSide, rightSide, onePassTab, multiPassTab};
+    radio = {radioLeftSide, radioRightSide, onePassTab, multiPassTab};
     combo = {comboTimes, comboCutMode, comboTabMode};
     checks = {checkTabPause, checkPumpPause};
     nums = {inputOverlap, inputTab, inputTabOffset};
@@ -52,13 +54,13 @@ FormPasses::FormPasses(ProgramParam& par, QWidget *parent) : QWidget(parent), pa
 }
 
 void FormPasses::createPasses() {
-    leftSide = new QRadioButton(tr("Left Offset"));
-    rightSide = new QRadioButton(tr("Right Offset"));
+    radioLeftSide = new QRadioButton(tr("Left Offset"));
+    radioRightSide = new QRadioButton(tr("Right Offset"));
 
     groupSide = new QGroupBox;
     groupSide->setLayout(new QHBoxLayout);
-    groupSide->layout()->addWidget(leftSide);
-    groupSide->layout()->addWidget(rightSide);
+    groupSide->layout()->addWidget(radioLeftSide);
+    groupSide->layout()->addWidget(radioRightSide);
 
     groupSide->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
@@ -87,7 +89,7 @@ void FormPasses::createPasses() {
     inputOverlap->setSingleStep(1);
     inputOverlap->setMaximum(100);
 
-    labelTab = new QLabel(tr("Indent Width"));
+    labelTab = new QLabel(tr("Tab Width"));
     inputTab = new QDoubleSpinBox;
     labelTab->setBuddy(inputTab);
     inputTab->setSuffix(" mm");
@@ -122,13 +124,13 @@ void FormPasses::createPasses() {
     onePassTab = new QRadioButton(tr("Onepass"));
     multiPassTab = new QRadioButton(tr("Multipass"));
 
-    groupTab = new QGroupBox(tr("Indent"));
+    groupTab = new QGroupBox(tr("Workpiece Tab"));
     groupTab->setLayout(new QHBoxLayout);
     groupTab->layout()->addWidget(onePassTab);
     groupTab->layout()->addWidget(multiPassTab);
     groupTab->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
-    labelTabOffset = new QLabel(tr("Indent Offset"));
+    labelTabOffset = new QLabel(tr("Tab Offset"));
     inputTabOffset = new QDoubleSpinBox;
     labelTabOffset->setBuddy(inputTabOffset);
     inputTabOffset->setSuffix(" " + tr("mm"));
@@ -140,11 +142,11 @@ void FormPasses::createPasses() {
     comboCutMode = new QComboBox;
     labelCutMode->setBuddy(comboCutMode);
 
-    labelTabMode = new QLabel(tr("Indent Mode"));
+    labelTabMode = new QLabel(tr("Tab Mode"));
     comboTabMode = new QComboBox;
     labelTabMode->setBuddy(comboTabMode);
 
-    checkTabPause = new QCheckBox(tr("Indent Pause"));
+    checkTabPause = new QCheckBox(tr("Tab Pause"));
 
     labelPumpDelay = new QLabel(tr("Pump On Pause"));
     inputPumpDelay = new QSpinBox;
@@ -217,8 +219,8 @@ void FormPasses::createPasses() {
 
     initPasses();
 
-    connect(leftSide, &QRadioButton::clicked, this, [&]()                                                   { par.cut.offset_side = OFFSET_SIDE::LEFT; });
-    connect(rightSide, &QRadioButton::clicked, this, [&]()                                                  { par.cut.offset_side = OFFSET_SIDE::RIGHT; });
+    connect(radioLeftSide, &QRadioButton::clicked, this, [&]()                                                   { par.cut.offset_side = OFFSET_SIDE::LEFT; });
+    connect(radioRightSide, &QRadioButton::clicked, this, [&]()                                                  { par.cut.offset_side = OFFSET_SIDE::RIGHT; });
 //    connect(comboTimes, QOverload<int>::of(&QSpinBox::valueChanged), this, [&](int value)                   { setCutTimes(value); });
     connect(comboTimes, QOverload<int>::of(&QComboBox::currentIndexChanged), [&](int index) { setCutTimes(index + 1); });
     connect(inputOverlap, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, [&](double value)     { par.cut.overlap = value; });
@@ -269,8 +271,9 @@ void FormPasses::createPasses() {
 void FormPasses::initPasses() {
     initComboMode();
 
-    leftSide->setChecked(par.cut.offset_side == OFFSET_SIDE::LEFT);
-    leftSide->setChecked(par.cut.offset_side == OFFSET_SIDE::RIGHT);
+    bool rightChecked = ProgramParam::swapXY ? par.cut.offset_side == OFFSET_SIDE::RIGHT : par.cut.offset_side == OFFSET_SIDE::LEFT;
+    radioLeftSide->setChecked(rightChecked);
+    radioRightSide->setChecked(!rightChecked);
 
 //    comboTimes->setValue(par.cut.times);
     int index = par.cut.times - 1;
@@ -524,7 +527,7 @@ void FormPasses::on_btnSaveAs_clicked() {
 
 void FormPasses::createButtons() {
     btnBack = new QPushButton(tr("Back"));
-    btnBack->setStatusTip(tr("Back to contour panel"));
+    btnBack->setStatusTip(tr("Return to Contour editor"));
 
     btnOpen = new QPushButton(tr("Open"));
     btnOpen->setEnabled(true);
