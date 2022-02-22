@@ -177,12 +177,19 @@ int CncComThread::readPort(ComPacket &rxd, int timeout_ms) {
 
 void CncComThread::clearReadPort(int timeout) {
     if (timeout) {
-        if (timeout < 10) timeout = 10;
-        m_port->waitForReadyRead(timeout);
+        if (timeout < 10)
+            timeout = 10;
+
+        if (m_port->waitForReadyRead(timeout)) {
+            QByteArray bytes = m_port->readAll();
+            qDebug("Clear RX %d bytes (1)\n", bytes.size());
+        }
     }
 
-    while (m_port->waitForReadyRead(10))
-        m_port->readAll();
+    while (m_port->waitForReadyRead(10)) {
+        QByteArray bytes = m_port->readAll();
+        qDebug("Clear RX %d bytes (2)\n", bytes.size());
+    }
 }
 
 // by 255 bytes
@@ -250,25 +257,32 @@ void CncComThread::writeBytesFast(uint32_t addr, const std::vector<uint8_t> &byt
         if (!m_port || !m_port->isOpen())
             throw runtime_error("COM port isn't opened");
 
-        m_txpack.createWritePacket(addr, bytes, 0, bytes.size());
+        m_txpack.createWritePacket(addr, bytes, 0, bytes.size(), true);
 
-        m_port->write(reinterpret_cast<const char*>(m_txpack.rawData()), qint64(m_txpack.rawSize()));
-        m_port->flush();
+        qDebug("Write async. Addr: 0x%08x Size: %d bytes\n", (int)addr, (int)m_txpack.rawSize());
+
+        size_t pos = 0;
+        while (pos < m_txpack.rawSize()) {
+            pos += m_port->write(reinterpret_cast<const char*>(m_txpack.rawData()) + pos, qint64(m_txpack.rawSize()) - pos);
+//            m_port->flush();
 
 #ifdef PRINT_CNC_COM_DEBUG
-        qDebug("Write to address 0x%08x bytes %d:\n%s\n", (int)addr, (int)bytes.size(), m_txpack.toString().c_str());
+            qDebug("Write to address 0x%08x bytes %d:\n%s\n", (int)addr, (int)bytes.size(), m_txpack.toString().c_str());
 #endif
 
-        if (m_port->waitForBytesWritten(TIMEOUT)) {
-            clearReadPort(0);
-        } else {
+            if (m_port->waitForBytesWritten(TIMEOUT)) {
+                ;
+            } else {
 #ifdef PRINT_CNC_COM_DEBUG
-        qDebug("Write timeout\n");
+            qDebug("Write timeout\n");
 #endif
+            }
+
+            qDebug("Sent %d bytes\n", (int)pos);
         }
     } else {
 #ifdef PRINT_CNC_COM_DEBUG
-        qDebug("No write data\n");
+            qDebug("No write data\n");
 #endif
     }
 }

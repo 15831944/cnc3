@@ -11,6 +11,7 @@ extern uint8_t tx_buf[TX_BUF_SIZE];
 void tx_wrack(uint32_t addr, uint8_t len);
 void tx_rdack(COMMAND_T cmd, uint32_t addr, uint8_t len);
 void tx_readRegsAck(uint32_t addr, uint8_t len);
+void tx_readRegsAckAsync(uint32_t addr, uint8_t len);
 void tx_readFifoAck(uint32_t addr, uint8_t len);
 void tx_error(COMMAND_T cmd, uint32_t addr);
 

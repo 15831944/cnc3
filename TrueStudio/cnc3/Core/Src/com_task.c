@@ -8,6 +8,14 @@
 #include "rw_ad.h"
 #include "soft_wdt.h"
 
+static BOOL async_read;
+static uint32_t async_rdaddr, async_rdaddr_end;
+
+void com_reset() {
+	async_read = FALSE;
+	async_rdaddr = async_rdaddr_end = 0;
+}
+
 static void __error(COMMAND_T cmd, uint32_t addr) {
 	tx_error(cmd, addr);
 	rx_buf_rdack();
@@ -26,13 +34,13 @@ void com_task() {
 		const uint8_t* const bytes = (uint8_t*)rx_buf.array;
 
 		switch (cmd) {
-		case CMD_WRITE:
+		case CMD_WRITE: case CMD_WRITE_ASYNC:
 			if (size == len + 9) {
 				uint32_t calc_crc = crc32(bytes, len + 5);
 				uint32_t rx_crc = read_u32_rev(bytes, size, len + 5);
 
 				if (calc_crc == rx_crc) {
-					ad_writeRegs(addr, len, bytes, sizeof(rx_buf.array));
+					ad_writeRegs(addr, len, bytes, sizeof(rx_buf.array), cmd == CMD_WRITE_ASYNC);
 					rx_buf_rdack();
 				}
 				else {
@@ -52,8 +60,29 @@ void com_task() {
 				uint32_t rx_crc = read_u32_rev(bytes, size, 5);
 
 				if (calc_crc == rx_crc) {
-					cmd == CMD_READ ? ad_readRegs(addr, len) : ad_readFifo(addr, len);
+					cmd == CMD_READ ? ad_readRegs(addr, len, FALSE) : ad_readFifo(addr, len);
 					rx_buf_rdack();
+				}
+				else {
+//					printf("C%d A%x L%d\n", rdevent.cmd, (int)rdevent.addr, (int)rdevent.len);
+//					printf("CRC ERR %x (exp %x)\n", (int)rx_crc, (int)calc_crc);
+					__error(cmd, addr);
+				}
+			}
+			else
+				__error(cmd, addr);
+
+			break;
+
+		case CMD_READ_ASYNC:
+			if (size == 13) {
+				uint32_t calc_crc = crc32(bytes, 9);
+				uint32_t rx_crc = read_u32_rev(bytes, size, 9);
+
+				if (calc_crc == rx_crc) {
+					async_rdaddr = addr;
+					async_rdaddr_end = read_u32(bytes, size, 5);
+					async_read = async_rdaddr_end > async_rdaddr;
 				}
 				else {
 //					printf("C%d A%x L%d\n", rdevent.cmd, (int)rdevent.addr, (int)rdevent.len);
@@ -70,5 +99,18 @@ void com_task() {
 			rx_buf_rdack();
 			break;
 		}
+	}
+
+	if (async_read) {
+		size_t len = async_rdaddr_end - async_rdaddr;
+
+		if (len > 255)
+			len = 255;
+
+		ad_readRegs(async_rdaddr, len, TRUE);
+		rx_buf_rdack();
+		async_rdaddr += len;
+
+		async_read = async_rdaddr_end > async_rdaddr;
 	}
 }

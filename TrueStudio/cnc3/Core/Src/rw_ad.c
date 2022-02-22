@@ -32,7 +32,7 @@ void reset() {
 	debug_fifo_clear();
 }
 
-void ad_writeRegs(size_t addr, size_t len, const uint8_t buf[], size_t N) {
+void ad_writeRegs(size_t addr, size_t len, const uint8_t buf[], size_t N, BOOL async) {
 	uint32_t addr32;
 	size_t len32;
 	size_t pos = 5;
@@ -42,9 +42,11 @@ void ad_writeRegs(size_t addr, size_t len, const uint8_t buf[], size_t N) {
 
 	if ((addr & ADDR_MASK) == PA_BAR) {
 		pa_writeBytes(addr & ~ADDR_MASK, len, buf, N, pos);
-		tx_wrack(addr, len);
-	}
-	else if ((addr & ADDR_MASK) == MCU_BAR && (addr & 3) == 0 && (len & 3) == 0) {
+
+		if (!async)
+			tx_wrack(addr, len);
+
+	} else if ((addr & ADDR_MASK) == MCU_BAR && (addr & 3) == 0 && (len & 3) == 0) {
 		addr32 = (addr & ~ADDR_MASK) >> 2;
 		len32 = len >> 2;
 
@@ -215,9 +217,10 @@ void ad_writeRegs(size_t addr, size_t len, const uint8_t buf[], size_t N) {
 		if (!gpo_getValid())
 			gpo_apply();
 
-		tx_wrack(addr, len);
-	}
-	else if ((addr & ADDR_MASK) == FPGA_BAR && (addr & 1) == 0 && (len & 1) == 0) {
+		if (!async)
+			tx_wrack(addr, len);
+
+	} else if ((addr & ADDR_MASK) == FPGA_BAR && (addr & 1) == 0 && (len & 1) == 0) {
 		uint32_t addr16 = (addr & ~ADDR_MASK) >> 1;
 		size_t len16 = len >> 1;
 		pos = 0;
@@ -227,7 +230,8 @@ void ad_writeRegs(size_t addr, size_t len, const uint8_t buf[], size_t N) {
 			fpga_write_u16(addr16, wrdata16);
 		}
 
-		tx_wrack(addr, len);
+		if (!async)
+			tx_wrack(addr, len);
 	}
 }
 
@@ -237,7 +241,7 @@ const char __time__[16] = __TIME__;
 const uint32_t* __date32__ = (uint32_t*)__date__;
 const uint32_t* __time32__ = (uint32_t*)__time__;
 
-void ad_readRegs(uint32_t addr, size_t len) {
+void ad_readRegs(uint32_t addr, size_t len, BOOL async) {
 	static uint32_t rddata;
 	static int32_t* const p32 = (int32_t*)&rddata;
 	static float* const pfloat = (float*)&rddata;
@@ -470,7 +474,7 @@ void ad_readRegs(uint32_t addr, size_t len) {
 	else
 		memset(&tx_buf[pos], 0, len);
 
-	tx_readRegsAck(addr, len);
+	async ? tx_readRegsAckAsync(addr, len) : tx_readRegsAck(addr, len);
 }
 
 void ad_readFifo(uint32_t addr, size_t len) {

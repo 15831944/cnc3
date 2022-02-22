@@ -28,6 +28,10 @@ void tx_readRegsAck(uint32_t addr, uint8_t len) {
 	tx_rdack(CMD_READ, addr, len);
 }
 
+void tx_readRegsAckAsync(uint32_t addr, uint8_t len) {
+	tx_rdack(CMD_READ_ASYNC, addr, len);
+}
+
 void tx_readFifoAck(uint32_t addr, uint8_t len) {
 	tx_rdack(CMD_READ_FIFO, addr, len);
 }

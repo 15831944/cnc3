@@ -7,7 +7,7 @@
 
 class ComPacket {
 public:
-    enum Command: int {CMD_IDLE, CMD_READ, CMD_WRITE, CMD_READ_FIFO, CMD_ERROR = 0xF};
+    enum Command: int {CMD_IDLE, CMD_READ, CMD_WRITE, CMD_READ_FIFO, CMD_READ_ASYNC, CMD_WRITE_ASYNC, CMD_ERROR = 0xF};
     static constexpr unsigned MAX = 255;
     static constexpr unsigned SIZE = MAX + 4 + 1 + 4;    
 private:
@@ -44,7 +44,7 @@ public:
 //    static void toBytesRev(uint8_t* const dst, size_t pos, uint32_t src);
     static void toBytesRev(std::vector<uint8_t>& dst, size_t pos, uint32_t data);
 
-    void createWritePacket(uint32_t addr, const std::vector<uint8_t>& bytes, size_t begin, size_t length);
+    void createWritePacket(uint32_t addr, const std::vector<uint8_t>& bytes, size_t begin, size_t length, bool async = false);
     void createReadPacket(Command cmd, uint32_t addr, size_t length);
 
     std::string toString() const;

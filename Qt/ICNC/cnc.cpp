@@ -80,7 +80,7 @@ bool Cnc::writeProgArrayFast(const std::vector<uint8_t>& bytes) {
         qDebug("Write to Program Array %d bytes (fast)\n", int(bytes.size()));
         if (isOpen()) {
             m_com.writeFast(ADDR::PA, bytes);
-//            m_com.write32(ADDR::PA_RDADDR, 0);
+//            m_com.write64(ADDR::PA_RDADDR, static_cast<uint64_t>(bytes.size())<<32 | 0);
 //            m_com.write32(ADDR::PA_WRADDR, static_cast<uint32_t>(bytes.size()));
             return true;
         }

@@ -7,7 +7,7 @@
 #define DATA_SIZE (255U)
 #define CMD_SIZE (4U + 1U + DATA_SIZE + 4U)
 
-typedef enum {CMD_IDLE, CMD_READ, CMD_WRITE, CMD_READ_FIFO, CMD_ERROR = 0xF} COMMAND_T;
+typedef enum {CMD_IDLE, CMD_READ, CMD_WRITE, CMD_READ_FIFO, CMD_READ_ASYNC, CMD_WRITE_ASYNC, CMD_ERROR = 0xF} COMMAND_T;
 
 typedef struct {
 	uint8_t buf[16 * CMD_SIZE];

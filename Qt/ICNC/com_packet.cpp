@@ -125,7 +125,7 @@ void ComPacket::toBytesRev(std::vector<uint8_t>& dst, size_t pos, uint32_t data)
     dst[pos] = ptr[0];
 }
 
-void ComPacket::createWritePacket(uint32_t addr, const std::vector<uint8_t>& bytes, const size_t begin, const size_t length) {
+void ComPacket::createWritePacket(uint32_t addr, const std::vector<uint8_t>& bytes, const size_t begin, const size_t length, bool async) {
     clear();
 
     if (length) {
@@ -137,7 +137,7 @@ void ComPacket::createWritePacket(uint32_t addr, const std::vector<uint8_t>& byt
             m_size = bytes.size() - begin;
 
         if (m_size) {
-            uint32_t data = CMD_WRITE << 28 | addr;
+            uint32_t data = (async ? CMD_WRITE_ASYNC : CMD_WRITE) << 28 | addr;
             toBytesRev(m_data, 0, data);
 
             m_data[4] = m_size & 0xFF;

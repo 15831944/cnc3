@@ -10,8 +10,8 @@
 
 void reset();
 
-void ad_writeRegs(size_t addr, size_t len, const uint8_t buf[], size_t N);
-void ad_readRegs(uint32_t addr, size_t len);
+void ad_writeRegs(size_t addr, size_t len, const uint8_t buf[], size_t N, BOOL async);
+void ad_readRegs(uint32_t addr, size_t len, BOOL async);
 void ad_readFifo(uint32_t addr, size_t len);
 
 #endif /* INC_RW_AD_H_ */

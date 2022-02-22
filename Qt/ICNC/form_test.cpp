@@ -203,17 +203,46 @@ void FormTest::on_btnMemTest_clicked() {
         bytes[(i<<2) + 3] = ptr[3];
     }
 
+    par.cnc.clearReadPort(); // don't necessary
+
     timer.start();
     OK = par.cnc.writeProgArrayFast(bytes); // todo to async
     int t = timer.elapsed();
 
-    par.cnc.clearReadPort();
     double wr_speed = bytes.size() * 1e3 / t;
+
+    par.cnc.clearReadPort(); // don't necessary
 
     if (OK)
         writeln(QString::asprintf("Elapsed time: %g sec. Write speed: %g kB/s\n", t / 1e3, wr_speed / 1024.0));
-    else
+    else {
         writeln("Write error\n");
+        return;
+    }
+
+//    writeln("Read");
+
+//    timer.start();
+//    vector<uint8_t> rddata = par.cnc.readProgArray();
+//    t = timer.elapsed();
+
+//    double rd_speed = rddata.size() * 1e3 / t;
+
+//    par.cnc.clearReadPort(); // don't necessary
+
+//    writeln(QString::asprintf("Read: %d bytes, Elapsed time: %g sec., Read speed: %g kB/s\n", (int)rddata.size(), t / 1e3, rd_speed / 1024.0));
+
+//    if (bytes.size() == rddata.size()) {
+//        for (int i = 0; i < (int)rddata.size(); i++)
+//            if (bytes[i] != rddata[i]) {
+//                writeln(QString::asprintf("Read data error at %d byte", i));
+//                break;
+//            }
+//    } else {
+//        writeln("Read Program Array size error");
+//    }
+
+//    writeln("Program memory test completed");
 }
 
 void FormTest::clear() {
