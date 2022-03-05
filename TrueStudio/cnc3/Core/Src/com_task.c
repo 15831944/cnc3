@@ -30,8 +30,10 @@ void com_task() {
 
 		COMMAND_T cmd = rx_buf_cmd();
 		uint32_t addr = rx_buf_addr();
-		size_t len = rx_buf_len();
+		size_t len = rx_buf_data_size();
 		const uint8_t* const bytes = (uint8_t*)rx_buf.array;
+
+//		printf("%d %x %x %d\n", (int)size, (int)cmd, (int)addr, (int)len);
 
 		switch (cmd) {
 		case CMD_WRITE: case CMD_WRITE_ASYNC:

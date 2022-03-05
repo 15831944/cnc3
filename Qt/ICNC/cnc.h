@@ -158,6 +158,7 @@ public:
     inline bool isOpen() const { return m_com.isOpen(); }
     void close();
     inline CncCom& com() { return m_com; }
+    void reconnect();
 
     bool reset();
 

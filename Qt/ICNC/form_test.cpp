@@ -254,3 +254,7 @@ void FormTest::writeln(const QString &s){
     ui->txtMsg->append(s + "\n");
     ui->txtMsg->repaint();
 }
+
+void FormTest::on_btnConn_clicked() {
+    par.cnc.reconnect();
+}

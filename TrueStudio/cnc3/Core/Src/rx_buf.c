@@ -9,7 +9,7 @@ volatile rx_fifo_t rx_fifo;
 volatile rx_buffer_t rx_buf;
 
 /*return
- *number of wrote data
+ *number of written data
  */
 size_t rx_fifo_add(const uint8_t* restrict const Buf, const size_t Len) {
 	if (rx_fifo.wraddr >= sizeof(rx_fifo.buf)) // error
@@ -130,13 +130,13 @@ size_t rx_buf_move(size_t len) {
 }
 
 size_t rx_buf_size() { return rx_buf.size; }
-BOOL rx_buf_empty() { return rx_buf.size == 0; }
+BOOL rx_buf_empty() { return !rx_buf.size; }
 uint8_t rx_buf_get(size_t i) { return i < sizeof(rx_buf.array) ? rx_buf.array[i] : 0; }
 void rx_buf_rdack() { rx_buf.size = 0; }
 
 COMMAND_T rx_buf_cmd() { return (rx_buf.size) ? (COMMAND_T)(rx_buf.array[0]>>4) : CMD_IDLE; }
 uint32_t rx_buf_addr() { return (rx_buf.size >= 4) ? read_u32_rev((uint8_t*)rx_buf.array, rx_buf.size, 0) & 0x0FFFFFFF : ~0U; }
-uint8_t rx_buf_len() { return (rx_buf.size >= 5) ? rx_buf.array[4] : 0; }
+uint8_t rx_buf_data_size() { return (rx_buf.size >= 5) ? rx_buf.array[4] : 0; }
 
 void rx_fifo_tb() {
 //	static uint8_t buf[64];

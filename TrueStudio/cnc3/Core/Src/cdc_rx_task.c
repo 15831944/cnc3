@@ -13,38 +13,48 @@ void cdc_rx_task() {
 	static uint32_t tic;
 	static size_t size_reg;
 	static BOOL timer_ena;
-
 	BOOL timer_req = FALSE;
-	size_t size = rx_fifo_size();
 
-	if (rx_buf_empty() && size) {
-		timer_req = size == size_reg;
+	if (rx_buf_empty()) {
+		size_t size = rx_fifo_size();
 
-		if (size >= 9) {
-			COMMAND_T cmd = getCommand();
-			size_t len = getLength();
+		if (size) {
+			timer_req = size == size_reg; // FIFO is not empty and is not changed
 
-			switch (cmd) {
-			case CMD_WRITE:
-				len += 9;
-				if (size >= len) {
-					timer_req = FALSE;
-					if (rx_buf_move(len) == 0)
-						rx_fifo_flush();
+			if (size >= 9) {
+				COMMAND_T cmd = getCommand();
+				size_t len = getLength();
+
+				switch (cmd) {
+				case CMD_WRITE: case CMD_WRITE_ASYNC:
+					len += 9;
+					if (size >= len) {
+						timer_req = FALSE;
+						if (rx_buf_move(len) == 0)
+							rx_fifo_flush(); // it's necessary?
+					}
+					break;
+
+				case CMD_READ: case CMD_READ_FIFO:
+					if (size >= 9) {
+						timer_req = FALSE;
+						if (rx_buf_move(9) == 0)
+							rx_fifo_flush();
+					}
+					break;
+
+				case CMD_READ_ASYNC:
+					if (size >= 13) {
+						timer_req = FALSE;
+						if (rx_buf_move(13) == 0)
+							rx_fifo_flush();
+					}
+					break;
+
+				default:
+					rx_fifo_flush();
+					break;
 				}
-				break;
-
-			case CMD_READ: case CMD_READ_FIFO:
-				if (size >= 9) {
-					timer_req = FALSE;
-					if (rx_buf_move(9) == 0)
-						rx_fifo_flush();
-				}
-				break;
-
-			default:
-				rx_fifo_flush();
-				break;
 			}
 		}
 	}

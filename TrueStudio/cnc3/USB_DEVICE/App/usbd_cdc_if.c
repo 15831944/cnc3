@@ -266,6 +266,8 @@ static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len)
 {
   /* USER CODE BEGIN 6 */
 	rx_fifo_add(Buf, *Len);
+	cdc_rx_task();
+	printf("%d\n", (int)*Len);
 
 	//	CDC_Transmit_FS(Buf, *Len);
 	//	uint8_t res;

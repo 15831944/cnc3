@@ -32,19 +32,30 @@ void reset() {
 	debug_fifo_clear();
 }
 
-void ad_writeRegs(size_t addr, size_t len, const uint8_t buf[], size_t N, BOOL async) {
+void ad_writeRegs(const size_t addr, size_t len, const uint8_t buf[], const size_t N, const BOOL async) {
 	uint32_t addr32;
 	size_t len32;
 	size_t pos = 5;
+	static int bytes_cnt = 0;
+	static int cnt = 1;
 
 	size_t len_max = N - 9;
 	if (len > len_max) len = len_max;
 
+//	printf("%x %d %x\n", addr, len, async);
+
 	if ((addr & ADDR_MASK) == PA_BAR) {
 		pa_writeBytes(addr & ~ADDR_MASK, len, buf, N, pos);
 
+
+
 		if (!async)
 			tx_wrack(addr, len);
+		else {
+			bytes_cnt += len;
+		}
+
+//		printf("%x %d %d %d\n", async, cnt++, bytes_cnt, len);
 
 	} else if ((addr & ADDR_MASK) == MCU_BAR && (addr & 3) == 0 && (len & 3) == 0) {
 		addr32 = (addr & ~ADDR_MASK) >> 2;
@@ -60,7 +71,7 @@ void ad_writeRegs(size_t addr, size_t len, const uint8_t buf[], size_t N, BOOL a
 			if (addr32 < 0x200)
 				switch (addr32) {
 					case 0:
-	//					printf("W: A0 %08x\n", wrdata);
+//						printf("W: A0 %08x\n", wrdata);
 						if (wrdata & 1) cnc_runReq();
 
 						if (wrdata & 1<<8) cnc_revReq();
@@ -205,9 +216,9 @@ void ad_writeRegs(size_t addr, size_t len, const uint8_t buf[], size_t N, BOOL a
 
 					case 0xFF: test_reg = wrdata; break;
 
-	//				case 0x100: if (!cnc_run()) pa_setBegin(wrdata); break;
+//					case 0x100: if (!cnc_run()) pa_setBegin(wrdata); break;
 					case 0x101: pa_setWraddr(wrdata); break;
-	//				case 0x102: if (!cnc_run()) pa_setRev(wrdata); break;
+//					case 0x102: if (!cnc_run()) pa_setRev(wrdata); break;
 					default: break;
 				}
 			else if (addr32 < 0x220)
@@ -423,7 +434,8 @@ void ad_readRegs(uint32_t addr, size_t len, BOOL async) {
 
 					case 0x100: rddata = pa_getPos(); break;
 					case 0x101: rddata = pa_getWraddr(); break;
-					case 0x102: rddata = PA_SIZE; break;
+					case 0x102: rddata = 1024; break;
+//					case 0x102: rddata = PA_SIZE; break;
 					case 0x103: rddata = imit_fifo_count(); break;
 					case 0x104: rddata = (uint32_t)cnc_getState(); break;
 					case 0x105: *p32 = pa_getStrNum(); break;

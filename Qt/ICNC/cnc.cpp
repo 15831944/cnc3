@@ -42,6 +42,11 @@ void Cnc::close() {
     m_com.close();
 }
 
+void Cnc::reconnect() {
+    m_com.close();
+    m_com.open();
+}
+
 bool Cnc::reset() {
     if (isOpen()) {
 //        com.write32(ADDR::CLEAR, ADDR::RESET_MASK);

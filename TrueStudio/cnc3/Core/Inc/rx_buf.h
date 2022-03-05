@@ -43,7 +43,7 @@ void rx_buf_rdack();
 
 COMMAND_T rx_buf_cmd();
 uint32_t rx_buf_addr();
-uint8_t rx_buf_len();
+uint8_t rx_buf_data_size();
 
 void rx_fifo_tb();
 

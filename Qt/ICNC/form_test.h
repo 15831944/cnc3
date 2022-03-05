@@ -34,6 +34,8 @@ private slots:
 
     void on_btnMemTest_clicked();
 
+    void on_btnConn_clicked();
+
 private:
     const std::string job_dir = "c:\\Work\\Meatec\\Prototype\\NC\\";
 

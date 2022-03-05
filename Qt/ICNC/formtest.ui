@@ -118,12 +118,12 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_12">
+        <widget class="QPushButton" name="btnConn">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="text">
-          <string/>
+          <string>Reconnect</string>
          </property>
         </widget>
        </item>

@@ -264,7 +264,7 @@ void CncComThread::writeBytesFast(uint32_t addr, const std::vector<uint8_t> &byt
         size_t pos = 0;
         while (pos < m_txpack.rawSize()) {
             pos += m_port->write(reinterpret_cast<const char*>(m_txpack.rawData()) + pos, qint64(m_txpack.rawSize()) - pos);
-//            m_port->flush();
+            m_port->flush();
 
 #ifdef PRINT_CNC_COM_DEBUG
             qDebug("Write to address 0x%08x bytes %d:\n%s\n", (int)addr, (int)bytes.size(), m_txpack.toString().c_str());

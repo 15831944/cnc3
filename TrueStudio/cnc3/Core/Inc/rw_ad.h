@@ -10,7 +10,7 @@
 
 void reset();
 
-void ad_writeRegs(size_t addr, size_t len, const uint8_t buf[], size_t N, BOOL async);
+void ad_writeRegs(const size_t addr, size_t len, const uint8_t buf[], const size_t N, const BOOL async);
 void ad_readRegs(uint32_t addr, size_t len, BOOL async);
 void ad_readFifo(uint32_t addr, size_t len);
 

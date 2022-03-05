@@ -12,7 +12,7 @@
 #include "com_packet.h"
 #include "main.h"
 
-//#define PRINT_CNC_COM_DEBUG
+#define PRINT_CNC_COM_DEBUG
 
 // Class provides communication with CNC
 class CncComThread : public QThread {
